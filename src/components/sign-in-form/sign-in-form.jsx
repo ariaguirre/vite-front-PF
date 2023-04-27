@@ -65,13 +65,13 @@ const SignInForm = () => {
 
   return (
 
-    <Grid item md={6} xs={12} justifyItems={"center"}>
+    <Grid item md={5} sm={12} justifyItems={"center"}>
       <Typography variant="h4" color="initial" align='center'>Already have an account?</Typography>
       <Typography variant='body1' color="initial" align='center'>
         Sign in with your email and password
       </Typography>
       <Grid container justifyContent={"center"}>
-        <FormControl variant='standard' sx={{width: "100vw", padding:"2rem"}} align="center" margin='dense' >
+        <FormControl variant='standard' fullWidth align="center" >
           <TextField
             label='Email'
             type='email'
@@ -79,7 +79,7 @@ const SignInForm = () => {
             onChange={handleChange}
             name='email'
             value={email}
-            margin='normal'
+            margin='dense'
           />
           <TextField
             label='Password'
@@ -88,12 +88,13 @@ const SignInForm = () => {
             onChange={handleChange}
             name='password'
             value={password}
+            margin='dense'
           />
-          <Grid container  justifyContent={"space-between"} alignItems={"center"}>
-            <Grid item  sm={5.5} xs={12} margin={"1rem 0"}>
+          <Grid container  justifyContent={"space-between"} alignItems={"center"} gap={1}>
+            <Grid item  sm={5} xs={12} margin={"1rem 0"}>
               <Button type='submit' variant='contained' onClick={handleSubmit} fullWidth  >Sign In</Button>
             </Grid>
-            <Grid item sm={5.5} xs={12} >
+            <Grid item sm={6} xs={12} >
             <Button variant='contained' onClick={signInWithGoogle} fullWidth>Google sign in</Button>
             </Grid>
           </Grid>
