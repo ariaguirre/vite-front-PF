@@ -9,6 +9,7 @@ import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from '../../utils/firebase/firebaseClient';
+import Typography from '@mui/material/Typography'
 
 
 const defaultFormFields = {
@@ -58,17 +59,18 @@ const SignUpForm = () => {
   };
 
   return (
-    <Grid item md={6} xs={12} justifyItems={"center"}>
-      <h2>Don&#39;t have an account?</h2>
-      <span>Sign up with your email and password</span>
-      <FormControl onSubmit={handleSubmit}>
+    <Grid item md={5} sm={12} justifyItems={"center"}>  
+      <Typography variant="h4" color="initial" align='center'>Don&#39;t have an account?</Typography>
+      <Typography variant="body1" align='center'>Sign up with your email and password</Typography>
+      <Grid container justifyContent={"center"}>
+      <FormControl variant='standard' margin='dense'  onSubmit={handleSubmit} fullWidth >
         <TextField
           label='Display Name'
           type='text'
           required
           onChange={handleChange}
           name='displayName'
-          value={displayName}                  
+          value={displayName}                        
         />    
 
         <TextField
@@ -77,7 +79,8 @@ const SignUpForm = () => {
           required
           onChange={handleChange}
           name='email'
-          value={email}        
+          value={email} 
+          margin='dense'       
         />
 
         <TextField
@@ -87,6 +90,7 @@ const SignUpForm = () => {
           onChange={handleChange}
           name='password'
           value={password}
+          margin='dense'
         />
 
         <TextField
@@ -96,9 +100,11 @@ const SignUpForm = () => {
           onChange={handleChange}
           name='confirmPassword'
           value={confirmPassword}
+          margin='dense'
         />
-        <Button type='submit' variant='contained'sx={{boder:1 , marginTop: "20px 0"}} >Sign Up</Button>
-      </FormControl>          
+        <Button type='submit' variant='contained' margin='dense'>Sign Up</Button>
+      </FormControl>
+      </Grid>           
     </Grid>
   );
 };

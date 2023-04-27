@@ -145,15 +145,14 @@ export const getProductByid = async (id) => {
   return Product;
 };
 //Trae un producto por nombre
-// verificarlo
-// export const getProductByName = async (name) => {
-// //  
-//   const Products = await gettingAdminProducts();
-//   let findProduct = Products.filter((prod) => {
-//     return prod.name.toLowerCase().includes(name.toString().toLowerCase());
-//   });
-//   return findProduct;
-// };
+export const getProductByName = async (name) => {
+  const Products = await getProducts();
+  let findProduct = Products.filter((prod) => {
+    return prod.name.toLowerCase().includes(name.toString().toLowerCase());
+  });
+  return findProduct;
+};
+
 //actualiza un documento existente encontrado por id, pasando por parametros los datos
 export const updateProduct = async (data) => {
   const ProfuctsRef = doc(db, "Products", data.id);
