@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { makeStyles } from '@mui/material';
+import styled from '@emotion/styled';
 
 
 const Sale = ({ sale, price }) => {
