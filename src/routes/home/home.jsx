@@ -1,8 +1,10 @@
+import Container from '@mui/material/Container'
+
 const Home = () => {
   return (
-    <div>
-      Home      
-    </div>
+    <Container maxWidth="xl">
+           
+    </Container>
   )
 }
 
