@@ -268,3 +268,17 @@ export const postcategoriesAdmin = async (data) => {
     subCategory: data.subCategory,
   });
 };
+
+
+// agrega imagenes a la base de datos y devuelve la url
+import {getStorage, ref, uploadBytes, getDownloadURL} from 'firebase/storage'
+import { v4 } from 'uuid'
+
+const storage = getStorage(firebaseApp)
+
+export async function uploadFile(file){
+    const storageRef = ref(storage, v4())
+    await uploadBytes(storageRef, file)
+    const url = getDownloadURL(storageRef)
+    return url
+}
