@@ -27,8 +27,7 @@ const SignUpForm = () => {
     setFormFields(defaultFormFields);
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async () => {
 
     if (password !== confirmPassword) {
       alert('passwords do not match');
@@ -40,7 +39,7 @@ const SignUpForm = () => {
         email,
         password
       );
-
+   
       await createUserDocumentFromAuth(user, { displayName });
       resetFormFields();
     } catch (error) {
@@ -54,7 +53,6 @@ const SignUpForm = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setFormFields({ ...formFields, [name]: value });
   };
 
@@ -63,7 +61,7 @@ const SignUpForm = () => {
       <Typography variant="h4" color="initial" align='center'>Don&#39;t have an account?</Typography>
       <Typography variant="body1" align='center'>Sign up with your email and password</Typography>
       <Grid container justifyContent={"center"}>
-      <FormControl variant='standard' margin='dense'  onSubmit={handleSubmit} fullWidth >
+      <FormControl variant='standard' margin='dense'  fullWidth >
         <TextField
           label='Display Name'
           type='text'
@@ -102,7 +100,7 @@ const SignUpForm = () => {
           value={confirmPassword}
           margin='dense'
         />
-        <Button type='submit' variant='contained' margin='dense'>Sign Up</Button>
+        <Button  onClick={()=>handleSubmit()} variant='contained' margin='dense'>Sign Up</Button>
       </FormControl>
       </Grid>           
     </Grid>

@@ -1,5 +1,6 @@
-/* eslint-disable no-unused-vars */
-import { initializeApp } from "firebase/app";
+/*cle eslint-disable no-unused-vars */
+import CryptoJS from 'crypto-js';
+import { initializeApp} from "firebase/app";
 import {
   getAuth,
   signInWithPopup,
@@ -7,6 +8,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  setPersistence,
+  browserLocalPersistence
 } from "firebase/auth";
 
 import {
@@ -40,7 +43,33 @@ const provider = new GoogleAuthProvider();
 provider.setCustomParameters({
   prompt: "select_account",
 });
+export const setLocalStorage = async (email,password) =>{
+  const data = [];
+  let passwordHash = CryptoJS.AES.encrypt(password, 'secret').toString();
+  data.push(email,passwordHash)
+console.log(passwordHash)
+  localStorage.setItem("user", JSON.stringify(data)) 
+}
+export const getLocalStorage = async() =>{
+  const datos = [];
+ const user  = JSON.parse(localStorage.getItem("user"))
+ const bytes  = CryptoJS.AES.decrypt(user[0].passwordHash, 'secret');
+ const decrypt = await  bytes.toString(CryptoJS.enc.Utf8)
+ datos.push({email:user[0].email,password:decrypt});
+ return datos;
+}
+export const userPersist  =  (email,password)=>{
+  setPersistence(auth, browserLocalPersistence)
+  .then(() => {
+    return signInWithEmailAndPassword(auth, email, password);
+  }).then(userCredentials =>console.log(userCredentials))
+  .catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
 
+}
 export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
@@ -81,13 +110,16 @@ export const createUserDocumentFromAuth = async (
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
+  setLocalStorage(email,password)
   return await createUserWithEmailAndPassword(auth, email, password);
 };
 
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
   try {
+    setLocalStorage(email,password)
     return await signInWithEmailAndPassword(auth, email, password);
+   
   } catch (error) {
     switch (error.code) {
       case "auth/wrong-password":

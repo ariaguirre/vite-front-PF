@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 import Button from '@mui/material/Button';
@@ -11,6 +11,8 @@ import {
   signInWithGooglePopup,
   createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
+  getLocalStorage,
+  setLocalStorage,
 } from '../../utils/firebase/firebaseClient';
 
 
@@ -41,7 +43,8 @@ const SignInForm = () => {
         email,
         password
       );
-      console.log(response);
+      setLocalStorage(email,password);
+     
       resetFormFields();
     } catch (error) {
       switch (error.code) {
