@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./routes/home/home";
 import Authentication from "./routes/authentication/authentication";
+import Shop from "./routes/shop/shop";
 import RequireAuth from "./components/require-auth/require-auth";
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
         </RequireAuth>
       }/>
       <Route path="/auth" element={<Authentication/>}/>
+      <Route path="/store" element={<Shop/>}/>
     </Routes>
       
     
