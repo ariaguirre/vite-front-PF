@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { decrement, increment } from './counterSlice'
 import { Button, Rating, TextField } from '@mui/material';
+import { getProducts } from './reducer/productSlice';
 
 
 export function Counter() {
@@ -16,7 +17,7 @@ export function Counter() {
         <span>{count}</span>
         <Button variant='contained' 
           aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
+          onClick={() => dispatch(getProducts("Probando"))}
         >
           Decrement
         </Button>
