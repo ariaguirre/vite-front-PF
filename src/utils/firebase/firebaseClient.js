@@ -24,6 +24,18 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 
+import {
+  getStorage,
+  ref,
+  uploadBytes, 
+  getDownloadURL 
+} from 'firebase/storage';
+
+import {
+  v4
+} from 'uuid';
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyDX7xT2yej2KtXBaKHiupxjlu6iPwVjwN8",
   authDomain: "mombabyandhome-2c584.firebaseapp.com",
@@ -36,6 +48,8 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 
 const provider = new GoogleAuthProvider();
+
+const storage = getStorage(firebaseApp)
 
 provider.setCustomParameters({
   prompt: "select_account",
@@ -269,16 +283,9 @@ export const postcategoriesAdmin = async (data) => {
   });
 };
 
-
 // agrega imagenes a la base de datos y devuelve la url
-import {getStorage, ref, uploadBytes, getDownloadURL} from 'firebase/storage'
-import { v4 } from 'uuid'
-
-const storage = getStorage(firebaseApp)
-
-export async function uploadFile(file){
+export const uploadFile = async (file) => {
     const storageRef = ref(storage, v4())
     await uploadBytes(storageRef, file)
-    const url = getDownloadURL(storageRef)
-    return url
+    return getDownloadURL(storageRef); 
 }
