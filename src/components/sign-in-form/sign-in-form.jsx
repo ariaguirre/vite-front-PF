@@ -1,19 +1,18 @@
-import { useEffect, useState } from 'react';
-
-
+import {  useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography'
 import FormControl from '@mui/material/FormControl'
 import TextField from '@mui/material/TextField'
-
+import { getCredentials } from '../../features/userCredentials/userCredentialsSlice';
 import {
   signInWithGooglePopup,
   createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
-  getLocalStorage,
-  setLocalStorage,
+  
 } from '../../utils/firebase/firebaseClient';
+
 
 
 
@@ -23,6 +22,8 @@ const defaultFormFields = {
 };
 
 const SignInForm = () => {
+
+  const dispatch = useDispatch();
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
@@ -33,18 +34,20 @@ const SignInForm = () => {
   const signInWithGoogle = async () => {
     const { user } = await signInWithGooglePopup();
     await createUserDocumentFromAuth(user);
+    dispatch(getCredentials(user.uid))
   };
-
+ 
   const handleSubmit = async (event) => {
+    
     event.preventDefault();
-
+  
     try {
       const response = await signInAuthUserWithEmailAndPassword(
         email,
         password
       );
-      setLocalStorage(email,password);
      
+      dispatch(getCredentials(response.user.uid))
       resetFormFields();
     } catch (error) {
       switch (error.code) {

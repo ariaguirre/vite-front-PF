@@ -1,19 +1,30 @@
-import { useEffect } from "react"
-import { getLocalStorage,userPersist } from "../../utils/firebase/firebaseClient"
 
+
+import { useMemo } from "react";
+import  PrimarySearchAppBar  from "../../components/navbar/navbar"
+
+import { useDispatch,useSelector } from "react-redux"
+import { getUserByid } from "../../utils/firebase/firebaseClient";
+import { getUserData } from "../../features/userData/userDataSlice";
 const Home = () => {
-  let user;
-  useEffect( ()=>{
-    const ls = async () =>{
-      user = await getLocalStorage();
-    let credentials =  userPersist(user[0].email,user[0].password)
-    console.log(credentials)
-    }
- ls();
-  },[])
- 
+const dispatch = useDispatch();
+const userCredentials = useSelector((state) =>state.credentials.userState.userCredentials)
+const dataUser = useSelector((state) =>state.userData.userData)
+
+const datosUser = useMemo( async() =>{
+  if(userCredentials){
+    const dataUser = await  getUserByid(userCredentials);
+    dispatch(getUserData(dataUser))  
+  }
+return dataUser;
+},[])
+
+
+
+
   return (
     <div>
+      <PrimarySearchAppBar/>
       Home   
 
     </div>

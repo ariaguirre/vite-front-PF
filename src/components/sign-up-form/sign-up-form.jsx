@@ -1,15 +1,15 @@
-import { useState } from 'react';
-
+import {  useState } from 'react';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid'; 
 import FormControl from '@mui/material/FormControl'
 import TextField from '@mui/material/TextField'
-
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from '../../utils/firebase/firebaseClient';
 import Typography from '@mui/material/Typography'
+import { useDispatch } from 'react-redux';
+import { getCredentials } from '../../features/userCredentials/userCredentialsSlice';
 
 
 const defaultFormFields = {
@@ -20,15 +20,16 @@ const defaultFormFields = {
 };
 
 const SignUpForm = () => {
+   const dispatch = useDispatch()
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
+
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
 
   const handleSubmit = async () => {
-
     if (password !== confirmPassword) {
       alert('passwords do not match');
       return;
@@ -41,7 +42,9 @@ const SignUpForm = () => {
       );
    
       await createUserDocumentFromAuth(user, { displayName });
-      resetFormFields();
+       dispatch(getCredentials(user.uid))
+       resetFormFields();
+     
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         alert('Cannot create user, email already in use');
