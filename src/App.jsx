@@ -3,6 +3,8 @@ import Home from "./routes/home/home";
 import Authentication from "./routes/authentication/authentication";
 import Shop from "./routes/shop/shop";
 import RequireAuth from "./components/require-auth/require-auth";
+import DetailProduct from "./routes/detail/ProductDetail";
+import Error from "./routes/404/404";
 
 const App = () => {
   return (
@@ -15,6 +17,10 @@ const App = () => {
       }/>
       <Route path="/auth" element={<Authentication/>}/>
       <Route path="/store" element={<Shop/>}/>
+      <Route path="/detail/:id" element={<DetailProduct />} />
+
+
+      <Route path="*" element={<Error />} />
     </Routes>
       
     
