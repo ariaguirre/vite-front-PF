@@ -63,12 +63,12 @@ const SignUpForm = () => {
 
   return (
     <Grid item md={5} sm={12} justifyItems={"center"}>  
-       {loading &&<Backdrop
+      <Backdrop
             sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-           open={open}
+           open={loading}
           >
           <CircularProgress color="inherit" />
-         </Backdrop>}
+      </Backdrop>
       <Typography variant="h4" color="initial" align='center'>Don&#39;t have an account?</Typography>
       <Typography variant="body1" align='center'>Sign up with your email and password</Typography>
       <Grid container justifyContent={"center"}>
