@@ -4,7 +4,7 @@ import { useDispatch,useSelector } from "react-redux"
 import { auth, getUserByid} from "../../utils/firebase/firebaseClient";
 import { getUserData,userDataAuth } from "../../features/userData/userDataSlice";
 import Container from '@mui/material/Container'
-import { Hero } from "../../components/hero-section/hero"
+import Hero  from "../../components/hero-section/hero"
 
 const Home = () => {
 const dispatch = useDispatch();
