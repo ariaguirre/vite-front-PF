@@ -293,3 +293,21 @@ export const uploadFile = async (file) => {
     await uploadBytes(storageRef, file)
     return getDownloadURL(storageRef); 
 }
+
+// actualiza datos del producto
+export const updateDataProduct = async(data) =>{
+  const priceRef = doc(db, 'Products', data.id)
+  try {
+    await updateDoc(priceRef,{
+      categories: data.categories,
+      colors:data.colors,
+      description:data.description,
+      image: data.image,
+      name:data.name,
+      price: data.price,
+      stock:data.stock
+    })
+  } catch (error) {
+    alert(error)
+  }
+}

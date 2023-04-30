@@ -1,9 +1,10 @@
 import {  useMemo } from "react";
 import  PrimarySearchAppBar  from "../../components/navbar/navbar"
 import { useDispatch,useSelector } from "react-redux"
-import { auth, getUserByid } from "../../utils/firebase/firebaseClient";
+import { auth, getUserByid} from "../../utils/firebase/firebaseClient";
 import { getUserData,userDataAuth } from "../../features/userData/userDataSlice";
 import Container from '@mui/material/Container'
+
 
 const Home = () => {
 const dispatch = useDispatch();
@@ -25,7 +26,7 @@ return dataAuth
 return (
 
     <Container maxWidth="xl">
-      <PrimarySearchAppBar/>           
+      <PrimarySearchAppBar/>
     </Container>
   )
 }
