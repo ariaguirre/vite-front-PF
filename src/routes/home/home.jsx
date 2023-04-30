@@ -27,10 +27,11 @@ return dataAuth
 return (
 
     <Container maxWidth="xl">
-      <Hero/>
       <PrimarySearchAppBar/>           
+      <Hero/>
     </Container>
 
   )
 }
 
+export default Home;
