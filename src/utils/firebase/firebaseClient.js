@@ -8,8 +8,6 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  setPersistence,
-  browserLocalPersistence
 } from "firebase/auth";
 
 import {
@@ -44,23 +42,7 @@ const provider = new GoogleAuthProvider();
 provider.setCustomParameters({
   prompt: "select_account",
 });
- // funcion persistence de firebase
-export const userPersist  =  (email,password)=>{
-return  setPersistence(auth, browserLocalPersistence)
-  .then(() => {
-    return signInWithEmailAndPassword(auth, email, password);
-  }).then((userCredentials) =>{ 
-   
-    return userCredentials;
-  }
-   )
-  .catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
 
-}
 export const auth = getAuth();
 
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);

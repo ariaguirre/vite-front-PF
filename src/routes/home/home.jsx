@@ -1,23 +1,28 @@
 
 
-import { useMemo } from "react";
+import {  useMemo } from "react";
 import  PrimarySearchAppBar  from "../../components/navbar/navbar"
 
 import { useDispatch,useSelector } from "react-redux"
-import { getUserByid } from "../../utils/firebase/firebaseClient";
-import { getUserData } from "../../features/userData/userDataSlice";
+import { auth, getUserByid } from "../../utils/firebase/firebaseClient";
+import { getUserData,userDataAuth } from "../../features/userData/userDataSlice";
 const Home = () => {
 const dispatch = useDispatch();
-const userCredentials = useSelector((state) =>state.credentials.userState.userCredentials)
-const dataUser = useSelector((state) =>state.userData.userData)
+const dataAuth = useSelector((state) =>state.userData.dataAuth)
 
-const datosUser = useMemo( async() =>{
-  if(userCredentials){
-    const dataUser = await  getUserByid(userCredentials);
-    dispatch(getUserData(dataUser))  
+const user =useMemo  ( ()=>{
+  if(!dataAuth.length){
+    auth.onAuthStateChanged(async (user) =>{
+      if(user){
+        dispatch(userDataAuth(user))
+        const dataUser = await  getUserByid(user.uid);
+        dispatch(getUserData(dataUser))  
+      }
+    }) 
   }
-return dataUser;
-},[])
+return dataAuth
+},[] )
+
 
 
 

@@ -17,8 +17,9 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { useDispatch, useSelector } from 'react-redux';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { logOut } from '../../features/userData/userDataSlice';
 import { removeCredentials } from '../../features/userCredentials/userCredentialsSlice'
+import { signOutUser } from '../../utils/firebase/firebaseClient';
+import { getUserData } from '../../features/userData/userDataSlice';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -84,7 +85,8 @@ export default function PrimarySearchAppBar() {
   }
   const handleLogOut = () =>{
     localStorage.removeItem("user")
-    dispatch(logOut())
+    signOutUser()
+    dispatch(getUserData([]))
     dispatch(removeCredentials())
     handleMenuClose()
   }
