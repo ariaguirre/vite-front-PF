@@ -6,7 +6,6 @@ h1,h2,h3,h4,h5,h6
 {
   margin: 0;
   padding: 0;
-  font-weight: 600;
 }
 a
 {
@@ -15,49 +14,6 @@ a
 input
 {
   outline: none;
-}
-
-
-body{
-  background-color: #c5c5c5;
-}
-
-h1{
-  text-align: center;
-  font-size: 3.5rem;
-
-}
-img{
-  max-width: 100%;
-}
-
-hr{
-  border: 1px solid #c5c5c5;
-  margin: 0;
-}
-
-input
-{
-  outline: none;
-}
-
-.contenedor{
-  width:1000px;
-  margin: 0 auto;
-  max-width: 95%;
-}
-
-.flex{
-  display: flex;
-}
-
-p{
-  margin: 0;
-}
-
-button{
-  display: block;
-  margin: 1.5rem auto;
 }
 
 
