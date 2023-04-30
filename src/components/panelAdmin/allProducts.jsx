@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Box } from '@mui/material'
-import {fetchProducts} from "../../features/products/productActions"
+import { getProducts } from '../../utils/firebase/firebaseClient'
+import { getProductsActions } from '../../features/products/productSlice'
 
 
 const allProducts = () => {
@@ -10,12 +10,16 @@ const dispatch = useDispatch();
 const {products} = useSelector(state=> state.products)
 
 useEffect(()=>{
-  dispatch(fetchProducts())
-  
+  const fetchData = async() =>{
+    const result = await getProducts()
+    dispatch(getProductsActions(result))
+  }
+  fetchData()
 },[])
 
+
   return (
-    
+    <div>
     <h1>
     ESTOS SON TUS PRODUCTOS !
     <br></br>
@@ -28,8 +32,8 @@ useEffect(()=>{
         </div>
        )
      })}
-    </h1>
-    
+    </h1> 
+ </div>
   
     
   )
