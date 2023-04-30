@@ -3,6 +3,22 @@ import { Box, Paper, Container, Grid, Typography, Icon } from "@mui/material";
 import {styled} from '@mui/material/styles'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import MailIcon from '@mui/icons-material/Mail';
+
+
+const Various = styled('h2')(({ theme }) => ({
+    color: 'black',
+    textAlign: 'start',
+    fontSize: theme.typography.pxToRem(6),
+    fontWeight: 'normal',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.pxToRem(17),
+    },
+  }));
+
+// const Iconos = styled('h2')(({theme})) => ({
+//     [theme.breakpoints.up('sm')]:{}
+// })
 
 export default function Footer () {
   return (
@@ -12,28 +28,58 @@ export default function Footer () {
     height: "auto",
     backgroundColor: "transparent",
     marginTop: 2,
-    paddingTop: "1rem",
-    paddingBottom: "1rem",
+    paddingTop: "2rem",
+    paddingBottom: "2rem",
    }} elevation={8}
    >
       <Container maxWidth="lg">
-        <Grid container direction="row" >
-          <Grid item xs={12}>
+        <Grid container direction="row" justifyContent='space-around' alignItems='center'>
+          <Grid item xs={6}>
             <Typography 
             sx={{
+                float:'left',
+                marginLeft: '-18rem',
                 color: 'black', 
-                fontWeight: 'bolder',    
-                textAlign: 'start',
+                fontWeight: 'bolder',
+                fontSize: 20
+                // textAlign: 'start',
+                // alignItems:'end',
             }}
             >
               Mom Home & Baby
+              <Typography sx={{color: 'darkGrey'}}>
+              {`${new Date().getFullYear()} All Rights Reserved.`}
+              </Typography>
             </Typography>
-          </Grid>
-          <Grid item xs={12}>
-            <Typography color="textSecondary" variant="subtitle1" alignItems='end'>
-              {`${new Date().getFullYear()} | Contact | About us | Socials`}
-              {/* <WhatsAppIcon/> */}
-            </Typography>
+            <Various item xs={12}
+            sx={{marginRight:'-12rem', marginLeft:'10rem', marginTop: '1rem'}}
+            >
+             Contact | About us | Preguntas frecuentes
+              <WhatsAppIcon 
+              sx={{
+                  color: 'black',
+                  marginRight:'-6rem',
+                  float: 'right',
+                  fontSize: 25,
+                }}
+                />
+              <InstagramIcon
+              sx={{
+                color: 'black',
+                marginRight:'-3rem',
+                float: 'right',
+                fontSize: 25,
+              }}              
+              />
+              <MailIcon
+              sx={{
+                color: 'black',
+                marginRight:'-1rem',
+                float: 'right',
+                fontSize: 25,
+              }}               
+              />
+                </Various>
           </Grid>
         </Grid>
       </Container>
