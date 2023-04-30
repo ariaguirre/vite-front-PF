@@ -22,7 +22,7 @@ const persistedReducer = persistReducer(persistConfig,rootReducer)
 export const store = configureStore({
   reducer: {
     credentials : persistedReducer,
-    userData : userDataSlice
+    userData : userDataSlice,
     products: productSlice,
     carrito: carritoSlice,
     favorite: favoriteSlice,
