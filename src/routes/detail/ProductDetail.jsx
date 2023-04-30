@@ -1,15 +1,12 @@
 import { useState } from 'react';
 import "../../index.css";
 import '../detail/ProductDetail.css';
- 
+
 
 
 
 export default function DetailProduct(){
  
-
-
-  const [cant, setCant] = useState(0)
 
 
   const handleInput = (e) =>{
@@ -21,7 +18,9 @@ export default function DetailProduct(){
     e.preventDefault()
   }
 
-  return<div className="detail">
+  return<>
+   
+  <div className="detail">
       <div className="contenedor p-Detail">
 
               <img src='https://http2.mlstatic.com/D_NQ_NP_656735-MCO48794245078_012022-O.webp' className=" imgDetail" alt={name} />
@@ -80,4 +79,5 @@ export default function DetailProduct(){
 
 
   </div>
+  </>
 }

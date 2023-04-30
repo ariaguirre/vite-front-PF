@@ -4,5 +4,7 @@
 export default function Carritow(){
 
 
-  return(<div>Carritow</div>)
+  return(<div className="contenedor">
+    <h1>Carrito</h1>
+  </div>)
 }
