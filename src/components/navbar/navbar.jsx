@@ -15,6 +15,12 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import { useDispatch, useSelector } from 'react-redux';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { removeCredentials } from '../../features/userCredentials/userCredentialsSlice'
+import { signOutUser } from '../../utils/firebase/firebaseClient';
+import { getUserData } from '../../features/userData/userDataSlice';
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -57,15 +63,34 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.userData.userData)
+
   const [anchorEl, setAnchorEl] = React.useState(null);
+
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
+  // enviar al page profile del usuario
+  const handleSendProfile = () =>{
+    //crear funcion para redirigir al usuario a su perfil
+    alert("Enviado a profile")
+    handleMenuClose()
+  }
+  const handleLogOut = () =>{
+    localStorage.removeItem("user")
+    signOutUser()
+    dispatch(getUserData([]))
+    dispatch(removeCredentials())
+    handleMenuClose()
+  }
+
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -97,8 +122,10 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+    { userData?(<ul><MenuItem onClick={handleSendProfile}>Profile</MenuItem>
+    <MenuItem onClick={handleLogOut}>log Out</MenuItem></ul>):(null)}
+  
+      
     </Menu>
   );
 
@@ -139,7 +166,7 @@ export default function PrimarySearchAppBar() {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem onClick={handleSendProfile}>
         <IconButton
           size="large"
           aria-label="account of current user"
@@ -149,7 +176,24 @@ export default function PrimarySearchAppBar() {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        {userData && <Typography> {userData.displayName}  </Typography>}
+      </MenuItem>
+      <MenuItem>
+      <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+           <LogoutIcon 
+          size="large"
+          aria-label=""
+          color="inherit">
+      </LogoutIcon>
+        </IconButton>
+   
+        <p>log Out</p>
       </MenuItem>
     </Menu>
   );
@@ -167,14 +211,7 @@ export default function PrimarySearchAppBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
-          >
-            MUI
-          </Typography>
+          
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -210,6 +247,8 @@ export default function PrimarySearchAppBar() {
               color="inherit"
             >
               <AccountCircle />
+              {userData && <Typography> {userData.displayName}  </Typography>}
+              
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
@@ -227,7 +266,8 @@ export default function PrimarySearchAppBar() {
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
-      {renderMenu}
+     {renderMenu} 
+  
     </Box>
   );
 }
