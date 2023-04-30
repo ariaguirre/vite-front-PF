@@ -1,8 +1,31 @@
 import { configureStore } from '@reduxjs/toolkit'
-import counterReducer from '../features/counter/counterSlice'
+import  storage  from 'redux-persist/lib/storage'
+import { persistReducer } from 'redux-persist'
+import { combineReducers } from '@reduxjs/toolkit'
+import credentialsReducer from '../features/userCredentials/userCredentialsSlice'
+import  productSlice  from '../features/products/productSlice'
+import carritoSlice from '../features/carrito/carritoSlice'
+import favoriteSlice from '../features/favorite/favoriteSlice'
 
+import thunk from 'redux-thunk'
+import userDataSlice from '../features/userData/userDataSlice'
+
+const persistConfig ={
+  key :'root',
+  storage,
+  whitelist:['userState']
+}
+const rootReducer = combineReducers({
+    userState : credentialsReducer
+})
+const persistedReducer = persistReducer(persistConfig,rootReducer)
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    credentials : persistedReducer,
+    userData : userDataSlice,
+    products: productSlice,
+    carrito: carritoSlice,
+    favorite: favoriteSlice,
   },
+  middleware :[thunk]
 })

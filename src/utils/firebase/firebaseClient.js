@@ -1,5 +1,6 @@
-/* eslint-disable no-unused-vars */
-import { initializeApp } from "firebase/app";
+/*cle eslint-disable no-unused-vars */
+
+import { initializeApp} from "firebase/app";
 import {
   getAuth,
   signInWithPopup,
@@ -56,6 +57,7 @@ provider.setCustomParameters({
 });
 
 export const auth = getAuth();
+
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
 export const db = getFirestore();
@@ -101,7 +103,9 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
   try {
+   
     return await signInWithEmailAndPassword(auth, email, password);
+   
   } catch (error) {
     switch (error.code) {
       case "auth/wrong-password":
