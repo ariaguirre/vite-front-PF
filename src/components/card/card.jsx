@@ -10,7 +10,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import Sale from "./sale/sale";
 import HalfRating from "./rating/rating";
 
-
 const CardInf = (
   {
     imageUrl,
@@ -27,15 +26,14 @@ const CardInf = (
     onSale.current = true;
   }
 
-
   return (
-    <Card sx={{ maxWidth: "300px", margin:"1rem"}}>
+    <Card sx={{ maxWidth: "300px", margin: "1rem" }}>
       <CardMedia
         component="img"
         title={title}
         src={imageUrl}
         alt={title}
-        sx={{ maxHeight: "220px", width:"100%", objectFit:"contain"}}
+        sx={{ maxHeight: "220px", width: "100%", objectFit: "contain" }}
       />
       <CardHeader
         title={title}
@@ -48,8 +46,8 @@ const CardInf = (
         }
         {
           onSale.current
-          && <Box sx={{display:"flex" }}>
-            <Typography variant="body1" sx={{ textDecorationLine: "line-through", paddingRight:"1rem" }}>{`$ ${price}`}</Typography>
+          && <Box sx={{ display: "flex" }}>
+            <Typography variant="body1" sx={{ textDecorationLine: "line-through", paddingRight: "1rem" }}>{`$ ${price}`}</Typography>
             <Box
               component="span"
               sx={{
@@ -66,13 +64,12 @@ const CardInf = (
               {`save ${sale.discount}%`}
             </Box>
           </Box>
-
         }
       </CardContent>
       <Box paddingLeft={"1rem"}>
         <HalfRating rValue={ratingValue} sValue={setRatingValue} />
       </Box>
-      <CardActions sx={{paddingLeft:"1rem"}}>        
+      <CardActions sx={{ paddingLeft: "1rem" }}>
         <Button variant="contained" color="primary">
           Add to cart
         </Button>
