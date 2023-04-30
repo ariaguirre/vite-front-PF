@@ -1,12 +1,15 @@
+import Container from '@mui/material/Container'
+import Stack from '@mui/joy/Stack';
+import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material/styles';
 import { useState } from 'react';
-import "../../index.css";
-import '../detail/ProductDetail.css';
 
 
 
 
 export default function DetailProduct(){
  
+  const [cant, setCant] = useState(0)
 
 
   const handleInput = (e) =>{
@@ -18,15 +21,24 @@ export default function DetailProduct(){
     e.preventDefault()
   }
 
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
+
   return<>
    
-  <div className="detail">
-      <div className="contenedor p-Detail">
+  <Container fixed className="detail">
+      <Stack direction={{ xs: 'column', sm: 'row' }} alignItems="center" spacing={2} justifyContent="center" sx={{px:"2rem", py:"2rem"  }}>
+        <Item>
+          <img src='https://http2.mlstatic.com/D_NQ_NP_656735-MCO48794245078_012022-O.webp' className=" imgDetail" alt={name} />
 
-              <img src='https://http2.mlstatic.com/D_NQ_NP_656735-MCO48794245078_012022-O.webp' className=" imgDetail" alt={name} />
+        </Item>
          
-          
-          <div className=" infDetail ">
+          <div className=" infDetail">
             <form>
               <h2 className='titleDetail'>coche para bebé + silla para carro</h2>
               <hr/>
@@ -40,6 +52,7 @@ export default function DetailProduct(){
                 </div>
               
               <button className='addCar' onClick={(e) => handlerButton(e)} >Añadir al carrito</button>
+
               </div>
               <hr/>
               <div>
@@ -50,9 +63,9 @@ export default function DetailProduct(){
             </form>
         </div>
 
-      </div>
+      </Stack>
 
-        <div className="contenedor caract">
+        <Container className="contenedor caract">
           <h2 className="titleII">Caracteristicas del Producto</h2>
             <p className="">Lorem ipsum  dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae tempus quam pellentesque nec nam aliquam sem et tortor.</p>
 
@@ -75,9 +88,9 @@ export default function DetailProduct(){
             </ul>
 
           </div>
-        </div>
+        </Container>
 
 
-  </div>
+  </Container>
   </>
 }
