@@ -1,19 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-    products: []
-}
+import { fetchProducts } from './productActions'
 
-export const productSlice = createSlice({
+
+
+const productSlice = createSlice({
     name: 'products',
-    initialState,
-    reducers: {
-        getProductsActions: (state, action) =>{
-            state.products = action.payload
-        }
-    }
-})
-
-export const { getProductsActions }= productSlice.actions
-
-export default productSlice.reducer
+    initialState: {
+        products: [],
+        status: 'idle',
+        error: null
+      },
+      reducers: {},
+      extraReducers: (builder) => {
+        builder
+         
+          .addCase(fetchProducts.fulfilled, (state, action) => {
+            state.status = 'succeeded';
+            state.products = action.payload;
+          })
+         
+      }
+    });
+    
+    export default productSlice.reducer;
