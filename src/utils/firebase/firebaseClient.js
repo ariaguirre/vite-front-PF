@@ -1,5 +1,6 @@
-/* eslint-disable no-unused-vars */
-import { initializeApp } from "firebase/app";
+/*cle eslint-disable no-unused-vars */
+
+import { initializeApp} from "firebase/app";
 import {
   getAuth,
   signInWithPopup,
@@ -24,6 +25,18 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 
+import {
+  getStorage,
+  ref,
+  uploadBytes, 
+  getDownloadURL 
+} from 'firebase/storage';
+
+import {
+  v4
+} from 'uuid';
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyDX7xT2yej2KtXBaKHiupxjlu6iPwVjwN8",
   authDomain: "mombabyandhome-2c584.firebaseapp.com",
@@ -37,11 +50,14 @@ const firebaseApp = initializeApp(firebaseConfig);
 
 const provider = new GoogleAuthProvider();
 
+const storage = getStorage(firebaseApp)
+
 provider.setCustomParameters({
   prompt: "select_account",
 });
 
 export const auth = getAuth();
+
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
 export const db = getFirestore();
@@ -87,7 +103,9 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
   try {
+   
     return await signInWithEmailAndPassword(auth, email, password);
+   
   } catch (error) {
     switch (error.code) {
       case "auth/wrong-password":
@@ -268,3 +286,10 @@ export const postcategoriesAdmin = async (data) => {
     subCategory: data.subCategory,
   });
 };
+
+// agrega imagenes a la base de datos y devuelve la url
+export const uploadFile = async (file) => {
+    const storageRef = ref(storage, v4())
+    await uploadBytes(storageRef, file)
+    return getDownloadURL(storageRef); 
+}
