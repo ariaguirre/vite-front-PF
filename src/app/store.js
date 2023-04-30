@@ -9,6 +9,7 @@ import favoriteSlice from '../features/favorite/favoriteSlice'
 
 import thunk from 'redux-thunk'
 import userDataSlice from '../features/userData/userDataSlice'
+import productsIdSlice from '../features/productsId/productsIdSlice'
 
 const persistConfig ={
   key :'root',
@@ -24,6 +25,7 @@ export const store = configureStore({
     credentials : persistedReducer,
     userData : userDataSlice,
     products: productSlice,
+    productsId: productsIdSlice,
     carrito: carritoSlice,
     favorite: favoriteSlice,
   },
