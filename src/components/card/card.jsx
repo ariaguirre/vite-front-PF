@@ -1,5 +1,5 @@
 //react Imports
-import { useRef } from "react";
+import { useRef, useState } from "react";
 //mui Components
 import Card from "@mui/material/Card";
 import CardMedia from '@mui/material/CardMedia';
@@ -20,11 +20,13 @@ const CardInf = (
   }
 ) => {
 
+  const [ratingValue, setRatingValue] = useState(null);
   const onSale = useRef(false);
 
   if (Object.keys(sale).length !== 0) {
     onSale.current = true;
   }
+
 
   return (
     <Card sx={{ maxWidth: "300px", margin:"1rem"}}>
@@ -67,8 +69,10 @@ const CardInf = (
 
         }
       </CardContent>
-      <HalfRating />
-      <CardActions>        
+      <Box paddingLeft={"1rem"}>
+        <HalfRating rValue={ratingValue} sValue={setRatingValue} />
+      </Box>
+      <CardActions sx={{paddingLeft:"1rem"}}>        
         <Button variant="contained" color="primary">
           Add to cart
         </Button>
