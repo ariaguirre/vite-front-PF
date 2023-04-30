@@ -5,6 +5,7 @@ import { auth, getUserByid} from "../../utils/firebase/firebaseClient";
 import { getUserData,userDataAuth } from "../../features/userData/userDataSlice";
 import Container from '@mui/material/Container'
 import Hero  from "../../components/hero-section/hero"
+import Footer from '../../components/footer/footer'
 
 const Home = () => {
 const dispatch = useDispatch();
@@ -28,6 +29,7 @@ return (
     <Container maxWidth="xl">
       <PrimarySearchAppBar/>           
       <Hero/>
+      <Footer/>
     </Container>
 
   )
