@@ -149,7 +149,7 @@ export const postProductsAdmin = async (data) => {
     stock: data.stock,
     price: data.price,
     categories: data.categories,
-    imageUrl: data.image,
+    imageUrl: data.imageUrl,
     reviews: data.reviews,
     rating: data.rating,
     sale: data.sale,
