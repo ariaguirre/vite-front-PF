@@ -28,35 +28,7 @@ const Shop = () => {
     const prods = await prevProducts();
     await setProducts(prods)
     }
-
-
-/*   return (
-    <Container maxWidth="xl" sx={{minHeight:"100vh"}}   >    
-        <Grid container justifyContent={"center"}>        
-        {
-        products.map((products) => (
-          <CardInf
-            key={products.id}
-            id={products.id}
-            imageUrl={products.imageUrl}
-            categories={products.categories}
-            title={products.title}
-            price={products.price}
-            sale={products.sale}
-            rating={products.rating}
-            reviews={products.reviews}
-            stock={products.stock}
-          />
-        ))
-      } 
-      </Grid>
-      <Stack spacing={2} direction="row">
-      <Button onClick={pagPrev} variant="contained">Prev</Button>
-      <Button onClick={pagNext} variant="contained">Next</Button>
-    </Stack>    
-    </Container>
-  ) */
-  return (
+   return (
     <Container maxWidth="xl" sx={{minHeight:"100vh"}}   >    
         <Grid container justifyContent={"center"}>        
         {
@@ -76,7 +48,7 @@ const Shop = () => {
         )):(null)
       } 
       </Grid>
-      <Stack justifyContent={'center'}  spacing={2} direction="row">
+      <Stack justifyContent={'center'} spacing={2} direction="row">
       <Button onClick={pagPrev} variant="contained">Prev</Button>
       <Button onClick={pagNext} variant="contained">Next</Button>
     </Stack>    
