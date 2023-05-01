@@ -11,7 +11,7 @@ export const products = [
         "sillas para el carro": false,
       },
       title: "Monitor Respiracion",
-      price: "10.000",
+      price: 1000000,
       sale: {
         discount: 20,  
       },
@@ -42,7 +42,7 @@ export const products = [
         "sillas para el carro": false,
       },
       title: "COMEDOR 7 EN 1",
-      price: "1,360.00",
+      price: 1360000,
       sale: {
       },
       rating: 5,
@@ -60,5 +60,4 @@ export const products = [
       ],
       stock: 10,
     },
-    
   ];
