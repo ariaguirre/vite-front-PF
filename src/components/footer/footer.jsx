@@ -3,7 +3,6 @@ import { Box, Paper, Container, Grid, Typography, Icon } from "@mui/material";
 import {styled} from '@mui/material/styles'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import MailIcon from '@mui/icons-material/Mail';
 
 
 const Various = styled('h2')(({ theme }) => ({
@@ -16,9 +15,19 @@ const Various = styled('h2')(({ theme }) => ({
     },
   }));
 
-// const Iconos = styled('h2')(({theme})) => ({
-//     [theme.breakpoints.up('sm')]:{}
-// })
+
+  // const Tipografia = styled(Typography)(({ theme }) => ({
+  //   float:'left',
+  //   marginLeft: '-18rem',
+  //   color: 'black', 
+  //   fontWeight: 'bolder',
+  //   fontSize: theme.typography.pxToRem(20),
+  //   [theme.breakpoints.up('sm')]: {
+  //     fontSize: theme.typography.pxToRem(70),
+  //     marginTop: theme.spacing(10),
+  //   },
+  // }));
+
 
 export default function Footer () {
   return (
@@ -70,14 +79,6 @@ export default function Footer () {
                 float: 'right',
                 fontSize: 25,
               }}              
-              />
-              <MailIcon
-              sx={{
-                color: 'black',
-                marginRight:'-1rem',
-                float: 'right',
-                fontSize: 25,
-              }}               
               />
                 </Various>
           </Grid>
