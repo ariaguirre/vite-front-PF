@@ -1,5 +1,5 @@
 import {  useMemo } from "react";
-import  PrimarySearchAppBar  from "../../components/navbar/navbar"
+
 import { useDispatch,useSelector } from "react-redux"
 import { auth, getUserByid} from "../../utils/firebase/firebaseClient";
 import { getUserData,userDataAuth } from "../../features/userData/userDataSlice";
@@ -10,7 +10,7 @@ const Home = () => {
 const dispatch = useDispatch();
 const dataAuth = useSelector((state) =>state.userData.dataAuth)
 
-const user =useMemo  ( ()=>{
+useMemo(()=>{
   if(!dataAuth.length){
     auth.onAuthStateChanged(async (user) =>{
       if(user){
@@ -25,8 +25,7 @@ return dataAuth
 
 return (
 
-    <Container maxWidth="xl">
-      <PrimarySearchAppBar/>           
+    <Container maxWidth="xl">              
       <Hero/>
     </Container>
 
