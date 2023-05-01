@@ -3,7 +3,6 @@ import {  useMemo } from "react";
 import { useDispatch,useSelector } from "react-redux"
 import { auth, getUserByid} from "../../utils/firebase/firebaseClient";
 import { getUserData,userDataAuth } from "../../features/userData/userDataSlice";
-import Container from '@mui/material/Container'
 import Hero  from "../../components/hero-section/hero"
 
 const Home = () => {
@@ -23,12 +22,8 @@ useMemo(()=>{
 return dataAuth
 },[] )
 
-return (
-
-    <Container maxWidth="xl">              
-      <Hero/>
-    </Container>
-
+return (           
+      <Hero/>    
   )
 }
 
