@@ -14,12 +14,12 @@ const Shop = () => {
   const [Products , setProducts] = useState([])
   //let Products = [];
   useEffect(()=>{
-    const start=async () =>{
+  start();
+  },[])
+  const start=async () =>{
     const prods = await pagProducts();
     await setProducts(prods) 
     }
-  start();
-  },[])
   const pagNext = async () =>{
   const prods = await nextProducts();
   await setProducts(prods)
