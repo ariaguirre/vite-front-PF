@@ -51,7 +51,7 @@ const SignInForm = () => {
     event.preventDefault();
     setLoading(loading => !loading)
     try {
-      const response = await signInAuthUserWithEmailAndPassword(
+      await signInAuthUserWithEmailAndPassword(
         email,
         password
       );

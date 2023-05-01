@@ -1,4 +1,4 @@
-/*cle eslint-disable no-unused-vars */
+/* eslint-disable no-unused-vars */
 
 import { initializeApp} from "firebase/app";
 import {
