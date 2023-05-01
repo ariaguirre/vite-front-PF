@@ -32,7 +32,7 @@ import AllProducts from './allProducts';
 import VentasTotales from './ventasTotales';
 import Inicio from './inicio';
 import Users from './users';
-import NavBar from '../navbar/navbar'
+import NavBar from '../navigation/navigation'
 
 const drawerWidth = 240;
 
