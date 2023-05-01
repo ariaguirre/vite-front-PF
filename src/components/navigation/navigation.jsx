@@ -11,10 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from 'react-router-dom';
-
-
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import { Link } from '@mui/material';
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -88,29 +85,24 @@ function ResponsiveAppBar() {
               }}
             >
               {/* Menu Movil */}
-                <Link to="/">
-                <MenuItem onClick={handleCloseNavMenu}  >                  
-                    <Typography textAlign="center">Home</Typography>
-                  
+              <Link href='/' underline='none'>
+                <MenuItem onClick={handleCloseNavMenu} >
+                  <Typography textAlign="center">Home</Typography>
                 </MenuItem>
-                </Link>
-
-
-                <Link to="/shop">
+              </Link>
+              <Link href='/shop' underline='none'>
                 <MenuItem onClick={handleCloseNavMenu} >
                   <Typography textAlign="center">Shop</Typography>
                 </MenuItem>
-                </Link>
-
-                <Link to="/auth">
+              </Link>
+              <Link href='/auth' underline='none'>
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">LogIn</Typography>
                 </MenuItem>
-                </Link>
-              
+              </Link>
             </Menu>
-          </Box>   
-            
+          </Box>
+
           <Typography
             variant="h5"
             noWrap
@@ -131,17 +123,17 @@ function ResponsiveAppBar() {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        
+
             <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }} href='/'>
               Home
-            </Button>            
+            </Button>
             <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }} href='shop'>
               Shop
             </Button>
             <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }} href='auth'>
               Login
             </Button>
-            
+
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -150,7 +142,7 @@ function ResponsiveAppBar() {
                 <Avatar alt="name" src="" />
               </IconButton>
             </Tooltip>
-            
+
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -167,12 +159,13 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+              <Link href='/admin' underline='none'>
+                <MenuItem onClick={handleCloseUserMenu}>
+                  LogIn
                 </MenuItem>
-              ))}
+              </Link>
             </Menu>
+
           </Box>
         </Toolbar>
       </Container>
