@@ -5,24 +5,28 @@ import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import  Avatar  from '@mui/material/Avatar';
+import Stack from'@mui/material/Stack';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+
 import FolderSharedRoundedIcon from '@mui/icons-material/FolderSharedRounded';
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
-import PlaylistAddCheckCircleRoundedIcon from '@mui/icons-material/PlaylistAddCheckCircleRounded';
-import PlaylistAddCircleRoundedIcon from '@mui/icons-material/PlaylistAddCircleRounded';
-import TrendingDownRoundedIcon from '@mui/icons-material/TrendingDownRounded';
+import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
+import Inventory2Icon from '@mui/icons-material/Inventory2';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+
 import CreateProduct from "./createProduct";
 import AllProducts from './allProducts';
 import VentasTotales from './ventasTotales';
@@ -122,125 +126,141 @@ export default function SideBar() {
   
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{
-              marginRight: 5,
-              ...(open && { display: 'none' }),
-            }}
-          >
-            <MenuIcon />
-         </IconButton>
-         <NavBar />
-        </Toolbar>
-      </AppBar>
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          
-         {/*menu latera*/}
-            <ListItem>
-            <ListItemButton
-               onClick={() => handleItemClick(<Inicio/>)}
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              > 
-              <ListItemIcon>
-                <HomeRoundedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Inicio"  />      
-              </ListItemButton>      
-            </ListItem>
+  <Box sx={{ display: 'flex' }}>
+  <CssBaseline />
+  <AppBar position="fixed" open={open}>
+  <Toolbar>
+  <IconButton
+    color="inherit"
+    aria-label="open drawer"
+    onClick={handleDrawerOpen}
+    edge="start"
+    sx={{
+      marginRight: 5,
+      ...(open && { display: 'none' }),
+    }}
+    >
+    <MenuIcon />
+    </IconButton>
+    <NavBar />
+  </Toolbar>
+  </AppBar>
+  <Drawer variant="permanent" open={open} >
+  <DrawerHeader>
+  <IconButton onClick={handleDrawerClose}>
+    {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+  </IconButton>
+  </DrawerHeader>
+  <Divider />
+  <List>
+     {/*menu latera*/}
+  <ListItem sx={{mt:'20%'}}>
+  <ListItemButton
+    onClick={() => handleItemClick(<Inicio/>)}
+    sx={{
+    minHeight: 48,
+    justifyContent: open ? 'initial' : 'center',
+    px: 2.5,
+    }}
+    > 
+    <ListItemIcon>
+    <Stack direction="row" spacing={2}>
+    <Avatar  sx={{ bgcolor: '#19c8db' }}>
+    <SpaceDashboardIcon />
+    </Avatar> </Stack>                
+    </ListItemIcon>
+    <ListItemText primary="Inicio"  />      
+    </ListItemButton>      
+    </ListItem>
             
-            <ListItem>
-            <ListItemButton
-             onClick={() => handleItemClick(<AllProducts/>)}
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-              <ListItemIcon>
-                <PlaylistAddCheckCircleRoundedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Ver Productos" /> 
-              </ListItemButton>           
-            </ListItem>
+    <ListItem>
+    <ListItemButton
+      onClick={() => handleItemClick(<AllProducts/>)}
+      sx={{
+      minHeight: 48,
+      justifyContent: open ? 'initial' : 'center',
+       px: 2.5,
+      }}
+      >
+    <ListItemIcon>
+    <Stack direction="row" spacing={2}>
+    <Avatar  sx={{ bgcolor: '#19c8db'}}>
+    <Inventory2Icon />
+    </Avatar> </Stack>
+    </ListItemIcon>
+    <ListItemText primary="Ver Productos" /> 
+    </ListItemButton>           
+    </ListItem>
             
-            <ListItem>
-            <ListItemButton
-            onClick={() => handleItemClick(<CreateProduct/>)}
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-              <ListItemIcon>
-              <PlaylistAddCircleRoundedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Nuevo Producto" />  
-            </ListItemButton>           
-            </ListItem>
-
-            <ListItem>
-            <ListItemButton
-               onClick={() => handleItemClick(<VentasTotales/>)}
+    <ListItem>
+    <ListItemButton
+      onClick={() => handleItemClick(<CreateProduct/>)}
+      sx={{
+      minHeight: 48,
+      justifyContent: open ? 'initial' : 'center',
+      px: 2.5,
+      }}
+      >
+      <ListItemIcon>
+      <Stack direction="row" spacing={2}>
+      <Avatar   sx={{ bgcolor: '#19c8db'}}>
+      <AddCircleIcon />
+      </Avatar> </Stack>     
               
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                  
-                }}
-              >
-              <ListItemIcon>
-                <TrendingDownRoundedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Ventas" />  
-            </ListItemButton>           
-            </ListItem>
+      </ListItemIcon>
+      <ListItemText primary="Nuevo Producto" />  
+      </ListItemButton>           
+      </ListItem>
 
-            <ListItem>
-            <ListItemButton
-            onClick={() => handleItemClick(<Users/>)}
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-              <ListItemIcon>
-                <FolderSharedRoundedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Clientes" />     
-              </ListItemButton>      
-            </ListItem>
-        </List>
-        <Divider />
+      <ListItem>
+      <ListItemButton
+        onClick={() => handleItemClick(<VentasTotales/>)}
+        sx={{
+        minHeight: 48,
+        justifyContent: open ? 'initial' : 'center',
+        px: 2.5,
+                  
+        }}
+        >
+      <ListItemIcon>
+      <Stack direction="row" spacing={2}>
+      <Avatar  sx={{ bgcolor: '#19c8db' }}>
+      <MonetizationOnIcon/>
+      </Avatar> </Stack>     
+               
+      </ListItemIcon>
+      <ListItemText primary="Ventas" />  
+      </ListItemButton>           
+      </ListItem>
+
+      <ListItem>
+      <ListItemButton
+        onClick={() => handleItemClick(<Users/>)}
+        sx={{
+          minHeight: 48,
+          justifyContent: open ? 'initial' : 'center',
+          px: 2.5,
+        }}
+        >
+      <ListItemIcon>
+      <Stack direction="row" spacing={2}>
+      <Avatar  sx={{ bgcolor: '#19c8db' }}>
+      <FolderSharedRoundedIcon />
+      </Avatar> </Stack>   
+             
+      </ListItemIcon>
+      <ListItemText primary="Clientes" />     
+      </ListItemButton>      
+      </ListItem>
+      </List>
+      <Divider />
       </Drawer>
 
       <Box component="main" sx={{ flexGrow: 1, p: 3, alignContent:"center"}}>
-        <DrawerHeader />
+      <DrawerHeader />
         {content} 
        
-      </Box>
+    </Box>
     </Box>
   );
 }

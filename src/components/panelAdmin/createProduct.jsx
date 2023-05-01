@@ -1,12 +1,9 @@
-import { Box, Divider, FormControl, Toolbar } from '@mui/material';
+import { Box,  } from '@mui/material';
 import {useState, useEffect} from 'react';
 import { postProductsAdmin, getCategories } from '../../utils/firebase/firebaseClient';
 import { getCategoriesAction } from '../../features/categories/categoriesSlice';
 import Images from '../images/images'
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+
 import { useDispatch, useSelector } from 'react-redux';
 
 const createProduct = () => {
@@ -78,7 +75,27 @@ const handleSubmit = async (e) => {
 
 
   return (
-    
+    <div>
+    <Box component="main"
+    sx={{ width: '50%',alignContent:"center", display: 'flex',
+    justifyContent: 'center', mx:"25%", mt:"2%"}}
+     textAlign={"center"}
+     boxShadow={3}
+     alignContent={"center"}
+     bgcolor={"primary"} 
+     >
+    <h1>
+    CREAR PRODUCTO 
+    </h1>
+    </Box>
+    <Box component="main"
+    sx={{ width: '50%',alignContent:"center", display: 'flex',
+    justifyContent: 'center', mx:"25%", mt:"2%"}}
+     textAlign={"center"}
+     boxShadow={3}
+     alignContent={"center"}
+     bgcolor={"primary"} 
+     >
     <form onSubmit={handleSubmit}>
 
             <label htmlFor="">Name </label>
@@ -106,6 +123,8 @@ const handleSubmit = async (e) => {
             <button type="submit">Enviar</button>
            
         </form>
+      </Box>
+        </div>
   );
 
 }
