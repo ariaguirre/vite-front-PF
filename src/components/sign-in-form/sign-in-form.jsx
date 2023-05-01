@@ -32,12 +32,18 @@ const SignInForm = () => {
   };
 
   const signInWithGoogle = async () => {
-    setLoading(loading => !loading)
-    const { user } = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(user);
-    dispatch(getCredentials(user.uid))
-    setLoading(loading => loading)
-    navigate('/');
+     await signInWithGooglePopup().then(async (data)=>{
+      if(!data.code){
+        setLoading(loading => !loading)
+        await createUserDocumentFromAuth(data.user);
+        dispatch(getCredentials(data.user.uid))
+        setLoading(loading => loading)
+        navigate('/'); 
+      }else{
+        console.log("El usuario cerro el popup de google, no hacer nada")
+      }
+    })
+ 
   };
  
   const handleSubmit = async (event) => {
@@ -76,12 +82,12 @@ const SignInForm = () => {
   return (
 
     <Grid item md={5} sm={12} justifyItems={"center"}>
-          {loading &&<Backdrop
+          <Backdrop
             sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-           open={open}
+           open={loading}
           >
           <CircularProgress color="inherit" />
-         </Backdrop>}
+         </Backdrop>
       <Typography variant="h4" color="initial" align='center'>Already have an account?</Typography>
       <Typography variant='body1' color="initial" align='center'>
         Sign in with your email and password

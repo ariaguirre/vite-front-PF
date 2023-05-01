@@ -1,9 +1,10 @@
 import {  useMemo } from "react";
 import  PrimarySearchAppBar  from "../../components/navbar/navbar"
 import { useDispatch,useSelector } from "react-redux"
-import { auth, getUserByid } from "../../utils/firebase/firebaseClient";
+import { auth, getUserByid} from "../../utils/firebase/firebaseClient";
 import { getUserData,userDataAuth } from "../../features/userData/userDataSlice";
 import Container from '@mui/material/Container'
+import Hero  from "../../components/hero-section/hero"
 
 const Home = () => {
 const dispatch = useDispatch();
@@ -26,8 +27,10 @@ return (
 
     <Container maxWidth="xl">
       <PrimarySearchAppBar/>           
+      <Hero/>
     </Container>
+
   )
 }
 
-export default Home
+export default Home;

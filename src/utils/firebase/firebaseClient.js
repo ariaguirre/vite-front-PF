@@ -58,7 +58,11 @@ provider.setCustomParameters({
 
 export const auth = getAuth();
 
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+export const signInWithGooglePopup = () => signInWithPopup(auth, provider).then((data)=>{
+  return data
+}).catch((error)=>{
+  return error
+})
 
 export const db = getFirestore();
 
@@ -292,4 +296,22 @@ export const uploadFile = async (file) => {
     const storageRef = ref(storage, v4())
     await uploadBytes(storageRef, file)
     return getDownloadURL(storageRef); 
+}
+
+// actualiza datos del producto
+export const updateDataProduct = async(data) =>{
+  const priceRef = doc(db, 'Products', data.id)
+  try {
+    await updateDoc(priceRef,{
+      categories: data.categories,
+      colors:data.colors,
+      description:data.description,
+      image: data.image,
+      name:data.name,
+      price: data.price,
+      stock:data.stock
+    })
+  } catch (error) {
+    alert(error)
+  }
 }

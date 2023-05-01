@@ -1,11 +1,11 @@
 import SignUpForm from '../../components/sign-up-form/sign-up-form';
 import SignInForm from '../../components/sign-in-form/sign-in-form';
 import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container'
+
 
 const Authentication = () => {
   return (
-    <Container maxWidth="xl">
+    
       <Grid
         container
         justifyContent="center"
@@ -16,8 +16,7 @@ const Authentication = () => {
           <SignInForm />
           <SignUpForm />
         </Grid>
-      </Grid>
-    </Container>
+      </Grid>  
   );
 };
 
