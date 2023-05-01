@@ -71,7 +71,7 @@ useEffect(()=>{
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
-              <TableCell align="right"><img src={row.image} /></TableCell>
+              <TableCell align="right"><img src={row.imageUrl[0]} /></TableCell>
            
               <TableCell align="center">{row.price}</TableCell>
               <TableCell align="center">{row.stock}</TableCell>

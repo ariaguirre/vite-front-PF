@@ -23,6 +23,12 @@ import {
   query,
   where,
   deleteDoc,
+  orderBy,
+  limit,
+  startAfter,
+  endBefore,
+  startAt,
+  endAt,
 } from "firebase/firestore";
 
 import {
@@ -125,7 +131,38 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 };
 
 export const signOutUser = async () => await signOut(auth);
-
+// paginacion
+let lastVisible = null;
+let firstDoc = null;
+export const pagProducts = async () =>{
+  const docs = []
+  const first = query(collection(db, "Products"), orderBy("name" , "asc"), limit(3));
+  const documentSnapshots = await getDocs(first);
+  firstDoc = documentSnapshots.docs[0] || null
+    lastVisible = documentSnapshots.docs[documentSnapshots.docs.length-1]
+    documentSnapshots.forEach(a=>{docs.push(a.data())})
+    return docs
+}
+export const nextProducts = async () =>{
+    const docs = []
+    const next = query(collection(db, "Products"),orderBy("name","asc"),startAfter(lastVisible),limit(3));
+    const document = await getDocs(next);
+    firstDoc = document.docs[0] || null
+    lastVisible = document.docs[document.docs.length-1] || null
+    document.forEach(a=>{docs.push(a.data())})
+   return docs
+}
+export const prevProducts = async () =>{
+  const docs = []
+  const pev = query(collection(db, "Products"),orderBy("name", "desc"),startAfter(firstDoc),limit(3));
+  const document = await getDocs(pev);
+  firstDoc = document.docs[0] || null
+  lastVisible = document.docs[document.docs.length-1] || null
+  const doc = document.docs.reverse();
+  doc.forEach(a=>{docs.push(a.data())})
+  return docs
+}
+// paginacion
 //trae Productos existentes
 export const getProducts = async () => {
   const querySnapshot = await getDocs(collection(db, "Products"));
@@ -184,7 +221,7 @@ export const updateProduct = async (data) => {
     stock: data.stock,
     price: data.price,
     categories: data.categories,
-    imageUrl: data.image,
+    imageUrl: data.imageUrl,
     reviews: data.reviews,
     rating: data.rating,
     sale: data.sale,
