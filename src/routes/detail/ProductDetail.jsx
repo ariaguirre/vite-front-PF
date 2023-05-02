@@ -9,7 +9,7 @@ import {Box, Typography, Button} from '@mui/material';
 
 
 
-export default function DetailProduct(){
+const DetailProduct = () => {
  
 
 
@@ -107,3 +107,5 @@ export default function DetailProduct(){
   </Container>
   </>
 }
+
+export default DetailProduct;
