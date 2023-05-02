@@ -1,5 +1,5 @@
 import Container from '@mui/material/Container'
-import Stack from '@mui/joy/Stack';
+import Stack from '@mui/material/Stack';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom'
