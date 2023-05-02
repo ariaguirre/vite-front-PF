@@ -83,7 +83,7 @@ const HeroContainer = styled(Paper)(({ theme }) => ({
         <HeroSubtitle>
           Asesoramos a mamitas primerizas en la elección de los mejores productos para su embarazo, lactancia y sus bebés. ¡Ahorrándoles horas de investigación!
         </HeroSubtitle>
-        <HeroButton href="/store" startIcon={<LocalMallIcon/>}>
+        <HeroButton href="/shop" startIcon={<LocalMallIcon/>}>
           Tienda
         </HeroButton>
       </HeroContainer>
