@@ -6,6 +6,7 @@ import { getUserData,userDataAuth } from "../../features/userData/userDataSlice"
 import Hero  from "../../components/hero-section/hero"
 
 const Home = () => {
+
 const dispatch = useDispatch();
 const dataAuth = useSelector((state) =>state.userData.dataAuth)
 
