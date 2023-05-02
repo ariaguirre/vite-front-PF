@@ -1,10 +1,33 @@
-import Container from '@mui/material/Container'
+import {  useMemo } from "react";
+
+import { useDispatch,useSelector } from "react-redux"
+import { auth, getUserByid} from "../../utils/firebase/firebaseClient";
+import { getUserData,userDataAuth } from "../../features/userData/userDataSlice";
+import Hero  from "../../components/hero-section/hero"
 
 const Home = () => {
-  return (
-    <Container maxWidth="xl">           
-    </Container>
+
+const dispatch = useDispatch();
+const dataAuth = useSelector((state) =>state.userData.dataAuth)
+
+useMemo(()=>{
+  if(!dataAuth.length){
+    auth.onAuthStateChanged(async (user) =>{
+      if(user){
+        dispatch(userDataAuth(user))
+        const dataUser = await  getUserByid(user.uid);
+        dispatch(getUserData(dataUser))  
+      }
+    }) 
+  }
+return dataAuth
+// eslint-disable-next-line react-hooks/exhaustive-deps
+},[] )
+
+
+return (             
+        <Hero/>            
   )
 }
 
-export default Home
+export default Home;

@@ -1,13 +1,11 @@
 import { useParams } from "react-router-dom"
-import { Container, Typography, Box, Stack, Grid } from "@mui/material";
+import { Container, Typography, Box, Grid } from "@mui/material";
 
 
-export default function Carritow({match}){
+export default function Carritow(){
 
   const { id } = useParams();
 
-
-  const cesta = []
 
   return(<Box>
     <Container fixed >
@@ -26,10 +24,7 @@ export default function Carritow({match}){
       <Box bgcolor={'#f4f4f4'}  mt={2}>
       <Typography variant="h5" textAlign="center">
           Detalle de la compra
-          </Typography>
-
-
-          
+          </Typography>          
       </Box>
       </Grid>
       </Grid>

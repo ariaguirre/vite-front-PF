@@ -1,15 +1,16 @@
-import { useState } from 'react';
-
+//React 
+import {  useState } from 'react';
+//Material UI 
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid'; 
 import FormControl from '@mui/material/FormControl'
 import TextField from '@mui/material/TextField'
-
+import Typography from '@mui/material/Typography'
+//Firebase 
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from '../../utils/firebase/firebaseClient';
-import Typography from '@mui/material/Typography'
 
 
 const defaultFormFields = {
@@ -20,6 +21,7 @@ const defaultFormFields = {
 };
 
 const SignUpForm = () => {
+
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
@@ -27,22 +29,18 @@ const SignUpForm = () => {
     setFormFields(defaultFormFields);
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
+  const handleSubmit = async () => {
     if (password !== confirmPassword) {
       alert('passwords do not match');
       return;
-    }
-
+    }    
     try {
       const { user } = await createAuthUserWithEmailAndPassword(
         email,
         password
-      );
-
-      await createUserDocumentFromAuth(user, { displayName });
-      resetFormFields();
+      );        
+      await createUserDocumentFromAuth(user, { displayName });         
+      resetFormFields();      
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         alert('Cannot create user, email already in use');
@@ -54,7 +52,6 @@ const SignUpForm = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setFormFields({ ...formFields, [name]: value });
   };
 
@@ -63,7 +60,7 @@ const SignUpForm = () => {
       <Typography variant="h4" color="initial" align='center'>Don&#39;t have an account?</Typography>
       <Typography variant="body1" align='center'>Sign up with your email and password</Typography>
       <Grid container justifyContent={"center"}>
-      <FormControl variant='standard' margin='dense'  onSubmit={handleSubmit} fullWidth >
+      <FormControl variant='standard' margin='dense'  fullWidth >
         <TextField
           label='Display Name'
           type='text'
@@ -102,7 +99,7 @@ const SignUpForm = () => {
           value={confirmPassword}
           margin='dense'
         />
-        <Button type='submit' variant='contained' margin='dense'>Sign Up</Button>
+        <Button  onClick={()=>handleSubmit()} variant='contained' margin='dense'>Sign Up</Button>
       </FormControl>
       </Grid>           
     </Grid>
