@@ -10,9 +10,9 @@ const Authentication = () => {
         container
         justifyContent="center"
         alignItems="center"
-        sx={{ minHeight: '100vh' }}
+        sx={{ minHeight: '100vh'}}
       >
-        <Grid container justifyContent={"space-evenly"} alignItems={'flex-start'} gap={2}>
+        <Grid container justifyContent={"space-evenly"} alignItems={'flex-start'} gap={2} >
           <SignInForm />
           <SignUpForm />
         </Grid>
