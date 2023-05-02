@@ -11,8 +11,6 @@ import {Box, Typography, Button} from '@mui/material';
 
 const DetailProduct = () => {
  
-
-
   const handleInput = (e) =>{
     setCant(() => e.target.value)
   }
