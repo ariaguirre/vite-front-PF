@@ -1,6 +1,5 @@
 import Container from '@mui/material/Container'
 import CardInf from "../../components/card/card"
-import {products} from '../../utils/data/data'
 import { Grid } from '@mui/material'
 
 import {Button} from '@mui/material'
@@ -10,10 +9,11 @@ import { useEffect, useState } from 'react'
 const Shop = () => {
   const [Products , setProducts] = useState([])
   const [itemsSize, setItemSize] = useState(0)//tamaño de la collection
-  const [itemsPerPage , setitemsPerPage] = useState(8)// items por pagina -- modifica este numero si quieres ver mas o menos items
+  const [itemsPerPage] = useState(8)// items por pagina -- modifica este numero si quieres ver mas o menos items
   const [count , setCount] = useState(0)// contador de items al darle clic a botones next y prev
   useEffect(()=>{
   start();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
   const start=async () =>{
     await setCount(+itemsPerPage)
@@ -39,9 +39,9 @@ const Shop = () => {
     <Container maxWidth="xl" sx={{minHeight:"100vh"}}   >    
         <Grid container justifyContent={"center"}>        
         {
-        Products.length?Products.map((products) => (
+        Products.length?Products.map((products, i) => (
           <CardInf
-            key={products.id}
+            key={`${products.id}+${i}`}
             id = {products.id}
             imageUrl={products.imageUrl[0]}
             categories={products.categories}
