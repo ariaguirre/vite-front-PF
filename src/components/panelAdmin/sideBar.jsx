@@ -1,12 +1,10 @@
-import * as React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import CssBaseline from '@mui/material/CssBaseline';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -32,7 +30,7 @@ import AllProducts from './allProducts';
 import VentasTotales from './ventasTotales';
 import Inicio from './inicio';
 import Users from './users';
-import NavBar from '../navigation/navigation'
+
 
 const drawerWidth = 240;
 
@@ -101,11 +99,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function SideBar() {
+const SideBar = () =>  {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const isLargeScreen = useMediaQuery(theme => theme.breakpoints.up('sm')); //para manejar drawer visble/oculto responsive
-  const [content, setContent] = React.useState(<Inicio/>) //estado local para manejar contenido dinamico
+  const [content, setContent] = useState(<Inicio />) //estado local para manejar contenido dinamico
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -123,144 +121,145 @@ export default function SideBar() {
   useEffect(() => {
     setOpen(isLargeScreen);
   }, [isLargeScreen]);
-  
+
 
   return (
-  <Box sx={{ display: 'flex' }}>
-  <CssBaseline />
-  <AppBar position="fixed" open={open}>
-  <Toolbar>
-  <IconButton
-    color="inherit"
-    aria-label="open drawer"
-    onClick={handleDrawerOpen}
-    edge="start"
-    sx={{
-      marginRight: 5,
-      ...(open && { display: 'none' }),
-    }}
-    >
-    <MenuIcon />
-    </IconButton>
-    <NavBar />
-  </Toolbar>
-  </AppBar>
-  <Drawer variant="permanent" open={open} >
-  <DrawerHeader>
-  <IconButton onClick={handleDrawerClose}>
-    {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-  </IconButton>
-  </DrawerHeader>
-  <Divider />
-  <List>
-     {/*menu latera*/}
-  <ListItem sx={{mt:'20%'}}>
-  <ListItemButton
-    onClick={() => handleItemClick(<Inicio/>)}
-    sx={{
-    minHeight: 48,
-    justifyContent: open ? 'initial' : 'center',
-    px: 2.5,
-    }}
-    > 
-    <ListItemIcon>
-    <Stack direction="row" spacing={2}>
-    <Avatar  sx={{ bgcolor: '#19c8db' }}>
-    <SpaceDashboardIcon />
-    </Avatar> </Stack>                
-    </ListItemIcon>
-    <ListItemText primary="Inicio"  />      
-    </ListItemButton>      
-    </ListItem>
-            
-    <ListItem>
-    <ListItemButton
-      onClick={() => handleItemClick(<AllProducts/>)}
-      sx={{
-      minHeight: 48,
-      justifyContent: open ? 'initial' : 'center',
-       px: 2.5,
-      }}
-      >
-    <ListItemIcon>
-    <Stack direction="row" spacing={2}>
-    <Avatar  sx={{ bgcolor: '#19c8db'}}>
-    <Inventory2Icon />
-    </Avatar> </Stack>
-    </ListItemIcon>
-    <ListItemText primary="Ver Productos" /> 
-    </ListItemButton>           
-    </ListItem>
-            
-    <ListItem>
-    <ListItemButton
-      onClick={() => handleItemClick(<CreateProduct/>)}
-      sx={{
-      minHeight: 48,
-      justifyContent: open ? 'initial' : 'center',
-      px: 2.5,
-      }}
-      >
-      <ListItemIcon>
-      <Stack direction="row" spacing={2}>
-      <Avatar   sx={{ bgcolor: '#19c8db'}}>
-      <AddCircleIcon />
-      </Avatar> </Stack>     
-              
-      </ListItemIcon>
-      <ListItemText primary="Nuevo Producto" />  
-      </ListItemButton>           
-      </ListItem>
+    <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
+      <AppBar position="fixed" open={open}>
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{
+              marginRight: 5,
+              ...(open && { display: 'none' }),
+            }}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <Drawer variant="permanent" open={open} >
+        <DrawerHeader>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          </IconButton>
+        </DrawerHeader>
+        <Divider />
+        <List>
+          {/*menu latera*/}
+          <ListItem sx={{ mt: '20%' }}>
+            <ListItemButton
+              onClick={() => handleItemClick(<Inicio />)}
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon>
+                <Stack direction="row" spacing={2}>
+                  <Avatar sx={{ bgcolor: '#19c8db' }}>
+                    <SpaceDashboardIcon />
+                  </Avatar> </Stack>
+              </ListItemIcon>
+              <ListItemText primary="Inicio" />
+            </ListItemButton>
+          </ListItem>
 
-      <ListItem>
-      <ListItemButton
-        onClick={() => handleItemClick(<VentasTotales/>)}
-        sx={{
-        minHeight: 48,
-        justifyContent: open ? 'initial' : 'center',
-        px: 2.5,
-                  
-        }}
-        >
-      <ListItemIcon>
-      <Stack direction="row" spacing={2}>
-      <Avatar  sx={{ bgcolor: '#19c8db' }}>
-      <MonetizationOnIcon/>
-      </Avatar> </Stack>     
-               
-      </ListItemIcon>
-      <ListItemText primary="Ventas" />  
-      </ListItemButton>           
-      </ListItem>
+          <ListItem>
+            <ListItemButton
+              onClick={() => handleItemClick(<AllProducts />)}
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon>
+                <Stack direction="row" spacing={2}>
+                  <Avatar sx={{ bgcolor: '#19c8db' }}>
+                    <Inventory2Icon />
+                  </Avatar> </Stack>
+              </ListItemIcon>
+              <ListItemText primary="Ver Productos" />
+            </ListItemButton>
+          </ListItem>
 
-      <ListItem>
-      <ListItemButton
-        onClick={() => handleItemClick(<Users/>)}
-        sx={{
-          minHeight: 48,
-          justifyContent: open ? 'initial' : 'center',
-          px: 2.5,
-        }}
-        >
-      <ListItemIcon>
-      <Stack direction="row" spacing={2}>
-      <Avatar  sx={{ bgcolor: '#19c8db' }}>
-      <FolderSharedRoundedIcon />
-      </Avatar> </Stack>   
-             
-      </ListItemIcon>
-      <ListItemText primary="Clientes" />     
-      </ListItemButton>      
-      </ListItem>
-      </List>
-      <Divider />
+          <ListItem>
+            <ListItemButton
+              onClick={() => handleItemClick(<CreateProduct />)}
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon>
+                <Stack direction="row" spacing={2}>
+                  <Avatar sx={{ bgcolor: '#19c8db' }}>
+                    <AddCircleIcon />
+                  </Avatar> </Stack>
+
+              </ListItemIcon>
+              <ListItemText primary="Nuevo Producto" />
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem>
+            <ListItemButton
+              onClick={() => handleItemClick(<VentasTotales />)}
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+
+              }}
+            >
+              <ListItemIcon>
+                <Stack direction="row" spacing={2}>
+                  <Avatar sx={{ bgcolor: '#19c8db' }}>
+                    <MonetizationOnIcon />
+                  </Avatar> </Stack>
+
+              </ListItemIcon>
+              <ListItemText primary="Ventas" />
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem>
+            <ListItemButton
+              onClick={() => handleItemClick(<Users />)}
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon>
+                <Stack direction="row" spacing={2}>
+                  <Avatar sx={{ bgcolor: '#19c8db' }}>
+                    <FolderSharedRoundedIcon />
+                  </Avatar> </Stack>
+
+              </ListItemIcon>
+              <ListItemText primary="Clientes" />
+            </ListItemButton>
+          </ListItem>
+        </List>
+        <Divider />
       </Drawer>
 
-      <Box component="main" sx={{ flexGrow: 1, p: 3, alignContent:"center"}}>
-      <DrawerHeader />
-        {content} 
-       
-    </Box>
+      <Box component="main" sx={{ flexGrow: 1, p: 3, alignContent: "center" }}>
+        <DrawerHeader />
+        {content}
+
+      </Box>
     </Box>
   );
 }
+
+export default SideBar;

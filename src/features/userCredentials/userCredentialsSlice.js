@@ -1,25 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  userCredentials: '',
+  userCredentials: null,
 }
 
 export const userCredentialsSlice = createSlice({
-  name: 'credentials',
+  name: 'currentUser',
   initialState,
   reducers: {
-    getCredentials: (state,action) => {
-    
+    setCurrentUser: (state,action) => {    
       state.userCredentials = action.payload;
-    },
-    removeCredentials: (state) => {
-    
-      state.userCredentials = '';
-    }
+    }    
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { getCredentials,removeCredentials } = userCredentialsSlice.actions
+export const { setCurrentUser } = userCredentialsSlice.actions
 
 export default userCredentialsSlice.reducer

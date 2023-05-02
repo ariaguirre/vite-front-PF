@@ -1,24 +1,32 @@
-import {useState} from 'react';
-import AppBar from '@mui/material/AppBar';
+//React
+import { useState } from 'react';
+//Redux
+import { useSelector } from 'react-redux';
+//material UI
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
+import Link from '@mui/material/Link';
+import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
+import Toolbar from '@mui/material/Toolbar';
 import MenuItem from '@mui/material/MenuItem';
-import Logo from "../img/logoMom.png";
+import MenuIcon from '@mui/icons-material/Menu';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+//FireBase
+import { signOutUser } from "../../utils/firebase/firebaseClient";
 
-const pages = ['Authentication', 'Shop', 'SignIn'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function Navigation() {
+
+const Navigation = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+
+  //redux
+  const {userCredentials} = useSelector((state)=> state.currentUser);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -37,21 +45,27 @@ function Navigation() {
 
   return (
     <AppBar position="static">
-      <Container >
+      <Container maxWidth="xl">
         <Toolbar disableGutters>
-          
-          <Box
-            component="img"
+          {/* LogoFullScreen */}
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
             sx={{
-            height: 45,
-            display: { xs: 'none', md: 'flex' }, 
-            mr: 1
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
             }}
-            alt="Your logo."
-            src={Logo}
-        />
-          
-          
+          >
+            MB&H
+          </Typography>
+
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -81,66 +95,85 @@ function Navigation() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {/* Menu Movil */}
+              <Link href='/' underline='none'>
+                <MenuItem onClick={handleCloseNavMenu} >
+                  <Typography textAlign="center">Home</Typography>
                 </MenuItem>
-              ))}
+              </Link>
+              <Link href='/shop' underline='none'>
+                <MenuItem onClick={handleCloseNavMenu} >
+                  <Typography textAlign="center">Shop</Typography>
+                </MenuItem>
+              </Link>
             </Menu>
-          </Box>
-          
-          <Box
-            component="img"
-            sx={{
-            height: 45,
-            display: { xs: 'flex', md: 'none' }, 
-            mr: 1
-            }}
-            alt="Your logo."
-            src={Logo}
-        />
-          
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: 'flex', md: 'none' },
+              flexGrow: 1,
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            MB&H
+          </Typography>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block', }} href='/'>
+              Home
+            </Button>
+            <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }} href='shop'>
+              Shop
+            </Button>
           </Box>
+
+          {
+          userCredentials
+          ? <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings" >
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Typography variant="body1" color="secondary" p={".5rem"} mr={1} >{userCredentials.displayName||"User"}</Typography>
+                <Avatar alt={userCredentials.displayName} src={userCredentials.photoURL} />
+                </IconButton>
+              </Tooltip>
+                <Menu
+                  sx={{ mt: '45px' }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  
+                  <MenuItem>
+                    <Link variant="body1" color="primary" href="/admin" underline='none'>Profile</Link>                    
+                  </MenuItem>
+                  <MenuItem onClick={handleCloseUserMenu}>
+                    <Link variant="body1" color="primary" href="/auth" underline='none' onClick={()=>signOutUser()}>Logout</Link>                    
+                  </MenuItem>
+                  
+                </Menu>
+            </Box> 
+          :<Button variant='text' color='secondary' href='/auth'>Login</Button>
+        }        
         </Toolbar>
       </Container>
     </AppBar>

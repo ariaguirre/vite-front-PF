@@ -1,9 +1,15 @@
 import { useState, useEffect } from 'react';
 import { uploadFile } from '../../utils/firebase/firebaseClient';
+import { TextField} from '@mui/material';
+
+
+
+
+
 
 const Images = ({setUrlImages}) => {
   const [images, setImages] = useState([]);
-  
+
 
   const onImageChange = (e) => {    
     setImages([...e.target.files]);    
@@ -21,20 +27,21 @@ const Images = ({setUrlImages}) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [images])
   
+
+
+
   return (
 
     <>
-      <input
-        type="file"
-        accept="image/*"
+ 
+        <TextField
+        type='file'
         onChange={onImageChange}
-        name="image"
-        id="image"
-        multiple
-      />
-      <label htmlFor="image">
-        &nbsp; Choose A photo
-      </label>
+        name='image'
+        id='image'
+        inputProps={{ multiple: true }}
+        />
+   
     </>
   )
 }

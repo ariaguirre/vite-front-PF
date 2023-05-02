@@ -1,6 +1,6 @@
-/*cle eslint-disable no-unused-vars */
-
+/* eslint-disable no-unused-vars */
 import { initializeApp} from "firebase/app";
+
 import {
   getAuth,
   signInWithPopup,
@@ -8,6 +8,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  onAuthStateChanged
 } from "firebase/auth";
 
 import {
@@ -19,16 +20,11 @@ import {
   setDoc,
   addDoc,
   updateDoc,
-  arrayUnion,
-  query,
-  where,
   deleteDoc,
   orderBy,
   limit,
   startAfter,
-  endBefore,
-  startAt,
-  endAt,
+  query,
 } from "firebase/firestore";
 
 import {
@@ -107,6 +103,7 @@ export const createUserDocumentFromAuth = async (
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
+  
   return await createUserWithEmailAndPassword(auth, email, password);
 };
 
@@ -138,13 +135,14 @@ let itemPerPage =0
 export const pagProducts = async (limitPerPage) =>{
   itemPerPage = limitPerPage
   const docs = []
-  const items = query(collection(db, "Products").path.length)
+  const items = query(collection(db, "Products"))
+  const itemsColl = (await getDocs(items)).size
   const first = query(collection(db, "Products") ,limit(itemPerPage), orderBy("name" , "asc"));
   const documentSnapshots = await getDocs(first);
   firstDoc = documentSnapshots.docs[0] || null
     lastVisible = documentSnapshots.docs[documentSnapshots.docs.length-1]|| null
     documentSnapshots.forEach(a=>{docs.push(a.data())})
-    return {docs,items}
+    return {docs,itemsColl}
 }
 export const nextProducts = async () =>{
     const docs = []
@@ -166,6 +164,11 @@ export const prevProducts = async () =>{
   return docs
 }
 // paginacion
+
+export const onAuthStateChangedListener = (callback) =>  
+onAuthStateChanged(auth, callback);
+
+
 //trae Productos existentes
 export const getProducts = async () => {
   const querySnapshot = await getDocs(collection(db, "Products"));
@@ -183,7 +186,7 @@ export const getProducts = async () => {
 
 //Agrega nuevos productos
 export const postProductsAdmin = async (data) => {
-  const docRef = await addDoc(collection(db, "Products"), {
+  await addDoc(collection(db, "Products"), {
     name: data.name,
     description: data.description,
     stock: data.stock,
@@ -326,7 +329,7 @@ export const getCategories = async () => {
 };
 // agrega nueva categoria
 export const postcategoriesAdmin = async (data) => {
-  const docRef = await setDoc(doc(db, "categories", data.category), {
+  await setDoc(doc(db, "categories", data.category), {
     subCategory: data.subCategory,
   });
 };
@@ -338,20 +341,33 @@ export const uploadFile = async (file) => {
     return getDownloadURL(storageRef); 
 }
 
-// actualiza datos del producto
-export const updateDataProduct = async(data) =>{
-  const priceRef = doc(db, 'Products', data.id)
-  try {
-    await updateDoc(priceRef,{
-      categories: data.categories,
-      colors:data.colors,
-      description:data.description,
-      image: data.image,
-      name:data.name,
-      price: data.price,
-      stock:data.stock
-    })
-  } catch (error) {
-    alert(error)
-  }
+
+// post de carrito de de compra al usuario
+export const setCart = async(data) =>{
+  const carritoRef = doc(db, 'user', data.uid)
+  await setDoc(carritoRef,{
+    cart: data.cart
+  },{merge: true})
 }
+
+// post favorites al usuario
+
+export const setFavorites = async(data)=>{
+  const favoritesRef = doc(db, 'user', data.uid)
+    await setDoc(favoritesRef,{
+      favorites: data.favorites
+    },{merge:true})
+  }
+
+// post pedidos
+export const setDelivery = async(data)=>{
+  const deliveryRef = doc(db, 'user', data.uid)
+  await setDoc(deliveryRef,{
+    delivery: data.delivery
+  },{merge:true})
+}
+
+
+
+
+
