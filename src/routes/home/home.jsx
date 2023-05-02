@@ -20,10 +20,12 @@ useMemo(()=>{
     }) 
   }
 return dataAuth
+// eslint-disable-next-line react-hooks/exhaustive-deps
 },[] )
 
-return (           
-      <Hero/>    
+
+return (             
+        <Hero/>            
   )
 }
 

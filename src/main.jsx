@@ -5,9 +5,6 @@ import ReactDOM from 'react-dom/client'
 import { store } from './app/store.js'
 import { Provider } from 'react-redux'
 
-import { PersistGate } from 'redux-persist/integration/react'
-import { persistStore } from 'redux-persist'
-
 import App from './App.jsx'
 
 // Material ui
@@ -35,11 +32,8 @@ const theme = createTheme({
   },
 });
 
-
-const persisor = persistStore(store);
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode> 
-    <PersistGate persistor={persisor}>
+  <React.StrictMode>     
     <Provider store={store}>
       <BrowserRouter>
       <ThemeProvider theme={theme}>
@@ -47,8 +41,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <App />
       </ThemeProvider>
       </BrowserRouter>
-    </Provider>
-    </PersistGate>
-  
+    </Provider>    
   </React.StrictMode>,
 )
