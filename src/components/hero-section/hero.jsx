@@ -1,4 +1,3 @@
-import React from 'react';
 import { Paper, Button } from '@mui/material';
 import {styled} from '@mui/material/styles'
 import bebe1 from '../../../documents/Image/bebe1.jpg'
@@ -44,20 +43,20 @@ const HeroContainer = styled(Paper)(({ theme }) => ({
     },
   }));
 
-  const HeroSubtitle2 = styled('h2')(({ theme }) => ({
-    color: 'white',
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(4),
-    textAlign: 'center',
+  // const HeroSubtitle2 = styled('h2')(({ theme }) => ({
+  //   color: 'white',
+  //   marginTop: theme.spacing(1),
+  //   marginBottom: theme.spacing(4),
+  //   textAlign: 'center',
 
-    fontSize: theme.typography.pxToRem(16),
-    fontWeight: 'normal',
-    maxWidth: '700px',
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(20),
-      marginTop: theme.spacing(-4),
-    },
-  }));
+  //   fontSize: theme.typography.pxToRem(16),
+  //   fontWeight: 'normal',
+  //   maxWidth: '700px',
+  //   [theme.breakpoints.up('sm')]: {
+  //     fontSize: theme.typography.pxToRem(20),
+  //     marginTop: theme.spacing(-4),
+  //   },
+  // }));
   
   const HeroButton = styled(Button)(({ theme }) => ({
     backdropFilter: 'blur(10px)',

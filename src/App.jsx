@@ -51,12 +51,4 @@ const App = () => {
   )
 }
 
-export default App
-
-
-{/* <Route path="/" element={
-  //Protected routes
-  <RequireAuth>
-    <Home/>          
-  </RequireAuth>
-}/> */}
+export default App;

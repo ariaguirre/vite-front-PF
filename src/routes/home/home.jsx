@@ -4,7 +4,6 @@ import { useDispatch,useSelector } from "react-redux"
 import { auth, getUserByid} from "../../utils/firebase/firebaseClient";
 import { getUserData,userDataAuth } from "../../features/userData/userDataSlice";
 import Hero  from "../../components/hero-section/hero"
-import Footer from '../../components/footer/footer'
 
 const Home = () => {
 const dispatch = useDispatch();
@@ -21,11 +20,12 @@ useMemo(()=>{
     }) 
   }
 return dataAuth
+// eslint-disable-next-line react-hooks/exhaustive-deps
 },[] )
 
 
-return (           
-      <Hero/>    
+return (             
+        <Hero/>            
   )
 }
 
