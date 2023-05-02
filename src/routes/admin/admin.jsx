@@ -1,4 +1,4 @@
-import SideBar from '../../components/panelAdmin/SideBar'
+import SideBar from '../../components/panelAdmin/sideBar'
 
 const admin = () => {
   return (    
