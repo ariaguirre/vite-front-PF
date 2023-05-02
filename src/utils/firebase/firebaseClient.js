@@ -1,6 +1,6 @@
-/*cle eslint-disable no-unused-vars */
-
+/* eslint-disable no-unused-vars */
 import { initializeApp} from "firebase/app";
+
 import {
   getAuth,
   signInWithPopup,
@@ -8,6 +8,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  onAuthStateChanged
 } from "firebase/auth";
 
 import {
@@ -19,9 +20,6 @@ import {
   setDoc,
   addDoc,
   updateDoc,
-  arrayUnion,
-  query,
-  where,
   deleteDoc,
 } from "firebase/firestore";
 
@@ -101,6 +99,7 @@ export const createUserDocumentFromAuth = async (
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
+  
   return await createUserWithEmailAndPassword(auth, email, password);
 };
 
@@ -126,6 +125,10 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 
 export const signOutUser = async () => await signOut(auth);
 
+export const onAuthStateChangedListener = (callback) =>  
+onAuthStateChanged(auth, callback);
+
+
 //trae Productos existentes
 export const getProducts = async () => {
   const querySnapshot = await getDocs(collection(db, "Products"));
@@ -143,7 +146,7 @@ export const getProducts = async () => {
 
 //Agrega nuevos productos
 export const postProductsAdmin = async (data) => {
-  const docRef = await addDoc(collection(db, "Products"), {
+  await addDoc(collection(db, "Products"), {
     name: data.name,
     description: data.description,
     stock: data.stock,
@@ -286,7 +289,7 @@ export const getCategories = async () => {
 };
 // agrega nueva categoria
 export const postcategoriesAdmin = async (data) => {
-  const docRef = await setDoc(doc(db, "categories", data.category), {
+  await setDoc(doc(db, "categories", data.category), {
     subCategory: data.subCategory,
   });
 };

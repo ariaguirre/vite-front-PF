@@ -6,7 +6,7 @@ import Images from '../images/images'
 
 import { useDispatch, useSelector } from 'react-redux';
 
-const createProduct = () => {
+const CreateProduct = () => {
 
   
   const [urlImages, setUrlImages] = useState([]);
@@ -129,4 +129,4 @@ const handleSubmit = async (e) => {
 
 }
 
-export default createProduct
+export default CreateProduct

@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { userCredentialsSlice } from '../userCredentials/userCredentialsSlice';
 
 const initialState = {
   userData :[],
