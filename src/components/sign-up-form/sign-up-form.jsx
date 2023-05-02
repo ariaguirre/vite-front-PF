@@ -1,16 +1,17 @@
+//React 
 import {  useState } from 'react';
+//Material UI 
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid'; 
 import FormControl from '@mui/material/FormControl'
 import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
+//Firebase 
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from '../../utils/firebase/firebaseClient';
-import Typography from '@mui/material/Typography'
-import { useNavigate } from 'react-router-dom';
-import CircularProgress from '@mui/material/CircularProgress';
-import { Backdrop } from '@mui/material';
+
 
 const defaultFormFields = {
   displayName: '',
@@ -20,11 +21,9 @@ const defaultFormFields = {
 };
 
 const SignUpForm = () => {
-  const [loading ,setLoading] = useState(false); 
-  const navigate = useNavigate()
+
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
-
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -34,20 +33,15 @@ const SignUpForm = () => {
     if (password !== confirmPassword) {
       alert('passwords do not match');
       return;
-    }
-    setLoading(loading => !loading)
+    }    
     try {
       const { user } = await createAuthUserWithEmailAndPassword(
         email,
         password
-      );
-   
-      await createUserDocumentFromAuth(user, { displayName });    
-       resetFormFields();
-       setLoading(loading => loading)
-       navigate('/');
+      );        
+      await createUserDocumentFromAuth(user, { displayName });         
+      resetFormFields();      
     } catch (error) {
-      setLoading(loading => loading)
       if (error.code === 'auth/email-already-in-use') {
         alert('Cannot create user, email already in use');
       } else {
@@ -62,13 +56,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <Grid item md={5} sm={12} justifyItems={"center"}>  
-      <Backdrop
-            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-           open={loading}
-          >
-          <CircularProgress color="inherit" />
-      </Backdrop>
+    <Grid item md={5} sm={12} justifyItems={"center"} sx={{border:1, borderColor:"red"}} >  
       <Typography variant="h4" color="initial" align='center'>Don&#39;t have an account?</Typography>
       <Typography variant="body1" align='center'>Sign up with your email and password</Typography>
       <Grid container justifyContent={"center"}>
