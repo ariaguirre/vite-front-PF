@@ -1,9 +1,11 @@
 import Container from '@mui/material/Container'
 import CardInf from "../../components/card/card"
 import {products} from '../../utils/data/data'
+import { Grid } from '@mui/material'
 const Shop = () => {
   return (
-    <Container maxWidth="xl">    
+    <Container maxWidth="xl" sx={{minHeight:"100vh"}}   >    
+        <Grid container justifyContent={"center"}>        
         {
         products.map((products) => (
           <CardInf
@@ -19,7 +21,8 @@ const Shop = () => {
             stock={products.stock}
           />
         ))
-      }     
+      } 
+      </Grid>    
     </Container>
   )
 }
