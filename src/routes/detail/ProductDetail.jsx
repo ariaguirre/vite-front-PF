@@ -1,6 +1,7 @@
 import Container from '@mui/material/Container'
 import Stack from '@mui/joy/Stack';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import AddIcon from '@mui/icons-material/Add';
 import {Link} from 'react-router-dom'
 import {Box, Typography, Button} from '@mui/material';
 
@@ -44,9 +45,12 @@ export default function DetailProduct(){
                   <p>Cantidad:</p>
                   <input type="number" min='0' className="cant" onChange={ (e) => handleInput(e)}/>
                 </Stack>
-              <Link to="/carrito/:idCompra">
-              <Button variant="contained" sx={{mt:2, mb:2}}startIcon={<AddShoppingCartIcon />}>Añadir al carrito</Button>
-              </Link>
+              <Stack direction="row" alignContent={'center'} gap={2} >
+               <Button variant="contained" sx={{mt:2, mb:2}}startIcon={<AddIcon />}>Ir al carrito</Button>
+                  <Link to="/carrito/:idCompra">
+                    <Button variant="contained" sx={{mt:2, mb:2}}startIcon={<AddShoppingCartIcon />}>Ir al carrito</Button>
+                  </Link>
+                </Stack>  
 
               </div>
               <hr/>
