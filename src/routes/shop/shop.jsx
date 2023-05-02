@@ -25,14 +25,18 @@ const Shop = () => {
     await setProducts(docs) 
     }
   const pagNext = async () =>{
-   setCount(count+itemsPerPage)
-  const prods = await nextProducts();
-  await setProducts(prods)
+          setCount(count+itemsPerPage)
+    if(count<itemsSize){
+      const prods = await nextProducts();
+      await setProducts(prods)
+    }
    }
    const pagPrev = async () =>{
     setCount(count-itemsPerPage)
-    const prods = await prevProducts();
-    await setProducts(prods)
+    if(count>itemsPerPage){
+      const prods = await prevProducts();
+      await setProducts(prods)
+    }
     }
    return (
     <Container maxWidth="xl" sx={{minHeight:"100vh"}}   >    
@@ -55,7 +59,7 @@ const Shop = () => {
       } 
       </Grid>
       <Stack justifyContent={'center'} spacing={2} direction="row">
-      {count>itemsPerPage?(<Button onClick={pagPrev} variant="contained">Prev</Button>):(<Button  disabled={true} variant="contained">Prev</Button>)}
+      {count>itemsPerPage?(<Button  onClick={pagPrev} variant="contained">Prev</Button>):(<Button  disabled={true} variant="contained">Prev</Button>)}
       {count<itemsSize?(<Button onClick={pagNext} variant="contained">Next</Button>):(<Button  disabled={true} variant="contained">Next</Button>)}
     </Stack>    
     </Container>
