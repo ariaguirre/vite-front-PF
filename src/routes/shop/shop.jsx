@@ -12,19 +12,25 @@ import { useEffect, useState } from 'react'
 
 const Shop = () => {
   const [Products , setProducts] = useState([])
-  //let Products = [];
+  const [itemsSize, setItemSize] = useState(0)//tamaño de la collection
+  const [itemsPerPage , setitemsPerPage] = useState(2)// items por pagina -- modifica este numero si quieres ver mas o menos items
+  const [count , setCount] = useState(0)// contador de items al darle clic a botones next y prev
   useEffect(()=>{
   start();
   },[])
   const start=async () =>{
-    const prods = await pagProducts();
-    await setProducts(prods) 
+    setCount(itemsPerPage)
+    const {docs} = await pagProducts(itemsPerPage);
+    await setItemSize((await pagProducts(itemsPerPage)).items)
+    await setProducts(docs) 
     }
   const pagNext = async () =>{
+   setCount(count+itemsPerPage)
   const prods = await nextProducts();
   await setProducts(prods)
    }
    const pagPrev = async () =>{
+    setCount(count-itemsPerPage)
     const prods = await prevProducts();
     await setProducts(prods)
     }
@@ -49,8 +55,8 @@ const Shop = () => {
       } 
       </Grid>
       <Stack justifyContent={'center'} spacing={2} direction="row">
-      <Button onClick={pagPrev} variant="contained">Prev</Button>
-      <Button onClick={pagNext} variant="contained">Next</Button>
+      {count>itemsPerPage?(<Button onClick={pagPrev} variant="contained">Prev</Button>):(<Button  disabled={true} variant="contained">Prev</Button>)}
+      {count<itemsSize?(<Button onClick={pagNext} variant="contained">Next</Button>):(<Button  disabled={true} variant="contained">Next</Button>)}
     </Stack>    
     </Container>
   )

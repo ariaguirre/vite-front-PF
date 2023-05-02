@@ -134,30 +134,33 @@ export const signOutUser = async () => await signOut(auth);
 // paginacion
 let lastVisible = null;
 let firstDoc = null;
-export const pagProducts = async () =>{
+let itemPerPage =0
+export const pagProducts = async (limitPerPage) =>{
+  itemPerPage = limitPerPage
   const docs = []
-  const first = query(collection(db, "Products"), orderBy("name" , "asc"), limit(3));
+  const items = query(collection(db, "Products").path.length)
+  const first = query(collection(db, "Products") ,limit(itemPerPage), orderBy("name" , "asc"));
   const documentSnapshots = await getDocs(first);
   firstDoc = documentSnapshots.docs[0] || null
-    lastVisible = documentSnapshots.docs[documentSnapshots.docs.length-1]
+    lastVisible = documentSnapshots.docs[documentSnapshots.docs.length-1]|| null
     documentSnapshots.forEach(a=>{docs.push(a.data())})
-    return docs
+    return {docs,items}
 }
 export const nextProducts = async () =>{
     const docs = []
-    const next = query(collection(db, "Products"),orderBy("name","asc"),startAfter(lastVisible),limit(3));
+    const next = query(collection(db, "Products"),limit(itemPerPage),orderBy("name","asc"),startAfter(lastVisible));
     const document = await getDocs(next);
     firstDoc = document.docs[0] || null
-    lastVisible = document.docs[document.docs.length-1] || null
-    document.forEach(a=>{docs.push(a.data())})
+    lastVisible = document.docs[document.docs.length-1] || null  
+    document.forEach(a=>{docs.push(a.data()) })
    return docs
 }
 export const prevProducts = async () =>{
   const docs = []
-  const pev = query(collection(db, "Products"),orderBy("name", "desc"),startAfter(firstDoc),limit(3));
+  const pev = query(collection(db, "Products"),limit(itemPerPage),orderBy("name", "desc"),startAfter(firstDoc));
   const document = await getDocs(pev);
-  firstDoc = document.docs[0] || null
-  lastVisible = document.docs[document.docs.length-1] || null
+  firstDoc = document.docs[document.docs.length-1] || null
+  lastVisible = document.docs[0] || null
   const doc = document.docs.reverse();
   doc.forEach(a=>{docs.push(a.data())})
   return docs
