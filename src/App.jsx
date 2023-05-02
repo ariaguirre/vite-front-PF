@@ -19,7 +19,7 @@ const App = () => {
       <Route path="/auth" element={<Authentication/>}/>
       <Route path="/store" element={<Shop/>}/>
       <Route path="/detail/:id" element={<DetailProduct />} />
-      <Route path="/carrito/:compra" element={<Carritow />} />
+      <Route path="/carrito/:id" element={<Carritow />} />
 
       <Route path="*" element={<Error />} />
     </Routes>

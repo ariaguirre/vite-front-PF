@@ -1,9 +1,8 @@
 import Container from '@mui/material/Container'
 import Stack from '@mui/joy/Stack';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import {Link} from 'react-router-dom'
 import {Box, Typography, Button} from '@mui/material';
-import { useState } from 'react';
-
 
 
 
@@ -11,7 +10,6 @@ import { useState } from 'react';
 
 export default function DetailProduct(){
  
-  const [cant, setCant] = useState(0)
 
 
   const handleInput = (e) =>{
@@ -46,8 +44,9 @@ export default function DetailProduct(){
                   <p>Cantidad:</p>
                   <input type="number" min='0' className="cant" onChange={ (e) => handleInput(e)}/>
                 </Stack>
-              
+              <Link to="/carrito/:idCompra">
               <Button variant="contained" sx={{mt:2, mb:2}}startIcon={<AddShoppingCartIcon />}>Añadir al carrito</Button>
+              </Link>
 
               </div>
               <hr/>
