@@ -1,8 +1,10 @@
 import Container from '@mui/material/Container'
 import Stack from '@mui/joy/Stack';
-import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import {Box, Typography, Button} from '@mui/material';
 import { useState } from 'react';
+
+
 
 
 
@@ -21,37 +23,31 @@ export default function DetailProduct(){
     e.preventDefault()
   }
 
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  }));
-
   return<>
    
   <Container fixed className="detail">
       <Stack direction={{ xs: 'column', sm: 'row' }} alignItems="center" spacing={2} justifyContent="center" sx={{px:"2rem", py:"2rem"  }}>
-        <Item>
-          <img src='https://http2.mlstatic.com/D_NQ_NP_656735-MCO48794245078_012022-O.webp' className=" imgDetail" alt={name} />
 
-        </Item>
+          <img src='https://http2.mlstatic.com/D_NQ_NP_656735-MCO48794245078_012022-O.webp' className=" imgDetail" alt={name} />
          
           <div className=" infDetail">
             <form>
-              <h2 className='titleDetail'>coche para bebé + silla para carro</h2>
-              <hr/>
+              <Typography variant="h3">
+                coche para bebé + silla para carro
+              </Typography>
+             
+                <hr/>
+              
               <div className="infoInicial">
                 <p>precio:<span className='money'>$</span><span className='price'>150</span></p>
                 <p>estrellas:</p>
                 <p>Disponible en stock:<span>si</span></p>
-                <div className='cant-field flex' >
+                <Stack direction="row" >
                   <p>Cantidad:</p>
                   <input type="number" min='0' className="cant" onChange={ (e) => handleInput(e)}/>
-                </div>
+                </Stack>
               
-              <button className='addCar' onClick={(e) => handlerButton(e)} >Añadir al carrito</button>
+              <Button variant="contained" sx={{mt:2, mb:2}}startIcon={<AddShoppingCartIcon />}>Añadir al carrito</Button>
 
               </div>
               <hr/>
@@ -65,30 +61,44 @@ export default function DetailProduct(){
 
       </Stack>
 
-        <Container className="contenedor caract">
-          <h2 className="titleII">Caracteristicas del Producto</h2>
+        <Box p={4} borderRadius={8} bgcolor={'#f4f4f4'} mb={2}>
+          <Typography fontWeight={500}>
+              Caracteristicas del Producto
+          </Typography>
             <p className="">Lorem ipsum  dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae tempus quam pellentesque nec nam aliquam sem et tortor.</p>
 
-          <div className='caractComplete'>
+          <Box pl={2} pr={2} pt={2}>
+            <Box>
 
-            <h3 className='titleIII'>Caracteristicas:</h3>
-            <ul className='caractList'>
-              <li>dato1</li>
-              <li>dato2</li>
-              <li>dato3</li>
-              <li>dato4</li>
-            </ul>
+            <Typography fontWeight={500}>
+              Caracteristicas:
+              </Typography> 
+              <Box pl={2}>
+                <ul className='caractList'>
+                  <li>dato1</li>
+                  <li>dato2</li>
+                  <li>dato3</li>
+                  <li>dato4</li>
+                </ul>
+              </Box>
+            </Box>
+            <Box>
 
-            <h3 className='titleIII'>Garantía:</h3>
-            <ul className='caractList'>
-              <li>dato1</li>
-              <li>dato2</li>
-              <li>dato3</li>
-              <li>dato4</li>
-            </ul>
+            <Typography fontWeight={500}>
+              Garantía:
+              </Typography>
+              <Box pl={2}>
+              <ul className='caractList'>
+                <li>dato1</li>
+                <li>dato2</li>
+                <li>dato3</li>
+                <li>dato4</li>
+              </ul>
+                </Box> 
+            </Box>
 
-          </div>
-        </Container>
+          </Box>
+        </Box>
 
 
   </Container>
