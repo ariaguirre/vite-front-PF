@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -100,11 +99,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function SideBar() {
+const SideBar = () =>  {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const isLargeScreen = useMediaQuery(theme => theme.breakpoints.up('sm')); //para manejar drawer visble/oculto responsive
-  const [content, setContent] = React.useState(<Inicio />) //estado local para manejar contenido dinamico
+  const [content, setContent] = useState(<Inicio />) //estado local para manejar contenido dinamico
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -262,3 +261,5 @@ export default function SideBar() {
     </Box>
   );
 }
+
+export default SideBar;

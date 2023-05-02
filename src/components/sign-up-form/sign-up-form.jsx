@@ -56,7 +56,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <Grid item md={5} sm={12} justifyItems={"center"} sx={{border:1, borderColor:"red"}} >  
+    <Grid item md={5} sm={12} justifyItems={"center"}>  
       <Typography variant="h4" color="initial" align='center'>Don&#39;t have an account?</Typography>
       <Typography variant="body1" align='center'>Sign up with your email and password</Typography>
       <Grid container justifyContent={"center"}>

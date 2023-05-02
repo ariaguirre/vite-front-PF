@@ -1,10 +1,12 @@
-import { Box,  } from '@mui/material';
+import { Box, FormControl, Grid, ImageList, ImageListItem, MenuItem, TextField, TextareaAutosize, Typography,  } from '@mui/material';
 import {useState, useEffect} from 'react';
 import { postProductsAdmin, getCategories } from '../../utils/firebase/firebaseClient';
 import { getCategoriesAction } from '../../features/categories/categoriesSlice';
 import Images from '../images/images'
 
+
 import { useDispatch, useSelector } from 'react-redux';
+import Button from '@mui/material/Button';
 
 const CreateProduct = () => {
 
@@ -66,66 +68,98 @@ const handleSubmit = async (e) => {
   e.preventDefault();
   const data = product
   try{
-  await postProductsAdmin(data)
-    console.log(product.name)
+      await postProductsAdmin(data)
+        alert('Se agregó correctamente')
   } catch(error){
-    console.log('No funciona')
+   alert('Upss algo falló','error:',error)
   }
 }
 
 
   return (
-    <div>
-    <Box component="main"
-    sx={{ width: '50%',alignContent:"center", display: 'flex',
-    justifyContent: 'center', mx:"25%", mt:"2%"}}
-     textAlign={"center"}
-     boxShadow={3}
-     alignContent={"center"}
-     bgcolor={"primary"} 
-     >
-    <h1>
-    CREAR PRODUCTO 
-    </h1>
-    </Box>
-    <Box component="main"
-    sx={{ width: '50%',alignContent:"center", display: 'flex',
-    justifyContent: 'center', mx:"25%", mt:"2%"}}
-     textAlign={"center"}
-     boxShadow={3}
-     alignContent={"center"}
-     bgcolor={"primary"} 
-     >
-    <form onSubmit={handleSubmit}>
-
-            <label htmlFor="">Name </label>
-            <input type="text" name="name" value={product.name} placeholder="name" onChange={handleChange}/>
-            <br />
-            <label htmlFor="">Description</label>
-            <textarea type="text" name="description" value={product.description} placeholder="description" onChange={handleChange}></textarea>
-            <br />
-            <label htmlFor="">Stock</label>
-            <input type="number" name="stock" value={product.stock} placeholder="stock" onChange={handleChange}/>
-            <br />
-            <label htmlFor="">Price</label>
-            <input type="text" name="price" placeholder="price" value={product.price} onChange={handleChange} />
-            <br />
-            <label htmlFor="">Categories</label>
-            <select onChange={handleSelect}>
-                {dataCategories?.categories?.map((category, index)=> (
-                    <option key={index} value={category.id}>{category.id}</option>
-                ))}
-            </select>
-            <br />
-            <label htmlFor="">Image</label>
+    <div>      
+      <Grid
+      container
+      justifyContent='center'
+      alignItems='center'
+      sx={{ minHeight: '100vh' }}
+      > 
+        <Grid item md={5} sm={12} justifyItems={"center"}>
+        <Typography variant="h6" color="initial" align='center'>AGREGAR PRODUCTO</Typography>
+          <Grid container justifyContent={"center"}>
+            <FormControl variant='standard' fullWidth align="center">
+            <TextField
+            label='Nombre'
+            type='text'
+            onChange={handleChange}
+            required
+            name='name'
+            margin='dense'
+          />   
+            <TextField
+            label='Descripcion'
+            type='text'
+            onChange={handleChange}
+            required
+            name='description'
+            margin='dense'
+            inputProps={{
+              style: {height: 60},
+            }}
+            multiline
+            rows={3}
+          />   
+            <TextField
+            label='Stock'
+            type='number'
+            onChange={handleChange}
+            required
+            name='stock'
+            margin='dense'
+          />   
+            <TextField
+            label='Precio'
+            type='number'
+            onChange={handleChange}
+            required
+            name='price'
+            margin='dense'
+          /> 
+            <TextField
+            label='Select'
+            select
+            defaultValue=''
+            name='category'
+            helperText='Selecciona una categoría'
+            onChange={handleSelect}
+            >
+            {
+              dataCategories?.categories?.map((ele, index)=> (
+                <MenuItem key={index} value={ele.id}>
+                  {ele.id}
+                </MenuItem>
+            ))}
+            </TextField>
+            {product.imageUrl.length > 0 ? <ImageList sx={{ minHeight: '25vh'}} cols={3} rowHeight={164}>
+                {
+                  product.imageUrl?.map((item, i)=>(
+                    <ImageListItem key={i}>
+                      <img
+                      src={`${item}?w=100&h=100&fit=crop&auto=format`}
+                      />
+                    </ImageListItem>
+                  ))
+                }
+            </ImageList> : null }
             <Images setUrlImages={setUrlImages}/>
-            <br />
-            <button type="submit">Enviar</button>
-           
-        </form>
-      </Box>
-        </div>
+            <Button type='submit' variant='contained' onClick={handleSubmit} fullWidth>Listo</Button>
+            </FormControl>
+          </Grid>       
+        </Grid>
+      </Grid>
+      </div>
   );
+      
 
 }
 

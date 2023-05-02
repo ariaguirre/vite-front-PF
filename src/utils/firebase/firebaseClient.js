@@ -187,7 +187,7 @@ export const updateProduct = async (data) => {
     stock: data.stock,
     price: data.price,
     categories: data.categories,
-    imageUrl: data.image,
+    imageUrl: data.imageUrl,
     reviews: data.reviews,
     rating: data.rating,
     sale: data.sale,
@@ -301,20 +301,33 @@ export const uploadFile = async (file) => {
     return getDownloadURL(storageRef); 
 }
 
-// actualiza datos del producto
-export const updateDataProduct = async(data) =>{
-  const priceRef = doc(db, 'Products', data.id)
-  try {
-    await updateDoc(priceRef,{
-      categories: data.categories,
-      colors:data.colors,
-      description:data.description,
-      image: data.image,
-      name:data.name,
-      price: data.price,
-      stock:data.stock
-    })
-  } catch (error) {
-    alert(error)
-  }
+
+// post de carrito de de compra al usuario
+export const setCart = async(data) =>{
+  const carritoRef = doc(db, 'user', data.uid)
+  await setDoc(carritoRef,{
+    cart: data.cart
+  },{merge: true})
 }
+
+// post favorites al usuario
+
+export const setFavorites = async(data)=>{
+  const favoritesRef = doc(db, 'user', data.uid)
+    await setDoc(favoritesRef,{
+      favorites: data.favorites
+    },{merge:true})
+  }
+
+// post pedidos
+export const setDelivery = async(data)=>{
+  const deliveryRef = doc(db, 'user', data.uid)
+  await setDoc(deliveryRef,{
+    delivery: data.delivery
+  },{merge:true})
+}
+
+
+
+
+
