@@ -1,5 +1,7 @@
 import React from 'react'
-import { Box, Divider } from '@mui/material'
+//Import Material UI
+import { Box, 
+          Typography } from '@mui/material'
 
 
 const Inicio = () => {
@@ -13,9 +15,8 @@ const Inicio = () => {
      alignContent={"center"}
      bgcolor={"primary"} 
      >
-    <h1>
-     BIENVENIDOS AL PANEL DE ADMINISTRADOR !
-    </h1>
+    <Typography variant="h6" color="initial" align='center'>PANEL ADMINISTRADOR</Typography>
+
     </Box>
    
     </div>

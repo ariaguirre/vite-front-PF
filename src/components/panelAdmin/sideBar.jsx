@@ -1,4 +1,6 @@
+//import React y Redux
 import { useEffect, useState } from 'react';
+//import Material UI
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -16,20 +18,21 @@ import ListItemText from '@mui/material/ListItemText';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import  Avatar  from '@mui/material/Avatar';
 import Stack from'@mui/material/Stack';
+//import Icons UI
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-
 import FolderSharedRoundedIcon from '@mui/icons-material/FolderSharedRounded';
 import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
 import Inventory2Icon from '@mui/icons-material/Inventory2';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-
+//import componentes
 import CreateProduct from "./createProduct";
 import AllProducts from './allProducts';
 import VentasTotales from './ventasTotales';
 import Inicio from './inicio';
 import Users from './users';
+import Navigation from "../navigation/navigation"
 
 
 const drawerWidth = 240;
@@ -140,7 +143,9 @@ const SideBar = () =>  {
           >
             <MenuIcon />
           </IconButton>
+          <Navigation />
         </Toolbar>
+     
       </AppBar>
       <Drawer variant="permanent" open={open} >
         <DrawerHeader>

@@ -1,12 +1,15 @@
+//import React y Redux
+import { useEffect } from 'react'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react';
 
 import { getProducts } from '../../utils/firebase/firebaseClient'
 import { getProductsActions } from '../../features/products/productSlice'
 
+//import Material UI
 import DeleteIcon from '@mui/icons-material/Delete';
 import Edit from '@mui/icons-material/Edit';
-
 import {
   Box,
   Table,
@@ -16,7 +19,8 @@ import {
   TableHead,
   TableRow,
   Paper,
-  IconButton
+  IconButton,
+  Typography
 } from '@mui/material'
 
 
@@ -47,12 +51,8 @@ const AllProducts = () => {
         alignContent={"center"}
         bgcolor={"primary"}
       >
-        <h1>
-          LISTA DE PRODUCTOS
-        </h1>
+       <Typography variant="h6" color="initial" align='center'>LISTA DE PRODUCTOS</Typography>
       </Box>
-
-
       <TableContainer component={Paper} sx={{ mt: "1%" }}>
         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
           <TableHead bgcolor='#e3f2fd'>
@@ -68,7 +68,7 @@ const AllProducts = () => {
           <TableBody>
             {products.map((row) => (
               <TableRow
-                key={row.name}
+                key={row.id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
@@ -94,8 +94,6 @@ const AllProducts = () => {
       </TableContainer>
 
     </div>
-
-
   )
 }
  

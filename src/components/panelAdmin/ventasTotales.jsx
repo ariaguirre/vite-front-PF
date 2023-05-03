@@ -1,5 +1,6 @@
 import React from 'react'
-import { Box } from '@mui/material'
+import { Box,
+         Typography } from '@mui/material'
 
 const ventasTotales = () => {
   return (
@@ -12,9 +13,7 @@ const ventasTotales = () => {
      alignContent={"center"}
      bgcolor={"primary"} 
      >
-    <h1>
-      VENTAS !
-    </h1>
+    <Typography variant="h6" color="initial" align='center'>TUS VENTAS</Typography>
     </Box>
     </div>
   )
