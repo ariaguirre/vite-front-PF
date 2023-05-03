@@ -2,6 +2,7 @@ import { Paper, Container, Grid, Typography } from "@mui/material";
 import { styled } from '@mui/material/styles'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import style from './footer.module.css'
 
 
 const Various = styled('h2')(({ theme }) => ({
@@ -14,60 +15,52 @@ const Various = styled('h2')(({ theme }) => ({
   },
 }));
 
-
 const Footer = () => {
   return (
     <Paper
       sx={{
         width: "100%",
         height: "auto",
-        backgroundColor: "transparent",
+        left: 0,
+        bottom: 0, 
+        textAlign: 'center',
+        backgroundColor: "white",
         marginTop: 2,
         paddingTop: "2rem",
         paddingBottom: "2rem",
       }} elevation={8}
     >
       <Container maxWidth="lg">
-        <Grid container direction="row" justifyContent='space-around' alignItems='center'>
-          <Grid item xs={6}>
-            <Typography
-              sx={{
-                float: 'left',
-                marginLeft: '-18rem',
-                color: 'black',
-                fontWeight: 'bolder',
-                fontSize: 20                
-              }}
-            >
+        <div className={style.footerCont}>
+           <div className={style.titulo}>
               Mom Home & Baby              
-            </Typography>
-{/* Typography no puede estar dentro de otro typography */}
-            <Typography sx={{ color: 'darkGrey' }}>
-                {`${new Date().getFullYear()} All Rights Reserved.`}
-            </Typography>
-            <Various item xs={12}
-              sx={{ marginRight: '-12rem', marginLeft: '10rem', marginTop: '1rem' }}
-            >
+           </div>
+            <div className={style.varios}>
               Contact | About us | Preguntas frecuentes
+              
               <WhatsAppIcon
                 sx={{
                   color: 'black',
-                  marginRight: '-6rem',
+                  // marginRight: '-6rem',
                   float: 'right',
                   fontSize: 25,
                 }}
-              />
+                />
               <InstagramIcon
                 sx={{
                   color: 'black',
-                  marginRight: '-3rem',
+                  // marginRight: '-3rem',
                   float: 'right',
                   fontSize: 25,
                 }}
-              />
-            </Various>
-          </Grid>
-        </Grid>
+                />
+            </div>
+            </div>
+            <hr/>
+                <div className={style.tipografia}>
+                    {`@${new Date().getFullYear()} MH&B. All Rights Reserved.`}
+                </div>
+                
       </Container>
     </Paper>
   );
@@ -75,3 +68,16 @@ const Footer = () => {
 
 
 export default Footer;
+
+
+// import React from "react";
+
+// const Footer = () => {
+//   return(
+//     <div className="footer">
+
+//     </div>
+//   )
+// }
+
+// export default Footer;
