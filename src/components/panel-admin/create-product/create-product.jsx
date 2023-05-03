@@ -1,8 +1,8 @@
 import { Box, FormControl, Grid, ImageList, ImageListItem, MenuItem, TextField, TextareaAutosize, Typography,  } from '@mui/material';
 import {useState, useEffect} from 'react';
-import { postProductsAdmin, getCategories } from '../../utils/firebase/firebaseClient';
-import { getCategoriesAction } from '../../features/categories/categoriesSlice';
-import Images from '../images/images'
+import { postProductsAdmin, getCategories } from '../../../utils/firebase/firebaseClient';
+import { getCategoriesAction } from  "../../../features/categories/categoriesSlice" 
+import Images from  "../../images/images"
 
 
 import { useDispatch, useSelector } from 'react-redux';
