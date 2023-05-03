@@ -1,8 +1,7 @@
 //import React y Redux
 import { useEffect } from 'react'
-
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react';
+
 
 import { getProducts } from '../../utils/firebase/firebaseClient'
 import { getProductsActions } from '../../features/products/productSlice'
