@@ -1,76 +1,33 @@
-import { Paper, Container, Grid, Typography } from "@mui/material";
-import { styled } from '@mui/material/styles'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
-
-const Various = styled('h2')(({ theme }) => ({
-  color: 'black',
-  textAlign: 'start',
-  fontSize: theme.typography.pxToRem(6),
-  fontWeight: 'normal',
-  [theme.breakpoints.up('sm')]: {
-    fontSize: theme.typography.pxToRem(17),
-  },
-}));
-
-
+import styles from "./footer.module.css";
+import Typography from '@mui/material/Typography'
+import {Grid, IconButton } from '@mui/material';
 const Footer = () => {
   return (
-    <Paper
-      sx={{
-        width: "100%",
-        height: "auto",
-        backgroundColor: "transparent",
-        marginTop: 2,
-        paddingTop: "2rem",
-        paddingBottom: "2rem",
-      }} elevation={8}
-    >
-      <Container maxWidth="lg">
-        <Grid container direction="row" justifyContent='space-around' alignItems='center'>
-          <Grid item xs={6}>
-            <Typography
-              sx={{
-                float: 'left',
-                marginLeft: '-18rem',
-                color: 'black',
-                fontWeight: 'bolder',
-                fontSize: 20                
-              }}
-            >
-              Mom Home & Baby              
-            </Typography>
-{/* Typography no puede estar dentro de otro typography */}
-            <Typography sx={{ color: 'darkGrey' }}>
-                {`${new Date().getFullYear()} All Rights Reserved.`}
-            </Typography>
-            <Various item xs={12}
-              sx={{ marginRight: '-12rem', marginLeft: '10rem', marginTop: '1rem' }}
-            >
-              Contact | About us | Preguntas frecuentes
-              <WhatsAppIcon
-                sx={{
-                  color: 'black',
-                  marginRight: '-6rem',
-                  float: 'right',
-                  fontSize: 25,
-                }}
-              />
-              <InstagramIcon
-                sx={{
-                  color: 'black',
-                  marginRight: '-3rem',
-                  float: 'right',
-                  fontSize: 25,
-                }}
-              />
-            </Various>
+    <footer>
+      <Grid container justifyContent="center">
+        <Grid item md={4} xs={12}>
+          <Grid container justifyContent="center" alignItems="center" height="50px" overflow="hidden">
+            <Typography variant="body1" color="initial" align='center'>{new Date().getFullYear()} &copy; All Rights Reserved.</Typography>
           </Grid>
         </Grid>
-      </Container>
-    </Paper>
+        <Grid item md={4} xs={12}>
+          <Grid container justifyContent="center" alignItems="center" height="50px" overflow="hidden">
+            <Typography variant="body1" color="initial" align='center'>Build With<span className={styles.heart}>&#9825;</span>by &nbsp; Us</Typography>
+          </Grid>
+        </Grid>        
+        <Grid item md={4} xs={12}>
+          <Grid container justifyContent="center" alignItems="center" height="50px" overflow="hidden">
+            <IconButton color='primary'><WhatsAppIcon/></IconButton><IconButton color='primary'><InstagramIcon/></IconButton> 
+          </Grid>
+        </Grid>
+
+      </Grid>
+    </footer>
   );
+
 };
 
 

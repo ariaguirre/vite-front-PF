@@ -1,5 +1,5 @@
 import Container from '@mui/material/Container'
-import Stack from '@mui/joy/Stack';
+import Stack from '@mui/material/Stack';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom'
@@ -8,7 +8,6 @@ import { Box, Typography, Button } from '@mui/material';
 const DetailProduct = () => {
 
   return <>
-
     <Container fixed className="detail">
       <Stack direction={{ xs: 'column', sm: 'row' }} alignItems="center" spacing={2} justifyContent="center" sx={{ px: "2rem", py: "2rem" }}>
 

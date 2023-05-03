@@ -1,6 +1,6 @@
 //React
 import { useEffect } from "react";
-import { Routes, Route,  } from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 //Redux
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "./features/userCredentials/userCredentialsSlice";
@@ -19,13 +19,14 @@ import DetailProduct from "./routes/detail/ProductDetail";
 
 const App = () => {
   const dispatch = useDispatch();
+  
 
   useEffect(()=>{
     const unsubscribe = onAuthStateChangedListener((user)=> {
       if(user){
         createUserDocumentFromAuth(user);
       }      
-      dispatch(setCurrentUser(user))
+      dispatch(setCurrentUser(user))      
     })
 
     return unsubscribe;
@@ -40,7 +41,7 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path="auth" element={<Authentication />} />
         <Route path="shop" element={<Shop />} />
-        <Route path="detail:id" element={<DetailProduct/>}/>        
+        <Route path="detail/:id" element={<DetailProduct/>}/>        
       </Route>
       <Route path="/admin" element={
           <RequireAuth>

@@ -1,7 +1,9 @@
-import React from 'react'
-import { Box } from '@mui/material'
+//Import Material UI
+import { Box, 
+          Typography } from '@mui/material'
 
-const ventasTotales = () => {
+
+const HomeAdmin = () => {
   return (
     <div>
     <Box component="main"
@@ -12,12 +14,12 @@ const ventasTotales = () => {
      alignContent={"center"}
      bgcolor={"primary"} 
      >
-    <h1>
-      VENTAS !
-    </h1>
+    <Typography variant="h6" color="initial" align='center'>PANEL ADMINISTRADOR</Typography>
+
     </Box>
+   
     </div>
   )
 }
 
-export default ventasTotales
+export default HomeAdmin
