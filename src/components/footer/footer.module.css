@@ -1,0 +1,11 @@
+.container
+{ 
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  min-height: 80px;  
+}
+.heart{  
+  color: aqua;
+  font-size: 2rem;
+}
