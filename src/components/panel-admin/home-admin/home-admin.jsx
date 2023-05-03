@@ -1,4 +1,3 @@
-import React from 'react'
 //Import Material UI
 import { Box, 
           Typography } from '@mui/material'
