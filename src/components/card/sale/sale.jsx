@@ -2,8 +2,7 @@ import { useRef } from 'react'
 import { numberFormat } from '../../../helper/numberFormat';
 import Typography from '@mui/material/Typography'
 
-const Sale = ({sale, price}) => {
-
+const Sale = ({sale, price}) => {  
   const saleRef = useRef(null);
 
   if(saleRef){
