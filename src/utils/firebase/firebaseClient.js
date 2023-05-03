@@ -21,6 +21,10 @@ import {
   addDoc,
   updateDoc,
   deleteDoc,
+  orderBy,
+  limit,
+  startAfter,
+  query,
 } from "firebase/firestore";
 
 import {
@@ -124,7 +128,42 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 };
 
 export const signOutUser = async () => await signOut(auth);
-
+// paginacion
+let lastVisible = null;
+let firstDoc = null;
+let itemPerPage =0
+export const pagProducts = async (limitPerPage) =>{
+  itemPerPage = limitPerPage
+  const docs = []
+  const items = query(collection(db, "Products"))
+  const itemsColl = (await getDocs(items)).size
+  const first = query(collection(db, "Products") ,limit(itemPerPage), orderBy("name" , "asc"));
+  const documentSnapshots = await getDocs(first);
+  firstDoc = documentSnapshots.docs[0] || null
+    lastVisible = documentSnapshots.docs[documentSnapshots.docs.length-1]|| null
+    documentSnapshots.forEach(a=>{docs.push(a.data())})
+    return {docs,itemsColl}
+}
+export const nextProducts = async () =>{
+    const docs = []
+    const next = query(collection(db, "Products"),limit(itemPerPage),orderBy("name","asc"),startAfter(lastVisible));
+    const document = await getDocs(next);
+    firstDoc = document.docs[0] || null
+    lastVisible = document.docs[document.docs.length-1] || null  
+    document.forEach(a=>{docs.push(a.data()) })
+   return docs
+}
+export const prevProducts = async () =>{
+  const docs = []
+  const pev = query(collection(db, "Products"),limit(itemPerPage),orderBy("name", "desc"),startAfter(firstDoc));
+  const document = await getDocs(pev);
+  firstDoc = document.docs[document.docs.length-1] || null
+  lastVisible = document.docs[0] || null
+  const doc = document.docs.reverse();
+  doc.forEach(a=>{docs.push(a.data())})
+  return docs
+}
+// paginacion
 export const onAuthStateChangedListener = (callback) =>  
 onAuthStateChanged(auth, callback);
 
