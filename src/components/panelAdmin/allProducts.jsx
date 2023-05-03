@@ -1,5 +1,6 @@
-import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react';
+
 import { getProducts } from '../../utils/firebase/firebaseClient'
 import { getProductsActions } from '../../features/products/productSlice'
 
@@ -30,6 +31,7 @@ const AllProducts = () => {
       dispatch(getProductsActions(result))
     }
     fetchData()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 
@@ -84,7 +86,6 @@ const AllProducts = () => {
                   <IconButton aria-label="delete" size="small">
                     <DeleteIcon fontSize="inherit" color='error' />
                   </IconButton>
-
                 </TableCell>
               </TableRow>
             ))}
@@ -97,6 +98,7 @@ const AllProducts = () => {
 
   )
 }
-
+ 
 export default AllProducts
 
+ 
