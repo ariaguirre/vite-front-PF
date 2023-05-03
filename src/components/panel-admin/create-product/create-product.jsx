@@ -1,8 +1,8 @@
-import { Box, FormControl, Grid, ImageList, ImageListItem, MenuItem, TextField, TextareaAutosize, Typography,  } from '@mui/material';
+import { FormControl, Grid, ImageList, ImageListItem, MenuItem, TextField, Typography  } from '@mui/material';
 import {useState, useEffect} from 'react';
-import { postProductsAdmin, getCategories } from '../../utils/firebase/firebaseClient';
-import { getCategoriesAction } from '../../features/categories/categoriesSlice';
-import Images from '../images/images'
+import { postProductsAdmin, getCategories } from '../../../utils/firebase/firebaseClient';
+import { getCategoriesAction } from  "../../../features/categories/categoriesSlice" 
+import Images from  "../../images/images"
 
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -81,7 +81,7 @@ const handleSubmit = async (e) => {
       <Grid
       container
       justifyContent='center'
-      alignItems='center'
+      alignItems={'center'}
       sx={{ minHeight: '100vh' }}
       > 
         <Grid item md={5} sm={12} justifyItems={"center"}>

@@ -8,7 +8,6 @@ import { Box, Typography, Button } from '@mui/material';
 const DetailProduct = () => {
 
   return <>
-
     <Container fixed className="detail">
       <Stack direction={{ xs: 'column', sm: 'row' }} alignItems="center" spacing={2} justifyContent="center" sx={{ px: "2rem", py: "2rem" }}>
 

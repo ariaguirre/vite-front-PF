@@ -1,6 +1,6 @@
 //React
 import { useEffect } from "react";
-import { Routes, Route,  } from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 //Redux
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "./features/userCredentials/userCredentialsSlice";
@@ -19,13 +19,14 @@ import DetailProduct from "./routes/detail/ProductDetail";
 
 const App = () => {
   const dispatch = useDispatch();
+  
 
   useEffect(()=>{
     const unsubscribe = onAuthStateChangedListener((user)=> {
       if(user){
         createUserDocumentFromAuth(user);
       }      
-      dispatch(setCurrentUser(user))
+      dispatch(setCurrentUser(user))      
     })
 
     return unsubscribe;

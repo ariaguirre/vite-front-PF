@@ -36,8 +36,8 @@ const Shop = () => {
     }
     }
    return (
-    <Container maxWidth="xl" sx={{minHeight:"100vh"}}   >    
-        <Grid container justifyContent={"center"}>        
+    <Container maxWidth="xl" sx={{minHeight:"100vh", pt:"2rem"}}>    
+        <Grid container justifyContent={"center"} >        
         {
         Products.length?Products.map((products, i) => (
           <CardInf
@@ -50,7 +50,7 @@ const Shop = () => {
             sale={products.sale}
             rating={products.rating}
             reviews={products.reviews}
-            stock={products.stock}
+            stock={products.stock}            
           />
         )):(null)
       } 

@@ -1,5 +1,5 @@
 //react Imports
-import { useRef, useState } from "react";
+import { useRef } from "react";
 //mui Components
 import Card from "@mui/material/Card";
 import CardMedia from '@mui/material/CardMedia';
@@ -8,7 +8,7 @@ import { CardContent, CardHeader, IconButton, Typography, Box, Button } from "@m
 //Icons 
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Sale from "./sale/sale";
-import HalfRating from "./rating/rating";
+import HalfRatingPreview from "./rating/rating-preview";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 //Helpers
 import { numberFormat } from "../../helper/numberFormat";
@@ -19,26 +19,32 @@ const CardInf = (
     title,
     price,
     sale,
+    rating
   }
 ) => {
 
-  const [ratingValue, setRatingValue] = useState(null);
   const onSale = useRef(false);
+
 
   if (Object.keys(sale).length !== 0) {
     onSale.current = true;
+  }else{
+    onSale.current = false;
   }
 
+  price = Number(price);
+  
+
   return (
-    <Card sx={{ minWidth: "300px", margin: "1rem" }}>
+    <Card sx={{ minWidth: "300px", margin:"1rem"}} >
       <CardMedia
         component="img"
         title={title}
         src={imageUrl}
         alt={title}
-        sx={{ maxHeight: "220px", width: "100%", objectFit: "contain", userSelect:"none"}}
+        sx={{ maxHeight: "220px", width: "100%", objectFit: "cover"}}
       />
-      <CardContent>
+      <CardContent  sx={{py:0}}>
         <CardHeader title={title} sx={{ padding: 0, userSelect:"none" }} />
         <Box 
           display={"flex"}
@@ -84,8 +90,8 @@ const CardInf = (
             </Box>
           }
 
-          <Box>
-            <HalfRating rValue={ratingValue} sValue={setRatingValue} />
+          <Box>            
+            <HalfRatingPreview rValue={rating}/>
           </Box>
           <CardActions sx={{padding:0}}>
             <Button variant="contained" color="primary">
