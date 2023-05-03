@@ -13,6 +13,8 @@ import LandingPage from "./routes/landing-page/landing-page";
 import Authentication from "./routes/authentication/authentication";
 //Firebase
 import { createUserDocumentFromAuth, onAuthStateChangedListener } from "./utils/firebase/firebaseClient";
+import Error from "./routes/404/404";
+import DetailProduct from "./routes/detail/ProductDetail";
 
 
 const App = () => {
@@ -38,13 +40,14 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path="auth" element={<Authentication />} />
         <Route path="shop" element={<Shop />} />
+        <Route path="detail/:id" element={<DetailProduct/>}/>        
       </Route>
       <Route path="/admin" element={
           <RequireAuth>
             <Admin/>
           </RequireAuth>
         }/>
-      <Route path="*" />
+      <Route path="*" element={<Error />} />
     </Routes>
       
     

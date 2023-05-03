@@ -1,9 +1,12 @@
-import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react';
+
 import { getProducts } from '../../utils/firebase/firebaseClient'
 import { getProductsActions } from '../../features/products/productSlice'
+
 import DeleteIcon from '@mui/icons-material/Delete';
 import Edit from '@mui/icons-material/Edit';
+
 import {
   Box,
   Table,
@@ -15,20 +18,23 @@ import {
   Paper,
   IconButton
 } from '@mui/material'
- 
+
+
 const AllProducts = () => {
- 
+
   const dispatch = useDispatch();
   const { products } = useSelector(state => state.products)
- 
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await getProducts()
       dispatch(getProductsActions(result))
     }
     fetchData()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
- 
+
+
   return (
     <div>
       <Box component="main"
@@ -45,7 +51,8 @@ const AllProducts = () => {
           LISTA DE PRODUCTOS
         </h1>
       </Box>
- 
+
+
       <TableContainer component={Paper} sx={{ mt: "1%" }}>
         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
           <TableHead bgcolor='#e3f2fd'>
@@ -68,27 +75,27 @@ const AllProducts = () => {
                   {row.name}
                 </TableCell>
                 <TableCell align="right"><img src={row.image} /></TableCell>
- 
+
                 <TableCell align="center">{row.price}</TableCell>
                 <TableCell align="center">{row.stock}</TableCell>
                 <TableCell align="center">
- 
+
                   <IconButton aria-label="delete" size="small">
                     <Edit fontSize="inherit" color='success' />
                   </IconButton>
                   <IconButton aria-label="delete" size="small">
                     <DeleteIcon fontSize="inherit" color='error' />
                   </IconButton>
- 
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
- 
+
     </div>
- 
+
+
   )
 }
  

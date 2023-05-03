@@ -164,7 +164,6 @@ export const prevProducts = async () =>{
   return docs
 }
 // paginacion
-
 export const onAuthStateChangedListener = (callback) =>  
 onAuthStateChanged(auth, callback);
 
