@@ -1,9 +1,6 @@
-import { Paper, Container, Grid, Typography } from "@mui/material";
-import { styled } from '@mui/material/styles'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import style from './footer.module.css'
-
 
 const Various = styled('h2')(({ theme }) => ({
   color: 'black',
@@ -65,21 +62,10 @@ const Footer = () => {
       </Container>
     </Paper>
     </div>
-  );
-};
 
+  );
+
+};
 
 export default Footer;
 
-
-// import React from "react";
-
-// const Footer = () => {
-//   return(
-//     <div className="footer">
-
-//     </div>
-//   )
-// }
-
-// export default Footer;

@@ -6,8 +6,6 @@
     color: darkgrey;
     width: calc(30% - 20px);;
 }
-
-
 .titulo{
     color: solid black;
     font-size: 20px;
@@ -24,8 +22,6 @@
     width: 100%;
     display: flex;
 }
-
-
 
 @media screen and (max-width: 767px) {
 .footerCont {
@@ -44,5 +40,4 @@
 .tipografia {
     width: 100%;
   /* margin-top: 1rem; */
-}
 }
