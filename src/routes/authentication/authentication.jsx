@@ -15,11 +15,10 @@ const Authentication = () => {
       height: (`calc(100vh - ${theme.spacing(10)})`),                 
     }}              
     >       
-      
         <Grid container spacing={2} pt={4}>
           <SignInForm />
           <SignUpForm />
-        </Grid>       
+        </Grid>               
       </Container>
       
       
