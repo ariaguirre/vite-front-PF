@@ -1,10 +1,18 @@
+import { numberFormat } from "../../helper/numberFormat";
+import styles from "./card-item.module.css";
+
 const CardItem = ({cardItem}) => {
-  const {title, quantity} = cardItem;  
-  
+  const {title,imageUrl, price ,quantity} = cardItem;  
+    
   return (
-    <div>
-      <h2>{title}</h2>
-      <span>{quantity}</span> 
+    <div className={styles.cartItemContainer}>
+      <img src={imageUrl} alt={title} />
+      <div className={styles.itemDetails}>
+        <span className={styles.name}>{title}</span>
+        <span className={styles.price}>
+          {quantity} x {numberFormat(price)}
+        </span>        
+      </div>      
     </div>
   )
 }

@@ -49,7 +49,7 @@ const Navigation = () => {
         <Link to="/" className={styles.logo} >MB&H</Link>
         <div className={styles.group}>
           <ul className={styles.navigation}>
-            <li><Link to="/Shop" onClick={handleClick}>Tienda</Link></li>
+            <li><Link to="/shop" onClick={handleClick}>Tienda</Link></li>
             {
               userCredentials
                 ? <li><Link to="#" onClick={handleClick}><BasicMenu /></Link></li>

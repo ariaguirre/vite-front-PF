@@ -47,6 +47,7 @@ const CardInf = (
       id,
       title,
       imageUrl,
+      price      
     }   
     dispatch(setItemToCart(product));
   }
