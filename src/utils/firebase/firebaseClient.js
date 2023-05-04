@@ -25,6 +25,7 @@ import {
   limit,
   startAfter,
   query,
+  where,
 } from "firebase/firestore";
 
 import {
@@ -137,7 +138,15 @@ export const pagProducts = async (limitPerPage) =>{
   const documentSnapshots = await getDocs(first);
   firstDoc = documentSnapshots.docs[0] || null
     lastVisible = documentSnapshots.docs[documentSnapshots.docs.length-1]|| null
-    documentSnapshots.forEach(a=>{docs.push(a.data())})
+    documentSnapshots.forEach(doc=>{
+      const id = doc.id;
+      const datos = doc.data();
+      docs.push(
+      {
+        id,
+      ...datos
+      });
+    })
     return {docs,itemsColl}
 }
 export const nextProducts = async () =>{
@@ -146,7 +155,15 @@ export const nextProducts = async () =>{
     const document = await getDocs(next);
     firstDoc = document.docs[0] || null
     lastVisible = document.docs[document.docs.length-1] || null  
-    document.forEach(a=>{docs.push(a.data()) })
+    document.forEach(doc=>{
+      const id = doc.id;
+      const datos = doc.data();
+      docs.push(
+      {
+        id,
+      ...datos
+      });
+    })
    return docs
 }
 export const prevProducts = async () =>{
@@ -156,7 +173,15 @@ export const prevProducts = async () =>{
   firstDoc = document.docs[document.docs.length-1] || null
   lastVisible = document.docs[0] || null
   const doc = document.docs.reverse();
-  doc.forEach(a=>{docs.push(a.data())})
+  doc.forEach(doc=>{
+    const id = doc.id;
+    const datos = doc.data();
+    docs.push(
+    {
+      id,
+    ...datos
+    });
+  })
   return docs
 }
 // paginacion
