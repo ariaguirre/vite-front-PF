@@ -42,21 +42,6 @@ const HeroContainer = styled(Paper)(({ theme }) => ({
       marginTop: theme.spacing(8),
     },
   }));
-
-  // const HeroSubtitle2 = styled('h2')(({ theme }) => ({
-  //   color: 'white',
-  //   marginTop: theme.spacing(1),
-  //   marginBottom: theme.spacing(4),
-  //   textAlign: 'center',
-
-  //   fontSize: theme.typography.pxToRem(16),
-  //   fontWeight: 'normal',
-  //   maxWidth: '700px',
-  //   [theme.breakpoints.up('sm')]: {
-  //     fontSize: theme.typography.pxToRem(20),
-  //     marginTop: theme.spacing(-4),
-  //   },
-  // }));
   
   const HeroButton = styled(Button)(({ theme }) => ({
     backdropFilter: 'blur(10px)',
