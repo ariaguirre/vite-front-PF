@@ -145,7 +145,7 @@ const SideBar = () =>  {
   >
   <MenuIcon />
   </IconButton>
-  <Button href="/" variant="text" color='secondary'alignItems="center">Home</Button>
+  <Button href="/" variant="text" color='secondary'>Home</Button>
   </Toolbar>
   </AppBar>
 
