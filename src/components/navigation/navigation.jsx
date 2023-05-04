@@ -38,7 +38,7 @@ const Navigation = () => {
 
   return (
     <header className={ `${isToggleOn? styles.open : ""} ${styles.header}`}>
-      <a href="/" className={styles.logo} >MOM BABY & HOME </a>
+      <a href="/" className={styles.logo} >MB&H</a>
       <div className={styles.group}>
         <ul className={styles.navigation}>
           <li><Link to="/Shop" onClick={handleClick}>Tienda</Link></li>
