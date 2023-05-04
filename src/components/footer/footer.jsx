@@ -1,8 +1,12 @@
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import style from './footer.module.css'
+import { Container, Paper } from '@mui/material';
+import styled from '@emotion/styled';
 
-const Various = styled('h2')(({ theme }) => ({
+
+//Verificar que hace este various (const Various =)
+ styled('h2')(({ theme }) => ({
   color: 'black',
   textAlign: 'start',
   fontSize: theme.typography.pxToRem(6),
