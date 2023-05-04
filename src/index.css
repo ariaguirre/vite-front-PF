@@ -1,4 +1,4 @@
-/* #root
+#root
 {
 	box-sizing: border-box;
 	margin: 0;
@@ -10,7 +10,7 @@
 
 a{
   text-decoration: none;
-  color: black;
+  color:#232323
 }
 
 body {
@@ -27,4 +27,4 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-} */
+}

@@ -1,7 +1,8 @@
-import { Paper, Button } from '@mui/material';
+import { Paper, Button, Typography } from '@mui/material';
 import {styled} from '@mui/material/styles'
 import bebe1 from '../../../documents/Image/bebe1.jpg'
 import LocalMallIcon from '@mui/icons-material/LocalMall';
+import { Link } from 'react-router-dom';
 
 
 const HeroContainer = styled(Paper)(({ theme }) => ({
@@ -42,21 +43,6 @@ const HeroContainer = styled(Paper)(({ theme }) => ({
       marginTop: theme.spacing(8),
     },
   }));
-
-  // const HeroSubtitle2 = styled('h2')(({ theme }) => ({
-  //   color: 'white',
-  //   marginTop: theme.spacing(1),
-  //   marginBottom: theme.spacing(4),
-  //   textAlign: 'center',
-
-  //   fontSize: theme.typography.pxToRem(16),
-  //   fontWeight: 'normal',
-  //   maxWidth: '700px',
-  //   [theme.breakpoints.up('sm')]: {
-  //     fontSize: theme.typography.pxToRem(20),
-  //     marginTop: theme.spacing(-4),
-  //   },
-  // }));
   
   const HeroButton = styled(Button)(({ theme }) => ({
     backdropFilter: 'blur(10px)',
@@ -83,8 +69,10 @@ const HeroContainer = styled(Paper)(({ theme }) => ({
         <HeroSubtitle>
           Asesoramos a mamitas primerizas en la elección de los mejores productos para su embarazo, lactancia y sus bebés. ¡Ahorrándoles horas de investigación!
         </HeroSubtitle>
-        <HeroButton href="/shop" startIcon={<LocalMallIcon/>}>
-          Tienda
+          <HeroButton startIcon={<LocalMallIcon/>}>
+        <Link to={"/shop"}> 
+          <Typography variant="body1" color="secondary">Tienda</Typography>          
+        </Link>
         </HeroButton>
       </HeroContainer>
     );
