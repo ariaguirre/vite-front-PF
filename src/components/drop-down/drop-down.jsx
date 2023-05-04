@@ -16,15 +16,11 @@ export default function BasicMenu() {
 
   return (
     <>
-      <Link
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
+      <span               
+        onClick={handleClick}        
       >
         Dashboard
-      </Link>
+      </span>
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
