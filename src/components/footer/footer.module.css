@@ -1,5 +1,4 @@
 .tipografia{
-    /* border: 2px solid yellow; */
     padding-left: 10px;
     padding-right: 10px;
     float: left;
@@ -13,19 +12,37 @@
     color: solid black;
     font-size: 20px;
     font-weight: bolder;
-    /* border: 2px solid blue; */
     width: calc(30% - 20px);
 }
 
 .varios{
-    /* border: 2px solid green;  */
     width: 60%;
     float: right;
-    /* margin-top: -2rem; */
 }
 
 .footerCont{
-    /* border: 2px solid red; */
     width: 100%;
     display: flex;
+}
+
+
+
+@media screen and (max-width: 767px) {
+.footerCont {
+  flex-direction: column;
+  align-items: center;
+}
+.varios {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.varios a {
+  margin: 0.5rem;
+}
+.tipografia {
+    width: 100%;
+  /* margin-top: 1rem; */
+}
 }

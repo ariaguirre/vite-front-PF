@@ -17,6 +17,7 @@ const Various = styled('h2')(({ theme }) => ({
 
 const Footer = () => {
   return (
+    <div className={style.fullCont}>
     <Paper
       sx={{
         width: "100%",
@@ -36,7 +37,7 @@ const Footer = () => {
               Mom Home & Baby              
            </div>
             <div className={style.varios}>
-              Contact | About us | Preguntas frecuentes
+              Contact | About us | FAQ
               
               <WhatsAppIcon
                 sx={{
@@ -63,6 +64,7 @@ const Footer = () => {
                 
       </Container>
     </Paper>
+    </div>
   );
 };
 
