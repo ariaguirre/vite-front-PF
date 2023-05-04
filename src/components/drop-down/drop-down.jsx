@@ -1,7 +1,8 @@
-import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { signOutUser } from '../../utils/firebase/firebaseClient';
 
 export default function BasicMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -14,8 +15,8 @@ export default function BasicMenu() {
   };
 
   return (
-    <div>
-      <Button
+    <>
+      <Link
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
@@ -23,7 +24,7 @@ export default function BasicMenu() {
         onClick={handleClick}
       >
         Dashboard
-      </Button>
+      </Link>
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
@@ -33,10 +34,9 @@ export default function BasicMenu() {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleClose}><Link to="/admin">Profile</Link></MenuItem>
+        <MenuItem onClick={handleClose}><Link to="/auth" onClick={()=>{signOutUser()}}>Logout</Link></MenuItem>
       </Menu>
-    </div>
+    </>
   );
 }

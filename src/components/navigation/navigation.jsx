@@ -7,13 +7,13 @@ import { useSelector } from 'react-redux';
 import searchBtn from "../../utils/svg/search-outline.svg";
 import closeBtn from "../../utils/svg/close-outline.svg";
 import menuBtn from "../../utils/svg/menu-outline.svg";
+import BasicMenu from '../drop-down/drop-down';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false); 
   const [isToggleOn, setIsToggleOn] = useState(false);
   
   const {userCredentials} =  useSelector((state)=>state.currentUser);
-  console.log(userCredentials)
 
   const handleClickSearchBtn =()=> {
     setIsOpen(true);
@@ -43,9 +43,10 @@ const Navigation = () => {
         <ul className={styles.navigation}>
           <li><Link to="/Shop" onClick={handleClick}>Tienda</Link></li>
           {
-            userCredentials? <li><Link to="/auth" onClick={handleClick}>{userCredentials.displayName || "Usuario" }</Link></li> : <li><Link to="/auth" onClick={handleClick}>Login</Link></li>
-          }
-          
+            userCredentials
+            ? <li><Link to="#" onClick={handleClick}><BasicMenu/></Link></li> 
+            : <li><Link to="/auth" onClick={handleClick}>Login</Link></li>
+          }          
         </ul>
         <div className={styles.search}>
           <span className={styles.icon}>
@@ -76,7 +77,7 @@ const Navigation = () => {
         <input 
           type="text" 
           name="searchBox"
-          placeholder="look for your recipe..."           
+          placeholder="Busca algo para tu bebé..."           
         />
       </div>
     </header>
