@@ -1,8 +1,9 @@
-import styles from "./cart-dropdown.module.css";
 import Button from '@mui/material/Button'
 
+import styles from "./cart-dropdown.module.css";
 import CardItem from "../card-item/card-item";
 import { useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
 
 
 
@@ -17,7 +18,7 @@ const CartDropdown = ({isToggleCartOn}) => {
             <CardItem key={item.id} cardItem={item}/>
         ))}
       </div>
-      <Button variant="contained">proceder al pago</Button>
+      <Button variant="contained"><Link to="shop/checkout" className={styles.linkButton}>proceder al pago</Link></Button>
     </div>
   )
 }

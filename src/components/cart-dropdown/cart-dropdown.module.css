@@ -28,8 +28,11 @@ button
 {
   margin-top: auto;
 }
-
 .isClose
 {
   display: none;
+}
+.linkButton
+{
+  color: white;
 }
