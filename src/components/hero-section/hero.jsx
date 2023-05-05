@@ -1,5 +1,4 @@
 //import react y redux
-import React from 'react';
 import { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Paper, Button, Typography, Box, Grid  } from '@mui/material';
@@ -7,7 +6,6 @@ import { styled } from '@mui/material/styles'
 import bebe1 from '../../../documents/Image/bebe1.jpg'
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import { Link } from 'react-router-dom';
-import styles from "./hero.module.css";
 //import componentes
 import Slider from "./slider/slider"
 import CardInf from "../card/card"
