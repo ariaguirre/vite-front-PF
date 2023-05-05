@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 const CartDropdown = ({isToggleCartOn}) => {
   
-  const cartItems  = useSelector(state=> state.addItem.cartItems);
+  const cartItems  = useSelector(state=> state.cart.cartItems);
   
   return (
     <div className={`${isToggleCartOn ? styles.cartDropdownContainer : styles.isClose}`}>
