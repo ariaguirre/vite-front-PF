@@ -1,0 +1,33 @@
+.checkoutItemContainer {
+  width: 100%;
+  display: flex;
+  min-height: 100px;
+  border-bottom: 1px solid darkgrey;
+  padding: 15px 0;
+  font-size: 20px;
+  align-items: center;
+}
+.checkoutItemContainer .imageContainer {
+  width: 23%;
+  padding-right: 15px;
+}
+.checkoutItemContainer .imageContainer img {
+  width: 100%;
+  height: 100%;
+}
+.checkoutItemContainer .name, .checkoutItemContainer .quantity, .checkoutItemContainer .price {
+  width: 23%;
+}
+.checkoutItemContainer .quantity {
+  display: flex;
+}
+.checkoutItemContainer .quantity .arrow {
+  cursor: pointer;
+}
+.checkoutItemContainer .quantity .value {
+  margin: 0 10px;
+}
+.checkoutItemContainer .removeButton {
+  padding-left: 12px;
+  cursor: pointer;
+}
