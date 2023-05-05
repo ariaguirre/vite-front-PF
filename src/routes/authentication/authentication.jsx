@@ -8,16 +8,17 @@ const Authentication = () => {
   const theme = useTheme();
 
   return (    
-      <Container 
-        maxWidth="xl" 
-        style={{
-          height: (`calc(100vh - ${theme.spacing(10)})`),                 
-        }}              
-      >       
+
+    <Container 
+    maxWidth="xl" 
+    style={{
+      height: (`calc(100vh - ${theme.spacing(10)})`),                 
+    }}              
+    >       
         <Grid container spacing={2} pt={4}>
           <SignInForm />
           <SignUpForm />
-        </Grid>       
+        </Grid>               
       </Container>
       
       

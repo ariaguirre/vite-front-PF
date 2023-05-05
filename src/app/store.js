@@ -11,6 +11,7 @@ import productsIdSlice from '../features/productsId/productsIdSlice'
 import categoriesSlice from '../features/categories/categoriesSlice'
 import credentialsReducer from '../features/userCredentials/userCredentialsSlice'
 import productPag from '../features/productsPagination/productsPaginationSlice'
+import addItemToCartReducer from '../features/addItemToCart/addItemToCartSlice'
 
 
 export const store = configureStore({
@@ -23,7 +24,7 @@ export const store = configureStore({
     favorite: favoriteSlice,
     categories: categoriesSlice,
     productPag : productPag
-   
+    addItem: addItemToCartReducer  
   },
   middleware :[thunk]
 })
