@@ -1,4 +1,4 @@
-import { FormControl, Grid, ImageList, ImageListItem, MenuItem, TextField, Typography  } from '@mui/material';
+import { FormControl, Grid, ImageList, ImageListItem, MenuItem, Stack, TextField, Typography  } from '@mui/material';
 import {useState, useEffect} from 'react';
 import { postProductsAdmin, getCategories } from '../../../utils/firebase/firebaseClient';
 import { getCategoriesAction } from  "../../../features/categories/categoriesSlice" 
@@ -42,7 +42,7 @@ const CreateProduct = () => {
 const handleSelect =(event) => {
   setProduct({
       ...product,
-      categories: [{[event.target.value]: true}]
+      categories: [event.target.value]
   })
 }
 
@@ -81,13 +81,15 @@ const handleSubmit = async (e) => {
       <Grid
       container
       justifyContent='center'
-      alignItems={'center'}
+      alignItems={'start'}
       sx={{ minHeight: '100vh' }}
+      marginTop={3}
       > 
         <Grid item md={5} sm={12} justifyItems={"center"}>
         <Typography variant="h6" color="initial" align='center'>AGREGAR PRODUCTO</Typography>
           <Grid container justifyContent={"center"}>
             <FormControl variant='standard' fullWidth align="center">
+          <Stack spacing={2}>
             <TextField
             label='Nombre'
             type='text'
@@ -133,12 +135,12 @@ const handleSubmit = async (e) => {
             helperText='Selecciona una categoría'
             onChange={handleSelect}
             >
-            {
-              dataCategories?.categories?.map((ele, index)=> (
-                <MenuItem key={index} value={ele.id}>
-                  {ele.id}
-                </MenuItem>
-            ))}
+                {
+                  dataCategories?.categories?.map((ele, index)=> (
+                    <MenuItem key={index} value={ele.id}>
+                      {ele.id}
+                    </MenuItem>
+                ))}
             </TextField>
             {product.imageUrl.length > 0 ? <ImageList sx={{ minHeight: '25vh'}} cols={3} rowHeight={164}>
                 {
@@ -153,6 +155,7 @@ const handleSubmit = async (e) => {
             </ImageList> : null }
             <Images setUrlImages={setUrlImages}/>
             <Button type='submit' variant='contained' onClick={handleSubmit} fullWidth>Listo</Button>
+            </Stack>
             </FormControl>
           </Grid>       
         </Grid>

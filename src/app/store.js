@@ -10,6 +10,9 @@ import userDataSlice from '../features/userData/userDataSlice'
 import productsIdSlice from '../features/productsId/productsIdSlice'
 import categoriesSlice from '../features/categories/categoriesSlice'
 import credentialsReducer from '../features/userCredentials/userCredentialsSlice'
+import productPag from '../features/productsPagination/productsPaginationSlice'
+import cartReducer from '../features/cartSlice/cartSlice'
+
 
 
 export const store = configureStore({
@@ -20,7 +23,9 @@ export const store = configureStore({
     productsId: productsIdSlice,
     carrito: carritoSlice,
     favorite: favoriteSlice,
-    categories: categoriesSlice,  
+    categories: categoriesSlice,
+    productPag : productPag,
+    cart: cartReducer  
   },
   middleware :[thunk]
 })

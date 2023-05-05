@@ -15,6 +15,7 @@ import Authentication from "./routes/authentication/authentication";
 import { createUserDocumentFromAuth, onAuthStateChangedListener } from "./utils/firebase/firebaseClient";
 import Error from "./routes/404/404";
 import DetailProduct from "./routes/detail/ProductDetail";
+import Checkout from "./routes/checkout/checkout";
 
 
 const App = () => {
@@ -40,7 +41,8 @@ const App = () => {
       <Route path="/" element={<LandingPage/>}>
         <Route index element={<Home />} />
         <Route path="auth" element={<Authentication />} />
-        <Route path="shop" element={<Shop />} />
+        <Route path="shop" element={<Shop />} />        
+        <Route path="shop/checkout" element={<Checkout/>} />
         <Route path="detail/:id" element={<DetailProduct/>}/>        
       </Route>
       <Route path="/admin" element={

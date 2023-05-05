@@ -12,6 +12,9 @@ import HalfRatingPreview from "./rating/rating-preview";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 //Helpers
 import { numberFormat } from "../../helper/numberFormat";
+//redux 
+import { useDispatch } from "react-redux";
+import { addItemToCart } from "../../features/cartSlice/cartSlice";
 
 const CardInf = (
   {
@@ -19,11 +22,13 @@ const CardInf = (
     title,
     price,
     sale,
-    rating
+    rating,
+    id,    
   }
 ) => {
 
   const onSale = useRef(false);
+  const dispatch = useDispatch();
 
 
   if (Object.keys(sale).length !== 0) {
@@ -34,6 +39,16 @@ const CardInf = (
 
   price = Number(price);
   
+
+  const handleClickCartIcon = () => {
+    const product = {
+      id,
+      title,
+      imageUrl,
+      price      
+    }   
+    dispatch(addItemToCart(product));
+  }
 
   return (
     <Card sx={{ minWidth: "300px", margin:"1rem"}} >
@@ -100,7 +115,7 @@ const CardInf = (
             <IconButton>
               <FavoriteIcon color="warning" />
             </IconButton>
-            <IconButton>
+            <IconButton onClick={handleClickCartIcon}>
               <AddShoppingCartIcon color="primary" />
             </IconButton>
           </CardActions>
