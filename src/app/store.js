@@ -10,7 +10,10 @@ import userDataSlice from '../features/userData/userDataSlice'
 import productsIdSlice from '../features/productsId/productsIdSlice'
 import categoriesSlice from '../features/categories/categoriesSlice'
 import credentialsReducer from '../features/userCredentials/userCredentialsSlice'
+import productPag from '../features/productsPagination/productsPaginationSlice'
 import cartReducer from '../features/cartSlice/cartSlice'
+
+
 
 export const store = configureStore({
   reducer: {
@@ -21,6 +24,7 @@ export const store = configureStore({
     carrito: carritoSlice,
     favorite: favoriteSlice,
     categories: categoriesSlice,
+    productPag : productPag,
     cart: cartReducer  
   },
   middleware :[thunk]
