@@ -407,6 +407,22 @@ export const setDelivery = async(data)=>{
   },{merge:true})
 }
 
+// traer productos por categoria 
+
+export const productsByCategory = async (str) =>{
+  const categoriesProduct = []
+  const q = query(collection(db, 'Products'), where('categories', 'array-contains', str))
+  const querySnapshot = await getDocs(q)
+  querySnapshot.forEach(d => {
+    const id = d.id
+    const data = d.data()
+    categoriesProduct.push({
+      id,
+      ...data
+    })
+  })
+ return categoriesProduct
+}
 
 
 
