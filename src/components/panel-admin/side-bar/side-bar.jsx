@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 //import Material UI
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -145,7 +145,8 @@ const SideBar = () =>  {
   >
   <MenuIcon />
   </IconButton>
-  <Button href="/" variant="text" color='secondary'>Home</Button>
+  <Link to='/'> <Button variant="text" color='secondary'>Home</Button> </Link>
+  
   </Toolbar>
   </AppBar>
 
