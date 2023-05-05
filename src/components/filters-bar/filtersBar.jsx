@@ -1,7 +1,6 @@
 import { Button, Grid, List, ListItem, ListItemText } from "@mui/material";
 import { useEffect, useState } from "react";
 import {getCategories, productsByCategory} from '../../utils/firebase/firebaseClient'
-import { Link } from "react-router-dom";
 
 
 const FiltersBar = () => {

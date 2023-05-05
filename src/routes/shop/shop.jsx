@@ -6,7 +6,6 @@ import {Button} from '@mui/material'
 import {Stack} from '@mui/material'
 import { nextProducts, pagProducts, prevProducts } from '../../utils/firebase/firebaseClient'
 import { useEffect, useState } from 'react'
-import FiltersBar from '../../components/filters-bar/filtersBar'
 const Shop = () => {
   const [Products , setProducts] = useState([])
   const [itemsSize, setItemSize] = useState(0)//tamaño de la collection
@@ -38,7 +37,6 @@ const Shop = () => {
     }
    return (
     <Container maxWidth="xl" sx={{minHeight:"100vh", pt:"2rem"}}>   
-        <FiltersBar/> 
         <Grid container justifyContent={"center"} >        
         {
         Products.length?Products.map((products, i) => (
