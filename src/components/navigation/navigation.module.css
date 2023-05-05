@@ -144,6 +144,7 @@ header .search{
   position: relative;
   display: none;
 }
+
 /* responsive */
 @media (max-width: 800px ) {
   .searchBtn{
