@@ -1,6 +1,7 @@
 import { Button, Grid, List, ListItem, ListItemText, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import {getCategories, productsByCategory} from '../../utils/firebase/firebaseClient'
+import { Link } from "react-router-dom";
 
 
 const FiltersBar = () => {
@@ -13,8 +14,7 @@ const FiltersBar = () => {
     result();
   }, []);
   const handlerCategory = async (e) =>{
-    const { value } = e.target
-    const result = await productsByCategory(value)
+    const result = await productsByCategory(e)
    console.log(result);
   }
 
@@ -22,24 +22,23 @@ const FiltersBar = () => {
     <div>
       <Grid
         container
-        justifyContent="center"
+        justifyContent="start"
         alignItems={"start"}
       >
-       Categorias
         <Grid
           container
           justifyContent="start"
           alignItems={"start"}
-          
         >
           <List>
-            <Stack spacing={0.5} >
+            <Stack spacing={-1.5}>
               {categories?.map((item) => (
                 <ListItem key={item.id}>
-                <Button onClick={(e) => handlerCategory(e)} value={item.id}>{item.id}</Button>  
+                <Link onClick={() => handlerCategory(item.categories)}>{item.categories}</Link>  
                 </ListItem>
               ))}
             </Stack>
+            
           </List>
         </Grid>
       </Grid>
