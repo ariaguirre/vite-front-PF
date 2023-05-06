@@ -1,8 +1,18 @@
-import { Paper, Button, Typography } from '@mui/material';
+//import react y redux
+import { useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Paper, Button, Typography, Box, Grid  } from '@mui/material';
 import { styled } from '@mui/material/styles'
 import bebe1 from '../../../documents/Image/bebe1.jpg'
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import { Link } from 'react-router-dom';
+//import componentes
+import Slider from "./slider/slider"
+import CardInf from "../card/card"
+//import Firebase
+import { getProducts } from '../../utils/firebase/firebaseClient';
+//import Redux
+import { getProductsActions } from '../../features/products/productSlice'
 
 
 const HeroContainer = styled(Paper)(({ theme }) => ({
@@ -63,7 +73,24 @@ const HeroButton = styled(Button)(({ theme }) => ({
 }));
 
 export default function Hero() {
+  const dispatch = useDispatch();
+  const { products } = useSelector(state => state.products);
+  
+  useEffect(() => {
+    const fetchData = async () => {
+    const result = await getProducts()
+    dispatch(getProductsActions(result))
+    }
+    fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  //filtros orden por rating (imperdibles) y discount(recomendados)
+  const sortedProductsByRating=[...products].sort((a,b)=>b.rating - a.rating).slice(0,3)
+  const sortedProductsBySale=[...products].sort((a,b)=>b.sale.discount - a.sale.discount).slice(1,4)
+ 
+
   return (
+    <>
     <HeroContainer elevation={8}>
       <HeroTitle>Mom Home & Baby</HeroTitle>
       <HeroSubtitle>
@@ -75,5 +102,48 @@ export default function Hero() {
         </Link>
       </HeroButton>
     </HeroContainer>
+    <Box elevetion={8} alignContent={"center"} justifyContent={"center"} textAlign={"center"}>
+    <Typography textAlign={"center"} mt={3} variant='h5'>
+    <span>PRODUCTOS IMPERDIBLES</span>
+    </Typography> 
+    <Grid container justifyContent={"center"}  > 
+    {
+    sortedProductsByRating.length?sortedProductsByRating.map((sortedProductsByRating, i) => (
+    <CardInf
+     key={`${sortedProductsByRating.id}+${i}`}
+     id = {sortedProductsByRating.id}
+     imageUrl={sortedProductsByRating.imageUrl[0]}
+     title={sortedProductsByRating.name}
+     price={sortedProductsByRating.price}
+     sale={sortedProductsByRating.sale}
+     rating={sortedProductsByRating.rating}    
+    />
+    )):(null) 
+    } 
+    </Grid>
+    <Paper >
+    <Slider/>
+    </Paper>
+    <Typography textAlign={"center"} mt={3}  variant='h5'>
+    NUESTROS RECOMENDADOS
+    </Typography> 
+    <Grid container justifyContent={"center"}  > 
+    {
+    sortedProductsBySale.length?sortedProductsBySale.map((sortedProductsBySale, i) => (
+    <CardInf
+     key={`${sortedProductsBySale.id}+${i}`}
+     id = {sortedProductsBySale.id}
+     imageUrl={sortedProductsBySale.imageUrl[0]}
+     title={sortedProductsBySale.name}
+     price={sortedProductsBySale.price}
+     sale={sortedProductsBySale.sale}
+     rating={sortedProductsBySale.rating}    
+    />
+    )):(null) 
+    } 
+    </Grid>
+    </Box>
+
+    </>
   );
 }
