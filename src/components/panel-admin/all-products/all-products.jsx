@@ -1,5 +1,5 @@
 //import React y Redux
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react';
 
@@ -56,15 +56,6 @@ const [open, setOpen] = useState(false);
 const handleOpenModal = () => setOpen(true);
 const handleCloseModal = () => setOpen(false);
   
-
-useEffect(() => {
-  const fetchData = async () => {
-  const result = await getProducts()
-  dispatch(getProductsActions(result))
-  }
-  fetchData()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [reload])
 
  const handleDelete = async (id, name) =>{  
  if( window.confirm("Estas Seguro de Eliminar el Producto: " + name)){

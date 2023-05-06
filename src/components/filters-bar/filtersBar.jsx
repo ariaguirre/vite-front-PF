@@ -1,17 +1,19 @@
 import { Button, Grid, List, ListItem, ListItemText } from "@mui/material";
 import { useEffect, useState } from "react";
 import {getCategories, productsByCategory} from '../../utils/firebase/firebaseClient'
+import { useSelector } from "react-redux";
 
 
 const FiltersBar = () => {
-  const [categories, setCategories] = useState([]);
-  useEffect(() => {
+ // const [categories, setCategories] = useState([]);
+  const categories = useSelector(state => state.categories)
+/*   useEffect(() => {
     const result = async () => {
       let category = await getCategories();
       setCategories(category);
     };
     result();
-  }, []);
+  }, []); */
   const handlerCategory = async (e) =>{
     const { value } = e.target
     const result = await productsByCategory(value)
