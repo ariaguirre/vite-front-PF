@@ -5,21 +5,12 @@ import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom'
 import { Box, Typography, Button } from '@mui/material';
 //redux
-import { useDispatch } from 'react-redux';
-import { addItemToCart } from "../../features/cartSlice/cartSlice";
+
+
+
 const DetailProduct = () => {
 
-  const dispatch = useDispatch();
   
-  const handleClickCartIcon = () => {
-    const product = {
-      id,
-      title,
-      imageUrl,
-      price      
-    }   
-    dispatch(addItemToCart(product));
-  }
 
 
   return <>
@@ -47,7 +38,7 @@ const DetailProduct = () => {
               <Stack direction="row" alignContent={'center'} gap={2} >
                 <Button variant="contained" sx={{ mt: 2, mb: 2 }} startIcon={<AddIcon />}>Agregar al carrito</Button>
                 <Link to="/shop/checkout">
-                  <Button variant="contained" sx={{ mt: 2, mb: 2 }} onClick={handleClickCartIcon} startIcon={<AddShoppingCartIcon />}>Ir al carrito</Button>
+                  <Button variant="contained" sx={{ mt: 2, mb: 2 }}  startIcon={<AddShoppingCartIcon />}>Ir al carrito</Button>
                 </Link>
               </Stack>
 
