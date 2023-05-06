@@ -68,11 +68,10 @@ const FiltersComponent = () => {
             alignContent={"center"}
             justifyContent={"center"}
             className={style.cardContainer}
-            border={1}
             >
             {sortedProductsByRating.length
                 ? sortedProductsByRating.map((sortedProductsByRating, i) => (
-                    <Card key={i} style={{marginRight: '1rem'}}>
+                    <Card key={i} >
                     <CardInf
                         key={`${sortedProductsByRating.id}+${i}`}
                         id={sortedProductsByRating.id}
