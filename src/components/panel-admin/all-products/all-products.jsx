@@ -59,8 +59,8 @@ const handleCloseModal = () => setOpen(false);
 
 useEffect(() => {
   const fetchData = async () => {
-  const result = await getProducts()
-  dispatch(getProductsActions(result))
+  // const result = await getProducts()
+  // dispatch(getProductsActions(result))
   }
   fetchData()
   // eslint-disable-next-line react-hooks/exhaustive-deps
