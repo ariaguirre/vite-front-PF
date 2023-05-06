@@ -8,12 +8,14 @@ import { ProductsActions } from '../../features/productsPagination/productsPagin
 //import { nextProducts, pagProducts, prevProducts } from '../../utils/firebase/firebaseClient'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import FiltersComponent from '../../components/filtersComponent/filtersComponent'
 const Shop = () => {
 
   const Products =  useSelector((state) =>state.productPag.products)
 
    return (
     <Container maxWidth="xl" sx={{minHeight:"100vh", pt:"2rem"}}>   
+      <FiltersComponent/>
         <Grid container justifyContent={"center"} >        
         {
          Products.length?Products.map((products, i) => (
