@@ -43,7 +43,7 @@ const App = () => {
         <Route path="auth" element={<Authentication />} />
         <Route path="shop" element={<Shop />} />        
         <Route path="shop/checkout" element={<Checkout/>} />
-        <Route path="detail/:id" element={<DetailProduct/>}/>        
+        <Route path="/detail/:id" element={<DetailProduct/>}/>      
       </Route>
       <Route path="/admin" element={
           <RequireAuth>
