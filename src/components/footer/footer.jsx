@@ -19,19 +19,20 @@ import styled from '@emotion/styled';
 const Footer = () => {
   return (
     <div className={style.fullCont}>
-    <Paper
+    {/* <Paper
       sx={{
-        width: "100%",
-        height: "auto",
-        left: 0,
+        position: 'relative',
         bottom: 0, 
+        width: "100%",
+        // height: "auto",
+        // left: 0,
         textAlign: 'center',
         backgroundColor: "white",
         marginTop: 2,
         paddingTop: "2rem",
         paddingBottom: "2rem",
       }} elevation={8}
-    >
+    > */}
       <Container maxWidth="lg">
         <div className={style.footerCont}>
            <div className={style.titulo}>
@@ -64,7 +65,7 @@ const Footer = () => {
                 </div>
                 
       </Container>
-    </Paper>
+    {/* </Paper> */}
     </div>
 
   );
