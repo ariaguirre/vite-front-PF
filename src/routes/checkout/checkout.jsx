@@ -35,7 +35,6 @@ const Checkout = () => {
           {cartItems.length > 0 ? 
           <div className={styles.cart}>
               <span className={styles.ship}>Subtotal: {numberFormat(total)}</span>
-              <span className={styles.ship}>Envio: Gratis</span>
       <span className={styles.total}>Total: {numberFormat(total)}</span>
       <br/>
       <button className={styles.button}>Continuar compra</button>
