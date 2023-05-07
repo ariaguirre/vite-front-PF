@@ -20,6 +20,8 @@ const DetailProduct = () => {
   const dispatch = useDispatch();
   const {productsId} = useSelector((state) => state.productsId);
 
+  console.log(productsId)
+
   useEffect(() =>{
   (async function unit(){
       const result = await getProductByid(id)
@@ -52,13 +54,12 @@ const DetailProduct = () => {
 
   return <>
     <Container fixed>
-      <Stack direction={{ xs: 'column', sm: 'row' }} alignItems="center" spacing={2} justifyContent="center" sx={{ px: "2rem", py: "2rem" }}>
-        <Box sx={{maxWidth:'50%' }}>
+      <Stack direction={{ xs: 'column', sm: 'row' }} alignItems="center" spacing={2} justifyContent="center" sx={{px: "2rem", py: "2rem", ml:"auto", mr:"auto" }}>
+        <Box>
           <img src={productsId[0]?.imageUrl} alt={productsId[0]?.name} />
-
         </Box>
 
-        <div>
+        <Box>
           <form>
             <Typography variant="h3">
               {productsId[0]?.name}
@@ -75,6 +76,7 @@ const DetailProduct = () => {
                 <HalfRating  />
               </Stack>
               <p>Unidades disponibles en stock:<span>{productsId[0]?.stock}</span></p>
+              <p>Descuento:<span>{productsId[0]?.sale.discount}%</span></p>
               <Stack direction="row" >
                 <p>Cantidad:</p>
                 <input type="number" min='0' onChange={(e) =>handleCant(e)} value={1} className="cant" />
@@ -94,7 +96,7 @@ const DetailProduct = () => {
               <p>Disponible para despacho</p>
             </div>
           </form>
-        </div>
+        </Box>
 
       </Stack>
 
@@ -102,18 +104,20 @@ const DetailProduct = () => {
         <Typography variant='h3' fontSize={30} fontWeight={500}>
           Reseñas del producto
         </Typography>
-        <Box>
-          {
-            productsId[0]?.reviews.length < 1 ? <span>No hay comentarios</span> : productsId[0]?.reviews[0] 
+        <Stack sx={{pl:"2rem"}}>
+          {productsId[0]?.length < 1 ? <p>No hay reseñas</p> : productsId[0]?.reviews.map((r, index) =>{ return (<Box key={index}>
+            <p>Usuario:{r.user}</p>
+            <p>Reseña:{r.review}</p>
+            <p>Fecha de la reseña:{r.date}</p>
 
-          }
-        </Box>
+          </Box>)}) }
+        </Stack>
             
       </Box>
 
 
     </Container>
-  </>
+  </>  
 }
 
 export default DetailProduct;
