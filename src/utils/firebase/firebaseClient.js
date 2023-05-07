@@ -187,27 +187,9 @@ export const changePag = async (pageNumber,data) =>{
   }
 }
 //new pagination
-export const prevProducts = async () =>{
-  const docs = []
-  const pev = query(collection(db, "Products"),limit(itemPerPage),orderBy("name", "desc"),startAfter(firstDoc));
-  const document = await getDocs(pev);
-  firstDoc = document.docs[document.docs.length-1] || null
-  lastVisible = document.docs[0] || null
-  const doc = document.docs.reverse();
-  doc.forEach(doc=>{
-    const id = doc.id;
-    const datos = doc.data();
-    docs.push(
-    {
-      id,
-    ...datos
-    });
-  })
-  return docs
-}
 // paginacion
-export const onAuthStateChangedListener = (callback) =>  
-onAuthStateChanged(auth, callback);
+export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
+
 
 
 //trae Productos existentes
