@@ -2,7 +2,6 @@
   "name": "vite-final-proyect",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -16,7 +15,10 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.12.2",
     "@reduxjs/toolkit": "^1.9.5",
+    "@stripe/react-stripe-js": "^2.1.0",
+    "@stripe/stripe-js": "^1.52.1",
     "crypto-js": "^4.1.1",
+    "dotenv": "^16.0.3",
     "firebase": "^9.20.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -25,6 +27,7 @@
     "react-router-dom": "^6.10.0",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.2",
+    "stripe": "^12.4.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
