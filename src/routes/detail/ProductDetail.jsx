@@ -9,15 +9,16 @@ import { getProductByid } from '../../utils/firebase/firebaseClient';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import {getProductId } from '../../features/productsId/productsIdSlice';
+import HalfRating from '../../components/card/rating/rating';
 
 
 const DetailProduct = () => {
 
   const { id } = useParams()
   const dispatch = useDispatch();
-  const product = useSelector((state) => state.productsId);
-  const detail = product.productsId[0];
-  console.log(product);
+  const p = useSelector((state) => state.productsId);
+  let detail = p.productsId[0];
+  console.log(detail)
 
   useEffect(() =>{
     const unit = async () =>{
@@ -25,7 +26,7 @@ const DetailProduct = () => {
       dispatch(getProductId(result))
     }
     unit()
-  },[])
+  },[dispatch])
   
 
 
@@ -46,8 +47,11 @@ const DetailProduct = () => {
             <hr />
 
             <div className="infoInicial">
-              <p>precio:<span className='money'>$</span><span className='price'>{detail.price}</span></p>
-              <p>estrellas:</p>
+              <p>precio:<span className='money' color='green'>$</span><span className='price'>{detail.price}</span></p>
+              <Stack>
+                <p>estrellas:</p>
+                <HalfRating rValue={detail.rating} />
+              </Stack>
               <p>Unidades disponibles en stock:<span>{detail.stock}</span></p>
               <Stack direction="row" >
                 <p>Cantidad:</p>
@@ -73,42 +77,12 @@ const DetailProduct = () => {
       </Stack>
 
       <Box p={4} borderRadius={8} bgcolor={'#f4f4f4'} mb={2}>
-        <Typography fontWeight={500}>
-          Caracteristicas del Producto
+        <Typography variant='h3' fontSize={30} fontWeight={500}>
+          Reseñas del producto
         </Typography>
-        <p className="">Lorem ipsum  dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae tempus quam pellentesque nec nam aliquam sem et tortor.</p>
 
-        <Box pl={2} pr={2} pt={2}>
-          <Box>
 
-            <Typography fontWeight={500}>
-              Caracteristicas:
-            </Typography>
-            <Box pl={2}>
-              <ul className='caractList'>
-                <li>dato1</li>
-                <li>dato2</li>
-                <li>dato3</li>
-                <li>dato4</li>
-              </ul>
-            </Box>
-          </Box>
-          <Box>
-
-            <Typography fontWeight={500}>
-              Garantía:
-            </Typography>
-            <Box pl={2}>
-              <ul className='caractList'>
-                <li>dato1</li>
-                <li>dato2</li>
-                <li>dato3</li>
-                <li>dato4</li>
-              </ul>
-            </Box>
-          </Box>
-
-        </Box>
+            
       </Box>
 
 
