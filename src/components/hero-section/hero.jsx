@@ -1,4 +1,7 @@
+import styles from './hero.module.css';
+
 //import react y redux
+import React from 'react';
 import { useEffect, useRef} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Paper, Button, Typography, Box, Grid  } from '@mui/material';
@@ -20,55 +23,60 @@ const HeroContainer = styled(Paper)(({ theme }) => ({
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   width: '100%',
-  padding: theme.spacing(6),
+  //padding: theme.spacing(6),
+  padding: theme.spacing(4),  
   minHeight: '100vh',
   [theme.breakpoints.up('sm')]: {
-    padding: theme.spacing(6),
+    //padding: theme.spacing(6),
+    padding: theme.spacing(4),
   },
 }));
 
 const HeroTitle = styled('h1')(({ theme }) => ({
-  color: 'white',
-  marginTop: theme.spacing(4),
-  marginBottom: theme.spacing(2),
+  //color: 'white',
+  color: 'black',
+  //marginTop: theme.spacing(4),
+  //marginBottom: theme.spacing(2),
   fontSize: theme.typography.pxToRem(50),
   textAlign: 'center',
   fontWeight: 'bold',
+  
   maxWidth: '700px',
   [theme.breakpoints.up('sm')]: {
     fontSize: theme.typography.pxToRem(70),
-    marginTop: theme.spacing(10),
+    //marginTop: theme.spacing(10),
   },
 }));
 
 const HeroSubtitle = styled('h2')(({ theme }) => ({
-  color: 'white',
-  marginTop: theme.spacing(4),
+  //color: 'white',
+  color: 'black',
+  //marginTop: theme.spacing(4),
   textAlign: 'center',
   fontSize: theme.typography.pxToRem(16),
   fontWeight: 'normal',
   maxWidth: '700px',
   [theme.breakpoints.up('sm')]: {
     fontSize: theme.typography.pxToRem(20),
-    marginTop: theme.spacing(8),
+    //marginTop: theme.spacing(8),
   },
 }));
 
 const HeroButton = styled(Button)(({ theme }) => ({
-  backdropFilter: 'blur(10px)',
-  color: '#ffffff',
-  float: 'right',
-  marginTop: '20px',
-  marginRight: theme.spacing(12),
-  padding: theme.spacing(1),
-  fontSize: theme.typography.pxToRem(20),
-  borderColor: 'red',
-  borderWidth: 'thick',
-  borderRadius: '20px',
-  [theme.breakpoints.up('sm')]: {
-    fontSize: theme.typography.pxToRem(24),
-    marginRight: theme.spacing(25),
-    marginTop: '-160px',
+backdropFilter: 'blur(10px)',
+color: '#ffffff',
+float: 'right',
+marginTop: '20px',
+marginRight: theme.spacing(12),
+padding: theme.spacing(1),
+fontSize: theme.typography.pxToRem(20),
+borderColor: 'red',
+borderWidth: 'thick',
+borderRadius: '20px',
+[theme.breakpoints.up('sm')]: {
+  fontSize: theme.typography.pxToRem(24),
+  marginRight: theme.spacing(40),
+marginTop: '-160px',
   },
 }));
 
@@ -90,24 +98,42 @@ export default function Hero() {
     }    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
+ 
   //filtros orden por rating (imperdibles) y discount(recomendados)
-  const sortedProductsByRating=[...products].sort((a,b)=>b.rating - a.rating).slice(0,3)
-  const sortedProductsBySale=[...products].sort((a,b)=>b.sale.discount - a.sale.discount).slice(1,4)
+  const sortedProductsByRating=[...products].sort((a,b)=>b.rating - a.rating).slice(0,4)
+  const sortedProductsBySale=[...products].sort((a,b)=>b.sale.discount - a.sale.discount).slice(1,5)
  
 
   return (
     <>
-    <HeroContainer elevation={8}>
-      <HeroTitle>Mom Home & Baby</HeroTitle>
+    <HeroContainer elevation={8} >
+    <Box sx={{ background:"rgba(255,255,255,0.2)",width:"60%", pt:1, pb:1, borderRadius:5,pointer:"cursor",'&:hover':{
+      color:"black",
+    }}}>
+     <HeroTitle >Mom Home & Baby</HeroTitle>     
       <HeroSubtitle>
-        Asesoramos a mamitas primerizas en la elección de los mejores productos para su embarazo, lactancia y sus bebés. ¡Ahorrándoles horas de investigación!
+        Asesoramos a mamitas primerizas en la elección de los mejores productos para su embarazo, lactancia y sus bebés. <br />
+        ¡Ahorrándoles horas de investigación!
       </HeroSubtitle>
-      <HeroButton startIcon={<LocalMallIcon />}>
-        <Link to={"/shop"}>
-          <Typography variant="body1" color="secondary">Tienda</Typography>
+      <Button  sx={{
+        ml:"25%", 
+        mt:"3%", 
+        pl:"5%", 
+        width:"50%",
+       // background:"#0d47a1",
+       background:"#1976d2",
+      '&:hover':{
+        //background:"black",   
+        background:"#424242",     
+      }}} 
+        className={styles["vibrate-1"]}
+        startIcon={<LocalMallIcon sx={{color:"white", mr:"12", }}/>}
+      >
+      <Link to={"/shop"}>
+      <Typography variant="body1" color="secondary"sx={{fontSize:"20px" } }>  Ir a la Tienda</Typography>
         </Link>
-      </HeroButton>
+      </Button>
+      </Box>      
     </HeroContainer>
     <Box elevetion={8} alignContent={"center"} justifyContent={"center"} textAlign={"center"}>
     <Typography textAlign={"center"} mt={3} variant='h5'>
