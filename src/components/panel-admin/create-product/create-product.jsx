@@ -137,8 +137,8 @@ const handleSubmit = async (e) => {
             >
                 {
                   dataCategories?.categories?.map((ele, index)=> (
-                    <MenuItem key={index} value={ele.id}>
-                      {ele.id}
+                    <MenuItem key={index} value={ele.categories}>
+                      {ele.categories}
                     </MenuItem>
                 ))}
             </TextField>
