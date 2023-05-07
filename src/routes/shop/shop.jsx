@@ -10,7 +10,6 @@ const Shop = () => {
 
    return (
     <Container maxWidth="xl" sx={{minHeight:"100vh", pt:"2rem"}}>   
-      <FiltersComponent/>
         <Grid container justifyContent={"center"} >        
         {
          Products.length?Products.map((products, i) => (

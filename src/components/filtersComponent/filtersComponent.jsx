@@ -1,22 +1,39 @@
-import { Card, Grid } from "@mui/material";
+import { Button, Card, Grid, Stack, Typography } from "@mui/material";
 import style from "./filtersComponent.module.css";
 import FiltersBar from "../filters-bar/filtersBar";
 import { useDispatch, useSelector } from "react-redux";
 import CardInf from "../card/card";
 import { getProducts } from "../../utils/firebase/firebaseClient";
 import { getProductsActions } from '../../features/products/productSlice'
+import { useState } from "react";
 
 const FiltersComponent = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
- 
+  const [drop, setDrop] = useState(false)
+  const [dropFilter, setDropFilter] = useState(false)
   window.onload = async () => {
     if(products.length < 1){
       const result = await getProducts()
       dispatch(getProductsActions(result))
     }
   }
-
+  const handlerDrop = () =>{
+    if(!drop) {
+      setDrop(true)
+    }
+    else{
+      setDrop(false)
+    }
+  }
+  const handlerDropFilter = () =>{
+    if(!dropFilter) {
+      setDropFilter(true)
+    }
+    else{
+      setDropFilter(false)
+    }
+  }
   const sortedProductsByRating = [...products]
     .sort((a, b) => b.rating - a.rating)
     .slice(0, 1);
@@ -28,7 +45,7 @@ const FiltersComponent = () => {
       sm={3}
       maxWidth={"45vh"}
     >
-      <Grid item xs={12} sm={3} className={style.categoryContainer}>
+      <Grid item xs={12} sm={3} >
         <Grid
           container
           alignContent={"center"}
@@ -36,11 +53,16 @@ const FiltersComponent = () => {
           border={1}
           borderRadius={2}
         >
-          Categorias
+         <Button onClick={()=>handlerDrop()}> Categorias </Button> 
+  
         </Grid>
-        <FiltersBar />
+        { drop? 
+        <Grid item xs={12} sm={3} className={style.categoryContainer}>
+          <FiltersBar />
+        </Grid> : null}
+        
       </Grid>
-      <Grid item xs={12} sm={3}>
+      <Grid item xs={12} sm={3} marginTop={1}>
         <Grid
           container
           alignContent={"center"}
@@ -48,11 +70,15 @@ const FiltersComponent = () => {
           border={1}
           borderRadius={2}
         >
-          Filtros
+          <Button onClick={()=> handlerDropFilter()}>Filtros</Button>
         </Grid>
-        <Grid className={style.categoryContainer}>Aca los filtros</Grid>
+        {
+          dropFilter? 
+          <Grid className={style.categoryContainer}>Aca los filtros</Grid>
+          : null
+        }
       </Grid>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} >
         <Grid item xs={12} sm={12}>
             <Grid
             container
@@ -60,33 +86,37 @@ const FiltersComponent = () => {
             justifyContent={"center"}
             border={1}
             borderRadius={2}
+            marginTop={1}
             >
             Destacados
             </Grid>
+          
             <Grid
             container
             alignContent={"center"}
             justifyContent={"center"}
             className={style.cardContainer}
             >
-            {sortedProductsByRating.length
-                ? sortedProductsByRating.map((sortedProductsByRating, i) => (
-                    <Card key={i} >
-                    <CardInf
-                        key={`${sortedProductsByRating.id}+${i}`}
-                        id={sortedProductsByRating.id}
-                        imageUrl={sortedProductsByRating.imageUrl[0]}
-                        title={sortedProductsByRating.name}
-                        price={sortedProductsByRating.price}
-                        sale={sortedProductsByRating.sale}
-                        rating={sortedProductsByRating.rating}
-                    />
-                    </Card>
-                ))
-                : null}
+              {sortedProductsByRating.length
+                  ? sortedProductsByRating.map((sortedProductsByRating, i) => (
+                      <Card key={i} >
+                      <CardInf
+                          key={`${sortedProductsByRating.id}+${i}`}
+                          id={sortedProductsByRating.id}
+                          imageUrl={sortedProductsByRating.imageUrl[0]}
+                          title={sortedProductsByRating.name}
+                          price={sortedProductsByRating.price}
+                          sale={sortedProductsByRating.sale}
+                          rating={sortedProductsByRating.rating}
+                      />
+                      </Card>
+                  ))
+                  : null}
             </Grid>
+  
         </Grid>
       </Grid>
+      
     </Grid>
   );
 };
