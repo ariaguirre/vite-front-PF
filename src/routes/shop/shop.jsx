@@ -8,6 +8,7 @@ const Shop = () => {
 
   const Products =  useSelector((state) =>state.productPag.products)
 
+
    return (
     <Container maxWidth="xl" sx={{minHeight:"100vh", pt:"2rem"}}>   
         <Grid container justifyContent={"center"} >        
