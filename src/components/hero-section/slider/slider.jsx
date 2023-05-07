@@ -19,18 +19,20 @@ useEffect(() => {
 
 return (
   <>
-  <Box
-   
+  <Box   
    sx={{
    width: "100%",
-   height: 110,
+   height:{ xs:130, sm:110,},
+   justifyContent:"center",
+   alignItems:"center",
+   pt:"1.5%",
    //**CAMBIE COLOR BACKGROUND BANNER */
    //background: "#0d47a1",
    background:"#1976d2",
   
   }}
   >
-  <Typography  color={"secondary"} padding={0} pt={3} variant='h6' >
+  <Typography color={"secondary"}  variant='h6' sx={{pt:{xs:"1%"}}} >
   {textBanner[index]} </Typography> 
   <FavoriteBorderIcon color={"secondary"}/>
   </Box> 
