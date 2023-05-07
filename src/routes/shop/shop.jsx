@@ -2,15 +2,12 @@ import Container from '@mui/material/Container'
 import CardInf from "../../components/card/card"
 import { Grid } from '@mui/material'
 import { PaginationComponent } from '../../components/pagination/pagination'
-import {Button} from '@mui/material'
-import {Stack} from '@mui/material'
-import { ProductsActions } from '../../features/productsPagination/productsPaginationSlice'
-//import { nextProducts, pagProducts, prevProducts } from '../../utils/firebase/firebaseClient'
-import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import FiltersComponent from '../../components/filtersComponent/filtersComponent'
 const Shop = () => {
 
   const Products =  useSelector((state) =>state.productPag.products)
+
 
    return (
     <Container maxWidth="xl" sx={{minHeight:"100vh", pt:"2rem"}}>   
