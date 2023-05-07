@@ -1,12 +1,11 @@
 //import React y Redux
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 
 // import FireBase
-import { getProducts, 
-        deleteProductsAdmin } from '../../../utils/firebase/firebaseClient'
-import { getProductsActions } from '../../../features/products/productSlice'
+import { deleteProductsAdmin } from '../../../utils/firebase/firebaseClient'
+
 
 
 //import Material UI
