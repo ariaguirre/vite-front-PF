@@ -5,15 +5,9 @@ import { useSelector } from "react-redux";
 
 
 const FiltersBar = () => {
- // const [categories, setCategories] = useState([]);
+
   const categories = useSelector(state => state.categories)
-/*   useEffect(() => {
-    const result = async () => {
-      let category = await getCategories();
-      setCategories(category);
-    };
-    result();
-  }, []); */
+
   const handlerCategory = async (e) =>{
     const { value } = e.target
     const result = await productsByCategory(value)
