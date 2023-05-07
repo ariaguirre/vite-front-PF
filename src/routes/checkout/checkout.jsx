@@ -3,6 +3,7 @@ import styles from "./checkout.module.css"
 import CheckoutItem from '../../components/checkout-item/checkout-item';
 import { numberFormat } from '../../helper/numberFormat';
 import { useEffect, useState } from 'react';
+import PaymentForm from '../../components/payment-form/payment-form';
 
 const Checkout = () => {
 
@@ -40,6 +41,7 @@ const Checkout = () => {
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
       <span className={styles.total}>Total: {numberFormat(total)}</span>
+      <PaymentForm />
     </div>
 
   )
