@@ -2,35 +2,53 @@ import Container from '@mui/material/Container'
 import Stack from '@mui/material/Stack';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import AddIcon from '@mui/icons-material/Add';
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { Box, Typography, Button } from '@mui/material';
 //redux
-
+import { getProductByid } from '../../utils/firebase/firebaseClient';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import {getProductId } from '../../features/productsId/productsIdSlice';
 
 
 const DetailProduct = () => {
 
+  const { id } = useParams()
+  const dispatch = useDispatch();
+  const product = useSelector((state) => state.productsId);
+  const detail = product.productsId[0];
+  console.log(product);
+
+  useEffect(() =>{
+    const unit = async () =>{
+      const result = await getProductByid(id)
+      dispatch(getProductId(result))
+    }
+    unit()
+  },[])
   
 
 
   return <>
     <Container fixed className="detail">
       <Stack direction={{ xs: 'column', sm: 'row' }} alignItems="center" spacing={2} justifyContent="center" sx={{ px: "2rem", py: "2rem" }}>
+        <Box sx={{maxWidth:'50%' }}>
+          <img src={detail.imageUrl} className=" imgDetail" alt={detail.name} />
 
-        <img src='https://http2.mlstatic.com/D_NQ_NP_656735-MCO48794245078_012022-O.webp' className=" imgDetail" alt={name} />
+        </Box>
 
         <div className=" infDetail">
           <form>
             <Typography variant="h3">
-              coche para bebé + silla para carro
+              {detail.name}
             </Typography>
 
             <hr />
 
             <div className="infoInicial">
-              <p>precio:<span className='money'>$</span><span className='price'>150</span></p>
+              <p>precio:<span className='money'>$</span><span className='price'>{detail.price}</span></p>
               <p>estrellas:</p>
-              <p>Disponible en stock:<span>si</span></p>
+              <p>Unidades disponibles en stock:<span>{detail.stock}</span></p>
               <Stack direction="row" >
                 <p>Cantidad:</p>
                 <input type="number" min='0' className="cant" />
