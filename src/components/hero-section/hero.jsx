@@ -1,5 +1,5 @@
 //import react y redux
-import { useEffect} from 'react';
+import { useEffect, useRef} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Paper, Button, Typography, Box, Grid  } from '@mui/material';
 import { styled } from '@mui/material/styles'
@@ -75,7 +75,21 @@ const HeroButton = styled(Button)(({ theme }) => ({
 export default function Hero() {
 
   const { products } = useSelector(state => state.products);
-  
+  const updateRef = useRef(0);
+
+
+  useEffect(() => {
+    if(updateRef.current === 0){
+     
+      const fetchData = async () => {
+        // const result = await getProducts()
+        // dispatch(getProductsActions(result))
+        }
+        fetchData()  
+        updateRef.current += 1; 
+    }    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   //filtros orden por rating (imperdibles) y discount(recomendados)
   const sortedProductsByRating=[...products].sort((a,b)=>b.rating - a.rating).slice(0,3)
