@@ -8,7 +8,7 @@ import {
   signInWithGooglePopup,
   signInAuthUserWithEmailAndPassword,
 } from '../../utils/firebase/firebaseClient';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Stack } from '@mui/material';
 //Forms
 import { useForm } from 'react-hook-form';
@@ -45,58 +45,61 @@ const SignInForm = () => {
     } catch (error) {
       switch (error.code) {
         case 'auth/wrong-password':
-          alert('incorrect password for email');
+          alert('contraseña incorrecta');
           break;
         case 'auth/user-not-found':
-          alert('no user associated with this email');
+          alert('Ninguna usuario asociado con este correo electrónico');
           break;
         default:
-          alert('user sign in failed', error);
+          alert('inicio de sesión de usuario fallido', error);
       }
     }
   }
   return (
     <Grid item md={6} xs={12}>      
       <Typography variant="h4" color="initial" align='center'>
-        Already have an account?
+        ¿Ya tienes una cuenta?
       </Typography>
-      <Typography variant='body1' color="initial" align='center'>
-        Sign in with your email and password
+      <Typography variant='body1' color="initial" align='center' marginBottom={1}>
+        Inicia sesión con tu correo electrónico y contraseña
       </Typography>
       
         <form onSubmit={handleSubmit(onSubmitEmailAndPassword)} noValidate>
           <Stack spacing={2}>
             <TextField
-              label='Email'
+              label='Correo electrónico'
               type='email'
               autoComplete=""
               required                                       
               
-              {...register("email", {required:"Email is required"})}   
+              {...register("email", {required:"Por favor, ingrese una dirección de correo electrónico"})}   
               error={!!errors.email}
               helperText={errors.email?.message}
             />
             <TextField
-              label='Password'
+              label='Contraseña'
               type='password'
               autoComplete=""
               required                                                
-              {...register("password", {required:"Password is required"})}
+              {...register("password", {required:"Por favor, ingrese una contraseña"})}
               error={!!errors.password}
               helperText={errors.password?.message}
 
             />
             <Stack direction={"row"} spacing={2} > 
               <Button type='submit' variant='contained' fullWidth>
-                Sign In
+                Ingresar
               </Button>
               <Button variant='contained' fullWidth onClick={signInWithGoogle}>
-                Google sign in
+                Ingresar con Google
               </Button>
             </Stack>
             
           </Stack>
-        </form>              
+        </form> 
+        <Grid container justifyContent={'center'} marginTop={2}>
+          <Link to={'/sign-up'}> ¿No tienes cuenta? Registrarse aquí </Link>             
+        </Grid>
     </Grid>
   );
 };

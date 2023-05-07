@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import { initializeApp} from "firebase/app";
 
@@ -186,27 +187,9 @@ export const changePag = async (pageNumber,data) =>{
   }
 }
 //new pagination
-export const prevProducts = async () =>{
-  const docs = []
-  const pev = query(collection(db, "Products"),limit(itemPerPage),orderBy("name", "desc"),startAfter(firstDoc));
-  const document = await getDocs(pev);
-  firstDoc = document.docs[document.docs.length-1] || null
-  lastVisible = document.docs[0] || null
-  const doc = document.docs.reverse();
-  doc.forEach(doc=>{
-    const id = doc.id;
-    const datos = doc.data();
-    docs.push(
-    {
-      id,
-    ...datos
-    });
-  })
-  return docs
-}
 // paginacion
-export const onAuthStateChangedListener = (callback) =>  
-onAuthStateChanged(auth, callback);
+export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
+
 
 
 //trae Productos existentes
@@ -407,6 +390,22 @@ export const setDelivery = async(data)=>{
   },{merge:true})
 }
 
+// traer productos por categoria 
+
+export const productsByCategory = async (str) =>{
+  const categoriesProduct = []
+  const q = query(collection(db, 'Products'), where('categories', 'array-contains', str))
+  const querySnapshot = await getDocs(q)
+  querySnapshot.forEach(d => {
+    const id = d.id
+    const data = d.data()
+    categoriesProduct.push({
+      id,
+      ...data
+    })
+  })
+ return categoriesProduct
+}
 
 
 

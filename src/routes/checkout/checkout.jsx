@@ -1,17 +1,22 @@
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import styles from "./checkout.module.css"
 import CheckoutItem from '../../components/checkout-item/checkout-item';
 import { numberFormat } from '../../helper/numberFormat';
 import { useEffect, useState } from 'react';
+import PaymentForm from '../../components/payment-form/payment-form';
+import { setCartTotal } from '../../features/cartSlice/cartSlice';
 
 const Checkout = () => {
 
   const cartItems = useSelector(state => state.cart.cartItems);
   const [total, setTotal] = useState(0);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const newCartTotal = cartItems.reduce((total, cartItem) => total + cartItem.quantity * cartItem.price, 0)
     setTotal(newCartTotal);
+    dispatch(setCartTotal(newCartTotal));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartItems])
 
 
@@ -40,6 +45,7 @@ const Checkout = () => {
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
       <span className={styles.total}>Total: {numberFormat(total)}</span>
+      <PaymentForm />
     </div>
 
   )

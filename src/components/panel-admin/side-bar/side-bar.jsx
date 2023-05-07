@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 //import Material UI
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,8 +12,6 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import List from '@mui/material/List';
-import MenuItem from '@mui/material/MenuItem';
-import Typography from '@mui/material/Typography';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -145,7 +143,8 @@ const SideBar = () =>  {
   >
   <MenuIcon />
   </IconButton>
-  <Button href="/" variant="text" color='secondary'>Home</Button>
+  <Link to='/'> <Button variant="text" color='secondary'>Home</Button> </Link>
+  
   </Toolbar>
   </AppBar>
 
