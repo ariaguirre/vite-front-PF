@@ -116,27 +116,25 @@ export default function Hero() {
         ¡Ahorrándoles horas de investigación!
       </HeroSubtitle>
       <Button  sx={{
-        ml:"25%", 
-        mt:"3%", 
-        pl:"5%", 
-        width:"50%",
+        ml:{sm:"25%"},
+        mt:{sm:"2%"},
+        width:{xs:"100%", sm:"50%"},
        // background:"#0d47a1",
        background:"#1976d2",
       '&:hover':{
-        //background:"black",   
-        background:"#424242",     
+        background:"#424242",          
       }}} 
         className={styles["vibrate-1"]}
         startIcon={<LocalMallIcon sx={{color:"white", mr:"12", }}/>}
       >
       <Link to={"/shop"}>
-      <Typography variant="body1" color="secondary"sx={{fontSize:"20px" } }>  Ir a la Tienda</Typography>
+      <Typography variant="body1" color="secondary"sx={{fontSize:"14px" } }>  Ir a la Tienda</Typography>
         </Link>
       </Button>
       </Box>      
     </HeroContainer>
     <Box elevetion={8} alignContent={"center"} justifyContent={"center"} textAlign={"center"}>
-    <Typography textAlign={"center"} mt={3} variant='h5'>
+    <Typography textAlign={"center"} mt={3} variant='h5'sx={{fontSize:"8"}}>
     <span>PRODUCTOS IMPERDIBLES</span>
     </Typography> 
     <Grid container justifyContent={"center"}  > 
