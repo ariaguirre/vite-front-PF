@@ -81,7 +81,7 @@ marginTop: '-160px',
 }));
 
 export default function Hero() {
-  const dispatch = useDispatch();
+
   const { products } = useSelector(state => state.products);
   const updateRef = useRef(0);
 
@@ -98,13 +98,10 @@ export default function Hero() {
     }    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
  
   //filtros orden por rating (imperdibles) y discount(recomendados)
   const sortedProductsByRating=[...products].sort((a,b)=>b.rating - a.rating).slice(0,4)
   const sortedProductsBySale=[...products].sort((a,b)=>b.sale.discount - a.sale.discount).slice(1,5)
-
-  
  
 
   return (
