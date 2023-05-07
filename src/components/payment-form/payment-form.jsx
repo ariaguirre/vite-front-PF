@@ -35,7 +35,7 @@ const PaymentForm = () => {
         }
       }
     });
-
+    
     setIsProcessingPayment(false);
 
     if (paymentResult.error) {
