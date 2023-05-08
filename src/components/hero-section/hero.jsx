@@ -62,23 +62,23 @@ const HeroSubtitle = styled('h2')(({ theme }) => ({
   },
 }));
 
-const HeroButton = styled(Button)(({ theme }) => ({
-backdropFilter: 'blur(10px)',
-color: '#ffffff',
-float: 'right',
-marginTop: '20px',
-marginRight: theme.spacing(12),
-padding: theme.spacing(1),
-fontSize: theme.typography.pxToRem(20),
-borderColor: 'red',
-borderWidth: 'thick',
-borderRadius: '20px',
-[theme.breakpoints.up('sm')]: {
-  fontSize: theme.typography.pxToRem(24),
-  marginRight: theme.spacing(40),
-marginTop: '-160px',
-  },
-}));
+// const HeroButton = styled(Button)(({ theme }) => ({
+// backdropFilter: 'blur(10px)',
+// color: '#ffffff',
+// float: 'right',
+// marginTop: '20px',
+// marginRight: theme.spacing(12),
+// padding: theme.spacing(1),
+// fontSize: theme.typography.pxToRem(20),
+// borderColor: 'red',
+// borderWidth: 'thick',
+// borderRadius: '20px',
+// [theme.breakpoints.up('sm')]: {
+//   fontSize: theme.typography.pxToRem(24),
+//   marginRight: theme.spacing(40),
+// marginTop: '-160px',
+//   },
+// }));
 
 export default function Hero() {
 

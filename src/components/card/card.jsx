@@ -17,7 +17,7 @@ import { numberFormat } from "../../helper/numberFormat";
 //redux 
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../features/cartSlice/cartSlice";
-import styled from "@emotion/styled";
+// import styled from "@emotion/styled";
 
 const CardInf = (
   {

@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 // import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-const Slider = () => {
+const Slide = () => {
 const textBanner =["LA MATERNIDAD ES UN CAMINO QUE TE ENSEÑA A SER PERSEVERANTE, POSITIVA, RECURSIVA Y MAGICA","CLARO QUE HAY DIAS O ETAPAS DIFICILES Y ESO TAMBIEN ES NORMAL", "DIOS TE ELIGIÓ PARA SER MADRE EN EL MOMENTO JUSTO", "Y TE DOTO DE TODO LO QUE NECESITAS PARA SER LA MAMÁ PERFECTA PARA TU BEBE"];
 
 const [index, setIndex] = useState(0);
@@ -31,4 +31,4 @@ return (
   )
 }
 
-export default Slider;
+export default Slide;
