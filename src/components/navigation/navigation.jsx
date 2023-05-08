@@ -14,13 +14,18 @@ import CartDropdown from '../cart-dropdown/cart-dropdown';
 import { changePag, startPagination } from '../../utils/firebase/firebaseClient';
 import { useDispatch } from 'react-redux';
 import { ProductsActions, setPagesActions } from '../../features/productsPagination/productsPaginationSlice';
+import { searchProduct } from './search';
+import { getProductsActions } from '../../features/products/productSlice';
+import { slice } from '../pagination/helper';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isToggleOn, setIsToggleOn] = useState(false);
   const [isToggleCartOn, setIsToggleCartOn] = useState(false);
   const [search, setSearch] = useState('')
-  const navigation = useNavigate()
+  const { products,productsCopy } = useSelector(state => state.products)
+  const [tamañoPorpagina] =useState(8);
+  const { pages , productsPag ,pageSelect } = useSelector(state => state.productPag)
   const { userCredentials } = useSelector((state) => state.currentUser);
   const dispatch = useDispatch()
   const handleClickSearchBtn = () => {
@@ -46,33 +51,18 @@ const Navigation = () => {
   const handleClickCart = ()=> {
     setIsToggleCartOn(!isToggleCartOn);
   }
+ const handleChange = async (value) => {
+  const name = value.target.value.trim()
 
-  const handlerSearchBar = (e) =>{
-    const { value } = e.target;
-    setSearch({
-      ...search,
-      value
-    })
-    if(!value) setSearch('')
+  if(name){
+   const searchProducts = await searchProduct({name , productsCopy})
+   dispatch(getProductsActions(searchProducts))
+   dispatch(setPagesActions(Math.ceil(searchProducts.length/8)))  
+  }else{
+    dispatch(setPagesActions(Math.ceil(products.length/8)))  
+    dispatch(getProductsActions(productsCopy))
   }
-
-  const handlerBuscar = async () =>{
-    const valueSearch = search.value.trim()
-    const searchDoc = {
-      name: valueSearch,
-      orderBy :"name",
-      orderType :"asc",
-      filter : "",
-      itemsPage: 8
-    }
-    const { docs } = 
-    await changePag(1, searchDoc )
-    const {collectionSize} = await startPagination(searchDoc);
-    dispatch(ProductsActions(docs))
-    dispatch(setPagesActions(Math.ceil( collectionSize / searchDoc.itemsPage)))
-    navigation('/shop')
-  }
- 
+ }
   return (
     <>
       <header className={`${isToggleOn ? styles.open : ""} ${styles.header}`}>
@@ -117,7 +107,7 @@ const Navigation = () => {
             type="text"
             name="searchBox"
             placeholder="Busca algo para tu bebé..."
-            onChange={(e)=>{handlerSearchBar(e)}}
+            onChange={(e)=>{handleChange(e)}}
             />
             <div className={styles.buscar}>
               {isOpen && search ? <button onClick={handlerBuscar}>Buscar</button> : null}

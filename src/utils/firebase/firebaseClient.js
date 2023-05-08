@@ -28,6 +28,8 @@ import {
   query,
   where,
   endBefore,
+  DocumentReference,
+  refEqual,
 } from "firebase/firestore";
 
 import {
@@ -127,67 +129,7 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 };
 
 export const signOutUser = async () => await signOut(auth);
-// paginacion
-export const startPagination = async(data) =>{
-  const docs = []
-  const next = query(collection(db, "Products"),limit(data.itemsPage),orderBy("index"));
-  const items = query(collection(db, "Products"))
-  const collectionSize = (await getDocs(items)).size
-  const document = await getDocs(next);
-  document.forEach(doc=>{
-    const id = doc.id;
-    const datos = doc.data();
-    docs.push(
-    {
-      id,
-    ...datos
-    });
-  })
- return {docs,collectionSize}
-}
-// new pagination
-export const changePag = async (pageNumber,data) =>{
-  const docs =[] // van todos los items retornados 
-  let collectionSize = 0;
-  let indexFinal = data.itemsPage * pageNumber; 
-  let inicial = indexFinal - data.itemsPage; 
-  if(data.name){
-      const  items = query(collection(db, "Products"),orderBy(data.orderBy , data.orderType));
-     const Products = await getDocs(items);
-     const findProduct = Products.docs.filter(doc => { 
-        const prod = doc.data()
-       return prod.name.toLowerCase().includes(data.name.toString().toLowerCase());
-     });
-     collectionSize = findProduct.length
-     const documents = []
-    findProduct.forEach(doc =>{
-      const id = doc.id
-      const data = doc.data();
-      documents.push({id,
-      ...data})
-    })
-    let docs = documents.slice(inicial, indexFinal);
-    return {docs,collectionSize}
-  }
-  else{
-  const items = query(collection(db, "Products"),limit(data.itemsPage),orderBy(data.orderBy ,data.orderType),startAfter(data.itemsPage * (pageNumber -1)));
-  const Products = await getDocs(items)
-  const size = query(collection(db, "Products"))
-   collectionSize = (await getDocs(size)).size
-    Products.forEach(doc=>{
-      const id = doc.id;
-      const datos = doc.data();
-      docs.push(
-      {
-        id,
-      ...datos
-      });
-    }) 
-    return {docs,collectionSize}
-  }
-}
-//new pagination
-// paginacion
+
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
 
 
