@@ -1,9 +1,5 @@
-import React from 'react'
 import styles from './slider.module.css';
 import { useState, useEffect } from 'react';
-// import { Box, Button, Typography } from '@mui/material'
-// import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-// import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 const Slide = () => {

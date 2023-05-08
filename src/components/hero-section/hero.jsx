@@ -1,9 +1,6 @@
-import styles from './hero.module.css';
-
 //import react y redux
-import React from 'react';
 import { useEffect, useRef} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Paper, Button, Typography, Box, Grid  } from '@mui/material';
 import { styled } from '@mui/material/styles'
 import bebe1 from '../../../documents/Image/bebe1.jpg'
@@ -12,48 +9,43 @@ import { Link } from 'react-router-dom';
 //import componentes
 import Slider from "./slider/slider"
 import CardInf from "../card/card"
-//import Firebase
-import { getProducts } from '../../utils/firebase/firebaseClient';
-//import Redux
-import { getProductsActions } from '../../features/products/productSlice'
 
+
+import styles from './hero.module.css';
 
 const HeroContainer = styled(Paper)(({ theme }) => ({
   backgroundImage: `url(${bebe1})`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
-  width: '100%',
-  //padding: theme.spacing(6),
-  padding: theme.spacing(4),  
-  minHeight: '100vh',
+  width: '100vw',  
+  padding: theme.spacing(6),
+ 
   [theme.breakpoints.up('sm')]: {
-    //padding: theme.spacing(6),
-    padding: theme.spacing(4),
+    padding: theme.spacing(6),
+    minHeight: "100vh",
   },
 }));
 
 const HeroTitle = styled('h1')(({ theme }) => ({
-  //color: 'white',
+ 
   color: 'black',
-  //marginTop: theme.spacing(4),
-  //marginBottom: theme.spacing(2),
-  fontSize: theme.typography.pxToRem(50),
+  marginTop: "1px",
+  marginRight:"1px",
+  fontSize: theme.typography.pxToRem(20),
   textAlign: 'center',
-  fontWeight: 'bold',
-  
+  fontWeight: 'bold',  
   maxWidth: '700px',
   [theme.breakpoints.up('sm')]: {
     fontSize: theme.typography.pxToRem(70),
-    //marginTop: theme.spacing(10),
+    marginTop: theme.spacing(2),
   },
 }));
 
 const HeroSubtitle = styled('h2')(({ theme }) => ({
-  //color: 'white',
-  color: 'black',
-  //marginTop: theme.spacing(4),
+  
+  color: 'black',  
   textAlign: 'center',
-  fontSize: theme.typography.pxToRem(16),
+  fontSize: theme.typography.pxToRem(14),
   fontWeight: 'normal',
   maxWidth: '700px',
   [theme.breakpoints.up('sm')]: {
@@ -62,23 +54,7 @@ const HeroSubtitle = styled('h2')(({ theme }) => ({
   },
 }));
 
-// const HeroButton = styled(Button)(({ theme }) => ({
-// backdropFilter: 'blur(10px)',
-// color: '#ffffff',
-// float: 'right',
-// marginTop: '20px',
-// marginRight: theme.spacing(12),
-// padding: theme.spacing(1),
-// fontSize: theme.typography.pxToRem(20),
-// borderColor: 'red',
-// borderWidth: 'thick',
-// borderRadius: '20px',
-// [theme.breakpoints.up('sm')]: {
-//   fontSize: theme.typography.pxToRem(24),
-//   marginRight: theme.spacing(40),
-// marginTop: '-160px',
-//   },
-// }));
+
 
 export default function Hero() {
 

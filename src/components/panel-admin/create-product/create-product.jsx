@@ -23,11 +23,15 @@ const CreateProduct = () => {
     price: 0,
     categories: [],
     imageUrl: [],
-    reviews: [],
+    reviews: [{
+      date:'',
+      rating: 0,
+      review:'',
+      user:''
+    }],
     rating: 0,
-    sale: {}
-    
-    
+    sale: {},
+    active: true
 });
 
   const handleChange =  (event) => {

@@ -1,12 +1,17 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import styles from './payment-form.module.css';
+import { useNavigate } from "react-router-dom";
+import { clearCart } from "../../features/cartSlice/cartSlice";
 const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
+  
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const amount = useSelector(state => state.cart.cartTotal)
   const currentUser = useSelector(state => state.currentUser.userCredentials )
   const [isProcessingPayment, setIsProcessingPayment ] = useState(false);
@@ -23,8 +28,8 @@ const PaymentForm = () => {
       headers:{
         'content-Type': 'application/json'
       },
-      body: JSON.stringify({ amount: amount })
-    }).then(res => res.json());    
+      body: JSON.stringify({ amount: amount * 100 })
+    }).then(res => res.json()).catch(error => console.log(error));    
     const {paymentIntent: { client_secret }} = response;
 
     const paymentResult = await stripe.confirmCardPayment(client_secret, {
@@ -38,26 +43,26 @@ const PaymentForm = () => {
     
     setIsProcessingPayment(false);
 
-    if (paymentResult.error) {
-      console.log(paymentResult.error)
-      alert(paymentResult.error);      
+    if (paymentResult.error) {      
+      alert(paymentResult.error.message);      
     }else{
       if(paymentResult.paymentIntent.status === "succeeded"){
         alert("paymet Succesfull");
+        navigate("/");
+        dispatch(clearCart());
       }
     }
   };
-  
-  
-
 
   return (
     <div className={styles.PaymentFormContainer} >
-      <form className={styles.FormContainer} onSubmit={paymentHandler} >
-        <h2>Credit card</h2>
-        <CardElement />
-        <button disabled={isProcessingPayment} type="submit">Pagar ahora</button>
+      <form className={styles.FormContainer} onSubmit={paymentHandler} id="creditCardForm" >
+        <h4>Credit card</h4>
+        <div className={styles.creditCardContainer}>
+          <CardElement />
+        </div>
       </form>
+        <button disabled={isProcessingPayment} form="creditCardForm" type="submit">Pagar ahora</button>
     </div>
   )
 }
