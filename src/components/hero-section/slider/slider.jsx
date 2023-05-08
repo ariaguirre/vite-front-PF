@@ -1,8 +1,9 @@
 import React from 'react'
+import styles from './slider.module.css';
 import { useState, useEffect } from 'react';
-import { Box, Button, Typography } from '@mui/material'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+// import { Box, Button, Typography } from '@mui/material'
+// import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+// import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 const Slider = () => {
@@ -14,29 +15,19 @@ useEffect(() => {
       setIndex((i) => (i + 1) % textBanner.length);     
     }, 5000);
     return () => clearInterval(interval);
+ // eslint-disable-next-line react-hooks/exhaustive-deps
  }, []);
-
-
+ 
 return (
-  <>
-  <Box   
-   sx={{
-   width: "100%",
-   height:{ xs:130, sm:110,},
-   justifyContent:"center",
-   alignItems:"center",
-   pt:"1.5%",
-   //**CAMBIE COLOR BACKGROUND BANNER */
-   //background: "#0d47a1",
-   background:"#1976d2",
-  
-  }}
-  >
-  <Typography color={"secondary"}  variant='h6' sx={{pt:{xs:"1%"}}} >
-  {textBanner[index]} </Typography> 
-  <FavoriteBorderIcon color={"secondary"}/>
-  </Box> 
-  </>
+  <div className={styles.banner}>
+    <div className={styles.contenedor} >
+      <div className={styles.dataBanner}>
+        <h1 className={styles.titleBanner}>
+          {textBanner[index]} </h1> 
+        <FavoriteBorderIcon sx={{ fontSize: 60}} color={"secondary"}/>
+      </div> 
+    </div> 
+  </div>
   )
 }
 

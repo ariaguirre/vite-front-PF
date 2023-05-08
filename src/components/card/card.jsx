@@ -2,6 +2,7 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 //mui Components
+import styles from './card.module.css';
 import Card from "@mui/material/Card";
 import CardMedia from '@mui/material/CardMedia';
 import CardActions from "@mui/material/CardActions";
@@ -52,7 +53,7 @@ const CardInf = (
   }
 
   return (
-    <Card sx={{ minWidth: "300px", margin:"1rem"}} >
+    <Card sx={{ Width: "300px", margin:"1rem"}} >
       <CardMedia
         component="img"
         title={title}

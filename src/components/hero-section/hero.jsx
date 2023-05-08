@@ -107,72 +107,79 @@ export default function Hero() {
   return (
     <>
     <HeroContainer elevation={8} >
-    <Box sx={{ background:"rgba(255,255,255,0.2)",width:"60%", pt:1, pb:1, borderRadius:5,pointer:"cursor",'&:hover':{
-      color:"black",
-    }}}>
-     <HeroTitle >Mom Home & Baby</HeroTitle>     
-      <HeroSubtitle>
-        Asesoramos a mamitas primerizas en la elección de los mejores productos para su embarazo, lactancia y sus bebés. <br />
-        ¡Ahorrándoles horas de investigación!
-      </HeroSubtitle>
-      <Button  sx={{
-        ml:{sm:"25%"},
-        mt:{sm:"2%"},
-        width:{xs:"100%", sm:"50%"},
-       // background:"#0d47a1",
-       background:"#1976d2",
-      '&:hover':{
-        background:"#424242",          
-      }}} 
-        className={styles["vibrate-1"]}
-        startIcon={<LocalMallIcon sx={{color:"white", mr:"12", }}/>}
-      >
-      <Link to={"/shop"}>
-      <Typography variant="body1" color="secondary"sx={{fontSize:"14px" } }>  Ir a la Tienda</Typography>
-        </Link>
-      </Button>
-      </Box>      
+    <div className={styles.legendHero}>
+      <HeroTitle >Mom Home & Baby</HeroTitle>     
+        <HeroSubtitle>
+          Asesoramos a mamitas primerizas en la elección de los mejores productos para su embarazo, lactancia y sus bebés. <br />
+          ¡Ahorrándoles horas de investigación!
+        </HeroSubtitle>
+        <Button  sx={{
+          ml:{sm:"25%"},
+          mt:{sm:"2%"},
+          width:{xs:"100%", sm:"50%"},
+        // background:"#0d47a1",
+        background:"#1976d2",
+        '&:hover':{
+          background:"#424242",          
+        }}} 
+          className={styles["vibrate-1"]}
+          startIcon={<LocalMallIcon sx={{color:"white", mr:"12", }}/>}
+        >
+        <Link to={"/shop"}>
+        <Typography variant="body1" color="secondary"sx={{fontSize:"14px" } }>  Ir a la Tienda</Typography>
+          </Link>
+        </Button>
+      </div>      
     </HeroContainer>
-    <Box elevetion={8} alignContent={"center"} justifyContent={"center"} textAlign={"center"}>
-    <Typography textAlign={"center"} mt={3} variant='h5'sx={{fontSize:"8"}}>
-    <span>PRODUCTOS IMPERDIBLES</span>
-    </Typography> 
-    <Grid container justifyContent={"center"}  > 
-    {
-    sortedProductsByRating.length?sortedProductsByRating.map((sortedProductsByRating, i) => (
-    <CardInf
-     key={`${sortedProductsByRating.id}+${i}`}
-     id = {sortedProductsByRating.id}
-     imageUrl={sortedProductsByRating.imageUrl[0]}
-     title={sortedProductsByRating.name}
-     price={sortedProductsByRating.price}
-     sale={sortedProductsByRating.sale}
-     rating={sortedProductsByRating.rating}    
-    />
-    )):(null) 
-    } 
-    </Grid>
+
+    <Box>
+    <div className={styles.contenedor}>
+    <div className={styles.imperdibles}>
+      <h2 className={styles.title}>PRODUCTOS IMPERDIBLES</h2> 
+      <Grid container justifyContent={"center"}  > 
+      {
+        sortedProductsByRating.length?sortedProductsByRating.map((sortedProductsByRating, i) => (
+          <CardInf
+          key={`${sortedProductsByRating.id}+${i}`}
+          id = {sortedProductsByRating.id}
+          imageUrl={sortedProductsByRating.imageUrl[0]}
+          title={sortedProductsByRating.name}
+          price={sortedProductsByRating.price}
+          sale={sortedProductsByRating.sale}
+          rating={sortedProductsByRating.rating}    
+          />
+          )):(null) 
+        } 
+      </Grid>
+    
+      </div>
+    </div>  
+
     <Paper >
     <Slider/>
     </Paper>
-    <Typography textAlign={"center"} mt={3}  variant='h5'>
-    NUESTROS RECOMENDADOS
-    </Typography> 
-    <Grid container justifyContent={"center"}  > 
-    {
-    sortedProductsBySale.length?sortedProductsBySale.map((sortedProductsBySale, i) => (
-    <CardInf
-     key={`${sortedProductsBySale.id}+${i}`}
-     id = {sortedProductsBySale.id}
-     imageUrl={sortedProductsBySale.imageUrl[0]}
-     title={sortedProductsBySale.name}
-     price={sortedProductsBySale.price}
-     sale={sortedProductsBySale.sale}
-     rating={sortedProductsBySale.rating}    
-    />
-    )):(null) 
-    } 
-    </Grid>
+   <div className={styles.contenedor}>
+    <div className={styles.imperdibles} >  
+        <h2 className={styles.title}>
+        NUESTROS RECOMENDADOS
+        </h2> 
+        <Grid container justifyContent={"center"}  > 
+        {
+          sortedProductsBySale.length?sortedProductsBySale.map((sortedProductsBySale, i) => (
+            <CardInf
+            key={`${sortedProductsBySale.id}+${i}`}
+            id = {sortedProductsBySale.id}
+            imageUrl={sortedProductsBySale.imageUrl[0]}
+            title={sortedProductsBySale.name}
+            price={sortedProductsBySale.price}
+            sale={sortedProductsBySale.sale}
+            rating={sortedProductsBySale.rating}    
+            />
+            )):(null) 
+          } 
+        </Grid>
+        </div> 
+      </div>
     </Box>
 
     </>

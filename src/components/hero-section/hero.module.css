@@ -1,4 +1,4 @@
-
+/* 
  @-webkit-keyframes vibrate-1 {
     0% {
       -webkit-transform: translate(0);
@@ -55,4 +55,39 @@
 	-webkit-animation: vibrate-1 0.7s linear infinite both;
 	        animation: vibrate-1 0.7s linear infinite both;
   }  
+ */
 
+ .contenedor{
+  width: 1100px;
+  margin:0 auto;
+  max-width: 95%;
+}
+
+
+ .legendHero{
+  padding:1rem;
+  max-width: 95%;
+  height: 95%;
+  background-color: #ffffff7b ;
+  border-radius: 15px;
+ }
+
+ .title{
+  font-size: 2.5rem;
+  font-weight: 200;
+  text-align: center;
+  padding-bottom: 1rem;
+}
+
+.imperdibles{
+  padding:2.5rem 0
+}
+
+ @media only screen and (min-width:769px){
+
+  .legendHero{
+    max-width: 600px;
+    margin-left: 10rem;
+    margin-top: 5rem;
+  }
+ }
