@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client'
 //Redux toolkit
 import { store } from './app/store.js'
 import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
+import { persistStore } from 'redux-persist'
 import App from './App.jsx'
 // Material ui
 import '@fontsource/roboto/300.css';
@@ -18,6 +20,7 @@ import { stripePromise } from "./utils/stripe/stripe.utils.jsx"
 
 import './index.css'
 
+const persist = persistStore(store);
 const theme = createTheme({
   palette: {
     type: 'light',
@@ -33,6 +36,9 @@ const theme = createTheme({
 });
 
 ReactDOM.createRoot(document.getElementById('root')).render(
+
+  <React.StrictMode>  
+   <PersistGate persistor={persist}>
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
@@ -43,6 +49,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           </Elements>
         </ThemeProvider>
       </BrowserRouter>
+    </Provider>    
+    </PersistGate>
     </Provider>
   </React.StrictMode>,
 )

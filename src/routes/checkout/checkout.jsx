@@ -8,7 +8,7 @@ import { setCartTotal } from '../../features/cartSlice/cartSlice';
 
 const Checkout = () => {
 
-  const cartItems = useSelector(state => state.cart.cartItems);
+  const cartItems = useSelector(state => state.persistedReducer.carState.cartItems);
   const [total, setTotal] = useState(0);
   const dispatch = useDispatch();
 
