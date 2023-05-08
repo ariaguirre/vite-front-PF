@@ -16,11 +16,11 @@ export default function BasicMenu() {
 
   return (
     <>
-      <span               
+      <p               
         onClick={handleClick}        
       >
         Dashboard
-      </span>
+      </p>
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
