@@ -1,6 +1,6 @@
 import styles from './navigation.module.css';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 //redux
 import { useSelector } from 'react-redux';
 //svg's
@@ -11,14 +11,18 @@ import BasicMenu from '../drop-down/drop-down';
 //components
 import CartIcon from '../cart-icon/cart-icon';
 import CartDropdown from '../cart-dropdown/cart-dropdown';
+import { changePag, startPagination } from '../../utils/firebase/firebaseClient';
+import { useDispatch } from 'react-redux';
+import { ProductsActions, setPagesActions } from '../../features/productsPagination/productsPaginationSlice';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isToggleOn, setIsToggleOn] = useState(false);
   const [isToggleCartOn, setIsToggleCartOn] = useState(false);
-
+  const [search, setSearch] = useState('')
+  const navigation = useNavigate()
   const { userCredentials } = useSelector((state) => state.currentUser);
-
+  const dispatch = useDispatch()
   const handleClickSearchBtn = () => {
     setIsOpen(true);
     setIsToggleOn(false);
@@ -43,6 +47,32 @@ const Navigation = () => {
     setIsToggleCartOn(!isToggleCartOn);
   }
 
+  const handlerSearchBar = (e) =>{
+    const { value } = e.target;
+    setSearch({
+      ...search,
+      value
+    })
+    if(!value) setSearch('')
+  }
+
+  const handlerBuscar = async () =>{
+    const valueSearch = search.value.trim()
+    const searchDoc = {
+      name: valueSearch,
+      orderBy :"name",
+      orderType :"asc",
+      filter : "",
+      itemsPage: 8
+    }
+    const { docs } = 
+    await changePag(1, searchDoc )
+    const {collectionSize} = await startPagination(searchDoc);
+    dispatch(ProductsActions(docs))
+    dispatch(setPagesActions(Math.ceil( collectionSize / searchDoc.itemsPage)))
+    navigation('/shop')
+  }
+ 
   return (
     <>
       <header className={`${isToggleOn ? styles.open : ""} ${styles.header}`}>
@@ -87,7 +117,11 @@ const Navigation = () => {
             type="text"
             name="searchBox"
             placeholder="Busca algo para tu bebé..."
-          />
+            onChange={(e)=>{handlerSearchBar(e)}}
+            />
+            <div className={styles.buscar}>
+              {isOpen && search ? <button onClick={handlerBuscar}>Buscar</button> : null}
+            </div>
         </div>
         <CartDropdown isToggleCartOn={isToggleCartOn} />
       </header>

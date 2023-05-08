@@ -4,12 +4,12 @@ import Stack from '@mui/material/Stack';
 import { changePag, startPagination } from '../../utils/firebase/firebaseClient';
 import { useDispatch, useSelector } from 'react-redux';
 import { ProductsActions } from '../../features/productsPagination/productsPaginationSlice';
+import { setPagesActions } from '../../features/productsPagination/productsPaginationSlice';
 
 export const PaginationComponent =  () => {
     const dispatch = useDispatch();
     const products = useSelector(state => { state.productPag.products})
-    // const [itemPerPage] = useState(8)
-    const [pages,setPages] = useState(0)
+    const { pages } = useSelector(state => state.productPag)
     const [filterOrder] = useState(
         {
          categories : "Seguridad para Bebés",
@@ -28,7 +28,9 @@ const startedPag = async () =>
     const {docs} = await startPagination(filterOrder);
     const {collectionSize} = await startPagination(filterOrder);
     dispatch(ProductsActions(docs))
-    setPages(Math.ceil(collectionSize/filterOrder.itemsPage))  
+    const n = Math.ceil(collectionSize/filterOrder.itemsPage)
+    dispatch(setPagesActions(n)) 
+    
   }
      
      
@@ -39,7 +41,8 @@ const handleChange = async (event,value) =>
     const {docs} = await changePag(value,filterOrder)
     const {collectionSize} = await changePag(value,filterOrder)
     dispatch(ProductsActions(docs))
-    setPages(Math.ceil(collectionSize/filterOrder.itemsPage))
+    const n = Math.ceil(collectionSize/filterOrder.itemsPage)
+    dispatch(setPagesActions(n)) 
 }
   return (
     <Stack justifyContent={'center'} sx={{flexDirection:'row',justifyContent:'center', alignItems:'center' }}  spacing={2} >

@@ -1,0 +1,98 @@
+
+.contenedor{
+  width: 1100px;
+  margin:0 auto;
+  max-width: 95%;
+}
+
+.flex{
+  display: flex;
+  gap:1rem;
+}
+
+.detailTop{
+  padding: 2rem 1rem ;
+}
+
+.infBaseDetail{
+  padding: 0 1rem;
+  
+}
+.detailTop div img{
+  display: block;
+  margin:0 auto;
+  padding-bottom: 2rem;
+}
+
+.titleDetail{
+  font-size: 2.5rem;
+  font-weight: 200;
+  text-align: center;
+}
+
+
+.division{
+  font-weight: 100;
+  border: .05rem solid #bfbfbf;
+}
+
+.infBaseDetail{
+  background-color: #f4f4f4;
+  padding:.5rem 1rem;
+}
+
+.price{
+  font-size: 2.5rem;
+  font-weight: 100;
+  padding:0;
+}
+
+
+span{
+  font-weight: 600;
+  line-height: 2;
+}
+.money{
+  color:rgb(3, 193, 3);
+  font-weight: 600;
+  
+}
+
+.rating{
+  display: flex;
+  align-items: top;
+}
+
+.cant{
+  cursor:pointer;
+}
+
+.detailBuy{
+  padding:1rem 0;
+  display:flex;
+  gap:.5rem;
+  flex-direction: column;
+}
+
+.btn{
+  width:100%;
+}
+
+@media only screen and (min-width:768px){
+
+  .detailTop{
+    display: flex;
+    gap:1rem;
+  }
+
+  .imgProduct,
+  .infBaseDetail{
+    flex-basis: calc(50% - 1rem);
+
+  }
+
+  .detailBuy{
+    flex-direction: row;
+  }
+
+}

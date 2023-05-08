@@ -1,6 +1,8 @@
 //react Imports
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 //mui Components
+import styles from './card.module.css';
 import Card from "@mui/material/Card";
 import CardMedia from '@mui/material/CardMedia';
 import CardActions from "@mui/material/CardActions";
@@ -13,8 +15,10 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 //Helpers
 import { numberFormat } from "../../helper/numberFormat";
 //redux 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart } from "../../features/cartSlice/cartSlice";
+// import styled from "@emotion/styled";
+
 
 const CardInf = (
   {
@@ -26,7 +30,7 @@ const CardInf = (
     id,    
   }
 ) => {
-
+const userData = useSelector((state) => state.currentUser.userCredentials)
   const onSale = useRef(false);
   const dispatch = useDispatch();
 
@@ -41,33 +45,37 @@ const CardInf = (
   
 
   const handleClickCartIcon = () => {
+    
     const product = {
       id,
       title,
       imageUrl,
       price      
     }   
-    dispatch(addItemToCart(product));
+ dispatch(addItemToCart(product));
+   
+
+   
   }
 
   return (
-    <Card sx={{ minWidth: "300px", margin:"1rem"}} >
+    <Card sx={{ Width: "300px", margin:"1rem"}} className={styles.card} >
       <CardMedia
         component="img"
         title={title}
         src={imageUrl}
         alt={title}
-        sx={{ maxHeight: "220px", width: "100%", objectFit: "cover"}}
+        sx={{ maxHeight: "220px", width: "100%", objectFit: "contain"}}
       />
       <CardContent  sx={{py:0}}>
-        <CardHeader title={title} sx={{ padding: 0, userSelect:"none" }} />
-        <Box 
-          display={"flex"}
-          flexDirection={"column"}
-          minHeight={130}
-          justifyContent={"space-between"}
-          alignItems={"flex-start"}
+        <div className={styles.infCard}
+          // display={"flex"}
+          // flexDirection={"column"}
+          // minHeight={130}
+          // justifyContent={"space-between"}
+          // alignItems={"flex-start"}
         >
+        <CardHeader title={title} className={styles.titleCard} sx={{ padding: 0, userSelect:"none" }} />
           {
             onSale.current
               ? <Sale price={price} sale={sale} />
@@ -109,9 +117,11 @@ const CardInf = (
             <HalfRatingPreview rValue={rating}/>
           </Box>
           <CardActions sx={{padding:0}}>
-            <Button variant="contained" color="primary">
-              Details
-            </Button>
+            <Link to={`/detail/${id}`}>
+              <Button variant="contained" color="primary">
+                Details
+              </Button>
+            </Link>
             <IconButton>
               <FavoriteIcon color="warning" />
             </IconButton>
@@ -119,7 +129,7 @@ const CardInf = (
               <AddShoppingCartIcon color="primary" />
             </IconButton>
           </CardActions>
-        </Box>
+        </div>
 
       </CardContent>
 
