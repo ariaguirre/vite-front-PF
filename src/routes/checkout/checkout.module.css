@@ -1,0 +1,5 @@
+.containerFormCheckout
+{
+  border: 1px solid red;
+  min-height: calc(100vh - 170px);
+}
