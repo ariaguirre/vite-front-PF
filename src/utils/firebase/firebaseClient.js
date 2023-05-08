@@ -408,6 +408,3 @@ export const productsByCategory = async (str) =>{
  return categoriesProduct
 }
 
-
-
-
