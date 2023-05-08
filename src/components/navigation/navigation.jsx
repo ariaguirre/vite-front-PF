@@ -1,6 +1,6 @@
 import styles from './navigation.module.css';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 //redux
 import { useSelector } from 'react-redux';
 //svg's
@@ -20,7 +20,7 @@ const Navigation = () => {
   const [isToggleOn, setIsToggleOn] = useState(false);
   const [isToggleCartOn, setIsToggleCartOn] = useState(false);
   const [search, setSearch] = useState('')
-
+  const navigation = useNavigate()
   const { userCredentials } = useSelector((state) => state.currentUser);
   const dispatch = useDispatch()
   const handleClickSearchBtn = () => {
@@ -70,6 +70,7 @@ const Navigation = () => {
     const {collectionSize} = await startPagination(searchDoc);
     dispatch(ProductsActions(docs))
     dispatch(setPagesActions(Math.ceil( collectionSize / searchDoc.itemsPage)))
+    navigation('/shop')
   }
  
   return (
