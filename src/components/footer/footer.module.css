@@ -1,3 +1,16 @@
+.fullCont{
+  position: relative;
+  bottom: 0; 
+  width: 100%;
+  /* height: "auto"; */
+  /* left: 0; */
+  text-align: center;
+  background-color: white;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
 .tipografia {
   padding-left: 10px;
   padding-right: 10px;
