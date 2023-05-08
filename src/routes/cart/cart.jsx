@@ -3,7 +3,6 @@ import styles from "./cart.module.css"
 import CheckoutItem from '../../components/checkout-item/checkout-item';
 import { numberFormat } from '../../helper/numberFormat';
 import { useEffect, useState } from 'react';
-// import PaymentForm from '../../components/payment-form/payment-form';
 import { setCartTotal } from '../../features/cartSlice/cartSlice';
 import { useNavigate } from 'react-router-dom';
 

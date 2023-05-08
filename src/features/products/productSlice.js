@@ -4,7 +4,8 @@ const initialState = {
   products: [],
   productsCopy:[],
   status: 'idle',
-  error: null
+  error: null,
+  productById: null
 }
 
 const productSlice = createSlice({
@@ -12,8 +13,10 @@ const productSlice = createSlice({
     initialState,
       reducers: {
         getProductsActions: (state, action) =>{
-          state.products = action.payload
-          
+          state.products = action.payload          
+      },
+         getProductById: (state, action) => {
+      state.productById = state.products.find(product => product.id === action.payload);
       },
       productsCopy : (state,action)=>{
         state.productsCopy = action.payload
@@ -22,3 +25,5 @@ const productSlice = createSlice({
     });
     export const { getProductsActions,productsCopy } = productSlice.actions
     export default productSlice.reducer;
+
+

@@ -1,0 +1,47 @@
+.detailContainer
+{
+  min-height: calc(100vh - 90px);
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;  
+}
+.detailContainer img
+{
+  width: 400px;
+  height: 100%;
+}
+.detailContainer h2
+{
+  font-size: 3rem;
+  text-align: center;
+}
+.detailContainer a
+{
+  font-size: 2rem;
+  color: #1ac8db;
+}
+
+.detailContainer a:hover
+{
+  color: rgba(26, 200, 219,.8);
+  position: relative;
+  top:-1px
+}
+.detailContainer a:active
+{
+  position: relative;
+  top:1px
+}
+
+@media only screen and (max-width: 600px) {
+
+  .detailContainer h2 {
+      font-size: 2rem;
+      text-align: center;
+  }
+  .detailContainer img {
+    width: 300px;
+}
+}
+

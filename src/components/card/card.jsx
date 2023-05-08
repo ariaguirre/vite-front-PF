@@ -1,6 +1,8 @@
 //react Imports
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 //mui Components
+import styles from './card.module.css';
 import Card from "@mui/material/Card";
 import CardMedia from '@mui/material/CardMedia';
 import CardActions from "@mui/material/CardActions";
@@ -13,9 +15,8 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 //Helpers
 import { numberFormat } from "../../helper/numberFormat";
 //redux 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../features/cartSlice/cartSlice";
-
 
 const CardInf = (
   {
@@ -24,59 +25,55 @@ const CardInf = (
     price,
     sale,
     rating,
-    id,    
+    id,
   }
 ) => {
-const userData = useSelector((state) => state.currentUser.userCredentials)
+
   const onSale = useRef(false);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
 
   if (Object.keys(sale).length !== 0) {
     onSale.current = true;
-  }else{
+  } else {
     onSale.current = false;
   }
 
   price = Number(price);
-  
+
 
   const handleClickCartIcon = () => {
-    
+
     const product = {
       id,
       title,
       imageUrl,
-      price      
-    }   
- dispatch(addItemToCart(product));
-   
+      price
+    }
+    dispatch(addItemToCart(product));
+  }
 
-   
+  const handleDetailsClick = ()=> {
+    navigate(`detail/${id}`);
   }
 
   return (
-    <Card sx={{ minWidth: "300px", margin:"1rem"}} >
+    <Card sx={{ Width: "300px", margin: "1rem" }} className={styles.card} >
       <CardMedia
         component="img"
         title={title}
         src={imageUrl}
         alt={title}
-        sx={{ maxHeight: "220px", width: "100%", objectFit: "cover"}}
+        sx={{ maxHeight: "220px", width: "100%", objectFit: "contain" }}
       />
-      <CardContent  sx={{py:0}}>
-        <CardHeader title={title} sx={{ padding: 0, userSelect:"none" }} />
-        <Box 
-          display={"flex"}
-          flexDirection={"column"}
-          minHeight={130}
-          justifyContent={"space-between"}
-          alignItems={"flex-start"}
-        >
+      <CardContent sx={{ py: 0 }}>
+        <div className={styles.infCard}>
+          <CardHeader title={title} className={styles.titleCard} sx={{ padding: 0, userSelect: "none" }} />
           {
             onSale.current
               ? <Sale price={price} sale={sale} />
-              : <Typography variant="h5" color="initial" sx={{userSelect:"none"}}>{numberFormat(price)}</Typography>
+              : <Typography variant="h5" color="initial" sx={{ userSelect: "none" }} align="left">{numberFormat(price)}</Typography>
           }
           {
             onSale.current
@@ -86,7 +83,7 @@ const userData = useSelector((state) => state.currentUser.userCredentials)
                 sx={{
                   textDecorationLine: "line-through",
                   paddingRight: "1rem",
-                  userSelect:"none"
+                  userSelect: "none"
                 }}
               >
                 {`${numberFormat(price)}`}
@@ -103,20 +100,20 @@ const userData = useSelector((state) => state.currentUser.userCredentials)
                   fontSize: "0.875rem",
                   lineHeight: "1.25rem",
                   borderRadius: "0.375rem",
-                  userSelect:"none"
+                  userSelect: "none"
                 }}>
                 {`save ${sale.discount}%`}
               </Box>
             </Box>
           }
 
-          <Box>            
-            <HalfRatingPreview rValue={rating}/>
+          <Box>
+            <HalfRatingPreview rValue={rating} />
           </Box>
-          <CardActions sx={{padding:0}}>
-            <Button variant="contained" color="primary">
-              Details
-            </Button>
+          <CardActions sx={{ padding: 0 }}>            
+              <Button variant="contained" color="primary" onClick={handleDetailsClick}>
+                Details
+              </Button>            
             <IconButton>
               <FavoriteIcon color="warning" />
             </IconButton>
@@ -124,7 +121,7 @@ const userData = useSelector((state) => state.currentUser.userCredentials)
               <AddShoppingCartIcon color="primary" />
             </IconButton>
           </CardActions>
-        </Box>
+        </div>
 
       </CardContent>
 
