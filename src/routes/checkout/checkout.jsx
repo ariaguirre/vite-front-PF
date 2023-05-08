@@ -6,9 +6,8 @@ import { useEffect, useState } from 'react';
 
 const Checkout = () => {
 
-  const cartItems = useSelector(state => state.cart.cartItems);
+  const cartItems = useSelector(state => state.persistedReducer.carState.cartItems);
   const [total, setTotal] = useState(0);
-
   useEffect(() => {
     const newCartTotal = cartItems.reduce((total, cartItem) => total + cartItem.quantity * cartItem.price, 0)
     setTotal(newCartTotal);

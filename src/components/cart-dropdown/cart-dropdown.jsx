@@ -9,12 +9,12 @@ import { Link } from 'react-router-dom';
 
 const CartDropdown = ({isToggleCartOn}) => {
   
-  const cartItems  = useSelector(state=> state.cart.cartItems);
+  const cartItems  = useSelector(state=> state.persistedReducer.carState.cartItems);
   
   return (
     <div className={`${isToggleCartOn ? styles.cartDropdownContainer : styles.isClose}`}>
       <div className={styles.cartItems}>
-        {cartItems.map((item) => (                           
+        {cartItems?.map((item) => (                           
             <CardItem key={item.id} cardItem={item}/>
         ))}
       </div>

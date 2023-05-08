@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom/client'
 //Redux toolkit
 import { store } from './app/store.js'
 import { Provider } from 'react-redux'
-
+import { PersistGate } from 'redux-persist/integration/react'
+import { persistStore } from 'redux-persist'
 import App from './App.jsx'
 
 // Material ui
@@ -18,6 +19,7 @@ import { CssBaseline, ThemeProvider, createTheme } from '@mui/material'
 
 import './index.css'
 
+const persist = persistStore(store);
 const theme = createTheme({
   palette: {
     type: 'light',
@@ -33,7 +35,8 @@ const theme = createTheme({
 });
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>     
+  <React.StrictMode>  
+   <PersistGate persistor={persist}>
     <Provider store={store}>
       <BrowserRouter>
       <ThemeProvider theme={theme}>
@@ -42,5 +45,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       </ThemeProvider>
       </BrowserRouter>
     </Provider>    
+    </PersistGate>
   </React.StrictMode>,
 )
