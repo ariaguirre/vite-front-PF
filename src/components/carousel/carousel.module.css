@@ -1,0 +1,9 @@
+
+.imgSlider{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  width: auto;
+  max-height: 500px;
+}

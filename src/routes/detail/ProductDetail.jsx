@@ -9,13 +9,16 @@ import noAvialableProduct from "../../utils/img/producto-no-disponible.png";
 import Typography from '@mui/material/Typography'
 import DetailComponent from '../../components/detail-component/detail-component';
 import { getProductByid } from '../../utils/firebase/firebaseClient';
+import Loader from '../../components/loader/loader';
 
 const DetailProduct = () => {
   const { id } = useParams()
   const [product, setProduct] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    setIsLoading(true);
     getProductDetail(id);
   }, [id])
 
@@ -23,12 +26,15 @@ const DetailProduct = () => {
     try {
       const product = await getProductByid(id)
       setProduct(product[0])
+      setIsLoading(false)
     } catch (error) {
       console.error(error);
     }
   }
 
   return (
+    isLoading ? <Loader /> :
+
     product.active
       ?
       <Container maxWidth="xl">
