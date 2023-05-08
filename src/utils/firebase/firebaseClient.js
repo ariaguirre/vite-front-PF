@@ -219,6 +219,7 @@ export const postProductsAdmin = async (data) => {
     reviews: data.reviews,
     rating: data.rating,
     sale: data.sale,
+    active: data.active
   });
 };
 //Trae un producto por id
