@@ -1,5 +1,4 @@
 //import react y redux
-import { useEffect, useRef} from 'react';
 import { useSelector } from 'react-redux';
 import { Paper, Button, Typography, Box, Grid  } from '@mui/material';
 import { styled } from '@mui/material/styles'
@@ -19,7 +18,6 @@ const HeroContainer = styled(Paper)(({ theme }) => ({
   backgroundPosition: 'center',
   width: '100vw',  
   padding: theme.spacing(6),
- 
   [theme.breakpoints.up('sm')]: {
     padding: theme.spacing(6),
     minHeight: "100vh",
@@ -36,7 +34,7 @@ const HeroTitle = styled('h1')(({ theme }) => ({
   fontWeight: 'bold',  
   maxWidth: '700px',
   [theme.breakpoints.up('sm')]: {
-    fontSize: theme.typography.pxToRem(70),
+    fontSize: theme.typography.pxToRem(50),
     marginTop: theme.spacing(2),
   },
 }));
@@ -59,22 +57,7 @@ const HeroSubtitle = styled('h2')(({ theme }) => ({
 export default function Hero() {
 
   const { products } = useSelector(state => state.products);
-  const updateRef = useRef(0);
 
-
-  useEffect(() => {
-    if(updateRef.current === 0){
-     
-      const fetchData = async () => {
-        // const result = await getProducts()
-        // dispatch(getProductsActions(result))
-        }
-        fetchData()  
-        updateRef.current += 1; 
-    }    
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
- 
   //filtros orden por rating (imperdibles) y discount(recomendados)
   const sortedProductsByRating=[...products].sort((a,b)=>b.rating - a.rating).slice(0,4)
   const sortedProductsBySale=[...products].sort((a,b)=>b.sale.discount - a.sale.discount).slice(1,5)
