@@ -3,7 +3,6 @@ import CardInf from "../../components/card/card"
 import { Grid } from '@mui/material'
 import { PaginationComponent } from '../../components/pagination/pagination'
 import { useSelector } from 'react-redux'
-import FiltersComponent from '../../components/filtersComponent/filtersComponent'
 const Shop = () => {
 
   const Products =  useSelector((state) =>state.productPag.products)
