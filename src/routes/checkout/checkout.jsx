@@ -19,8 +19,6 @@ const Checkout = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartItems])
 
-
-
   return (
     <div className={styles.checkoutContainer}>
       <div className={styles.checkoutHeader}>
