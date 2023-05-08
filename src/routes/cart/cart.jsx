@@ -3,14 +3,17 @@ import styles from "./cart.module.css"
 import CheckoutItem from '../../components/checkout-item/checkout-item';
 import { numberFormat } from '../../helper/numberFormat';
 import { useEffect, useState } from 'react';
-import PaymentForm from '../../components/payment-form/payment-form';
+// import PaymentForm from '../../components/payment-form/payment-form';
 import { setCartTotal } from '../../features/cartSlice/cartSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
 
   const cartItems = useSelector(state => state.persistedReducer.carState.cartItems);
   const [total, setTotal] = useState(0);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     const newCartTotal = cartItems.reduce((total, cartItem) => total + cartItem.quantity * cartItem.price, 0)
@@ -18,6 +21,10 @@ const Cart = () => {
     dispatch(setCartTotal(newCartTotal));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartItems])
+
+  const handleClick = () => {
+    navigate("/shop/checkout");
+  }
 
   return (
     <div className={styles.checkoutContainer}>
@@ -42,10 +49,11 @@ const Cart = () => {
       {cartItems.map((cartItem) => (
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
-      <span className={styles.total}>Total: {numberFormat(total)}</span>
-      <PaymentForm />
+      <div className={styles.total}>
+        <button onClick={handleClick}>Checkout</button>Total: {numberFormat(total)}
+      </div>    
+      
     </div>
-
   )
 }
 
