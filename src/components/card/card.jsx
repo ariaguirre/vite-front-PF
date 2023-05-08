@@ -1,6 +1,6 @@
 //react Imports
 import { useRef } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 //mui Components
 import styles from './card.module.css';
 import Card from "@mui/material/Card";
@@ -30,6 +30,7 @@ const CardInf = (
 ) => {
 
   const onSale = useRef(false);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
 
@@ -51,6 +52,10 @@ const CardInf = (
       price
     }
     dispatch(addItemToCart(product));
+  }
+
+  const handleDetailsClick = ()=> {
+    navigate(`detail/${id}`);
   }
 
   return (
@@ -105,12 +110,10 @@ const CardInf = (
           <Box>
             <HalfRatingPreview rValue={rating} />
           </Box>
-          <CardActions sx={{ padding: 0 }}>
-            <Link to={`/detail/${id}`}>
-              <Button variant="contained" color="primary">
+          <CardActions sx={{ padding: 0 }}>            
+              <Button variant="contained" color="primary" onClick={handleDetailsClick}>
                 Details
-              </Button>
-            </Link>
+              </Button>            
             <IconButton>
               <FavoriteIcon color="warning" />
             </IconButton>
