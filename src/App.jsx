@@ -15,9 +15,10 @@ import Authentication from "./routes/authentication/authentication";
 import { createUserDocumentFromAuth, getCategories, getProducts, onAuthStateChangedListener } from "./utils/firebase/firebaseClient";
 import Error from "./routes/404/404";
 import DetailProduct from "./routes/detail/ProductDetail";
-import { getProductsActions } from "./features/products/productSlice";
+import { getProductsActions, productsCopy } from "./features/products/productSlice";
 import  { getCategoriesAction } from "./features/categories/categoriesSlice";
 import SignUp from "./routes/authentication/signUp";
+import { ProductsActions } from "./features/productsPagination/productsPaginationSlice";
 
 
 const App = () => {
@@ -41,6 +42,7 @@ const getData = async () =>{
   let category = await getCategories();
   dispatch(getCategoriesAction(category))
   dispatch(getProductsActions(products))
+  dispatch(productsCopy(products))
 }
 
   return (

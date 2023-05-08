@@ -55,7 +55,7 @@ const CardInf = (
   }
 
   const handleDetailsClick = ()=> {
-    navigate(`detail/${id}`);
+    navigate(`/detail/${id}`);
   }
 
   return (
