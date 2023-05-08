@@ -147,6 +147,16 @@ header .search{
   display: none;
 }
 
+.buscar button{
+  margin-right: 75px;
+  background-color: transparent;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+}
+
 /* responsive */
 @media (max-width: 800px ) {
   .searchBtn{
@@ -185,5 +195,14 @@ header .search{
   }
   .hide{
     display: none;
+  }
+  .buscar{
+    
+    background-color: transparent;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 0.1rem;
   }
 }

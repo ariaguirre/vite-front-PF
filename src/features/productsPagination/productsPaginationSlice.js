@@ -5,6 +5,7 @@ const initialState = {
   orderBy :"",
   orderType :"",
   filter : "",
+  pages:0,
   status: 'idle',
   error: null
 }
@@ -24,8 +25,11 @@ const productsPag = createSlice({
     } ,
     filterActions: (state, action) =>{
         state.filter = action.payload
-    } 
+    },
+    setPagesActions: ( state, action) =>{
+      state.pages = action.payload
+    }
       }
     });
-    export const { ProductsActions,orderTypeActions,filterActions,ProductsOrderBy } = productsPag.actions
+    export const { ProductsActions,orderTypeActions,filterActions,ProductsOrderBy, setPagesActions} = productsPag.actions
     export default productsPag.reducer;
