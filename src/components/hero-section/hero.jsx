@@ -101,8 +101,8 @@ export default function Hero() {
   }, [])
  
   //filtros orden por rating (imperdibles) y discount(recomendados)
-  const sortedProductsByRating=[...products].sort((a,b)=>b.rating - a.rating).slice(0,3)
-  const sortedProductsBySale=[...products].sort((a,b)=>b.sale.discount - a.sale.discount).slice(1,4)
+  const sortedProductsByRating=[...products].sort((a,b)=>b.rating - a.rating).slice(0,4)
+  const sortedProductsBySale=[...products].sort((a,b)=>b.sale.discount - a.sale.discount).slice(1,5)
  
 
   return (
@@ -136,8 +136,8 @@ export default function Hero() {
     <Box elevetion={8} alignContent={"center"} justifyContent={"center"} textAlign={"center"}
     
     sx={{width:{xs:"80%"}}}>
-    <Typography textAlign={"center"} mt={3} variant='h5'sx={{fontSize:"8"}}>
-    <span>PRODUCTOS IMPERDIBLES</span>
+    <Typography textAlign={"center"} ml={18} mt={3} variant='h5'sx={{fontSize:"8"}}>
+        PRODUCTOS IMPERDIBLES
     </Typography> 
     <Grid container justifyContent={"center"} ml={{xs:5, sm:10}} > 
     {
@@ -157,8 +157,8 @@ export default function Hero() {
     <Paper> 
     <Slider/>    
     </Paper>
-    <Typography textAlign={"center"} mt={3}  variant='h5'>
-    NUESTROS RECOMENDADOS
+    <Typography textAlign={"center"} mt={3} ml={18} variant='h5'>
+        NUESTROS RECOMENDADOS
     </Typography> 
     <Grid container justifyContent={"center"} ml={{xs:5, sm:10}} > 
      
