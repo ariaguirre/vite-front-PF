@@ -1,94 +1,120 @@
-import Container from '@mui/material/Container'
-import Stack from '@mui/material/Stack';
+/* eslint-disable react-hooks/exhaustive-deps */
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import AddIcon from '@mui/icons-material/Add';
-import { Link } from 'react-router-dom'
-import { Box, Typography, Button } from '@mui/material';
+import { Link, useParams } from 'react-router-dom'
+import { Button } from '@mui/material';
+//redux
+import { getProductByid } from '../../utils/firebase/firebaseClient';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import {getProductId } from '../../features/productsId/productsIdSlice';
+import HalfRating from '../../components/card/rating/rating';
+import styles from "./productDetail.module.css";
+import { addItemToCart,  deleteCartItem } from '../../features/cartSlice/cartSlice';
+
 
 const DetailProduct = () => {
 
+  const { id } = useParams()
+  const dispatch = useDispatch();
+  const {productsId} = useSelector((state) => state.productsId);
+  const cartItems = useSelector(state => state.cart.cartItems);
+
+  useEffect(() =>{
+  (async function unit(){
+      const result = await getProductByid(id)
+      dispatch(getProductId(result))
+    })()
+  },[])
+  
+
+  console.log(cartItems)
+  const { quantity } = cartItems;
+
+ 
+  const addItemHandler = () => dispatch(addItemToCart({id}));
+  const removeItemHandler = ()=> dispatch(deleteCartItem({id}))
+
+  const handleClickCartIcon = () => {
+    const product = {
+      id:productsId[0]?.id,
+      title:productsId[0]?.name,
+      imageUrl:productsId[0]?.imageUrl,
+      price:productsId[0]?.price,    
+    }
+      dispatch(addItemToCart(product));
+
+  }
+
+
+
+
+  const newLocal = (styles.contenedor, styles.infBaseDetail);
+
+  
   return <>
-    <Container fixed className="detail">
-      <Stack direction={{ xs: 'column', sm: 'row' }} alignItems="center" spacing={2} justifyContent="center" sx={{ px: "2rem", py: "2rem" }}>
+    <div className={styles.contenedor}>
+      <div className={styles.detailTop}>
+        
+        <div className={styles.imgProduct}>
+          <img src={productsId[0]?.imageUrl} alt={productsId[0]?.name} />
+        </div>
 
-        <img src='https://http2.mlstatic.com/D_NQ_NP_656735-MCO48794245078_012022-O.webp' className=" imgDetail" alt={name} />
-
-        <div className=" infDetail">
+        <div className={styles.infBaseDetail}>
           <form>
-            <Typography variant="h3">
-              coche para bebé + silla para carro
-            </Typography>
+            <h2 className={styles.titleDetail}>{productsId[0]?.name}</h2>
 
-            <hr />
+            <hr className={styles.division} />
 
-            <div className="infoInicial">
-              <p>precio:<span className='money'>$</span><span className='price'>150</span></p>
-              <p>estrellas:</p>
-              <p>Disponible en stock:<span>si</span></p>
-              <Stack direction="row" >
-                <p>Cantidad:</p>
-                <input type="number" min='0' className="cant" />
-              </Stack>
-              <Stack direction="row" alignContent={'center'} gap={2} >
-                <Button variant="contained" sx={{ mt: 2, mb: 2 }} startIcon={<AddIcon />}>Ir al carrito</Button>
-                <Link to="/carrito/:idCompra">
-                  <Button variant="contained" sx={{ mt: 2, mb: 2 }} startIcon={<AddShoppingCartIcon />}>Ir al carrito</Button>
+            <div className={styles.infBaseDetail}>
+              <p className={styles.price}><span className={styles.money}>$</span>{productsId[0]?.price}</p>
+              <div className={styles.rating}>
+                <span>Calificación:</span>
+                <HalfRating  />
+              </div>
+              <p><span>Unidades disponibles:</span>{productsId[0]?.stock}</p>
+              <div className={styles.flex} >
+                <span>Cantidad:</span>
+                  <div className={styles.flex}>
+                  <div onClick={()=> removeItemHandler()}> &#10094;</div>
+                  <span >{quantity}</span>        
+                  <div   onClick={() => addItemHandler()}>&#10095;</div>
+                </div>
+              </div>
+              <div className={styles.detailBuy} >
+                <Button variant="contained"  onClick={handleClickCartIcon} startIcon={<AddIcon />}>Agregar al carrito</Button>
+                <Link to="/shop/checkout">
+                  <Button variant="contained" className={styles.btn} startIcon={<AddShoppingCartIcon />}>Ir al carrito</Button>
                 </Link>
-              </Stack>
-
+              </div>
             </div>
-            <hr />
-            <div>
+
+            <hr className={styles.division}  />
+            <div className={styles.infBaseDetail}>
               <h3>Tipos de entrega</h3>
-              <p>Retiro en tienda:</p>
-              <p>Disponible para despacho</p>
+              <p><span>Retiro en tienda:</span></p>
+              <p><span>Disponible para despacho</span></p>
             </div>
           </form>
         </div>
 
-      </Stack>
+      </div>
 
-      <Box p={4} borderRadius={8} bgcolor={'#f4f4f4'} mb={2}>
-        <Typography fontWeight={500}>
-          Caracteristicas del Producto
-        </Typography>
-        <p className="">Lorem ipsum  dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae tempus quam pellentesque nec nam aliquam sem et tortor.</p>
+      <div className={newLocal}>
+        <h3 className={styles.titleDetail}>Reseñas del producto</h3>
+        {/* <Stack sx={{pl:"2rem"}}>
+          {productsId[0]?.length < 1 ? <p>No hay reseñas</p> : productsId[0]?.reviews.map((r, index) =>{ return (<Box key={index}>
+            <p>Usuario:{r.user}</p>
+            <p>Reseña:{r.review}</p>
+            <p>Fecha de la reseña:{r.date}</p>
 
-        <Box pl={2} pr={2} pt={2}>
-          <Box>
-
-            <Typography fontWeight={500}>
-              Caracteristicas:
-            </Typography>
-            <Box pl={2}>
-              <ul className='caractList'>
-                <li>dato1</li>
-                <li>dato2</li>
-                <li>dato3</li>
-                <li>dato4</li>
-              </ul>
-            </Box>
-          </Box>
-          <Box>
-
-            <Typography fontWeight={500}>
-              Garantía:
-            </Typography>
-            <Box pl={2}>
-              <ul className='caractList'>
-                <li>dato1</li>
-                <li>dato2</li>
-                <li>dato3</li>
-                <li>dato4</li>
-              </ul>
-            </Box>
-          </Box>
-
-        </Box>
-      </Box>
+          </Box>)}) }
+        </Stack> */}
+            
+      </div>
 
 
-    </Container>
+    </div>
   </>
 }
 
