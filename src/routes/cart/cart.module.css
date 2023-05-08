@@ -21,7 +21,38 @@
   width: 8%;
 }
 .checkoutContainer .total {
-  margin-top: 30px;
-  margin-left: auto;
-  font-size: 36px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-size: xx-large;
+  margin: 0;
+  padding: 0;
+}
+.checkoutContainer .total button{
+  min-width: 130px;
+  width: 40%;
+  height: 40px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 5px;
+  border: 2px solid #1ac8db;
+  background: #1ac8db;
+}
+.checkoutContainer .total button:hover
+{
+  background: #fff;
+  color: #1ac8db
+}
+.checkoutContainer .total button:active
+{
+  position: relative;
+  top: 2px;
 }
