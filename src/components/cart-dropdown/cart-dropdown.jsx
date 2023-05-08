@@ -18,7 +18,7 @@ const CartDropdown = ({isToggleCartOn}) => {
             <CardItem key={item.id} cardItem={item}/>
         ))}
       </div>
-      <Button variant="contained"><Link to="shop/checkout" className={styles.linkButton}>proceder al pago</Link></Button>
+      <Button variant="contained"><Link to="shop/cart" className={styles.linkButton}>proceder al pago</Link></Button>
     </div>
   )
 }

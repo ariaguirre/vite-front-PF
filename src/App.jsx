@@ -15,7 +15,6 @@ import Authentication from "./routes/authentication/authentication";
 import { createUserDocumentFromAuth, getCategories, getProducts, onAuthStateChangedListener } from "./utils/firebase/firebaseClient";
 import Error from "./routes/404/404";
 import DetailProduct from "./routes/detail/ProductDetail";
-import Checkout from "./routes/checkout/checkout";
 import { getProductsActions } from "./features/products/productSlice";
 import  { getCategoriesAction } from "./features/categories/categoriesSlice";
 import SignUp from "./routes/authentication/signUp";
@@ -50,8 +49,7 @@ const getData = async () =>{
         <Route index element={<Home />} />
         <Route path="auth" element={<Authentication />} />
         <Route path="sign-up" element={<SignUp/>} />
-        <Route path="shop" element={<Shop />} />        
-        <Route path="shop/checkout" element={<Checkout/>} />
+        <Route path="shop/*" element={<Shop />} />                
         <Route path="detail/:id" element={<DetailProduct/>}/>        
       </Route>
       <Route path="/admin" element={
