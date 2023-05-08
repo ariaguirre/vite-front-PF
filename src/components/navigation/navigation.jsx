@@ -1,6 +1,6 @@
 import styles from './navigation.module.css';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 //redux
 import { useSelector } from 'react-redux';
 //svg's
@@ -11,12 +11,10 @@ import BasicMenu from '../drop-down/drop-down';
 //components
 import CartIcon from '../cart-icon/cart-icon';
 import CartDropdown from '../cart-dropdown/cart-dropdown';
-import { changePag, startPagination } from '../../utils/firebase/firebaseClient';
 import { useDispatch } from 'react-redux';
-import { ProductsActions, setPagesActions } from '../../features/productsPagination/productsPaginationSlice';
+import { setPagesActions } from '../../features/productsPagination/productsPaginationSlice';
 import { searchProduct } from './search';
 import { getProductsActions } from '../../features/products/productSlice';
-import { slice } from '../pagination/helper';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
