@@ -17,7 +17,9 @@ header{
   left: 0;
   width: 100%;
   height: 80px;
-  background: #fff;
+  /* background: #5de2dcb6; */
+  background: rgb(196, 253, 252);
+  background: linear-gradient(90deg, rgba(190, 240, 255, 0.908) 0%, rgba(118, 205, 255, 0.894) 100%);
   padding: 20px 40px;
   display: flex;
   justify-content: space-between;
@@ -145,6 +147,16 @@ header .search{
   display: none;
 }
 
+.buscar button{
+  margin-right: 75px;
+  background-color: transparent;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+}
+
 /* responsive */
 @media (max-width: 800px ) {
   .searchBtn{
@@ -183,5 +195,14 @@ header .search{
   }
   .hide{
     display: none;
+  }
+  .buscar{
+    
+    background-color: transparent;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 0.1rem;
   }
 }
