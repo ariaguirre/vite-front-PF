@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux'
-import styles from "./checkout.module.css"
+import styles from "./cart.module.css"
 import CheckoutItem from '../../components/checkout-item/checkout-item';
 import { numberFormat } from '../../helper/numberFormat';
 import { useEffect, useState } from 'react';
 import PaymentForm from '../../components/payment-form/payment-form';
 import { setCartTotal } from '../../features/cartSlice/cartSlice';
 
-const Checkout = () => {
+const Cart = () => {
 
   const cartItems = useSelector(state => state.persistedReducer.carState.cartItems);
   const [total, setTotal] = useState(0);
@@ -49,4 +49,4 @@ const Checkout = () => {
   )
 }
 
-export default Checkout;
+export default Cart;
