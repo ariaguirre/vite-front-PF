@@ -1,13 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  products: [],
+  productsCopy :[],
+  productsPag: [],
   orderBy :"",
   orderType :"",
   filter : "",
   pages:0,
   status: 'idle',
-  error: null
+  error: null,
+  pageSelect:1
 }
 
 const productsPag = createSlice({
@@ -15,7 +17,7 @@ const productsPag = createSlice({
     initialState,
       reducers: {
         ProductsActions: (state, action) =>{
-          state.products = action.payload
+          state.productsPag = action.payload
       },
       ProductsOrderBy: (state, action) =>{
         state.orderBy = action.payload

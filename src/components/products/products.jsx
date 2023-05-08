@@ -5,7 +5,7 @@ import { PaginationComponent } from '../../components/pagination/pagination'
 import { useSelector } from 'react-redux'
 
 const Products = () => {
-  const products =  useSelector((state) =>state.productPag.products)
+  const products =  useSelector((state) =>state.productPag.productsPag)
    return (
     <Container maxWidth="xl" sx={{minHeight:"100vh", pt:"2rem"}}>   
         <Grid container justifyContent={"center"} >        
