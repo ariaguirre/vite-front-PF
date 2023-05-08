@@ -11,7 +11,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import {getProductId } from '../../features/productsId/productsIdSlice';
 import HalfRating from '../../components/card/rating/rating';
-import { addItemToCart } from '../../features/cartSlice/cartSlice';
+import CheckoutItem from '../../components/checkout-item/checkout-item';
+import { addItemToCart, clearItemFromCart, deleteCartItem } from '../../features/cartSlice/cartSlice';
 
 
 const DetailProduct = () => {
@@ -19,8 +20,7 @@ const DetailProduct = () => {
   const { id } = useParams()
   const dispatch = useDispatch();
   const {productsId} = useSelector((state) => state.productsId);
-
-  console.log(productsId)
+  const cartItems = useSelector(state => state.cart.cartItems);
 
   useEffect(() =>{
   (async function unit(){
@@ -29,12 +29,13 @@ const DetailProduct = () => {
     })()
   },[])
   
-  var cantidad = [];
 
-  const handleCant = (e) =>{
-    cantidad.push(e.target.value)
-  }
+  console.log(cartItems)
+  const { quantity } = cartItems;
 
+ 
+  const addItemHandler = () => dispatch(addItemToCart({id}));
+  const removeItemHandler = ()=> dispatch(deleteCartItem({id}))
 
   const handleClickCartIcon = () => {
     const product = {
@@ -43,10 +44,8 @@ const DetailProduct = () => {
       imageUrl:productsId[0]?.imageUrl,
       price:productsId[0]?.price,    
     }
-    
-    for(let i = 0; i<cantidad[0]; i++){
       dispatch(addItemToCart(product));
-    }
+
   }
 
 
@@ -54,12 +53,13 @@ const DetailProduct = () => {
 
   return <>
     <Container fixed>
-      <Stack direction={{ xs: 'column', sm: 'row' }} alignItems="center" spacing={2} justifyContent="center" sx={{px: "2rem", py: "2rem", ml:"auto", mr:"auto" }}>
-        <Box>
+      <Stack direction={{ xs: 'column', sm: 'row' }} alignItems="center" spacing={2} justifyContent="center" sx={{ px: "2rem", py: "2rem" }}>
+        <Box sx={{maxWidth:'50%' }}>
           <img src={productsId[0]?.imageUrl} alt={productsId[0]?.name} />
+
         </Box>
 
-        <Box>
+        <div>
           <form>
             <Typography variant="h3">
               {productsId[0]?.name}
@@ -76,10 +76,13 @@ const DetailProduct = () => {
                 <HalfRating  />
               </Stack>
               <p>Unidades disponibles en stock:<span>{productsId[0]?.stock}</span></p>
-              <p>Descuento:<span>{productsId[0]?.sale.discount}%</span></p>
               <Stack direction="row" >
                 <p>Cantidad:</p>
-                <input type="number" min='0' onChange={(e) =>handleCant(e)} value={1} className="cant" />
+                  <div>
+                  <div onClick={()=> removeItemHandler()}> &#10094;</div>
+                  <span >{quantity}</span>        
+                  <div   onClick={() => addItemHandler()}>&#10095;</div>
+                </div>
               </Stack>
               <Stack direction="row" alignContent={'center'} gap={2} >
                 <Button variant="contained" sx={{ mt: 2, mb: 2 }} onClick={handleClickCartIcon} startIcon={<AddIcon />}>Agregar al carrito</Button>
@@ -96,7 +99,7 @@ const DetailProduct = () => {
               <p>Disponible para despacho</p>
             </div>
           </form>
-        </Box>
+        </div>
 
       </Stack>
 
@@ -117,7 +120,7 @@ const DetailProduct = () => {
 
 
     </Container>
-  </>  
+  </>
 }
 
 export default DetailProduct;
