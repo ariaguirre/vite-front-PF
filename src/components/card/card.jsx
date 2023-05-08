@@ -15,10 +15,8 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 //Helpers
 import { numberFormat } from "../../helper/numberFormat";
 //redux 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../features/cartSlice/cartSlice";
-// import styled from "@emotion/styled";
-
 
 const CardInf = (
   {
@@ -27,59 +25,50 @@ const CardInf = (
     price,
     sale,
     rating,
-    id,    
+    id,
   }
 ) => {
-const userData = useSelector((state) => state.currentUser.userCredentials)
+
   const onSale = useRef(false);
   const dispatch = useDispatch();
 
 
   if (Object.keys(sale).length !== 0) {
     onSale.current = true;
-  }else{
+  } else {
     onSale.current = false;
   }
 
   price = Number(price);
-  
+
 
   const handleClickCartIcon = () => {
-    
+
     const product = {
       id,
       title,
       imageUrl,
-      price      
-    }   
- dispatch(addItemToCart(product));
-   
-
-   
+      price
+    }
+    dispatch(addItemToCart(product));
   }
 
   return (
-    <Card sx={{ Width: "300px", margin:"1rem"}} className={styles.card} >
+    <Card sx={{ Width: "300px", margin: "1rem" }} className={styles.card} >
       <CardMedia
         component="img"
         title={title}
         src={imageUrl}
         alt={title}
-        sx={{ maxHeight: "220px", width: "100%", objectFit: "contain"}}
+        sx={{ maxHeight: "220px", width: "100%", objectFit: "contain" }}
       />
-      <CardContent  sx={{py:0}}>
-        <div className={styles.infCard}
-          // display={"flex"}
-          // flexDirection={"column"}
-          // minHeight={130}
-          // justifyContent={"space-between"}
-          // alignItems={"flex-start"}
-        >
-        <CardHeader title={title} className={styles.titleCard} sx={{ padding: 0, userSelect:"none" }} />
+      <CardContent sx={{ py: 0 }}>
+        <div className={styles.infCard}>
+          <CardHeader title={title} className={styles.titleCard} sx={{ padding: 0, userSelect: "none" }} />
           {
             onSale.current
               ? <Sale price={price} sale={sale} />
-              : <Typography variant="h5" color="initial" sx={{userSelect:"none"}}>{numberFormat(price)}</Typography>
+              : <Typography variant="h5" color="initial" sx={{ userSelect: "none" }} align="left">{numberFormat(price)}</Typography>
           }
           {
             onSale.current
@@ -89,7 +78,7 @@ const userData = useSelector((state) => state.currentUser.userCredentials)
                 sx={{
                   textDecorationLine: "line-through",
                   paddingRight: "1rem",
-                  userSelect:"none"
+                  userSelect: "none"
                 }}
               >
                 {`${numberFormat(price)}`}
@@ -106,17 +95,17 @@ const userData = useSelector((state) => state.currentUser.userCredentials)
                   fontSize: "0.875rem",
                   lineHeight: "1.25rem",
                   borderRadius: "0.375rem",
-                  userSelect:"none"
+                  userSelect: "none"
                 }}>
                 {`save ${sale.discount}%`}
               </Box>
             </Box>
           }
 
-          <Box>            
-            <HalfRatingPreview rValue={rating}/>
+          <Box>
+            <HalfRatingPreview rValue={rating} />
           </Box>
-          <CardActions sx={{padding:0}}>
+          <CardActions sx={{ padding: 0 }}>
             <Link to={`/detail/${id}`}>
               <Button variant="contained" color="primary">
                 Details
