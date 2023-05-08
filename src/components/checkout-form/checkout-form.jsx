@@ -1,11 +1,15 @@
 import TextField from '@mui/material/TextField'
 import { useForm } from "react-hook-form"
-
+import PaymentForm from '../payment-form/payment-form'
 import Stack from '@mui/material/Stack'
 
 import styles from "./checkout-form.module.css"
+import { useState } from 'react'
 
 const CheckoutForm = () => {
+
+  const [allData, setAllData] = useState();
+
   const checkoutform = useForm({
     defaultValues: {
       name: "",
@@ -23,10 +27,13 @@ const CheckoutForm = () => {
   const { register, handleSubmit, formState: { errors } } = checkoutform;
 
   const onSubmit = (e) => {
-    console.log(e)
+    setAllData(e);
   }
-
   return (
+    allData 
+    ? <div>
+      <PaymentForm />
+    </div>  :
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <Stack spacing={2}>
         <TextField
@@ -61,6 +68,7 @@ const CheckoutForm = () => {
           label="Cuidad"
           type="text"
           autoComplete=""
+          required
           {...register("country", { required: "Ingrese la cuidad del destinatario" })}
           error={!!errors.country}
           helperText={errors.country?.message}
@@ -69,6 +77,7 @@ const CheckoutForm = () => {
           label="Dirreción"
           type="text"
           autoComplete=""
+          required
           {...register("streetA", { required: "Ingrese la direccion del destinatario" })}
           error={!!errors.streetA}
           helperText={errors.streetA?.message}
@@ -77,6 +86,7 @@ const CheckoutForm = () => {
           label="Codigo postal "
           type="text"
           autoComplete=""
+          required
           {...register("ZIPcode", { required: "Ingrese el codigo postal del destinatario" })}
           error={!!errors.ZIPcode}
           helperText={errors.ZIPcode?.message}
@@ -85,6 +95,7 @@ const CheckoutForm = () => {
           label="Numero de telefono "
           type="text"
           autoComplete=""
+          required
           {...register("phone", { required: "Ingrese el numero de celular del destinatario" })}
           error={!!errors.phone}
           helperText={errors.phone?.message}
@@ -105,12 +116,14 @@ const CheckoutForm = () => {
           error={!!errors.orderNotes}
           helperText={errors.orderNotes?.message}
         />
+        <div>
+        </div>
         <div className={styles.btnContainer}>
           <button type="submit" className={styles.btn}>Enviar</button>
         </div>
       </Stack>
-
     </form>
+   
   )
 }
 
