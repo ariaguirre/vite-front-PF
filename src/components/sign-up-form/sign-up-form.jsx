@@ -28,10 +28,6 @@ const SignUpForm = () => {
   });
 
   const { register, handleSubmit, formState: {errors} } = form;
-
-  // const handleSubmit = async () => {
-  //   
-  // };
   const navigate = useNavigate()
   const onSubmitRegistration = async ({displayName, email, password, repeatPassword})=> {
     if (password !== repeatPassword) {
@@ -56,9 +52,9 @@ const SignUpForm = () => {
   }
 
   return (
-    <Grid item md={6} xs={12}>
+    <Grid item md={8} xs={10}>
       <Typography variant="h4" color="initial" align='center'>¿No estás registrado?</Typography>
-      <Typography variant="body1" align='center' marginBottom={1}>Crea una cuenta con tu correo electrónico y contraseña</Typography>
+      <Typography variant="body1" align='center' marginBottom={4}>Crea una cuenta con tu correo electrónico y contraseña</Typography>
 
       <form onSubmit={handleSubmit(onSubmitRegistration)} noValidate>
         <Stack spacing={2}>
@@ -105,7 +101,7 @@ const SignUpForm = () => {
         </Stack>
       </form>
       <Grid container justifyContent={'center'} marginTop={2}>
-        <Link to={'/auth'}> ¿Ya estas registrado? Ingresar aquí</Link>
+        <Link to={'/auth'}> ¿Ya estas registrado? Ingresar <span style={{color:"#1ac8db"}}>aquí</span></Link>
       </Grid>
     </Grid>
   );

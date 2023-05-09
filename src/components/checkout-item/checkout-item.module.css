@@ -1,32 +1,19 @@
 .checkoutItemContainer {
-  /* border: 3px solid blue; */
   width: 100%;
   display: flex;
-  flex-direction: row;
-  /* min-height: 100px; */
-  height: 150px;
-  border-top: 1px solid darkgrey;
+  min-height: 100px;
+  border-bottom: 1px solid darkgrey;
   padding: 15px 0;
   font-size: 20px;
   align-items: center;
-  position: relative;
-  /* left:20%; */
 }
 .checkoutItemContainer .imageContainer {
   width: 23%;
   padding-right: 15px;
 }
 .checkoutItemContainer .imageContainer img {
-  width: 45%;
-  /* height: 45%; */
-  border-radius: 10px;
-  margin-left: 15px;
-}
-
-.checkoutItemContainer .name{
-  font-weight: bold;
-  font-size: 25px;
-  margin-left: -4rem;
+  width: 100%;
+  height: 100%;
 }
 .checkoutItemContainer .name, .checkoutItemContainer .quantity, .checkoutItemContainer .price {
   width: 23%;
@@ -40,63 +27,23 @@
 .checkoutItemContainer .quantity .value {
   margin: 0 10px;
 }
-
-.checkoutItemContainer .price{
-  font-size: 30px;
-  font-weight: normal;
-  display: flex;
-  flex-direction: row-reverse;
-  left: 10;
-  width: 25%;
-}
-
 .checkoutItemContainer .removeButton {
-  background-color: rgb(223, 217, 217);
-  border-radius: 10px;
-  align-items: center;
-  font-weight: bold;
-  padding: 5px;
+  padding-left: 12px;
   cursor: pointer;
-  margin-left: 60px;
-  transition: background-color 0.3s ease;
-
 }
 
-.checkoutItemContainer .removeButton:hover{
-  background-color: rgb(182, 67, 67);
-  color: white
+@media only screen and (max-width: 770px) {
+  .checkoutItemContainer
+  {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  
+  .checkoutItemContainer .name
+  {
+    display: none;
+  }
+
 }
-
-
-@media only screen and (min-width: 601px) and (max-width: 1024px) {
-  .checkoutItemContainer .name{
-    font-size: 20px;
-    margin-left:1.2rem;
-  }
-  .checkoutItemContainer .price{
-    font-size: 25px;
-    margin-right: -3rem;
-  }
-}
-
-/* Dispositivos pequeños */
-@media only screen and (max-width: 600px) {
-  .checkoutItemContainer{
-    width: 100%;
-  }
-  .checkoutItemContainer .name{
-    font-size: 15px;
-    margin-left:-1rem;
-  }
-  .checkoutItemContainer .price{
-    font-size: 15px;
-    margin-right: -3rem;
-  }
-  .checkoutItemContainer .imageContainer{
-    width: 25%;
-    height: 25%;
-  }
-  .checkoutItemContainer .removeButton{
-    font-size: 15px;
-  }
-  }
+ 

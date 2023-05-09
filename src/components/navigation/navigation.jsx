@@ -1,6 +1,6 @@
 import styles from './navigation.module.css';
 import { useState } from 'react';
-import { Link} from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 //redux
 import { useSelector } from 'react-redux';
 //svg's
@@ -10,7 +10,6 @@ import menuBtn from "../../utils/svg/menu-outline.svg";
 import BasicMenu from '../drop-down/drop-down';
 //components
 import CartIcon from '../cart-icon/cart-icon';
-import CartDropdown from '../cart-dropdown/cart-dropdown';
 import { useDispatch } from 'react-redux';
 import { setPagesActions } from '../../features/productsPagination/productsPaginationSlice';
 import { searchProduct } from './search';
@@ -19,13 +18,12 @@ import { getProductsActions } from '../../features/products/productSlice';
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isToggleOn, setIsToggleOn] = useState(false);
-  const [isToggleCartOn, setIsToggleCartOn] = useState(false);
-  const [search, setSearch] = useState('')
   const { products,productsCopy } = useSelector(state => state.products)
-  const [tamañoPorpagina] =useState(8);
-  const { pages , productsPag ,pageSelect } = useSelector(state => state.productPag)
+
   const { userCredentials } = useSelector((state) => state.currentUser);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleClickSearchBtn = () => {
     setIsOpen(true);
     setIsToggleOn(false);
@@ -47,7 +45,7 @@ const Navigation = () => {
     setIsToggleOn(!isToggleOn);
   }
   const handleClickCart = ()=> {
-    setIsToggleCartOn(!isToggleCartOn);
+    navigate("/shop/cart");
   }
  const handleChange = async (value) => {
   const name = value.target.value.trim()
@@ -106,12 +104,9 @@ const Navigation = () => {
             name="searchBox"
             placeholder="Busca algo para tu bebé..."
             onChange={(e)=>{handleChange(e)}}
-            />
-            <div className={styles.buscar}>
-              {isOpen && search ? <button onClick={handlerBuscar}>Buscar</button> : null}
-            </div>
+            />        
         </div>
-        <CartDropdown isToggleCartOn={isToggleCartOn} />
+        {/* <CartDropdown isToggleCartOn={isToggleCartOn} /> */}
       </header>
     </>
   );

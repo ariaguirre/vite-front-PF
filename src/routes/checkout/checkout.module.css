@@ -1,8 +1,2 @@
-.containerFormCheckout
-{
-  display: flex;
-  flex-direction: column;
-  min-height: calc(100vh - 170px);
-  padding:1rem;  
-}
+
 

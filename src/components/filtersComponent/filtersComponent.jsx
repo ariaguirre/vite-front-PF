@@ -1,4 +1,4 @@
-import { Button, Card, Grid, Stack, Typography } from "@mui/material";
+import { Button, Card, Grid} from "@mui/material";
 import style from "./filtersComponent.module.css";
 import FiltersBar from "../filters-bar/filtersBar";
 import { useDispatch, useSelector } from "react-redux";
