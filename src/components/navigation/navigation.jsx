@@ -10,7 +10,6 @@ import menuBtn from "../../utils/svg/menu-outline.svg";
 import BasicMenu from '../drop-down/drop-down';
 //components
 import CartIcon from '../cart-icon/cart-icon';
-import CartDropdown from '../cart-dropdown/cart-dropdown';
 import { useDispatch } from 'react-redux';
 import { setPagesActions } from '../../features/productsPagination/productsPaginationSlice';
 import { searchProduct } from './search';
@@ -51,6 +50,7 @@ const Navigation = () => {
   }
   // desdpues de la presentacion, este codigo se movera a un helper
  const handleChange = async (value) => {
+  console.log(products);
   const name = value.target.value.trim()
   if(name){
     const searchProducts = await searchProduct(name , productsCopy)
@@ -75,13 +75,13 @@ const Navigation = () => {
     if(productsFilter.length){
       dispatch(setPagesActions(Math.ceil(products.length/8)))  
       dispatch(getProductsActions(productsFilterCopy))
-      dispatch(productsName([]))
+      dispatch(productsName([]));
     }
     else{
 
       dispatch(setPagesActions(Math.ceil(products.length/8)))  
-      dispatch(getProductsActions(productsCopy))
-      dispatch(productsName([]))
+      dispatch(getProductsActions(productsCopy));
+      dispatch(productsName([]));
     }
 
   }

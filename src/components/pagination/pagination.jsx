@@ -13,7 +13,6 @@ export const PaginationComponent =  () => {
     useEffect(()=>{
       dispatch(setPagesActions(Math.ceil(products.length/8)))   
       set();
-      console.log(products);
     },[products])
 
 const set = async () =>{

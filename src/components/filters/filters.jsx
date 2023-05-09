@@ -90,12 +90,13 @@ const noFilter = () =>{
                  Todos
                 </Link>
               </li>
-           { categories?categories.map(a =>
-            <li className={styles.listInside}>
+           { categories?categories.map((a,i) =>
+            <li   key={`${a.id}+${i}`} className={styles.listInside}>
                 <Link
                   to="#"
                   onClick={()=>{handlerCategory(a.categories)}}
                   className={`${styles.navLink} ${styles.navLinkInside}`}
+                
                 >
                   {a.categories}
                 </Link>

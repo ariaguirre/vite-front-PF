@@ -22,6 +22,9 @@ const productSlice = createSlice({
          getProductById: (state, action) => {
       state.productById = state.products.find(product => product.id === action.payload);
       },
+      productsName : (state,action)=>{
+        state.productsName = action.payload
+      },
       productsCopy : (state,action)=>{
         state.productsCopy = action.payload
       },

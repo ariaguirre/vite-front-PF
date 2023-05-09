@@ -2,11 +2,11 @@
 
 
 
-export const searchProduct = (obj) =>{
+export const searchProduct = (name , products) =>{
 
-if(obj.name){
-    const findProduct =  obj.productsCopy.filter(doc => {
-       return doc.name.toLowerCase().includes(obj.name.toString().toLowerCase());
+if(name){
+    const findProduct = products.filter(doc => {
+       return doc.name.toLowerCase().includes(name.toString().toLowerCase());
      });
      return findProduct;
 }
