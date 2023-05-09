@@ -4,11 +4,12 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import styles from './payment-form.module.css';
 import { clearCart } from "../../features/cartSlice/cartSlice";
 import { numberFormat } from "../../helper/numberFormat";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const amount = useSelector(state => state.cart.cartTotal)
   const currentUser = useSelector(state => state.currentUser.userCredentials)
@@ -47,7 +48,8 @@ const PaymentForm = () => {
       alert(paymentResult.error.message);
     } else {
       if (paymentResult.paymentIntent.status === "succeeded") {
-        alert("paymet Succesfull");
+        alert("Pago exitoso gracias por su compra!");
+        navigate("/shop");
         dispatch(clearCart());
       }
     }
