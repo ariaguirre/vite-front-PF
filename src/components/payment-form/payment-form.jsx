@@ -29,7 +29,6 @@ const PaymentForm = () => {
       body: JSON.stringify({ amount: amount * 100 })
     }).then(res => res.json()).catch(error => alert(error));
     
-    console.log(response)
 
     const { paymentIntent: { client_secret } } = response;
 
@@ -53,6 +52,8 @@ const PaymentForm = () => {
       }
     }
   };
+
+  console.log(isProcessingPayment)
 
   return (
     <div className={styles.PaymentFormContainer} >
