@@ -6,11 +6,10 @@ import { getProductsActions, prodFilterCopy, productsFilterAction } from "../../
 
 const Filters = () => {
   const dispatch = useDispatch()
-  const  { products, productsName,productsCopy, productsNameCopy } = useSelector(state =>state.products )
+  const  {productsName,productsCopy, productsNameCopy } = useSelector(state =>state.products )
     const categories = useSelector(state => state.categories.categories)
   const [showMenu1, setShowMenu1] = useState(false);
   const [showMenu2, setShowMenu2] = useState(false);
-const [filterSelected,setFilterSelected] = useState("Filtros")
   const handleClick1 = () => {
     setShowMenu1(!showMenu1);
   };
@@ -20,7 +19,7 @@ const [filterSelected,setFilterSelected] = useState("Filtros")
   }; 
   const handlerCategory = async (e) =>{
    
-    setFilterSelected(e)
+
     let filterCategoryCopy =  productsCopy.filter(doc => {
       return doc.categories.some((a)=>{
        return a.toLowerCase().includes(e.toLowerCase())
