@@ -18,7 +18,6 @@ import DetailProduct from "./routes/detail/ProductDetail";
 import { getProductsActions, productsCopy } from "./features/products/productSlice";
 import  { getCategoriesAction } from "./features/categories/categoriesSlice";
 import SignUp from "./routes/authentication/signUp";
-import { ProductsActions } from "./features/productsPagination/productsPaginationSlice";
 
 
 const App = () => {
@@ -29,7 +28,8 @@ const App = () => {
     const unsubscribe = onAuthStateChangedListener((user)=> {
       if(user){
         createUserDocumentFromAuth(user);
-      }      
+      }   
+
       dispatch(setCurrentUser(user))      
     })
     getData()

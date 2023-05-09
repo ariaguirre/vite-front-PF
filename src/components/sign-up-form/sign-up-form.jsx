@@ -28,10 +28,6 @@ const SignUpForm = () => {
   });
 
   const { register, handleSubmit, formState: {errors} } = form;
-
-  // const handleSubmit = async () => {
-  //   
-  // };
   const navigate = useNavigate()
   const onSubmitRegistration = async ({displayName, email, password, repeatPassword})=> {
     if (password !== repeatPassword) {

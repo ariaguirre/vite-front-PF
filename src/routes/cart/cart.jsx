@@ -5,6 +5,7 @@ import { numberFormat } from '../../helper/numberFormat';
 import { useEffect, useState } from 'react';
 import { setCartTotal } from '../../features/cartSlice/cartSlice';
 import { useNavigate } from 'react-router-dom';
+import Typography from '@mui/material/Typography'
 
 const Cart = () => {
 
@@ -18,7 +19,7 @@ const Cart = () => {
     const newCartTotal = cartItems.reduce((total, cartItem) => total + cartItem.quantity * cartItem.price, 0)
     setTotal(newCartTotal);
     dispatch(setCartTotal(newCartTotal));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartItems])
 
   const handleClick = () => {
@@ -26,7 +27,9 @@ const Cart = () => {
   }
 
   return (
+
     <div className={styles.checkoutContainer}>
+      <Typography variant="h3" color="primary">CART</Typography>
       <div className={styles.checkoutHeader}>
         <div className={styles.headerBlock}>
           <span>Producto</span>
@@ -45,13 +48,12 @@ const Cart = () => {
         </div>
       </div>
 
-      {cartItems.map((cartItem) => (
-        <CheckoutItem key={cartItem.id} cartItem={cartItem} />
+      {cartItems.map((cartItem, index) => (
+        <CheckoutItem key={cartItem.id + index} cartItem={cartItem} />
       ))}
       <div className={styles.total}>
         <button onClick={handleClick}>Checkout</button>Total: {numberFormat(total)}
-      </div>    
-      
+      </div>
     </div>
   )
 }
