@@ -1,6 +1,6 @@
 import styles from './navigation.module.css';
 import { useState } from 'react';
-import { Link, useNavigate} from 'react-router-dom';
+import { Link} from 'react-router-dom';
 //redux
 import { useSelector } from 'react-redux';
 //svg's
@@ -10,20 +10,19 @@ import menuBtn from "../../utils/svg/menu-outline.svg";
 import BasicMenu from '../drop-down/drop-down';
 //components
 import CartIcon from '../cart-icon/cart-icon';
+import CartDropdown from '../cart-dropdown/cart-dropdown';
 import { useDispatch } from 'react-redux';
 import { setPagesActions } from '../../features/productsPagination/productsPaginationSlice';
 import { searchProduct } from './search';
-import { getProductsActions } from '../../features/products/productSlice';
+import { getProductsActions, prodNameCopy, productsName } from '../../features/products/productSlice';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isToggleOn, setIsToggleOn] = useState(false);
-  const { products,productsCopy } = useSelector(state => state.products)
-
+  const [isToggleCartOn, setIsToggleCartOn] = useState(false);
+  const { products,productsCopy,productsFilter,productsFilterCopy } = useSelector(state => state.products)
   const { userCredentials } = useSelector((state) => state.currentUser);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
+  const dispatch = useDispatch()
   const handleClickSearchBtn = () => {
     setIsOpen(true);
     setIsToggleOn(false);
@@ -43,22 +42,51 @@ const Navigation = () => {
 
   const handleClick = () => {
     setIsToggleOn(!isToggleOn);
+    dispatch(getProductsActions(productsCopy))
+      dispatch(productsName([]))
+      dispatch(setPagesActions(Math.ceil(productsCopy.length/8)))  
   }
   const handleClickCart = ()=> {
-    navigate("/shop/cart");
+    setIsToggleCartOn(!isToggleCartOn);
   }
+  // desdpues de la presentacion, este codigo se movera a un helper
  const handleChange = async (value) => {
   const name = value.target.value.trim()
-
   if(name){
-   const searchProducts = await searchProduct({name , productsCopy})
-   dispatch(getProductsActions(searchProducts))
-   dispatch(setPagesActions(Math.ceil(searchProducts.length/8)))  
-  }else{
-    dispatch(setPagesActions(Math.ceil(products.length/8)))  
-    dispatch(getProductsActions(productsCopy))
+    const searchProducts = await searchProduct(name , productsCopy)
+    dispatch(prodNameCopy(searchProducts))
+    if(productsFilter.length){
+      const searchProducts = await searchProduct(name , productsFilterCopy)
+      dispatch(getProductsActions(searchProducts))
+      dispatch(productsName(searchProducts))
+      dispatch(setPagesActions(Math.ceil(searchProducts.length/8)))  
+     
+    }
+    else{
+      const searchProducts = await searchProduct(name , productsCopy)
+      dispatch(getProductsActions(searchProducts))
+      dispatch(productsName(searchProducts))
+      dispatch(setPagesActions(Math.ceil(searchProducts.length/8)))  
+    }
+
+  }else
+  {
+   
+    if(productsFilter.length){
+      dispatch(setPagesActions(Math.ceil(products.length/8)))  
+      dispatch(getProductsActions(productsFilterCopy))
+      dispatch(productsName([]))
+    }
+    else{
+
+      dispatch(setPagesActions(Math.ceil(products.length/8)))  
+      dispatch(getProductsActions(productsCopy))
+      dispatch(productsName([]))
+    }
+
   }
  }
+
   return (
     <>
       <header className={`${isToggleOn ? styles.open : ""} ${styles.header}`}>

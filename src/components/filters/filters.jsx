@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./filters.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductsActions, prodFilterCopy, productsFilterAction } from "../../features/products/productSlice";
 
 const Filters = () => {
+  const dispatch = useDispatch()
+  const  { products, productsName,productsCopy, productsNameCopy } = useSelector(state =>state.products )
+    const categories = useSelector(state => state.categories.categories)
   const [showMenu1, setShowMenu1] = useState(false);
   const [showMenu2, setShowMenu2] = useState(false);
 
@@ -12,11 +17,7 @@ const Filters = () => {
 
   const handleClick2 = () => {
     setShowMenu2(!showMenu2);
-  };
-  const dispatch = useDispatch()
-const  { products, productsName,productsCopy, productsNameCopy } = useSelector(state =>state.products )
-  const categories = useSelector(state => state.categories.categories)
-
+  }; 
   const handlerCategory = async (e) =>{
     
     let filterCategoryCopy =  productsCopy.filter(doc => {
@@ -79,23 +80,25 @@ const noFilter = () =>{
               className={styles.listShow}
               style={{ height: showMenu1 ? "auto" : "0px" }}
             >
-              <li className={styles.listInside}>
+                 <li>
                 <Link
                   to="#"
                   className={`${styles.navLink} ${styles.navLinkInside}`}
                 >
-                  Dentro
+                 Todos
                 </Link>
               </li>
-
-              <li>
+           { categories?categories.map(a =>
+            <li className={styles.listInside}>
                 <Link
                   to="#"
                   className={`${styles.navLink} ${styles.navLinkInside}`}
                 >
-                  Dentro
+                  {a.categories}
                 </Link>
               </li>
+            )  : (null)
+               }
             </ul>
           </li>
 
