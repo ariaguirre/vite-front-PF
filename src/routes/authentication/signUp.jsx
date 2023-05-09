@@ -14,7 +14,7 @@ const SignUp = () => {
       height: (`calc(100vh - ${theme.spacing(10)})`),                 
     }}              
     >       
-        <Grid container spacing={2} pt={4} justifyContent={'center'}>
+        <Grid container spacing={2} justifyContent={"center"} alignContent={"center"} sx={{height:"100%"}} >
           <SignUpForm />
         </Grid>               
       </Container>

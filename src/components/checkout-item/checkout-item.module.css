@@ -31,4 +31,19 @@
   padding-left: 12px;
   cursor: pointer;
 }
+
+@media only screen and (max-width: 770px) {
+  .checkoutItemContainer
+  {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  
+  .checkoutItemContainer .name
+  {
+    display: none;
+  }
+
+}
  

@@ -15,8 +15,10 @@
   margin: 50px;
 }
 .checkoutContainer .checkoutHeader .headerBlock {
-  text-transform: capitalize;
+  text-transform: uppercase;
+  font-weight: 600;
   width: 23%;
+  color: rgba(26, 200, 219, .7);
 }
 .checkoutContainer .checkoutHeader .headerBlock:last-child {
   width: 8%;
@@ -57,4 +59,24 @@
 {
   position: relative;
   top: 2px;
+}
+/* Media queries */
+@media only screen and (max-width: 1350px) {
+  .checkoutContainer {  
+    width:70%
+  }
+}
+@media only screen and (max-width: 770px) {
+  .checkoutContainer {  
+    width:80%
+  }
+  .checkoutHeader :nth-child(2), :nth-child(5) {
+    display: none;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .checkoutContainer .total 
+  {
+    flex-direction: column;
+  }
 }
