@@ -3,6 +3,8 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
+//import EmailJS
+import emailjs from "emailjs-com"
 //Firebase 
 import {
   createAuthUserWithEmailAndPassword,
@@ -53,6 +55,12 @@ const SignUpForm = () => {
             console.error('Ha ocurrido un error al intentar crear el usuario', error);
           }
         }
+
+        //envio mail de Registro
+        emailjs.send("service_8duinll", "template_cvqj07q", {
+          email: email,
+          displayName: displayName
+        }, "lp4j5eTKXZNYsZ4jM")
   }
 
   return (
