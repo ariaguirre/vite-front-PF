@@ -11,6 +11,7 @@ const Products = () => {
         <Grid container justifyContent={"center"} >        
         {
          products.length?products.map((products, i) => (
+          products.active ? 
           <CardInf
             key={`${products.id}+${i}`}
             id = {products.id}
@@ -22,7 +23,7 @@ const Products = () => {
             rating={products.rating}
             reviews={products.reviews}
             stock={products.stock}            
-          />
+          /> : null
         )):(null) 
       } 
       </Grid>
