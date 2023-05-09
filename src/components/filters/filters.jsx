@@ -19,7 +19,8 @@ const Filters = () => {
     setShowMenu2(!showMenu2);
   }; 
   const handlerCategory = async (e) =>{
-    
+    console.log(e);
+    /* 
     let filterCategoryCopy =  productsCopy.filter(doc => {
       return doc.categories.some((a)=>{
        return a.toLowerCase().includes(e.toLowerCase())
@@ -46,7 +47,7 @@ const Filters = () => {
         dispatch(getProductsActions(filterCategory))
         dispatch(productsFilterAction(filterCategory))
     }
-   // const result = await productsByCategory(e)
+   */
 
 
   }
@@ -92,6 +93,7 @@ const noFilter = () =>{
             <li className={styles.listInside}>
                 <Link
                   to="#"
+                  onClick={(e)=>{handlerCategory(e)}}
                   className={`${styles.navLink} ${styles.navLinkInside}`}
                 >
                   {a.categories}
