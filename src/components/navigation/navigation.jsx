@@ -47,6 +47,7 @@ const Navigation = () => {
       dispatch(setPagesActions(Math.ceil(productsCopy.length/8)))  
   }
   const handleClickCart = ()=> {
+    setIsToggleOn(!isToggleOn);
     navigate("/shop/cart");
   }
 
