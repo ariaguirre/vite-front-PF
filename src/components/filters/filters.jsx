@@ -13,7 +13,54 @@ const Filters = () => {
   const handleClick2 = () => {
     setShowMenu2(!showMenu2);
   };
+  const dispatch = useDispatch()
+const  { products, productsName,productsCopy, productsNameCopy } = useSelector(state =>state.products )
+  const categories = useSelector(state => state.categories.categories)
 
+  const handlerCategory = async (e) =>{
+    
+    let filterCategoryCopy =  productsCopy.filter(doc => {
+      return doc.categories.some((a)=>{
+       return a.toLowerCase().includes(e.toLowerCase())
+         })
+      }); 
+    dispatch(prodFilterCopy(filterCategoryCopy))
+    if(productsName.length){
+      
+      const filterCategory =  productsNameCopy.filter(doc => {
+        return doc.categories.some((a)=>{
+         return a.toLowerCase().includes(e.toLowerCase())
+           })
+        }); 
+        dispatch(getProductsActions(filterCategory))
+        dispatch(productsFilterAction(filterCategory))
+    }
+    else{
+    
+      const filterCategory =  productsCopy.filter(doc => {
+        return doc.categories.some((a)=>{
+         return a.toLowerCase().includes(e.toLowerCase())
+           })
+        }); 
+        dispatch(getProductsActions(filterCategory))
+        dispatch(productsFilterAction(filterCategory))
+    }
+   // const result = await productsByCategory(e)
+
+
+  }
+const noFilter = () =>{
+  if(productsName.length){
+    dispatch(getProductsActions(productsNameCopy))
+    dispatch(prodFilterCopy([]))
+    dispatch(productsFilterAction([]))
+  }
+  else{
+    dispatch(getProductsActions(productsCopy))
+    dispatch(prodFilterCopy([]))
+    dispatch(productsFilterAction([]))
+  }
+  }
   return (
     <aside className={styles.filtersContainer}>
       <div className={styles.fitersTitle}>filtros</div>
