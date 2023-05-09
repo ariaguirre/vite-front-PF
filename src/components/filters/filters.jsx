@@ -10,7 +10,7 @@ const Filters = () => {
     const categories = useSelector(state => state.categories.categories)
   const [showMenu1, setShowMenu1] = useState(false);
   const [showMenu2, setShowMenu2] = useState(false);
-
+const [filterSelected,setFilterSelected] = useState("Filtros")
   const handleClick1 = () => {
     setShowMenu1(!showMenu1);
   };
@@ -19,8 +19,8 @@ const Filters = () => {
     setShowMenu2(!showMenu2);
   }; 
   const handlerCategory = async (e) =>{
-    console.log(e);
-    /* 
+   
+    setFilterSelected(e)
     let filterCategoryCopy =  productsCopy.filter(doc => {
       return doc.categories.some((a)=>{
        return a.toLowerCase().includes(e.toLowerCase())
@@ -47,7 +47,7 @@ const Filters = () => {
         dispatch(getProductsActions(filterCategory))
         dispatch(productsFilterAction(filterCategory))
     }
-   */
+   
 
 
   }
@@ -65,7 +65,7 @@ const noFilter = () =>{
   }
   return (
     <aside className={styles.filtersContainer}>
-      <div className={styles.fitersTitle}>filtros</div>
+      <div className={styles.fitersTitle}> </div>
       <nav className={styles.nav}>
         <ul className={styles.list}>
           <li className={`${styles.listItem} ${styles.listItemClick}`}>
@@ -84,6 +84,7 @@ const noFilter = () =>{
                  <li>
                 <Link
                   to="#"
+                  onClick={() =>{noFilter() }}
                   className={`${styles.navLink} ${styles.navLinkInside}`}
                 >
                  Todos
@@ -93,7 +94,7 @@ const noFilter = () =>{
             <li className={styles.listInside}>
                 <Link
                   to="#"
-                  onClick={(e)=>{handlerCategory(e)}}
+                  onClick={()=>{handlerCategory(a.categories)}}
                   className={`${styles.navLink} ${styles.navLinkInside}`}
                 >
                   {a.categories}
@@ -110,7 +111,7 @@ const noFilter = () =>{
               onClick={handleClick2}
             >
               <span className={styles.navLink}>
-                Filtros
+               Filtros
               </span>
               {/* <i className={`${styles.arrow} ${showMenu2 ? styles.arrowUp : styles.arrowDown}`} /> */}
             </div>
