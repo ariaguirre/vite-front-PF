@@ -25,7 +25,7 @@ const Filters = () => {
               onClick={handleClick1}
             >
               <span className={styles.navLink}>
-                Categories
+                Categorias
               </span>
             </div>
             <ul
@@ -48,7 +48,8 @@ const Filters = () => {
                 >
                   Dentro
                 </Link>
-              </li>
+              </li>          
+
             </ul>
           </li>
 
