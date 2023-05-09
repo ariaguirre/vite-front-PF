@@ -1,5 +1,4 @@
 import SignUpForm from '../../components/sign-up-form/sign-up-form';
-import SignInForm from '../../components/sign-in-form/sign-in-form';
 import Container from '@mui/material/Container'
 import { useTheme } from '@emotion/react';
 import { Grid} from '@mui/material';
@@ -15,8 +14,7 @@ const SignUp = () => {
       height: (`calc(100vh - ${theme.spacing(10)})`),                 
     }}              
     >       
-        <Grid container spacing={2} pt={4} justifyContent={'center'}>
-          {/* <SignInForm /> */}
+        <Grid container spacing={2} justifyContent={"center"} alignContent={"center"} sx={{height:"100%"}} >
           <SignUpForm />
         </Grid>               
       </Container>

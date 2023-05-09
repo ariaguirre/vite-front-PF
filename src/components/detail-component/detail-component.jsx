@@ -5,6 +5,11 @@ import styles from "./detail-component.module.css"
 import NoReview from "../no-review/no-review";
 import { numberFormat } from "../../helper/numberFormat";
 import HalfRatingPreview from "../card/rating/rating-preview";
+import ReviewComponent from "../review-component/review-component";
+import IconButton from '@mui/material/IconButton'
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { useDispatch } from "react-redux";
+import { addItemToCart } from "../../features/cartSlice/cartSlice";
 
 const DetailComponent = ({ productDetail }) => {
   const {
@@ -19,6 +24,18 @@ const DetailComponent = ({ productDetail }) => {
   } = productDetail;
 
 
+  const dispatch = useDispatch();
+
+  const handleClickCart = () => {
+    const product = {
+      id: productDetail.id,
+      title: name,
+      imageUrl,
+      price
+    }
+    dispatch(addItemToCart(product));
+
+  }
 
   return (
     <Container maxWidth="xl">
@@ -32,6 +49,9 @@ const DetailComponent = ({ productDetail }) => {
             <HalfRatingPreview rValue={rating} />
             <p className={styles.price}>{numberFormat(price)}</p>
             <span className={styles.stock}>En stock: {stock}</span>
+            <IconButton onClick={handleClickCart}>
+              <AddShoppingCartIcon color="primary" />
+            </IconButton>
             <span className={styles.categories}>
               {
                 categories.map((category, i) => (<p key={`${category}${i}`} >{category}</p>))
@@ -45,14 +65,11 @@ const DetailComponent = ({ productDetail }) => {
       </div>
       <div className={styles.reviewsContainer}>
         {
-          reviews[0].user === "" ? <NoReview /> :
-            reviews.map(({ user, review, data, rating }) => (
-              <div key={user}>
-                <p>{user}</p>
-                <p>{review}</p>
-                <p>{data}</p>
-                <p>{rating}</p>
-              </div>))
+          reviews.length ?
+            reviews.map((review, index) => (
+              <ReviewComponent key={index} review={review} />))
+            :
+            <NoReview />
         }
       </div>
     </Container>

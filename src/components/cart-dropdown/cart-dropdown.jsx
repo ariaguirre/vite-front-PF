@@ -14,8 +14,8 @@ const CartDropdown = ({isToggleCartOn}) => {
   return (
     <div className={`${isToggleCartOn ? styles.cartDropdownContainer : styles.isClose}`}>
       <div className={styles.cartItems}>
-        {cartItems?.map((item) => (                           
-            <CardItem key={item.id} cardItem={item}/>
+        {cartItems?.map((item,i) => (                           
+            <CardItem key={item.id+i} cardItem={item}/>
         ))}
       </div>
       <Button variant="contained"><Link to="shop/cart" className={styles.linkButton}>ir al carrito</Link></Button>
