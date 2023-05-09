@@ -65,6 +65,7 @@ const noFilter = () =>{
   }
   return (
     <aside className={styles.filtersContainer}>
+      <div className={styles.fitersTitle}>filtros</div>
       <div className={styles.fitersTitle}></div>
       <nav className={styles.nav}>
         <ul className={styles.list}>

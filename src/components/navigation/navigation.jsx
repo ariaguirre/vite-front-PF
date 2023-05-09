@@ -48,9 +48,8 @@ const Navigation = () => {
   const handleClickCart = ()=> {
     setIsToggleCartOn(!isToggleCartOn);
   }
-  // desdpues de la presentacion, este codigo se movera a un helper
+
  const handleChange = async (value) => {
-  console.log(products);
   const name = value.target.value.trim()
   if(name){
     const searchProducts = await searchProduct(name , productsCopy)
