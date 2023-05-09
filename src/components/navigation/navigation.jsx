@@ -1,6 +1,6 @@
 import styles from './navigation.module.css';
 import { useState } from 'react';
-import { Link} from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 //redux
 import { useSelector } from 'react-redux';
 //svg's
@@ -17,6 +17,7 @@ import { getProductsActions, prodNameCopy, productsName } from '../../features/p
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate()
   const [isToggleOn, setIsToggleOn] = useState(false);
   const [isToggleCartOn, setIsToggleCartOn] = useState(false);
   const { products,productsCopy,productsFilter,productsFilterCopy } = useSelector(state => state.products)
@@ -46,7 +47,7 @@ const Navigation = () => {
       dispatch(setPagesActions(Math.ceil(productsCopy.length/8)))  
   }
   const handleClickCart = ()=> {
-    setIsToggleCartOn(!isToggleCartOn);
+    navigate("/shop/cart");
   }
 
  const handleChange = async (value) => {
