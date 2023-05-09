@@ -45,6 +45,7 @@ const Navigation = () => {
     setIsToggleOn(!isToggleOn);
   }
   const handleClickCart = ()=> {
+    setIsToggleOn(!isToggleOn);
     navigate("/shop/cart");
   }
  const handleChange = async (value) => {

@@ -41,6 +41,7 @@ const SignUpForm = () => {
           );
           await createUserDocumentFromAuth(user, { displayName }); 
           alert('Registrado exitosamente') 
+          
           navigate('/auth')
         } catch (error) {
           if (error.code === 'auth/email-already-in-use') {
