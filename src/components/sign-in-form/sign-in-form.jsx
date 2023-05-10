@@ -56,11 +56,11 @@ const SignInForm = () => {
     }
   }
   return (
-    <Grid item md={6} xs={12}>      
+    <Grid item md={8} xs={10}>      
       <Typography variant="h4" color="initial" align='center'>
         ¿Ya tienes una cuenta?
       </Typography>
-      <Typography variant='body1' color="initial" align='center' marginBottom={1}>
+      <Typography variant='body1' color="initial" align='center' marginBottom={4}>
         Inicia sesión con tu correo electrónico y contraseña
       </Typography>
       
@@ -91,14 +91,14 @@ const SignInForm = () => {
                 Ingresar
               </Button>
               <Button variant='contained' fullWidth onClick={signInWithGoogle}>
-                Ingresar con Google
+                Con Google
               </Button>
             </Stack>
             
           </Stack>
         </form> 
         <Grid container justifyContent={'center'} marginTop={2}>
-          <Link to={'/sign-up'}> ¿No tienes cuenta? Registrarse aquí </Link>             
+          <Link to={'/sign-up'}> ¿No tienes cuenta? Registrarse <span style={{color:"#1ac8db"}}>aquí</span> </Link>             
         </Grid>
     </Grid>
   );

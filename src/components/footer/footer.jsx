@@ -1,7 +1,7 @@
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import style from './footer.module.css'
-import { Container, Paper } from '@mui/material';
+import { Container } from '@mui/material';
 import styled from '@emotion/styled';
 
 
@@ -19,20 +19,6 @@ import styled from '@emotion/styled';
 const Footer = () => {
   return (
     <div className={style.fullCont}>
-    {/* <Paper
-      sx={{
-        position: 'relative',
-        bottom: 0, 
-        width: "100%",
-        // height: "auto",
-        // left: 0,
-        textAlign: 'center',
-        backgroundColor: "white",
-        marginTop: 2,
-        paddingTop: "2rem",
-        paddingBottom: "2rem",
-      }} elevation={8}
-    > */}
       <Container maxWidth="lg">
         <div className={style.footerCont}>
            <div className={style.titulo}>
@@ -65,7 +51,6 @@ const Footer = () => {
                 </div>
                 
       </Container>
-    {/* </Paper> */}
     </div>
 
   );

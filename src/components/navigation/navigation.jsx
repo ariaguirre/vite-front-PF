@@ -1,6 +1,6 @@
 import styles from './navigation.module.css';
 import { useState } from 'react';
-import { Link} from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 //redux
 import { useSelector } from 'react-redux';
 //svg's
@@ -10,20 +10,17 @@ import menuBtn from "../../utils/svg/menu-outline.svg";
 import BasicMenu from '../drop-down/drop-down';
 //components
 import CartIcon from '../cart-icon/cart-icon';
-import CartDropdown from '../cart-dropdown/cart-dropdown';
 import { useDispatch } from 'react-redux';
 import { setPagesActions } from '../../features/productsPagination/productsPaginationSlice';
 import { searchProduct } from './search';
-import { getProductsActions } from '../../features/products/productSlice';
+import { getProductsActions, prodNameCopy, productsName } from '../../features/products/productSlice';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate()
   const [isToggleOn, setIsToggleOn] = useState(false);
   const [isToggleCartOn, setIsToggleCartOn] = useState(false);
-  const [search, setSearch] = useState('')
-  const { products,productsCopy } = useSelector(state => state.products)
-  const [tamañoPorpagina] =useState(8);
-  const { pages , productsPag ,pageSelect } = useSelector(state => state.productPag)
+  const { products,productsCopy,productsFilter,productsFilterCopy } = useSelector(state => state.products)
   const { userCredentials } = useSelector((state) => state.currentUser);
   const dispatch = useDispatch()
   const handleClickSearchBtn = () => {
@@ -45,26 +42,56 @@ const Navigation = () => {
 
   const handleClick = () => {
     setIsToggleOn(!isToggleOn);
+    dispatch(getProductsActions(productsCopy))
+      dispatch(productsName([]))
+      dispatch(setPagesActions(Math.ceil(productsCopy.length/8)))  
   }
   const handleClickCart = ()=> {
-    setIsToggleCartOn(!isToggleCartOn);
+    setIsToggleOn(!isToggleOn);
+    navigate("/shop/cart");
   }
+
  const handleChange = async (value) => {
   const name = value.target.value.trim()
-
   if(name){
-   const searchProducts = await searchProduct({name , productsCopy})
-   dispatch(getProductsActions(searchProducts))
-   dispatch(setPagesActions(Math.ceil(searchProducts.length/8)))  
-  }else{
-    dispatch(setPagesActions(Math.ceil(products.length/8)))  
-    dispatch(getProductsActions(productsCopy))
+    const searchProducts = await searchProduct(name , productsCopy)
+    dispatch(prodNameCopy(searchProducts))
+    if(productsFilter.length){
+      const searchProducts = await searchProduct(name , productsFilterCopy)
+      dispatch(getProductsActions(searchProducts))
+      dispatch(productsName(searchProducts))
+      dispatch(setPagesActions(Math.ceil(searchProducts.length/8)))  
+     
+    }
+    else{
+      const searchProducts = await searchProduct(name , productsCopy)
+      dispatch(getProductsActions(searchProducts))
+      dispatch(productsName(searchProducts))
+      dispatch(setPagesActions(Math.ceil(searchProducts.length/8)))  
+    }
+
+  }else
+  {
+   
+    if(productsFilter.length){
+      dispatch(setPagesActions(Math.ceil(products.length/8)))  
+      dispatch(getProductsActions(productsFilterCopy))
+      dispatch(productsName([]));
+    }
+    else{
+
+      dispatch(setPagesActions(Math.ceil(products.length/8)))  
+      dispatch(getProductsActions(productsCopy));
+      dispatch(productsName([]));
+    }
+
   }
  }
+
   return (
     <>
-      <header className={`${isToggleOn ? styles.open : ""} ${styles.header}`}>
-        <Link to="/" className={styles.logo} >MB&H</Link>
+   <header className={`${isToggleOn ? styles.open : ""} ${styles.header}`}>
+        <Link to="/" className={styles.logo} onClick={handleClick} >MB&H</Link>
         <div className={styles.group}>
           <ul className={styles.navigation}>
             <li><Link to="/shop" onClick={handleClick}>Tienda</Link></li>
@@ -106,12 +133,9 @@ const Navigation = () => {
             name="searchBox"
             placeholder="Busca algo para tu bebé..."
             onChange={(e)=>{handleChange(e)}}
-            />
-            <div className={styles.buscar}>
-              {isOpen && search ? <button onClick={handlerBuscar}>Buscar</button> : null}
-            </div>
+            />        
         </div>
-        <CartDropdown isToggleCartOn={isToggleCartOn} />
+        {/* <CartDropdown isToggleCartOn={isToggleCartOn} /> */}
       </header>
     </>
   );

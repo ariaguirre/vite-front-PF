@@ -1,26 +1,79 @@
 .PaymentFormContainer
 {
-  height: 260px;
+  min-height: calc(100vh - 160px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;  
+  gap: 4rem;
+  margin-top: 2rem;
 }
 .FormContainer 
 {
-  height: 180px;
-  min-width: 350px;
-  border-radius: 12px;
-  border: 1px solid #242424;
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;
-  padding: 1rem;
+  height: 180px;
+  min-width: 350px;
+  border-radius: 12px;
+  background-color: rgba(26, 200, 219, .4);
+  padding: 1rem;  
+  cursor: pointer;
+}
+.FormContainer h4
+{
+  color: #242424;
 }
 .PaymentFormContainer button
 {
   height: 50px;
   width: 200px;
   min-width: 130px;
+}
 
+.paymentFormHeader 
+{
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+}
+.paymentFormHeader h2
+{
+  font-weight: 500;  
+}
+.paymentFormHeader span
+{
+  text-align: center;
+}
+.paymentFormHeader span span
+{
+  color: #1ac8db;
+  font-weight: 500;
+}
+
+.btn
+{
+  min-width: 130px;
+  width: 50%;
+  height: 40px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 5px;  
+  background: #242424;
+}
+.btn:hover
+{
+  background: #fff;
+  color: #1ac8db
+}
+.btn:active
+{
+  position: relative;
+  top: 2px;
 }

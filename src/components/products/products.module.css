@@ -1,0 +1,33 @@
+.dropListContainer
+{
+  position: fixed;
+  height: calc(100vh - 80px);
+  width: 300px;
+  z-index: 999;
+  transform: translate(-300px);
+  transition: all .7s ease-in-out;
+}
+.dropListContainer:hover
+{
+  transform: translate(1px);
+}
+.dropListFilters
+{
+  position: absolute;
+  display: inline-block;
+  top: 50%;
+  left: 89%;
+  transform: rotate(90deg);
+  padding: 0 1rem; 
+  border-radius: .5rem .5rem 0 0;
+  text-transform: capitalize;
+  font-size: 1rem;
+  font-weight: 400;
+  background-color: #1ac8db;
+  letter-spacing: 2px;
+  color: #fff;
+  user-select: none;
+  cursor: pointer;
+}
+
+
