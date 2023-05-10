@@ -4,7 +4,7 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import styles from './payment-form.module.css';
 import { clearCart } from "../../features/cartSlice/cartSlice";
 import { numberFormat } from "../../helper/numberFormat";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const PaymentForm = () => {
   const stripe = useStripe();
