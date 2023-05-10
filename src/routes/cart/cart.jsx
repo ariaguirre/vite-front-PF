@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import { setCartTotal } from '../../features/cartSlice/cartSlice';
 import { useNavigate } from 'react-router-dom';
 import Typography from '@mui/material/Typography'
+import Swal from 'sweetalert2';
+
 
 const Cart = () => {
 
@@ -13,7 +15,22 @@ const Cart = () => {
   const [total, setTotal] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+   
 
+  if(cartItems.length === 0) {
+    Swal.fire(
+      'No tienes productos en el carrito',
+      'Quieres ir a comprar?',
+      'info'
+    ).then((result)=> {
+      if(result.isConfirmed){
+        navigate("/shop");
+      }else{
+        navigate("/shop");
+      }
+    })
+  
+  }
 
   useEffect(() => {
     const newCartTotal = cartItems.reduce((total, cartItem) => total + cartItem.quantity * cartItem.price, 0)
