@@ -24,8 +24,8 @@ const CheckoutItem = ({cartItem}) => {
           'Tu producto ha sido eliminado.',
           'success'
         )
+        dispatch(clearItemFromCart(cartItem))
       }
-      dispatch(clearItemFromCart(cartItem))
     })
     
   };
