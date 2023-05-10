@@ -1,23 +1,13 @@
-import { Style } from "@mui/icons-material"
+
 import styles from "../home-admin/home-admin.module.css"
 //Import Material UI
 // import { Box, Typography } from '@mui/material';
 
 
 const HomeAdmin = () => {
+  
   return (
-    <div>
-    {/* <Box component="main"
-    sx={{ width: '50%',alignContent:"center", display: 'flex',
-    justifyContent: 'center', mx:"25%", mt:"2%"}}
-     textAlign={"center"}
-     boxShadow={3}
-     alignContent={"center"}
-     bgcolor={"primary"} 
-     >
-    <Typography variant="h6" color="initial" align='center'>PANEL ADMINISTRADOR</Typography>
-
-    </Box> */}
+<div className={styles.base}>
 
     <h1>Panel Principal</h1>
     <div className={styles.container}>
@@ -43,6 +33,7 @@ const HomeAdmin = () => {
       </div>
 
       <p className={styles.item}>Ingresos</p>
+      
       <div className={styles.flex}>
         <div className={styles.areaPanel}>
           <p className={styles.title}>Hoy</p>

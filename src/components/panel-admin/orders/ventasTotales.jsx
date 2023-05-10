@@ -4,7 +4,7 @@ import { Box,
 const ventasTotales = () => {
   return (
     <div>
-    <Box component="main"
+    {/* <Box component="main"
     sx={{ width: '50%',alignContent:"center", display: 'flex',
     justifyContent: 'center', mx:"25%", mt:"2%"}}
      textAlign={"center"}
@@ -13,7 +13,7 @@ const ventasTotales = () => {
      bgcolor={"primary"} 
      >
     <Typography variant="h6" color="initial" align='center'>TUS VENTAS</Typography>
-    </Box>
+    </Box> */}
     </div>
   )
 }

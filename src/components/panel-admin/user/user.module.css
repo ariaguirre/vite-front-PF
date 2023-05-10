@@ -4,6 +4,12 @@ h1{
     text-align: center;
 }
 
+h3{
+    text-align: center;
+    text-transform: uppercase ;
+    padding-bottom:2rem ;   
+}
+
 .margin{
     display: block;
     padding: 1rem 0;
@@ -22,11 +28,6 @@ h1{
 
 }
 
-h3{
-    text-align: center;
-    text-transform: uppercase ;
-    padding-bottom:2rem ;   
-}
 
 .perfil{
     margin-top: 1rem;
@@ -37,4 +38,16 @@ h3{
     padding: 2rem;
     max-width: 800px;
     margin:0 auto;
+}
+
+
+span{
+    font-weight: 600;
+    text-transform: capitalize;
+    padding-right: .5rem;
+    padding-top: .5rem;
+}
+
+.infUsuario p {
+    line-height: 2;
 }

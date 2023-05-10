@@ -16,7 +16,7 @@ const User = () =>{
         dispatch(getUserData(getUserAdmin()))
     },[])
 
-    console.log(data)
+    // console.log(data)
 
     const img = data.reloadUserInfo.photoUrl;
 
@@ -32,8 +32,10 @@ const User = () =>{
 
             <div className={styles.infUsrBase} >
                 <h3>Información básica</h3>
-                <p><span>Nombre:</span>{data.displayName} </p>
-                <p><span>Email:</span>{data.email} </p>
+                <div className={styles.infoUsuario}>
+                    <p><span>Nombre:</span>{data.displayName} </p>
+                    <p><span>Email:</span>{data.email} </p>
+                </div>
                 <Stack  alignItems='center' py={2}>
                 <Button variant='contained' size='large' className={styles.btn} >Desactivar cuenta</Button>
             </Stack>
