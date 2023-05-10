@@ -4,7 +4,7 @@ import CheckoutForm from "../../components/checkout-form/checkout-form";
 
 const Checkout = () => {
   return (    
-    <Container maxWidth="md" sx={{mt:"1rem"}}>
+    <Container maxWidth="md" sx={{mt:"2rem"}}>
       <Typography variant="h3" color="primary" align="center">Checkout</Typography>
       <div className={styles.containerFormCheckout}>
         <CheckoutForm />

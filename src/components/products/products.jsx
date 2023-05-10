@@ -9,6 +9,7 @@ import Filters from '../filters/filters'
 import styles from "./products.module.css"
 
 const Products = () => {
+
   const products = useSelector((state) => state.productPag.productsPag)
   return (
     <>

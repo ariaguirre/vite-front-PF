@@ -350,3 +350,19 @@ export const productsByCategory = async (str) =>{
  return categoriesProduct
 }
 
+// borrador logico para productos
+export const setActiveProduct = async(data) =>{
+  const productActive = doc(db, 'Products', data.id)
+  await setDoc(productActive,{
+    active: data.active
+  },{merge: true})
+}
+
+//borrador logico usuario
+export const setActiveUser = async(data) =>{
+  const productActive = doc(db, 'user', data.uid)
+  await setDoc(productActive,{
+    active: data.active
+  },{merge: true})
+}
+

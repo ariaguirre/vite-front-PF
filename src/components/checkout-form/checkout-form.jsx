@@ -9,6 +9,7 @@ import { useState } from 'react'
 const CheckoutForm = () => {
 
   const [allData, setAllData] = useState();
+  
 
   const checkoutform = useForm({
     defaultValues: {
