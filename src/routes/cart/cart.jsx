@@ -22,14 +22,7 @@ const Cart = () => {
       'No tienes productos en el carrito',
       'Quieres ir a comprar?',
       'info'
-    ).then((result)=> {
-      if(result.isConfirmed){
-        navigate("/shop");
-      }else{
-        navigate("/shop");
-      }
-    })
-  
+    ).then(()=> navigate("/shop"))  
   }
 
   useEffect(() => {
