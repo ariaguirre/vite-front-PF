@@ -1,0 +1,40 @@
+
+h1{
+    padding-top: 1rem;
+    text-align: center;
+}
+
+.margin{
+    display: block;
+    padding: 1rem 0;
+}
+
+.basePerfil{
+    padding:1rem;
+    color:wheat
+}
+
+.imgUsuario{
+    max-width: 500px;
+    clip-path: circle(50% at 50% 50%);
+    margin: 0 auto;
+    display: block;
+
+}
+
+h3{
+    text-align: center;
+    text-transform: uppercase ;
+    padding-bottom:2rem ;   
+}
+
+.perfil{
+    margin-top: 1rem;
+    padding: 1rem;
+}
+
+.infUsrBase{
+    padding: 2rem;
+    max-width: 800px;
+    margin:0 auto;
+}
