@@ -2,21 +2,34 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./filters.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductsActions, prodFilterCopy, productsFilterAction } from "../../features/products/productSlice";
-
+import { getProductsActions, prodFilterCopy, productsFilterAction, productsOrder } from "../../features/products/productSlice";
+import { SliderPrice } from "./slider";
 const Filters = () => {
   const dispatch = useDispatch()
   const  {productsName,productsCopy, productsNameCopy } = useSelector(state =>state.products )
     const categories = useSelector(state => state.categories.categories)
   const [showMenu1, setShowMenu1] = useState(false);
   const [showMenu2, setShowMenu2] = useState(false);
+  const [showMenu3, setShowMenu3] = useState(false);
+  const [showMenu4, setShowMenu4] = useState(false);
   const handleClick1 = () => {
     setShowMenu1(!showMenu1);
+    if(showMenu2)setShowMenu2(!showMenu2);
   };
 
   const handleClick2 = () => {
     setShowMenu2(!showMenu2);
+    if(showMenu1)setShowMenu1(!showMenu1);
   }; 
+  const handleClick3 = () => {
+    setShowMenu3(!showMenu3);
+    if(showMenu4)setShowMenu4(!showMenu4);
+  }; 
+  const handleClick4 = () => {
+    setShowMenu4(!showMenu4);
+    if(showMenu3)setShowMenu3(!showMenu3);
+  }; 
+
   const handlerCategory = async (e) =>{
    
 
@@ -61,6 +74,9 @@ const noFilter = () =>{
     dispatch(prodFilterCopy([]))
     dispatch(productsFilterAction([]))
   }
+  }
+  const orderType = (order) =>{
+    dispatch(productsOrder(order))
   }
   return (
     <aside className={styles.filtersContainer}>
@@ -114,7 +130,6 @@ const noFilter = () =>{
               <span className={styles.navLink}>
                Filtros
               </span>
-              {/* <i className={`${styles.arrow} ${showMenu2 ? styles.arrowUp : styles.arrowDown}`} /> */}
             </div>
             <ul
               className={styles.listShow}
@@ -125,18 +140,108 @@ const noFilter = () =>{
                   to="#"
                   className={`${styles.navLink} ${styles.navLinkInside}`}
                 >
-                  Dentro
-                </Link>
-              </li>
-
-              <li>
+                <li className={`${styles.listItem} ${styles.listItemClick}`}>
+            <div
+              className={`${styles.listButton} ${styles.listButtonClick}`}
+              onClick={handleClick3}
+            >
+              <span className={styles.navLink}>
+               Ordenamientos
+              </span>
+            </div>
+            <ul
+              className={styles.listShow}
+              style={{ height: showMenu3 ? "auto" : "0px" }}
+            >
+              <li className={styles.listInside}>
                 <Link
                   to="#"
                   className={`${styles.navLink} ${styles.navLinkInside}`}
                 >
-                  Dentro
+                <li>
+                <Link
+                  to="#"
+                  onClick={() =>{orderType({orderBy :"name", orderType : "asc"}) }}
+                  className={`${styles.navLink} ${styles.navLinkInside}`}
+                >
+                 Nombre A - Z 
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="#"
+                  onClick={() =>{orderType({orderBy :"name", orderType : "desc"}) }}
+                  className={`${styles.navLink} ${styles.navLinkInside}`}
+                >
+                 Nombre Z - A 
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="#"
+                  onClick={() =>{orderType({orderBy :"rating", orderType : "desc"}) }}
+                  className={`${styles.navLink} ${styles.navLinkInside}`}
+                >
+                 Mas rating
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="#"
+                  onClick={() =>{orderType({orderBy :"rating", orderType : "asc"}) }}
+                  className={`${styles.navLink} ${styles.navLinkInside}`}
+                >
+                 Menos rating
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="#"
+                  onClick={() =>{orderType({orderBy :"price", orderType : "desc"}) }}
+                  className={`${styles.navLink} ${styles.navLinkInside}`}
+                >
+                 Mayor precio
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="#"
+                  onClick={() =>{orderType({orderBy :"price", orderType : "asc"}) }}
+                  className={`${styles.navLink} ${styles.navLinkInside}`}
+                >
+                 Menor precio
+                </Link>
+              </li>
+                </Link>
+              </li>
+            </ul>
+          </li>
+                <li className={`${styles.listItem} ${styles.listItemClick}`}>
+            <div
+              className={`${styles.listButton} ${styles.listButtonClick}`}
+              onClick={handleClick4}
+            >
+              <span className={styles.navLink}>
+               Rango de precios
+              </span>
+            </div>
+            <ul
+              className={styles.listShow}
+              style={{ height: showMenu4 ? "auto" : "0px" }}
+            >
+              <li className={styles.listInside}>
+                <Link
+                  to="#"
+                  className={`${styles.navLink} ${styles.navLinkInside}`}
+                >
+     <SliderPrice/>
+                </Link>
+              </li>
+            </ul>
+          </li>
+                </Link>
+              </li>
+              
             </ul>
           </li>
         </ul>
