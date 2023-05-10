@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import styles from "./filters.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductsActions, prodFilterCopy, productsFilterAction, productsOrder } from "../../features/products/productSlice";
-import Box from '@mui/material/Box';
-import Slider from '@mui/material/Slider';
 import { SliderPrice } from "./slider";
 const Filters = () => {
   const dispatch = useDispatch()
@@ -14,7 +12,6 @@ const Filters = () => {
   const [showMenu2, setShowMenu2] = useState(false);
   const [showMenu3, setShowMenu3] = useState(false);
   const [showMenu4, setShowMenu4] = useState(false);
-  const [value, setValue] = useState([0, 1000]);
   const handleClick1 = () => {
     setShowMenu1(!showMenu1);
     if(showMenu2)setShowMenu2(!showMenu2);
@@ -133,7 +130,6 @@ const noFilter = () =>{
               <span className={styles.navLink}>
                Filtros
               </span>
-              {/* <i className={`${styles.arrow} ${showMenu2 ? styles.arrowUp : styles.arrowDown}`} /> */}
             </div>
             <ul
               className={styles.listShow}
@@ -144,7 +140,6 @@ const noFilter = () =>{
                   to="#"
                   className={`${styles.navLink} ${styles.navLinkInside}`}
                 >
-                {/*-------------------------------------------------------------*/ }
                 <li className={`${styles.listItem} ${styles.listItemClick}`}>
             <div
               className={`${styles.listButton} ${styles.listButtonClick}`}
@@ -153,7 +148,6 @@ const noFilter = () =>{
               <span className={styles.navLink}>
                Ordenamientos
               </span>
-              {/* <i className={`${styles.arrow} ${showMenu2 ? styles.arrowUp : styles.arrowDown}`} /> */}
             </div>
             <ul
               className={styles.listShow}
@@ -164,7 +158,6 @@ const noFilter = () =>{
                   to="#"
                   className={`${styles.navLink} ${styles.navLinkInside}`}
                 >
-                {/*-------------------------------------------------------------*/ }
                 <li>
                 <Link
                   to="#"
@@ -219,13 +212,10 @@ const noFilter = () =>{
                  Menor precio
                 </Link>
               </li>
-                { /**----------------------------------------------------------- */ }
                 </Link>
               </li>
             </ul>
           </li>
-             
-                { /**----------------------------------------------------------- */ }
                 <li className={`${styles.listItem} ${styles.listItemClick}`}>
             <div
               className={`${styles.listButton} ${styles.listButtonClick}`}
@@ -234,7 +224,6 @@ const noFilter = () =>{
               <span className={styles.navLink}>
                Rango de precios
               </span>
-              {/* <i className={`${styles.arrow} ${showMenu2 ? styles.arrowUp : styles.arrowDown}`} /> */}
             </div>
             <ul
               className={styles.listShow}
@@ -245,10 +234,7 @@ const noFilter = () =>{
                   to="#"
                   className={`${styles.navLink} ${styles.navLinkInside}`}
                 >
-                {/*-------------------------------------------------------------*/ }
      <SliderPrice/>
-              
-                { /**----------------------------------------------------------- */ }
                 </Link>
               </li>
             </ul>
