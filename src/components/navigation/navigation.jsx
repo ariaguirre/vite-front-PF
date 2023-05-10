@@ -1,6 +1,6 @@
 import styles from './navigation.module.css';
 import { useState } from 'react';
-import { Link, useNavigate} from 'react-router-dom';
+import { Link, useLocation, useNavigate} from 'react-router-dom';
 //redux
 import { useSelector } from 'react-redux';
 //svg's
@@ -19,10 +19,14 @@ const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate()
   const [isToggleOn, setIsToggleOn] = useState(false);
-  const [isToggleCartOn, setIsToggleCartOn] = useState(false);
   const { products,productsCopy,productsFilter,productsFilterCopy } = useSelector(state => state.products)
   const { userCredentials } = useSelector((state) => state.currentUser);
   const dispatch = useDispatch()
+  const location = useLocation()
+
+  
+  
+
   const handleClickSearchBtn = () => {
     setIsOpen(true);
     setIsToggleOn(false);
@@ -52,6 +56,9 @@ const Navigation = () => {
   }
 
  const handleChange = async (value) => {
+  
+  if(location.pathname !== "/shop") navigate("/shop")
+
   const name = value.target.value.trim()
   if(name){
     const searchProducts = await searchProduct(name , productsCopy)
@@ -135,7 +142,6 @@ const Navigation = () => {
             onChange={(e)=>{handleChange(e)}}
             />        
         </div>
-        {/* <CartDropdown isToggleCartOn={isToggleCartOn} /> */}
       </header>
     </>
   );

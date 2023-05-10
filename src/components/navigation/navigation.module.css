@@ -1,18 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap');
-
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
-body{
-  background: #fff;
+body{  
   min-height: 100vh;
   overflow-x: hidden;
 }
 header{
-  position: relative;
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;

@@ -8,7 +8,6 @@ import CardMedia from '@mui/material/CardMedia';
 import CardActions from "@mui/material/CardActions";
 import { CardContent, CardHeader, IconButton, Typography, Box, Button } from "@mui/material";
 //Icons 
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import Sale from "./sale/sale";
 import HalfRatingPreview from "./rating/rating-preview";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -113,10 +112,7 @@ const CardInf = (
           <CardActions sx={{ padding: 0 }}>            
               <Button variant="contained" color="primary" onClick={handleDetailsClick}>
                 Details
-              </Button>            
-            <IconButton>
-              <FavoriteIcon color="warning" />
-            </IconButton>
+              </Button>                        
             <IconButton onClick={handleClickCartIcon}>
               <AddShoppingCartIcon color="primary" />
             </IconButton>
