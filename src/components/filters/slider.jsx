@@ -13,7 +13,7 @@ const minDistance = 20;
 
 export const SliderPrice = () =>{
     const dispatch = useDispatch();
-  const [value2, setValue2] = useState([0, 200 ] );
+  const [value2, setValue2] = useState([0, 2000 ] );
 const setPrices = () =>{
     dispatch(priceRangeAtion(value2))
 }
@@ -21,12 +21,11 @@ const setPricesAll = () =>{
     setValue2([0,5000])
     dispatch(priceRangeAtion([0,5000]))
 }
-  const handleChange2 = (event, newValue, activeThumb) => {
+  const handleChange = (event, newValue, activeThumb) => {
    
     if (!Array.isArray(newValue)) {
       return;
     }
-
     if (newValue[1] - newValue[0] < minDistance) {
       if (activeThumb === 0) {
         const clamped = Math.min(newValue[0], 100 - minDistance);
@@ -54,7 +53,7 @@ const setPricesAll = () =>{
       <Slider
         getAriaLabel={() => 'Minimum distance shift'}
         value={value2}
-        onChange={handleChange2}
+        onChange={handleChange}
         valueLabelDisplay="auto"
         getAriaValueText={valuetext}
         disableSwap

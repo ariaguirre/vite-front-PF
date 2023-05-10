@@ -43,13 +43,11 @@ const productSlice = createSlice({
       }
       ,
       productsOrder : (state,action)=>{
-        //state.products = order(state,action)
       order(state.products,action.payload)
       order(state.productsCopy,action.payload)
       }
       ,
       priceRangeAtion : (state,action)=>{
-        //state.products = order(state,action)
    state.products =  priceRange(state,action.payload)
       }
       }
@@ -137,10 +135,6 @@ const productSlice = createSlice({
  
    return rangeCopy
   }
-  
-      
-
-     console.log(products);
     }
     export const {priceRangeAtion,productsOrder,getProductsActions,getProductById,productsCopy,productsName,productsFilterAction,prodFilterCopy,prodNameCopy } = productSlice.actions
     export default productSlice.reducer;

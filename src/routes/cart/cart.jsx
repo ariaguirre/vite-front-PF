@@ -3,7 +3,7 @@ import styles from "./cart.module.css"
 import CheckoutItem from '../../components/checkout-item/checkout-item';
 import { numberFormat } from '../../helper/numberFormat';
 import { useEffect, useState } from 'react';
-import { setCartTotal } from '../../features/cartSlice/cartSlice';
+import { setCartTotal, updateInitialState } from '../../features/cartSlice/cartSlice';
 import { useNavigate } from 'react-router-dom';
 import Typography from '@mui/material/Typography'
 import Swal from 'sweetalert2';
@@ -12,6 +12,8 @@ import Swal from 'sweetalert2';
 const Cart = () => {
 
   const cartItems = useSelector(state => state.persistedReducer.carState.cartItems);
+
+ 
   const [total, setTotal] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -29,13 +31,13 @@ const Cart = () => {
     const newCartTotal = cartItems.reduce((total, cartItem) => total + cartItem.quantity * cartItem.price, 0)
     setTotal(newCartTotal);
     dispatch(setCartTotal(newCartTotal));
+    dispatch(updateInitialState(cartItems))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartItems])
 
   const handleClick = () => {
     navigate("/shop/checkout");
   }
-
   return (
 
     <div className={styles.checkoutContainer}>
@@ -58,7 +60,7 @@ const Cart = () => {
         </div>
       </div>
 
-      {cartItems.map((cartItem, index) => (
+      {cartItems?.map((cartItem, index) => (
         <CheckoutItem key={cartItem.id + index} cartItem={cartItem} />
       ))}
       <div className={styles.total}>
