@@ -28,12 +28,14 @@ import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
 import Inventory2Icon from '@mui/icons-material/Inventory2';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 //import componentes
 import CreateProduct from "../create-product/create-product";
 import AllProducts from '../all-products/all-products';
 import VentasTotales from '../orders/ventasTotales';
 import Inicio from '../home-admin/home-admin';
 import Users from '../users/users';
+import User from '../user/user';
 
 
 
@@ -259,9 +261,31 @@ const SideBar = () =>  {
   <ListItemText primary="Clientes" />
   </ListItemButton>
   </ListItem>
+
+    <ListItem>
+    <ListItemButton
+      onClick={() => handleItemClick(<User />)}
+      sx={{
+      minHeight: 48,
+      justifyContent: open ? 'initial' : 'center',
+      px: 2.5,
+      }}
+    >
+    <ListItemIcon>
+    <Stack direction="row" spacing={2}>
+      <Avatar sx={{ bgcolor: '#19c8db' }}>
+      <AccountCircleIcon />
+      </Avatar> 
+    </Stack>
+
+    </ListItemIcon>
+    <ListItemText primary="Usuario" />
+    </ListItemButton>
+    </ListItem>
   </List>
   <Divider />
   </Drawer>
+  
 
   <Box component="main" sx={{ flexGrow: 1, p: 3, alignContent: "center" }}>
   <DrawerHeader />
