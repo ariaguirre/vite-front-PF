@@ -1,0 +1,458 @@
+.heroContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 80px);
+  overflow: hidden;
+  background-color: #242424;
+}
+
+.heroContainer .heroBackgroundImg {
+  position: absolute;
+  background: url('../../../utils/img/background-baby.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  object-fit: scale-down;
+  opacity: 0.8;
+  width: inherit;
+  height: inherit;
+  transform: scale(1);
+}
+
+.heroSection {
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: inherit;
+}
+.heroSection .heroHeader {
+  text-align: center;
+  position: absolute;
+  top: 0;
+}
+
+.heroSection .heroHeader span {
+  color: #242424;
+  background: rgba(255, 255, 255, 1);
+  border-radius: .5rem ;
+  padding: 0 1rem;
+  text-shadow:
+    1px 0px 1px #CCCCCC,
+    0px 1px 1px #EEEEEE,
+    2px 1px 1px #CCCCCC,
+    1px 2px 1px #EEEEEE,
+    3px 2px 1px #CCCCCC,
+    2px 3px 1px #EEEEEE,
+    4px 3px 1px #CCCCCC,
+    3px 4px 1px #EEEEEE,
+    5px 4px 1px #CCCCCC,
+    4px 5px 1px #EEEEEE,
+    6px 5px 1px #CCCCCC,
+    5px 6px 1px #EEEEEE,
+    7px 6px 1px #CCCCCC;
+  font-size: 2em;
+  font-weight: 900;
+  letter-spacing: 1rem;
+}
+.heroSection .heroLegend {
+  width: 50%;
+  height: inherit;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 2rem;
+
+}
+.heroSection .heroLegendContainer
+{
+  border-radius: 2rem ;
+  height: 250px;
+  width: 500px;
+  background-color: rgba(11, 119, 119, .5);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem; 
+}
+.heroSection .heroLegendContainer span
+{
+  text-align: center;
+  color: #fff;
+  font-size: 1.5rem;
+}
+.heroSection .heroLegendContainer span p
+{
+  margin-top: 2rem;
+  color: #EEEEEE;
+  text-decoration: underline;
+  text-align: end;
+}
+.heroSection .heroCallToAction {
+  display: flex;
+  align-items: center;
+  justify-content:end;
+  width: 50%;
+  height: inherit;
+  margin: 4rem;
+}
+
+.heroCallToAction .heroBtn
+{
+  width:50%;
+  height:50%;
+  box-sizing:border-box;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.heroCallToAction .heroBtn .heroBtnContainer
+{
+  position:relative;
+  text-decoration:none;
+  color:#fff;
+  letter-spacing:1px;
+  font-size:2rem;
+  box-sizing:border-box;
+}
+.heroCallToAction .heroBtn .heroBtnContainer span
+{
+  position:relative;
+  box-sizing:border-box;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:200px;
+  height:200px;
+}
+.heroCallToAction .heroBtn .heroBtnContainer span:active
+{
+  position: relative;
+  top: 5px;
+}
+.heroCallToAction .heroBtn .heroBtnContainer span:before
+{
+  content:'';
+  width:100%;
+  height:100%;
+  display:block;
+  position:absolute;
+  border-radius:100%;
+  border:7px solid #1ac8db;
+  box-sizing:border-box;
+  transition: all .85s cubic-bezier(0.25, 1, 0.33, 1);
+  box-shadow: 0 30px 85px rgba(0,0,0,0.14), 0 15px 35px rgba(0,0,0,0.14);
+}
+.heroCallToAction .heroBtn .heroBtnContainer:hover span:before
+{
+  transform:scale(0.8);
+  box-shadow: 0 20px 55px rgba(0,0,0,0.14), 0 15px 35px rgba(0,0,0,0.14);
+}
+.heroCallToAction .heroBtn .heroBtnContainer .dotsContainer
+{
+  opacity:0;
+  animation: intro 1.6s;
+  animation-fill-mode: forwards;  
+}
+.heroBtnContainer .dot{
+  width:8px;
+  height:8px;
+  display:block;
+  background-color:#1ac8db;
+  border-radius:100%;
+  position:absolute;
+  transition: all .85s cubic-bezier(0.25, 1, 0.33, 1);
+}
+.heroBtnContainer .dot:nth-child(1){
+  top:50px;
+  left:50px;
+  transform:rotate(-140deg);
+  animation: swag1-out 0.3s;
+  animation-fill-mode: forwards;
+  opacity:0;
+}
+.heroBtnContainer .dot:nth-child(2){
+  top:50px;
+  right:50px;
+  transform:rotate(140deg);
+  animation: swag2-out 0.3s;
+  animation-fill-mode: forwards;
+  opacity:0;
+}
+.heroBtnContainer .dot:nth-child(3){
+  bottom:50px;
+  left:50px;
+  transform:rotate(140deg);
+  animation: swag3-out 0.3s;
+  animation-fill-mode: forwards;
+  opacity:0;
+}
+.heroBtnContainer .dot:nth-child(4){
+  bottom:50px;
+  right:50px;
+  transform:rotate(-140deg);
+  animation: swag4-out 0.3s;
+  animation-fill-mode: forwards;
+  opacity:0;
+}
+.heroBtnContainer:hover .dot:nth-child(1){
+  animation: swag1 0.3s;
+  animation-fill-mode: forwards;
+}
+.heroBtnContainer:hover .dot:nth-child(2){
+  animation: swag2 0.3s;
+  animation-fill-mode: forwards;
+}
+.heroBtnContainer:hover .dot:nth-child(3){
+  animation: swag3 0.3s;
+  animation-fill-mode: forwards;
+}
+.heroBtnContainer:hover .dot:nth-child(4){
+  animation: swag4 0.3s;
+  animation-fill-mode: forwards;
+}
+
+
+/* Responsive */
+/* sm 600px, md 900px, lg 1200px, xl 1536 */
+@media screen and (max-width: 1536px) 
+{
+  .heroSection .heroLegend {
+    padding: 4rem 2rem;
+  }
+  .heroSection .heroCallToAction {
+    margin: 0rem;    
+  }
+  .heroSection .heroLegendContainer
+  {
+    width: 400px;
+  }
+  .heroSection .heroLegendContainer span
+  {
+    font-size: 1.2rem;
+  }
+}
+@media screen and (max-width: 1200px) 
+{
+  .heroSection
+  {
+    flex-direction: column;        
+    overflow: hidden;
+    width: 100%;
+  }
+  .heroSection .heroLegend 
+  {
+    width: 100%;
+    margin: 0;    
+  }
+  .heroSection .heroLegendContainer
+  {
+    border-radius: 0;
+    width: 100%;
+    height: 100px;    
+    padding: 0;
+    border-radius: 1rem;
+  }
+  .heroSection .heroLegendContainer span
+  {
+    font-size: 1.1rem;
+  }
+  .heroSection .heroCallToAction {
+    width: 100%;
+    margin: 0;
+    justify-content: flex-end;
+  }
+  .heroCallToAction .heroBtn
+  {
+    justify-content: flex-end;
+    padding:2rem;
+    margin-bottom: 2rem ;
+  }
+}
+
+@media screen and (max-width: 930px) 
+{
+  .heroSection .heroLegendContainer
+  {
+    width: 100%;
+    height: 200px;
+  }
+  .heroSection .heroLegendContainer span p
+  {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 0 2rem;
+  }
+  .heroSection .heroLegendContainer span
+  {
+    font-size: 1rem;
+  }
+}
+@media screen and (max-width: 600px) 
+{
+  .heroSection .heroHeader span {
+    font-size: 1.5em;
+  }
+  .heroSection .heroLegendContainer
+  {
+    position: relative;
+    top: 25px;
+  }
+  .heroCallToAction .heroBtn 
+  {
+    padding: 0;
+    margin-bottom: 1rem;
+    transform: scale(0.6);
+  }
+
+}
+/* keyFrames */
+@keyframes intro {
+   0% {
+     opacity:0;
+  }
+  100% {
+     opacity:1;
+  }
+}
+@keyframes swag1 {
+   0% {
+     top:50px;
+     left:50px;
+     width:8px;
+  }
+  50% {
+    width:30px;
+    opacity:1;
+  }
+  100% {
+     top:20px;
+     left:20px;
+     width:8px;
+     opacity:1;
+  }
+}
+@keyframes swag1-out {
+   0% {
+     top:20px;
+     left:20px;
+     width:8px;
+  }
+  50% {
+     width:30px;
+    opacity:1;
+  }
+  100% {
+     top:50px;
+     left:50px;
+     width:8px;
+    opacity:0;
+  }
+}
+@keyframes swag2 {
+   0% {
+     top:50px;
+     right:50px;
+     width:8px;
+  }
+  50% {
+    width:30px;
+    opacity:1;
+  }
+  100% {
+     top:20px;
+     right:20px;
+     width:8px;
+     opacity:1;
+  }
+}
+@keyframes swag2-out {
+   0% {
+     top:20px;
+     right:20px;
+     width:8px;
+  }
+  50% {
+     width:30px;
+    opacity:1;
+  }
+  100% {
+     top:50px;
+     right:50px;
+     width:8px;
+    opacity:0;
+  }
+}
+@keyframes swag3 {
+   0% {
+     bottom:50px;
+     left:50px;
+     width:8px;
+  }
+  50% {
+    width:30px;
+    opacity:1;
+  }
+  100% {
+     bottom:20px;
+     left:20px;
+     width:8px;
+     opacity:1;
+  }
+}
+@keyframes swag3-out {
+   0% {
+     bottom:20px;
+     left:20px;
+     width:8px;
+  }
+  50% {
+     width:30px;
+    opacity:1;
+  }
+  100% {
+     bottom:50px;
+     left:50px;
+     width:8px;
+    opacity:0;
+  }
+}
+@keyframes swag4 {
+   0% {
+     bottom:50px;
+     right:50px;
+     width:8px;
+  }
+  50% {
+    width:30px;
+    opacity:1;
+  }
+  100% {
+     bottom:20px;
+     right:20px;
+     width:8px;
+     opacity:1;
+  }
+}
+@keyframes swag4-out {
+   0% {
+     bottom:20px;
+     right:20px;
+     width:8px;
+  }
+  50% {
+     width:30px;
+    opacity:1;
+  }
+  100% {
+     bottom:50px;
+     right:50px;
+     width:8px;
+    opacity:0;
+  }
+}
