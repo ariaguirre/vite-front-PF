@@ -37,13 +37,25 @@ const App = () => {
   
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-const getData = async () =>{
-  const products = await getProducts()
-  let category = await getCategories();
-  dispatch(getCategoriesAction(category))
-  dispatch(getProductsActions(products))
-  dispatch(productsCopy(products))
-}
+  const getData = async () =>{
+    const snap =  getProducts(a =>{
+      const Products = [];
+     a.forEach((element )=> {
+      const id = element.id;
+      const data = element.data()
+      Products.push({
+        id,
+        ...data
+      })
+     });
+     dispatch(getProductsActions(Products))
+     dispatch(productsCopy(Products))
+    })
+    let category = await getCategories();
+    dispatch(getCategoriesAction(category))
+  
+  
+  }
 
   return (
     <Routes>    

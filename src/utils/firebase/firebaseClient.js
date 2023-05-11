@@ -30,6 +30,7 @@ import {
   endBefore,
   DocumentReference,
   refEqual,
+  onSnapshot,
 } from "firebase/firestore";
 
 import {
@@ -135,19 +136,12 @@ export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth,
 
 
 //trae Productos existentes
-export const getProducts = async () => {
-  const querySnapshot = await getDocs(collection(db, "Products"));
-  let data = [];
-  querySnapshot.forEach((doc) => {
-    const id = doc.id;
-    const datos = doc.data();
-    data.push({
-      id,
-      ...datos,
-    });
-  });
-  return data;
-};
+export const getProducts = async (Products) => {
+
+    const q = query(collection(db, "Products"))
+     onSnapshot(q, (Products));
+  
+   }
 
 //Agrega nuevos productos
 export const postProductsAdmin = async (data) => {
