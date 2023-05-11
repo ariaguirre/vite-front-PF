@@ -26,17 +26,23 @@
   color: #303440;
   display: block;
   padding: 15px 0;
-  text-decoration: none;
+  text-decoration: none;  
 }
-
 .navLinkInside {
   border-radius: 6px;
   padding-left: 20px;
   text-align: left;
 }
-
 .navLinkInside:hover {
   background: #fff;
+}
+
+.navListSecond
+{
+  border-radius: 6px;
+  padding-left: 20px;
+  text-align: left;
+  border: 1px solid rebeccapurple;
 }
 
 .list {

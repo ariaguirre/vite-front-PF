@@ -89,7 +89,7 @@ const Filters = () => {
               className={`${styles.listButton} ${styles.listButtonClick}`}
               onClick={handleClick1}
             >
-              <span className={styles.navLink}>
+              <span className={`${styles.navLink} ${styles.navLinkPrincipal}`}>
                 Categorias
               </span>
             </div>
@@ -126,23 +126,22 @@ const Filters = () => {
               className={`${styles.listButton} ${styles.listButtonClick}`}
               onClick={handleClick2}
             >
-              <span className={styles.navLink}>Filtros</span>
+              <span className={`${styles.navLink} ${styles.navLinkPrincipal}`}>
+                Filtros
+              </span>
             </div>
             <ul
               className={styles.listShow}
               style={{ height: showMenu2 ? "auto" : "0px" }}
             >
               <ul className={styles.listInside}>
-                <span
-                  to="#"
-                  className={`${styles.navLink} ${styles.navLinkInside}`}
-                >
+                <span className={`${styles.navLink}`} >
                   <li className={`${styles.listItem} ${styles.listItemClick}`}>
                     <div
                       className={`${styles.listButton} ${styles.listButtonClick}`}
                       onClick={handleClick3}
                     >
-                      <span className={styles.navLink}>
+                      <span className={`${styles.navLink} ${styles.navLinkPrincipal}`}>
                         Ordenamientos
                       </span>
                     </div>
@@ -152,9 +151,9 @@ const Filters = () => {
                     >
                       <ul className={styles.listInside}>
                         <span                          
-                          className={`${styles.navLink} ${styles.navLinkInside}`}
+                          className={`${styles.navLink} `}
                         >
-                          <li>
+                          <li className={`${styles.listItem}`}>
                             <Link
                               to="#"
                               onClick={() => { orderType({ orderBy: "name", orderType: "asc" }) }}
@@ -163,7 +162,7 @@ const Filters = () => {
                               Nombre A - Z
                             </Link>
                           </li>
-                          <li>
+                          <li className={`${styles.listItem}`}>
                             <Link
                               to="#"
                               onClick={() => { orderType({ orderBy: "name", orderType: "desc" }) }}
@@ -172,7 +171,7 @@ const Filters = () => {
                               Nombre Z - A
                             </Link>
                           </li>
-                          <li>
+                          <li className={`${styles.listItem}`}>
                             <Link
                               to="#"
                               onClick={() => { orderType({ orderBy: "rating", orderType: "desc" }) }}
@@ -181,7 +180,7 @@ const Filters = () => {
                               Mas rating
                             </Link>
                           </li>
-                          <li>
+                          <li className={`${styles.listItem}`}>
                             <Link
                               to="#"
                               onClick={() => { orderType({ orderBy: "rating", orderType: "asc" }) }}
@@ -190,7 +189,7 @@ const Filters = () => {
                               Menos rating
                             </Link>
                           </li>
-                          <li>
+                          <li className={`${styles.listItem}`}>
                             <Link
                               to="#"
                               onClick={() => { orderType({ orderBy: "price", orderType: "desc" }) }}
@@ -199,7 +198,7 @@ const Filters = () => {
                               Mayor precio
                             </Link>
                           </li>
-                          <li>
+                          <li className={`${styles.listItem}`}>
                             <Link
                               to="#"
                               onClick={() => { orderType({ orderBy: "price", orderType: "asc" }) }}
@@ -217,7 +216,7 @@ const Filters = () => {
                       className={`${styles.listButton} ${styles.listButtonClick}`}
                       onClick={handleClick4}
                     >
-                      <span className={styles.navLink}>
+                      <span className={`${styles.navLink} ${styles.navLinkPrincipal}`}>
                         Rango de precios
                       </span>
                     </div>
