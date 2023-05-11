@@ -366,3 +366,12 @@ export const setActiveUser = async(data) =>{
   },{merge: true})
 }
 
+// crea o edita una propiedad dentro del usuario logueado
+
+export const setPropsUser = async(prop, uid)=>{
+  const propUserRef = doc(db, 'user', uid)
+  await setDoc(propUserRef,
+    prop
+  ,{merge:true})
+}
+
