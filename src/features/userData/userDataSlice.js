@@ -1,17 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  userData :[],
-  dataAuth :[]
+  userData :{},
+  dataAuth :{}
 }
 
 export const userDataSlice = createSlice({
   name: 'userData',
   initialState,
   reducers: {
-
-    getUserData :(state,action)=>{
-     
+    getUserData :(state,action)=>{     
   state.userData = action.payload;
     },
     userDataAuth : (state,action) =>{
