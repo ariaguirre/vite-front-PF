@@ -90,7 +90,7 @@ const Filters = () => {
               onClick={handleClick1}
             >
               <span className={`${styles.navLink} ${styles.navLinkPrincipal}`}>
-                Categorias
+                <span className={styles.filterIcons}>&#9673;</span> Categorias
               </span>
             </div>
             <ul
@@ -127,7 +127,7 @@ const Filters = () => {
               onClick={handleClick2}
             >
               <span className={`${styles.navLink} ${styles.navLinkPrincipal}`}>
-                Filtros
+                <span className={styles.filterIcons}>&#9673;</span> Filtros
               </span>
             </div>
             <ul
@@ -142,7 +142,7 @@ const Filters = () => {
                       onClick={handleClick3}
                     >
                       <span className={`${styles.navLink} ${styles.navLinkPrincipal}`}>
-                        Ordenamientos
+                      <span className={styles.filterIcons}>&#9673;</span> Ordenamientos
                       </span>
                     </div>
                     <ul
@@ -217,7 +217,7 @@ const Filters = () => {
                       onClick={handleClick4}
                     >
                       <span className={`${styles.navLink} ${styles.navLinkPrincipal}`}>
-                        Rango de precios
+                      <span className={styles.filterIcons}>&#9673;</span> Rango de precios                         
                       </span>
                     </div>
                     <ul
