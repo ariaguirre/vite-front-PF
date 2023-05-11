@@ -7,6 +7,7 @@ import Filters from '../filters/filters'
 
 
 import styles from "./products.module.css"
+import Loader from '../loader/loader'
 
 const Products = () => {
 
@@ -34,7 +35,7 @@ const Products = () => {
                   reviews={products.reviews}
                   stock={products.stock}
                 />
-              )) : (null)
+              )) : <Loader />
             }
           </Grid>
           <Grid  >
