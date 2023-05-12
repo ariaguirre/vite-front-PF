@@ -21,10 +21,11 @@ import cartReducer from '../features/cartSlice/cartSlice'
 const persistConfig = {
   key : 'localCar',
   storage,
-  whitelist: ['carState']
+  whitelist: ['carState', 'userData']
 }
 const localCarReducer = combineReducers({
-  carState : cartSlice
+  carState : cartSlice,
+  userData: userDataSlice
 })
 const persistedReducer = persistReducer(
  persistConfig, localCarReducer
@@ -34,7 +35,7 @@ const persistedReducer = persistReducer(
 export const store = configureStore({
   reducer: {
     currentUser : credentialsReducer,
-    userData : userDataSlice,
+    // userData : userDataSlice,
     products: productSlice,
     productsId: productsIdSlice,
  //   carrito: carritoSlice,
