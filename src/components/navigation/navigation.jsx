@@ -103,7 +103,7 @@ const Navigation = () => {
           <ul className={styles.navigation}>
             <li><Link to="/shop" onClick={handleClick}>Tienda</Link></li>
             {
-              userData ? < LinksNavbar userData={userData} />: <li><Link  to="auth">Ingresar</Link></li>
+              userData ? < LinksNavbar userData={userData} />: <li><Link  onClick={handleClick} to="auth">Ingresar</Link></li>
             }
             <li onClick={handleClickCart}><CartIcon /></li>
           </ul>
