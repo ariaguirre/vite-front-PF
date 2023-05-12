@@ -1,0 +1,19 @@
+.carouselContainer
+{
+  width: 100%;
+  height: 300px;
+  padding-top: 7%;
+  background: url("../../../utils/img/juguetes.jpg") no-repeat;
+  opacity: .8;
+  background-size: cover;
+  background-attachment: fixed;
+  top: 50%;
+}
+.homeCarousel h3
+{
+  position: relative;
+  color: #242424;
+  font-size: 2rem;  
+  background-color: rgba(240, 248, 255, 0.6);
+  padding: 0;
+}

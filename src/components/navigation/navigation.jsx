@@ -105,7 +105,7 @@ const Navigation = () => {
             {
               userCredentials
                 ? <li><Link to="#" onClick={handleClick}><BasicMenu /></Link></li>
-                : <li><Link to="/auth" onClick={handleClick}>Login</Link></li>
+                : <li><Link to="/auth" onClick={handleClick}>Ingresar</Link></li>
             }
             <li onClick={handleClickCart}><CartIcon/></li>
           </ul>

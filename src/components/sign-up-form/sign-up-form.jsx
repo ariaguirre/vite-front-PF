@@ -3,8 +3,11 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
-//import EmailJS
+//EmailJS
 import emailjs from "emailjs-com"
+const USER_ID="service_8duinll"
+const API_KEY="lp4j5eTKXZNYsZ4jM"
+const TEMPLATE_ID="template_cvqj07q"
 //Firebase 
 import {
   createAuthUserWithEmailAndPassword,
@@ -54,10 +57,10 @@ const SignUpForm = () => {
         }
 
         //envio mail de Registro
-        emailjs.send("service_8duinll", "template_cvqj07q", {
+        emailjs.send(USER_ID, TEMPLATE_ID, {
           email: email,
           displayName: displayName
-        }, "lp4j5eTKXZNYsZ4jM")
+        }, API_KEY)
   }
 
   return (

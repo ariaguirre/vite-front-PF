@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 //import React y Redux
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -51,22 +52,31 @@ const AllProducts = () => {
   const dispatch = useDispatch();
 
   const { products } = useSelector((state) => state.products);
-  const [reload, setReload] = useState(false);
   const [currentId, setCurrentId] = useState("");
   const [open, setOpen] = useState(false);
   const handleOpenModal = () => setOpen(true);
   const handleCloseModal = () => setOpen(false);
 
-  const handleDelete = async (id, name) => {
-    if (window.confirm("Estas Seguro de Eliminar el Producto: " + name)) {
-      try {
-        await deleteProductsAdmin(id);
-        alert("Se elimino correctamente");
-        setReload(!reload);
-      } catch (error) {
-        alert("Upss algo falló", "error:", error);
-      }
-    }
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: 'Estas seguro?',
+      text: "No sera posible revertir esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#1ac8db',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Eliminalo!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Eliminado!',
+          'Tu producto ha sido eliminado.',
+          'success'
+        )
+    dispatch(deleteProductsAdmin(id));}
+   
+      
+    })
   };
   const handleEdit = async (id) => {
     setCurrentId(id);
@@ -257,7 +267,7 @@ const AllProducts = () => {
                   <IconButton
                     aria-label="delete"
                     size="small"
-                    onClick={() => handleDelete(row.id, row.name)}
+                    onClick={() => handleDelete(row.id)}
                   >
                     <DeleteIcon fontSize="inherit" color="error" />
                   </IconButton>
