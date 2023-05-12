@@ -10,7 +10,7 @@
 
 .heroContainer .heroBackgroundImg {
   position: absolute;
-  background: url('../../../utils/img/background-baby.jpg') no-repeat;
+  background: url('../../../utils/img/mom-and-baby.jpg') no-repeat;
   background-size: cover;
   background-position: center;
   object-fit: scale-down;
@@ -72,25 +72,26 @@
   border-radius: 2rem ;
   height: 250px;
   width: 500px;
-  background-color: rgba(11, 119, 119, .5);
+  background-color: rgba(11, 119, 119, .2);
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem; 
+  /* padding: 2rem;  */  
 }
 .heroSection .heroLegendContainer span
 {
   text-align: center;
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 1.5rem;  
 }
 .heroSection .heroLegendContainer span p
 {
   margin-top: 2rem;
   color: #EEEEEE;
   text-decoration: underline;
-  text-align: end;
+  text-align: center ;
+  
 }
 .heroSection .heroCallToAction {
   display: flex;

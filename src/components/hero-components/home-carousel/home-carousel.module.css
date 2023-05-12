@@ -3,7 +3,8 @@
   width: 100%;
   height: 300px;
   padding-top: 7%;
-  background: url("../../../utils/img/mom-and-baby.jpg") no-repeat;
+  background: url("../../../utils/img/juguetes.jpg") no-repeat;
+  opacity: .8;
   background-size: cover;
   background-attachment: fixed;
   top: 50%;
