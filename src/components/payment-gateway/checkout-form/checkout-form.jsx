@@ -1,16 +1,18 @@
 import TextField from '@mui/material/TextField'
 import { useForm } from "react-hook-form"
-import PaymentForm from '../payment-form/payment-form'
+// import PaymentForm from '../payment-form/payment-form'
 import Stack from '@mui/material/Stack'
 
 import styles from "./checkout-form.module.css"
-import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { setOrderInf } from '../../../features/userData/userDataSlice'
+import { useNavigate } from 'react-router-dom'
 
 const CheckoutForm = () => {
 
-  const [allData, setAllData] = useState();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   
-
   const checkoutform = useForm({
     defaultValues: {
       name: "",
@@ -28,13 +30,11 @@ const CheckoutForm = () => {
   const { register, handleSubmit, formState: { errors } } = checkoutform;
 
   const onSubmit = (e) => {
-    setAllData(e);
+    dispatch(setOrderInf(e))
+    navigate("/shop/payment");
   }
   return (
-    allData 
-    ? <div>
-      <PaymentForm />
-    </div>  :
+
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <Stack spacing={2}>
         <TextField

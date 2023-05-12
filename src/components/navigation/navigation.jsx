@@ -8,7 +8,7 @@ import searchBtn from "../../utils/svg/search-outline.svg";
 import closeBtn from "../../utils/svg/close-outline.svg";
 import menuBtn from "../../utils/svg/menu-outline.svg";
 //components
-import CartIcon from '../cart-icon/cart-icon';
+import CartIcon from '../payment-gateway/cart-icon/cart-icon';
 import LinksNavbar from './links-navbar/links-navbar';
 import { useDispatch } from 'react-redux';
 import { setPagesActions } from '../../features/productsPagination/productsPaginationSlice';

@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  userData: null  
+  userData: null,   
+  orderInf: null
 };
 
 export const userDataSlice = createSlice({
@@ -10,17 +11,20 @@ export const userDataSlice = createSlice({
   reducers: {
     getUserData: (state, action) => {
       state.userData = action.payload;
-    },
-    userDataAuth: (state, action) => {
-      state.dataAuth = action.payload;
-    },
+    },    
     clearUserData: (state) => {
       state.userData = null;
+    },
+    setOrderInf: (state, action) =>  {
+      state.orderInf = action.payload
+    },
+    clearOrderInf: (state) => {
+      state.orderInf = null
     }
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { getUserData, userDataAuth, clearUserData } = userDataSlice.actions;
+export const { getUserData, clearUserData, setOrderInf, clearOrderInf } = userDataSlice.actions;
 
 export default userDataSlice.reducer;

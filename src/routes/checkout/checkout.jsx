@@ -1,6 +1,6 @@
 import { Container, Typography } from "@mui/material"
 import styles from "./checkout.module.css";
-import CheckoutForm from "../../components/checkout-form/checkout-form";
+import CheckoutForm from "../../components/payment-gateway/checkout-form/checkout-form";
 
 const Checkout = () => {
   return (    

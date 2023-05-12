@@ -8,10 +8,24 @@ import HalfRatingPreview from "../card/rating/rating-preview";
 import ReviewComponent from "../review-component/review-component";
 import IconButton from '@mui/material/IconButton'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart } from "../../features/cartSlice/cartSlice";
+import { useState } from "react";
+import { useEffect } from "react";
 
-const DetailComponent = ({ productDetail }) => {
+const DetailComponent = ({ productDetail }) => {  
+  
+  const [review,setReview] = useState(null);
+  const {userData} = useSelector(state=> state.persistedReducer.userData);
+
+  useEffect(()=> {    
+    if(userData){
+      setReview(userData.onlinePurchases);      
+    }  
+  }, [userData])
+
+  
+
   const {
     name,
     price,
@@ -72,6 +86,9 @@ const DetailComponent = ({ productDetail }) => {
             <NoReview />
         }
       </div>
+      {
+        review && "mostrar botton"
+      }
     </Container>
   )
 }

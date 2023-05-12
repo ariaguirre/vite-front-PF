@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import styles from "./checkout-item.module.css";
-import { clearItemFromCart, addItemToCart, deleteCartItem } from "../../features/cartSlice/cartSlice";
-import { numberFormat } from "../../helper/numberFormat";
+import { clearItemFromCart, addItemToCart, deleteCartItem } from "../../../features/cartSlice/cartSlice";
+import { numberFormat } from "../../../helper/numberFormat";
 import Swal from "sweetalert2";
 
 const CheckoutItem = ({ cartItem }) => {
@@ -11,10 +11,11 @@ const CheckoutItem = ({ cartItem }) => {
 
   const clearItemHandler = () => {
     Swal.fire({
-      title: 'Esta seguro?',
+      title: 'Esta seguro de eliminar este producto?',
       text: "No sera posible revertir esto!",
       icon: 'warning',
       showCancelButton: true,
+      cancelButtonText: "cancelar",
       confirmButtonColor: '#1ac8db',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Si, Eliminalo!'
