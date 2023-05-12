@@ -37,8 +37,11 @@ const App = () => {
   
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  
+
   const getData = async () =>{
-    const snap =  getProducts(a =>{
+    getProducts(a =>{
       const Products = [];
      a.forEach((element )=> {
       const id = element.id;
