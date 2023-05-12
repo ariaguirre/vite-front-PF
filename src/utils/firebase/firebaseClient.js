@@ -92,6 +92,10 @@ export const createUserDocumentFromAuth = async (
         displayName,
         email,
         createdAt,
+        onlinePurchases: [],
+        userData:[],
+        active:true,
+        admin:false,   
         ...additionalInformation,
       });
     } catch (error) {
@@ -132,8 +136,6 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 export const signOutUser = async () => await signOut(auth);
 
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
-
-
 
 //trae Productos existentes
 export const getProducts = async (Products) => {
