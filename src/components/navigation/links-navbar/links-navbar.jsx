@@ -4,12 +4,11 @@ import { clearCart } from "../../../features/cartSlice/cartSlice";
 import { useDispatch } from "react-redux";
 import { clearUserData } from "../../../features/userData/userDataSlice";
 
-const LinksNavbar = ({userData}) =>  {
-
+const LinksNavbar = ({ userData }) => {
   const dispatch = useDispatch();
-  console.log(userData);
 
-  const handleSignOut = () =>  {
+
+  const handleSignOut = () => {
     //Se deslogea de todo 
     signOutUser();
     //Se elimina la informacion del persist
@@ -17,12 +16,13 @@ const LinksNavbar = ({userData}) =>  {
     dispatch(clearUserData());
   }
 
+  return (
+    <>
+      {
+        userData.admin && <li><Link to="/admin">Admin</Link></li>
+      }
 
-
-  return(
-  <>
-     <li><Link to="/admin">Perfil</Link></li>
-     <li onClick={ handleSignOut }><Link>Salir</Link></li>
-  </>)
+      <li onClick={handleSignOut}><Link>Salir</Link></li>
+    </>)
 }
 export default LinksNavbar;
