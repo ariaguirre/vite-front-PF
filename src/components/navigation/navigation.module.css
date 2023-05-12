@@ -1,8 +1,4 @@
-body{  
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-header{
+.header{
   position: sticky;
   top: 0;
   left: 0;

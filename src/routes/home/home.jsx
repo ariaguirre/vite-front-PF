@@ -13,6 +13,7 @@ const Home = () => {
   const userData = useSelector(state => state.persistedReducer.userData.userData)
   const dispatch = useDispatch()
   useEffect(()=>{
+    
     if(Object.keys(userData).length < 1){
       if(uid){
         const dataUser = async() =>{
