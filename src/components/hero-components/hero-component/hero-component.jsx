@@ -11,7 +11,7 @@ const HeroComponent = () => {
         </div>
         <div className={styles.heroLegend}>
           <div className={styles.heroLegendContainer}>
-            <span>Asesoramos a mamitas primerizas en la elección de los mejores productos para su embarazo, lactancia y sus bebés. <p>¡Ahorrándoles horas de investigación!</p></span>
+            <span>Asesoramos a mamitas primerizas en la elección de los mejores productos para su embarazo, lactancia y sus bebés.<p>¡Ahorrándoles horas de investigación!</p></span>
           </div>
         </div>
         <div className={styles.heroCallToAction}>
