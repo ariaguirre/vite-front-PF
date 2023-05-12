@@ -10,10 +10,9 @@ import { getUserData } from "../../features/userData/userDataSlice"
 
 const Home = () => {
   const uid  = useSelector(state=> state.currentUser.userCredentials?.uid)
-  const userData = useSelector(state => state.persistedReducer.userData.userData)
   const dispatch = useDispatch()
+
   useEffect(()=>{
-    if(Object.keys(userData).length < 1){
       if(uid){
         const dataUser = async() =>{
         const info = await getUserByid(uid)
@@ -21,7 +20,7 @@ const Home = () => {
           }
           dataUser()
       }
-    }
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 

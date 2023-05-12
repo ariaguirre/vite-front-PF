@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 
 import noAvialableProduct from "../../utils/img/producto-no-disponible.png";
 import Typography from '@mui/material/Typography'
-import DetailComponent from '../../components/detail-component/detail-component';
+import DetailComponent from '../../components/detail-component/detail/detail-component';
 import { getProductByid } from '../../utils/firebase/firebaseClient';
 import Loader from '../../components/loader/loader';
 

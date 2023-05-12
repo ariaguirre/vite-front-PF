@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import styles from "./cart.module.css"
-import CheckoutItem from '../../components/checkout-item/checkout-item';
+import CheckoutItem from '../../components/payment-gateway/checkout-item/checkout-item';
 import { numberFormat } from '../../helper/numberFormat';
 import { useEffect, useState } from 'react';
 import { setCartTotal, updateInitialState } from '../../features/cartSlice/cartSlice';
