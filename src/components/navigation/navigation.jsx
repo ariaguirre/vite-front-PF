@@ -22,8 +22,8 @@ const Navigation = () => {
   const [isToggleOn, setIsToggleOn] = useState(false);
 
   const { products, productsCopy, productsFilter, productsFilterCopy } = useSelector(state => state.products)
-  const { userCredentials } = useSelector((state) => state.currentUser);
-  
+  const {userData}  = useSelector((state) => state.persistedReducer.userData);
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const location = useLocation()
@@ -103,7 +103,7 @@ const Navigation = () => {
           <ul className={styles.navigation}>
             <li><Link to="/shop" onClick={handleClick}>Tienda</Link></li>
             {
-              userCredentials ? < LinksNavbar />: <li><Link  to="auth">Ingresar</Link></li>
+              userData ? < LinksNavbar userData={userData} />: <li><Link  to="auth">Ingresar</Link></li>
             }
             <li onClick={handleClickCart}><CartIcon /></li>
           </ul>

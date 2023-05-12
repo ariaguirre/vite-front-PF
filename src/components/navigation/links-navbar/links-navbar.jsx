@@ -4,9 +4,10 @@ import { clearCart } from "../../../features/cartSlice/cartSlice";
 import { useDispatch } from "react-redux";
 import { clearUserData } from "../../../features/userData/userDataSlice";
 
-const LinksNavbar = () =>  {
-  const dispatch = useDispatch();
+const LinksNavbar = ({userData}) =>  {
 
+  const dispatch = useDispatch();
+  console.log(userData);
 
   const handleSignOut = () =>  {
     //Se deslogea de todo 
@@ -15,6 +16,7 @@ const LinksNavbar = () =>  {
     dispatch(clearCart());
     dispatch(clearUserData());
   }
+
 
 
   return(

@@ -14,7 +14,8 @@ const Home = () => {
   const dispatch = useDispatch()
   useEffect(()=>{
     
-    if(Object.keys(userData).length < 1){
+    if(!userData){
+
       if(uid){
         const dataUser = async() =>{
         const info = await getUserByid(uid)
