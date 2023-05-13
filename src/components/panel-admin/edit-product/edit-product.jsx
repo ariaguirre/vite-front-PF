@@ -171,3 +171,4 @@ return (
 }
 
 export default EditProduct
+
