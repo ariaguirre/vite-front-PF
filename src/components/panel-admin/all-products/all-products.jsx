@@ -39,8 +39,8 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "100vh",
-
+  width: "80vw",
+  height:"70vh",
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -48,9 +48,7 @@ const style = {
 };
 
 const AllProducts = () => {
-  //const s= styles()
   const dispatch = useDispatch();
-
   const { products } = useSelector((state) => state.products);
   const [currentId, setCurrentId] = useState("");
   const [open, setOpen] = useState(false);
@@ -59,7 +57,7 @@ const AllProducts = () => {
 
   const handleDelete = (id) => {
     Swal.fire({
-      title: 'Estas seguro?',
+      title: 'Estas seguro de Eliminar el Producto?',
       text: "No sera posible revertir esto!",
       icon: 'warning',
       showCancelButton: true,
@@ -81,7 +79,7 @@ const AllProducts = () => {
   const handleEdit = async (id) => {
     setCurrentId(id);
     setOpen(true);
-    console.log("editando ID:" + id);
+
   };
   //bodyModal
   const bodyModal = (
@@ -156,12 +154,35 @@ const AllProducts = () => {
       id: idProduct,
       active: act,
     };
-    try {
-      await setActiveProduct(data);
-      alert("successful");
-    } catch (error) {
-      alert("error", error);
-    }
+    if (!act){
+    Swal.fire({
+      title: 'Desactivar el Producto?',
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: '#1ac8db',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setActiveProduct(data)
+      }
+    })}else{
+      Swal.fire({
+        title: 'Activar el Producto?',
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonText: "Cancelar",
+        confirmButtonColor: '#1ac8db',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Confirmar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setActiveProduct(data)
+        }
+      })
+
+    }    
   };
 
   return (
@@ -212,8 +233,7 @@ const AllProducts = () => {
                 <TableCell align="center">{row.stock}</TableCell>
                 <TableCell align="center">
                   {row.active ? (
-                    <IconButton>
-                      <button
+                    <IconButton                     
                         onClick={() => handlerActive(row.id, false)}
                         className={s.disable}
                       >
@@ -231,11 +251,9 @@ const AllProducts = () => {
                           <path d="M18.36 6.64a9 9 0 1 1-12.73 0" />
                           <path d="M12 2v10" />
                         </svg>
-                      </button>
                     </IconButton>
                   ) : (
-                    <IconButton>
-                      <button
+                    <IconButton
                         onClick={() => handlerActive(row.id, true)}
                         className={s.active}
                       >
@@ -253,7 +271,7 @@ const AllProducts = () => {
                           <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
                           <path d="M22 4 12 14.01l-3-3" />
                         </svg>
-                      </button>
+                     
                     </IconButton>
                   )}
 
