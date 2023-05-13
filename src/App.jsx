@@ -1,8 +1,8 @@
 //React
 import { useEffect } from "react";
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 //Redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "./features/userCredentials/userCredentialsSlice";
 // Routes
 import Home from "./routes/home/home";
@@ -12,73 +12,82 @@ import RequireAuth from "./components/require-auth/require-auth";
 import LandingPage from "./routes/landing-page/landing-page";
 import Authentication from "./routes/authentication/authentication";
 //Firebase
-import { createUserDocumentFromAuth, getCategories, getProducts, onAuthStateChangedListener } from "./utils/firebase/firebaseClient";
+import {
+  createUserDocumentFromAuth,
+  getCategories,
+  getProducts,
+  onAuthStateChangedListener,
+} from "./utils/firebase/firebaseClient";
 import Error from "./routes/404/404";
 import DetailProduct from "./routes/detail/ProductDetail";
-import { getProductsActions, productsCopy } from "./features/products/productSlice";
-import  { getCategoriesAction } from "./features/categories/categoriesSlice";
+import {
+  getProductsActions,
+  productsCopy,
+} from "./features/products/productSlice";
+import { getCategoriesAction } from "./features/categories/categoriesSlice";
 import SignUp from "./routes/authentication/signUp";
-
+import User from "./components/panel-admin/user/User";
+import UserProfile from "./routes/userProfile/userProfile";
 
 const App = () => {
   const dispatch = useDispatch();
-  
+  const { userData } = useSelector((state) => state.persistedReducer.userData);
 
-  useEffect(()=>{
-    const unsubscribe = onAuthStateChangedListener((user)=> {
-      if(user){
+  useEffect(() => {
+    const unsubscribe = onAuthStateChangedListener((user) => {
+      if (user) {
         createUserDocumentFromAuth(user);
-      }   
+      }
 
-      dispatch(setCurrentUser(user))      
-    })
-    getData()
+      dispatch(setCurrentUser(user));
+    });
+    getData();
     return unsubscribe;
-  
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
-  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const getData = async () =>{
-    getProducts(a =>{
+  const getData = async () => {
+    getProducts((a) => {
       const Products = [];
-     a.forEach((element )=> {
-      const id = element.id;
-      const data = element.data()
-      Products.push({
-        id,
-        ...data
-      })
-     });
-     dispatch(getProductsActions(Products))
-     dispatch(productsCopy(Products))
-    })
+      a.forEach((element) => {
+        const id = element.id;
+        const data = element.data();
+        Products.push({
+          id,
+          ...data,
+        });
+      });
+      dispatch(getProductsActions(Products));
+      dispatch(productsCopy(Products));
+    });
     let category = await getCategories();
-    dispatch(getCategoriesAction(category))
-  
-  
-  }
+    dispatch(getCategoriesAction(category));
+  };
 
   return (
-    <Routes>    
-      <Route path="/" element={<LandingPage/>}>
+    <Routes>
+      <Route path="/" element={<LandingPage />}>
         <Route index element={<Home />} />
         <Route path="auth" element={<Authentication />} />
-        <Route path="sign-up" element={<SignUp/>} />
-        <Route path="shop/*" element={<Shop />} />                
-        <Route path="detail/:id" element={<DetailProduct/>}/>        
+        <Route path="sign-up" element={<SignUp />} />
+        <Route path="shop/*" element={<Shop />} />
+        <Route path="detail/:id" element={<DetailProduct />} />
+        <Route path="perfil" element={<UserProfile/>} />
       </Route>
-      <Route path="/admin" element={
-          <RequireAuth>
-            <Admin/>
-          </RequireAuth>
-        }/>
+      {userData?.admin && (
+        <Route
+          path="/admin"
+          element={
+            <RequireAuth>
+              <Admin />
+            </RequireAuth>
+          }
+        />
+      )}
       <Route path="*" element={<Error />} />
     </Routes>
-      
-    
-  )
-}
+  );
+};
 
 export default App;
