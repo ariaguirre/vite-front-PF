@@ -247,14 +247,17 @@ export const getOrdersAdmin = async () => {
 
 //---- trae pedidos por id
 export const getOrderByid = async (id) => {
-  const orders = [];
-  const docRef = doc(db, "Orders", id);
+  
+  const products = [];
+  const docRef = doc(db, "Orders",id);
   const docSnap = await getDoc(docRef);
-  orders.push({
-    id,
-    ...docSnap.data(),
-  });
-  return orders;
+const dataOrder = docSnap.data();
+  docSnap.data().products.forEach(pro =>{
+ 
+    products.push(pro)
+  })
+console.log(dataOrder);
+  return {dataOrder, products}
 };
 
 // actualiza status de pedidos
