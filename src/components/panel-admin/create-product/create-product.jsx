@@ -3,7 +3,7 @@ import {useState, useEffect} from 'react';
 import { postProductsAdmin, getCategories } from '../../../utils/firebase/firebaseClient';
 import { getCategoriesAction } from  "../../../features/categories/categoriesSlice" 
 import Images from  "../../images/images"
-
+import { useForm } from 'react-hook-form';
 
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
@@ -32,7 +32,24 @@ const CreateProduct = () => {
     rating: 0,
     sale: {},
     active: true
-});
+  });
+
+  
+  const productform = useForm({
+      defaultValue:{
+        name: '',
+        description: '',
+        stock: 0,
+        price: 0,
+        categories: [],
+        imageUrl: [],
+      }
+    })
+    
+    const {register, handleSubmit, formState:{ errors }} = productform;
+  
+  
+
 
   const handleChange =  (event) => {
     const property = event.target.name;
@@ -68,7 +85,7 @@ useEffect(()=>{
   })
 }, [urlImages])
 
-const handleSubmit = async (e) => {
+const onSubmit = async (e) => {
   e.preventDefault();
   const data = product
   try{
@@ -92,7 +109,7 @@ const handleSubmit = async (e) => {
         <Grid item md={5} sm={12} justifyItems={"center"}>
         <Typography variant="h6" color="initial" align='center'>AGREGAR PRODUCTO</Typography>
           <Grid container justifyContent={"center"}>
-            <FormControl variant='standard' fullWidth align="center">
+            <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <Stack spacing={2}>
             <TextField
             label='Nombre'
@@ -101,6 +118,9 @@ const handleSubmit = async (e) => {
             required
             name='name'
             margin='dense'
+            {...register("name", {required: 'Ingrese el nombre del producto'})}
+            error={!!errors.name}
+            helperText={errors.name?.message}
           />   
             <TextField
             label='Descripcion'
@@ -114,6 +134,9 @@ const handleSubmit = async (e) => {
             }}
             multiline
             rows={3}
+            {...register("description", {required: 'Ingrese la descripción del producto'})}
+            error={!!errors.description}
+            helperText={errors.description?.message}
           />   
             <TextField
             label='Stock'
@@ -122,6 +145,9 @@ const handleSubmit = async (e) => {
             required
             name='stock'
             margin='dense'
+            {...register("stock", {required: 'Ingrese la cantidad de producto disponible', min:1})}
+            error={!!errors.stock}
+            helperText={errors.stock?.message}
           />   
             <TextField
             label='Precio'
@@ -130,14 +156,19 @@ const handleSubmit = async (e) => {
             required
             name='price'
             margin='dense'
+            {...register("price", {required:'ingrese el precio de venta del producto', min:0})}
+            error={!!errors.price}
+            helperText={errors.price?.message}
           /> 
             <TextField
             label='Select'
             select
             defaultValue=''
             name='category'
-            helperText='Selecciona una categoría'
             onChange={handleSelect}
+            {...register("categories", {required:'Seleccione una categoria'})}
+            error={!!errors.categories}
+            helperText={errors.categories?.message}
             >
                 {
                   dataCategories?.categories?.map((ele, index)=> (
@@ -160,7 +191,7 @@ const handleSubmit = async (e) => {
             <Images setUrlImages={setUrlImages}/>
             <Button type='submit' variant='contained' onClick={handleSubmit} fullWidth>Listo</Button>
             </Stack>
-            </FormControl>
+            </form>
           </Grid>       
         </Grid>
       </Grid>
