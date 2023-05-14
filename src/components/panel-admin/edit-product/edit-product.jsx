@@ -1,170 +1,167 @@
-import { FormControl, Grid, ImageList, ImageListItem, MenuItem, Stack, TextField, Typography  } from '@mui/material';
+import Swal from "sweetalert2";
+//import react / redux
 import {useState, useEffect} from 'react';
-import { postProductsAdmin, getCategories } from '../../../utils/firebase/firebaseClient';
-import { getCategoriesAction } from  "../../../features/categories/categoriesSlice" 
+//import firebase
+import {getProductByid, updateProduct } from '../../../utils/firebase/firebaseClient';
+//import material ui
+import { Grid, Typography, Stack, TextField, ImageList, Button, ImageListItem, MenuItem, Divider } from '@mui/material';
 import Images from  "../../images/images"
 
 
-import { useDispatch, useSelector } from 'react-redux';
-import Button from '@mui/material/Button';
 
-const EditProduct = (id) => {
+const EditProduct = ({id}) => {
 
   
-  const [urlImages, setUrlImages] = useState([]);
-  const dispatch = useDispatch()
+ const [product, setProduct] = useState();
 
-  const dataCategories = useSelector(state => state.categories)
+useEffect(() => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  getProduct(id);
+}, [id])
 
-  const [product, setProduct] = useState({
-    name: '',
-    description: '',
-    stock: 0,
-    price: 0,
-    categories: [],
-    imageUrl: [],
-    reviews: [{
-      date:'',
-      rating: 0,
-      review:'',
-      user:''
-    }],
-    rating: 0,
-    sale: {},
-    active: true
-});
-
-  const handleChange =  (event) => {
-    const property = event.target.name;
-    const value = event.target.value;
-    setProduct({
-        ...product,
-        [property] : value
-    })
+const getProduct = async (id) => {
+  try {
+    const product = await getProductByid(id)
+    setProduct(product[0])
+  } catch (error) {
+    console.error(error);
+  }
 }
-
-const handleSelect =(event) => {
+const handleChange =  (event) => {
+  const property = event.target.name;
+  const value = event.target.value;
   setProduct({
       ...product,
-      categories: [event.target.value]
+      [property] : value
   })
 }
-
- useEffect(() => {
-  const getCat = async() => {
-    const result = await getCategories()
-    dispatch(getCategoriesAction(result))
-  };
-  getCat()
-}, [])
-
- 
-
-useEffect(()=>{
-  if(urlImages.length < 1) return;
-  setProduct({
-    ...product,
-    imageUrl: [...product.imageUrl, urlImages]
-  })
-}, [urlImages])
-
 const handleSubmit = async (e) => {
   e.preventDefault();
   const data = product
   try{
-      await postProductsAdmin(data)
-        alert('Se agregó correctamente')
+      await updateProduct(data)
+      Swal.fire({
+        icon: 'success',
+        title: 'Listo!',
+        text: 'El Producto ha sido modificado correctamente',
+        
+      })
   } catch(error){
-   alert('Upss algo falló','error:',error)
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Ocurrio un error... intentalo nuevamente',
+      
+    })
   }
-}
+  }
+
 
 
 return (
-<div>      
+<div>     
 <Grid
- container
- justifyContent='center'
- alignItems={'start'}
- sx={{ minHeight: '100vh' }}
- marginTop={3}
+container
+justifyContent='center'
+alignItems={'start'}
+sx={{ minHeight: '100vh' }}
+marginTop={3}
 > 
-<Grid item md={5} sm={12} justifyItems={"center"}>
-<Typography variant="h6" color="initial" align='center'>MODIFICAR PRODUCTO</Typography>
-<Grid container justifyContent={"center"}>
-<FormControl variant='standard' fullWidth align="center">
-<Stack spacing={2}>
-<TextField
-  label='Nombre'
-  type='text'
-  onChange={handleChange}
-  required
-  name='name'
-  margin='dense'
-/>   
-<TextField
- label='Descripcion'
- type='text'
- onChange={handleChange}
- required
- name='description'
- margin='dense'
- inputProps={{
- style: {height: 60},
-}}
- multiline
- rows={3}
-/>   
-<TextField
- label='Stock'
- type='number'
- onChange={handleChange}
- required
-  name='stock'
- margin='dense'
-/>   
-<TextField
- label='Precio'
- type='number'
- onChange={handleChange}
- required
- name='price'
- margin='dense'
-/> 
-<TextField
- label='Select'
- select
- defaultValue=''
- name='category'
- helperText='Selecciona una categoría'
- onChange={handleSelect}
- >
-{
- dataCategories?.categories?.map((ele, index)=> (
-<MenuItem key={index} value={ele.categories}>
- {ele.categories}
-</MenuItem>
- ))}
-</TextField>
- {product.imageUrl.length > 0 ? <ImageList sx={{ minHeight: '25vh'}} cols={3} rowHeight={164}>
-{
-  product.imageUrl?.map((item, i)=>(
-<ImageListItem key={i}>
-<img
- src={`${item}?w=100&h=100&fit=crop&auto=format`}
-/>
-</ImageListItem>
-))
-}
-</ImageList> : null }
-<Images setUrlImages={setUrlImages}/>
-<Button type='submit' variant='contained' onClick={handleSubmit} fullWidth>Listo</Button>
-</Stack>
-</FormControl>
-</Grid>       
-</Grid>
+<Grid justifyItems={"center"}>
+  <Typography variant="h6" color="initial" align='center'>MODIFICAR PRODUCTO</Typography>
+ 
+<Divider/>
+<Grid  justifyContent={"center"} ml={8}>
+      <form onSubmit={handleSubmit} noValidate>
+      <h2>{product?.name}</h2>
+      <TextField 
+      label='Modificar Nombre...'
+      type='text'
+      // value={product?.name}
+      onChange={handleChange}
+      required
+      name='name'
+      margin='dense'
+      fullWidth
+     
+    />
+    <h5>{product?.description}</h5>
+      <TextField
+      label='Modificar Descripcion...'
+      type='text'
+      // value={product?.description}
+      onChange={handleChange}
+      required
+      name='description'
+      margin='dense'
+      fullWidth
+      inputProps={{
+        style: {height: 60},
+      }}
+      multiline
+      rows={3}
+     
+    />  
+      <h4>Stock Actual: {product?.stock} </h4>
+      <TextField
+      label='Modificar Stock...'
+      type='number'
+      // value={product?.stock}
+      onChange={handleChange}
+      required
+      name='stock'
+      margin='dense'
+      
+      fullWidth
+      
+    />  
+    <h4>${product?.price}</h4> 
+      <TextField
+      label='Modificar Precio...'
+      type='number'
+      // value={product?.price}
+      onChange={handleChange}
+      required
+      name='price'
+      margin='dense'
+      fullWidth
+      
+    /> 
+      {/* <TextField
+      label='Select'
+      select
+      defaultValue=''
+      name='category'
+      onChange={handleSelect}
+      
+      > */}
+          {/* {
+            dataCategories?.categories?.map((ele, index)=> (
+              <MenuItem key={index} value={ele.categories}>
+                {ele.categories}
+              </MenuItem>
+          ))}
+      </TextField>
+      {product.imageUrl.length > 0 ? <ImageList sx={{ minHeight: '25vh'}} cols={3} rowHeight={164}>
+          {
+            product.imageUrl?.map((item, i)=>(
+              <ImageListItem key={i}>
+                <img
+                src={`${item}?w=100&h=100&fit=crop&auto=format`}
+                />
+              </ImageListItem>
+            ))
+          }
+      </ImageList> : null }
+      <Images setUrlImages={setUrlImages}/> */}
+      <Button type='submit' variant='contained' onClick={handleSubmit} fullWidth>Listo</Button>
+    
+      </form>
+    </Grid>       
+  </Grid>
 </Grid>
 </div>
+
  );
       
 

@@ -117,8 +117,8 @@ const SideBar = () =>  {
   const handleAddProduct = () => {
     setContent(<CreateProduct onShowList={handleShowList} />);
   };
-  const handleEditProduct = () => {
-    setContent(<EditProduct onShowList={handleShowList} />);
+  const handleEditProduct = (id) => {
+    setContent(<EditProduct id={id} onShowList={handleShowList} />);
   };
 
   const handleShowList = () => {
