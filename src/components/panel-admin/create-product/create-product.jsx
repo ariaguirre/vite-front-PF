@@ -97,9 +97,9 @@ const onSubmit = async (e) => {
     <div>      
       
         <Container maxWidth="lg" sx={{mt:"2rem"}}>
-        <Typography variant="h6" color="initial" align='center'>AGREGAR PRODUCTO</Typography>
 
-            <form onSubmit={handleSubmit(onSubmit)} noValidate>
+            <form onSubmit={handleSubmit(onSubmit)} className={styles.center} noValidate>
+        <Typography variant="h6" color="initial" align='center'>AGREGAR PRODUCTO</Typography>
           <div className={styles.contenedor}>
             <TextField
             label='Nombre'
