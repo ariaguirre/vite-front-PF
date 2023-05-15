@@ -241,7 +241,7 @@ export const getOrdersAdmin = async () => {
       ...datos,
     });
   });
-  console.log(orders);
+  // console.log(orders);
   return orders;
 };
 

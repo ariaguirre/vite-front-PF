@@ -26,8 +26,8 @@ import {
 } from "./features/products/productSlice";
 import { getCategoriesAction } from "./features/categories/categoriesSlice";
 import SignUp from "./routes/authentication/signUp";
-import User from "./components/panel-admin/user/User";
-import UserProfile from "./routes/userProfile/userProfile";
+// import User from "./components/panel-admin/user/User";
+import UserProfile from "./routes/userProfile/UserProfile";
 
 const App = () => {
   const dispatch = useDispatch();
