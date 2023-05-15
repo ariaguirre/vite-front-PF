@@ -1,20 +1,23 @@
-import { Box,
-         Typography } from '@mui/material'
+
+import styles from "../orders/ventasTotales.module.css"
+import { getOrdersAdmin } from "../../../utils/firebase/firebaseClient"
+
 
 const ventasTotales = () => {
+
+
+  const allOrders = getOrdersAdmin()
+
+  console.log(allOrders)
   return (
     <div >
-    {/* <Box component="main"
-    sx={{ width: '50%',alignContent:"center", display: 'flex',
-    justifyContent: 'center', mx:"25%", mt:"2%"}}
-     textAlign={"center"}
-     boxShadow={3}
-     alignContent={"center"}
-     bgcolor={"primary"} 
-     >
-    <Typography variant="h6" color="initial" align='center'>TUS VENTAS</Typography>
-    </Box> */}
-    <h1>ventas</h1>
+    <h1 className={styles.title}>Ventas</h1>
+
+    <div>
+      
+    </div>
+
+
     </div>
   )
 }
