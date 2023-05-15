@@ -18,8 +18,7 @@ const CheckoutForm = () => {
       lastName: "",
       company: "",
       country: "",
-      streetA: "",
-      streetB: "",
+      streetA: "",    
       ZIPcode: "",
       phone: "",
       email: "",
@@ -86,15 +85,6 @@ const CheckoutForm = () => {
           {...register("streetA", { required: "Ingrese la calle del destinatario", maxLength: 20, minLength:3 })}
           error={!!errors.streetA}
           helperText={errors.streetA?.message}
-        />
-        <TextField
-          label="Altura"
-          type="text"
-          autoComplete=""
-          required
-          {...register("streetB", { required: "Ingrese la altura del destinatario", maxLength: 10, minLength:2 })}
-          error={!!errors.streetB}
-          helperText={errors.streetB?.message}
         />
         <TextField
           label="Codigo postal "
