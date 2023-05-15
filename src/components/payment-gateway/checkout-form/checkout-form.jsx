@@ -34,7 +34,6 @@ const CheckoutForm = () => {
     navigate("/shop/payment");
   }
   return (
-
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <Stack spacing={2}>
         <TextField
