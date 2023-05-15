@@ -1,10 +1,10 @@
-import { FormControl, Grid, ImageList, ImageListItem, MenuItem, Stack, TextField, Typography  } from '@mui/material';
+import { Container, ImageList, ImageListItem, MenuItem, TextField, Typography  } from '@mui/material';
 import {useState, useEffect} from 'react';
 import { postProductsAdmin, getCategories } from '../../../utils/firebase/firebaseClient';
 import { getCategoriesAction } from  "../../../features/categories/categoriesSlice" 
 import Images from  "../../images/images"
 import { useForm } from 'react-hook-form';
-
+import styles from "../create-product/create-product.module.css";
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
 
@@ -46,10 +46,7 @@ const CreateProduct = () => {
       }
     })
     
-    const {register, handleSubmit, formState:{ errors }} = productform;
-  
-  
-
+  const {register, handleSubmit, formState:{ errors }} = productform;
 
   const handleChange =  (event) => {
     const property = event.target.name;
@@ -76,7 +73,6 @@ const handleSelect =(event) => {
 }, [])
 
  
-
 useEffect(()=>{
   if(urlImages.length < 1) return;
   setProduct({
@@ -99,18 +95,12 @@ const onSubmit = async (e) => {
 
   return (
     <div>      
-      <Grid
-      container
-      justifyContent='center'
-      alignItems={'start'}
-      sx={{ minHeight: '100vh' }}
-      marginTop={3}
-      > 
-        <Grid item md={5} sm={12} justifyItems={"center"}>
+      
+        <Container maxWidth="lg" sx={{mt:"2rem"}}>
         <Typography variant="h6" color="initial" align='center'>AGREGAR PRODUCTO</Typography>
-          <Grid container justifyContent={"center"}>
+
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          <Stack spacing={2}>
+          <div className={styles.contenedor}>
             <TextField
             label='Nombre'
             type='text'
@@ -190,11 +180,10 @@ const onSubmit = async (e) => {
             </ImageList> : null }
             <Images setUrlImages={setUrlImages}/>
             <Button type='submit' variant='contained' onClick={handleSubmit} fullWidth>Listo</Button>
-            </Stack>
+            </div>
             </form>
-          </Grid>       
-        </Grid>
-      </Grid>
+                
+        </Container>
       </div>
   );
       
