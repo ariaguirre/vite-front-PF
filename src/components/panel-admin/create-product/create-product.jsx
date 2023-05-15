@@ -7,9 +7,9 @@ import { useForm } from 'react-hook-form';
 import styles from "../create-product/create-product.module.css";
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
+import Swal from "sweetalert2";
 
 const CreateProduct = () => {
-
   
   const [urlImages, setUrlImages] = useState([]);
   const dispatch = useDispatch()
@@ -47,7 +47,7 @@ const CreateProduct = () => {
     })
     
   const {register, handleSubmit, formState:{ errors }} = productform;
-
+ 
   const handleChange =  (event) => {
     const property = event.target.name;
     const value = event.target.value;
@@ -82,13 +82,28 @@ useEffect(()=>{
 }, [urlImages])
 
 const onSubmit = async (e) => {
-  e.preventDefault();
-  const data = product
+  //e.preventDefault();
+  const data = {...product,
+          ...e}
+  
+ 
   try{
-      await postProductsAdmin(data)
-        alert('Se agregó correctamente')
-  } catch(error){
-   alert('Upss algo falló','error:',error)
+     await postProductsAdmin(data)
+     Swal.fire({
+      icon: 'success',
+      title: 'Listo!',
+      text: 'Creaste el Producto Correctamente :)',
+      
+      
+    })
+    productform.reset();
+} catch(error){
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: 'Ocurrio un error... intentalo nuevamente :(',
+    
+  })
   }
 }
 
