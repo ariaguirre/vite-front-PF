@@ -1,4 +1,4 @@
-import { Container, ImageList, ImageListItem, MenuItem, TextField, Typography  } from '@mui/material';
+import { Container, ImageList, ImageListItem, MenuItem, TextField  } from '@mui/material';
 import {useState, useEffect} from 'react';
 import { postProductsAdmin, getCategories } from '../../../utils/firebase/firebaseClient';
 import { getCategoriesAction } from  "../../../features/categories/categoriesSlice" 
@@ -99,7 +99,7 @@ const onSubmit = async (e) => {
         <Container maxWidth="lg" sx={{mt:"2rem"}}>
 
             <form onSubmit={handleSubmit(onSubmit)} className={styles.center} noValidate>
-        <Typography variant="h6" color="initial" align='center'>AGREGAR PRODUCTO</Typography>
+        <h1 className={styles.title}>AGREGAR PRODUCTO</h1>
           <div className={styles.contenedor}>
             <TextField
             label='Nombre'
