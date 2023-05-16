@@ -8,6 +8,7 @@ import setDataUser from "../../../helper/setDataUser";
 import CheckoutItem from "../../../components/payment-gateway/checkout-item/checkout-item"
 import { setCartTotal, updateInitialState } from '../../../features/cartSlice/cartSlice'
 import { useEffect, useState } from 'react';
+import Swal from "sweetalert2";
 
 
 
@@ -65,7 +66,11 @@ const PaymentForm = () => {
     });
 
     if (paymentResult.error) {
-      alert(paymentResult.error.message);
+      Swal.fire({
+        title:'Ocurrió un error!',
+        text: paymentResult.error.message,
+        icon: 'warning',
+      })
     } else {
       if (paymentResult.paymentIntent.status === "succeeded") {
         
@@ -74,7 +79,11 @@ const PaymentForm = () => {
           await setDataUser("onlinePurchases", cartItems, uid );
         }
         updateDataUser();
-        alert("Pago exitoso gracias por su compra!");
+        Swal.fire({
+          title:'Pago exitoso!',
+          icon: 'success',
+          showCancelButton: true,
+        })
         navigate("/");
         dispatch(clearCart());
       }
