@@ -30,6 +30,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 //import componentes
+import EditProduct from '../edit-product/edit-product';
 import CreateProduct from "../create-product/create-product";
 import AllProducts from '../all-products/all-products';
 import VentasTotales from '../orders/ventasTotales';
@@ -112,7 +113,20 @@ const SideBar = () =>  {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const isLargeScreen = useMediaQuery(theme => theme.breakpoints.up('sm')); //para manejar drawer visble/oculto responsive
-  const [content, setContent] = useState(<Inicio />) //estado local para manejar contenido dinamico
+  
+  const handleAddProduct = () => {
+    setContent(<CreateProduct onShowList={handleShowList} />);
+  };
+  const handleEditProduct = (id) => {
+    setContent(<EditProduct id={id} onShowList={handleShowList} />);
+  };
+
+  const handleShowList = () => {
+    setContent(<AllProducts onAddProduct={handleAddProduct} />);
+  };
+  
+  const [content, setContent] = useState((<Inicio />))//estado local para manejar contenido dinamico
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -127,6 +141,7 @@ const SideBar = () =>  {
   useEffect(() => {
     setOpen(isLargeScreen);
   }, [isLargeScreen]);
+
 
   return (
   <Box sx={{ display: 'flex' }}>
@@ -181,7 +196,7 @@ const SideBar = () =>  {
 
   <ListItem>
   <ListItemButton
-    onClick={() => handleItemClick(<AllProducts />)}
+    onClick={() => handleItemClick(<AllProducts onAddProduct={handleAddProduct} onEditProduct={handleEditProduct}/>)}
     sx={{
     minHeight: 48,
     justifyContent: open ? 'initial' : 'center',

@@ -37,13 +37,13 @@ const DetailProduct = () => {
 
     product.active
       ?
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" sx={{marginTop:"80px"}}>
         <div className={styles.detailContainer}>
           <DetailComponent productDetail = {product} />
         </div>
       </Container>
       :
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" sx={{marginTop:"80px"}}>
         <div className={styles.detailContainer}>
           <h2>Producto no displonible</h2>
           <img src={noAvialableProduct} alt="noAvialableProduct" />
