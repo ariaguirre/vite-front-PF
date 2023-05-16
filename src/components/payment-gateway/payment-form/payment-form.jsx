@@ -5,16 +5,29 @@ import { clearCart } from "../../../features/cartSlice/cartSlice";
 import { numberFormat } from "../../../helper/numberFormat";
 import { useNavigate } from "react-router-dom";
 import setDataUser from "../../../helper/setDataUser";
-import Cart from "../../../routes/cart/cart"
 import CheckoutItem from "../../../components/payment-gateway/checkout-item/checkout-item"
+import { setCartTotal, updateInitialState } from '../../../features/cartSlice/cartSlice'
+import { useEffect, useState } from 'react';
+
 
 
 const PaymentForm = () => {
+
+  const cartItems = useSelector(state => state.persistedReducer.carState.cartItems);
+
+  const [total, setTotal] = useState(0);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const newCartTotal = cartItems.reduce((total, cartItem) => total + cartItem.quantity * cartItem.price, 0)
+    setTotal(newCartTotal);
+    dispatch(setCartTotal(newCartTotal));
+    dispatch(updateInitialState(cartItems))
+  }, [cartItems])
+
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const {cartTotal, cartItems} = useSelector(state => state.persistedReducer.carState);
   const currentUser = useSelector(state => state.persistedReducer.userData.userInf)
   const uid = useSelector(state => state.currentUser.userCredentials.uid);
 
@@ -24,11 +37,13 @@ const PaymentForm = () => {
       return;
     }
 
-  const cartItems = useSelector(state => state.persistedReducer.carState.cartItems);
-  
-  // const cartItems = {
 
-  // }
+  useEffect(() => {
+    const newCartTotal = cartItems.reduce((total, cartItem) => total + cartItem.quantity * cartItem.price, 0)
+    setTotal(newCartTotal);
+    dispatch(setCartTotal(newCartTotal));
+    dispatch(updateInitialState(cartItems))
+  }, [cartItems])
 
     const response = await fetch('/.netlify/functions/create-payments-intent', {
       method: 'post',
@@ -69,7 +84,7 @@ const PaymentForm = () => {
 
   return (
     <div>
-        <h2>Datos de pago</h2>
+        <h2>Detalles del pago</h2>
     <div className={styles.PaymentFormContainer} >
       <div className={styles.cardContainer}>
       <div className={styles.paymentFormHeader}>
@@ -88,7 +103,7 @@ const PaymentForm = () => {
       {cartItems?.map((cartItem, index) => (
         <CheckoutItem key={cartItem.id + index} cartItem ={cartItem} />
         ))}
-        <span className={styles.total}>Total a pagar <span> {numberFormat(cartTotal)}</span> USD</span>
+        <span className={styles.total}>Total a pagar <span> {numberFormat(total)}</span> USD</span>
         </div>
     </div>
     </div>
