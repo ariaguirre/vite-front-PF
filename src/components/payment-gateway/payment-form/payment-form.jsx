@@ -5,6 +5,9 @@ import { clearCart } from "../../../features/cartSlice/cartSlice";
 import { numberFormat } from "../../../helper/numberFormat";
 import { useNavigate } from "react-router-dom";
 import setDataUser from "../../../helper/setDataUser";
+import Cart from "../../../routes/cart/cart"
+import CheckoutItem from "../../../components/payment-gateway/checkout-item/checkout-item"
+
 
 const PaymentForm = () => {
   const stripe = useStripe();
@@ -20,6 +23,12 @@ const PaymentForm = () => {
     if (!stripe || !elements) {
       return;
     }
+
+  const cartItems = useSelector(state => state.persistedReducer.carState.cartItems);
+  
+  // const cartItems = {
+
+  // }
 
     const response = await fetch('/.netlify/functions/create-payments-intent', {
       method: 'post',
@@ -59,19 +68,29 @@ const PaymentForm = () => {
 
 
   return (
+    <div>
+        <h2>Datos de pago</h2>
     <div className={styles.PaymentFormContainer} >
-
+      <div className={styles.cardContainer}>
       <div className={styles.paymentFormHeader}>
-        <h2>Ingrese sus datos de pago</h2>
-        <span>Total a pagar <span> {numberFormat(cartTotal)}</span> USD</span>
       </div>
       <form className={styles.FormContainer} onSubmit={paymentHandler} id="creditCardForm" >
-        <h4>Credit card</h4>
+        <h4>Card</h4>
         <div className={styles.creditCardContainer}>
           <CardElement />
         </div>
       </form>
-      <button form="creditCardForm" type="submit" className={styles.btn}>Pagar ahora</button>
+
+        <br/>
+      <button form="creditCardForm" type="submit" className={styles.btn}>Pagar</button>
+        </div>
+      <div className={styles.cartContainer}>
+      {cartItems?.map((cartItem, index) => (
+        <CheckoutItem key={cartItem.id + index} cartItem ={cartItem} />
+        ))}
+        <span className={styles.total}>Total a pagar <span> {numberFormat(cartTotal)}</span> USD</span>
+        </div>
+    </div>
     </div>
   )
 }
