@@ -240,8 +240,6 @@ export const getOrdersAdmin = async (orders) => {
  onSnapshot(q, (orders));
 
 
-
-
 };
 
 //---- trae pedidos por id
