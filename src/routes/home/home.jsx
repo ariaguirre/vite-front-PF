@@ -29,6 +29,7 @@ return (
       <HeroComponent />
       <ProductsByRaiting />
       <HomeCarousel />
+      <br />
       <ProductsBySale />           
   </>     
   )

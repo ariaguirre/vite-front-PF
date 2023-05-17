@@ -89,13 +89,13 @@ export const createUserDocumentFromAuth = async (
     try {
       //Set it inside our data base
       await setDoc(userDocRef, {
-        displayName,
-        email,
-        createdAt,
-        onlinePurchases: [],
-        userData:[],
         active:true,
         admin:false,   
+        createdAt,
+        displayName,
+        email,
+        onlinePurchases: [],
+        userData:{},
         ...additionalInformation,
       });
     } catch (error) {
@@ -241,7 +241,7 @@ export const getOrdersAdmin = async () => {
       ...datos,
     });
   });
-  console.log(orders);
+  // console.log(orders);
   return orders;
 };
 
