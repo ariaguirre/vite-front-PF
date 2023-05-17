@@ -261,8 +261,7 @@ const dataOrder = docSnap.data();
 export const orderuser = async(previousOrder, newOrder) =>{   
 const docRef = doc(db,"user",previousOrder.idClient)
 const ordRef = doc(db,"Orders",previousOrder.id_order)
-console.log("si llegfop");
-/* await updateDoc(docRef, {
+ await updateDoc(docRef, {
   onlinePurchases: arrayRemove({
     date : previousOrder.date,
     id_order :previousOrder.id_order,
@@ -304,7 +303,7 @@ export const updateOrder = async (data) => {
     userEmail: data.userEmail,
     userAddress: data.userAddress,
     orderTracking: data.orderTracking,
-  }); */
+  }); 
 };
 
 /// //funcionalidades para traer categorias
