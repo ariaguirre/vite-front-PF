@@ -1,13 +1,30 @@
+.perfil{
+    display: flex;
+    justify-content: center;
+    max-width: 100vw;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+}
 
 h1{
     padding-top: 1rem;
     text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
 }
 
 h3{
     text-align: center;
     text-transform: uppercase ;
-    padding-bottom:2rem ;   
+    padding-bottom:2rem ;  
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif; 
 }
 
 .margin{
@@ -15,34 +32,76 @@ h3{
     padding: 1rem 0;
 }
 
-.basePerfil{
-    padding:1rem;
-    color:wheat
-}
 
 .imgUsuario{
-    max-width: 500px;
+    max-width: 600px;
     clip-path: circle(50% at 50% 50%);
     margin: 0 auto;
     display: block;
-
-}
-
-
-.perfil{
     margin-top: 1rem;
-    padding: 1rem;
+    margin-bottom: 1rem;
 }
 
-.infUsrBase{
-    padding: 2rem;
-    max-width: 800px;
-    margin:0 auto;
+.name{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 4vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+.email{
+    display: flex;
+    justify-content: center;
+    font-size: large;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
 }
 
-
-
-
-.infUsuario p {
-    line-height: 2;
+.boton{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
 }
+
+.boton button{
+ min-width: 130px;
+  width: 20%;
+  height: 40px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 5px;
+  border: 2px solid #1ac8db;
+  background: #1ac8db;
+}
+
+.boton button:hover{
+    opacity: 0.8 ;
+}
+
+.containerData{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-bottom: 1px solid #1ac8db;
+    border-top: 1px solid #1ac8db;
+    padding-bottom: 2rem;
+    padding-top: 1rem;
+}
+
+@media only screen and (max-width: 600px) {
+    
+    .container{
+        display: flex;
+        flex-direction: column;
+        width: 80vw;
+    }
+  }

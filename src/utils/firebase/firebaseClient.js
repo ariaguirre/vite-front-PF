@@ -93,13 +93,13 @@ export const createUserDocumentFromAuth = async (
     try {
       //Set it inside our data base
       await setDoc(userDocRef, {
-        displayName,
-        email,
-        createdAt,
-        onlinePurchases: [],
-        userData:[],
         active:true,
         admin:false,   
+        createdAt,
+        displayName,
+        email,
+        onlinePurchases: [],
+        userData:{},
         ...additionalInformation,
       });
     } catch (error) {
@@ -238,10 +238,6 @@ export const getOrdersAdmin = async (orders) => {
 
   const q = query(collection(db, "Orders"))
  onSnapshot(q, (orders));
-
-
-
-
 };
 
 //---- trae pedidos por id
@@ -401,5 +397,13 @@ export const setPropsUser = async(prop, uid)=>{
   await setDoc(propUserRef,
     prop
   ,{merge:true})
+}
+
+// agregar compras al usuario sin borrar lo que ya tenga
+export const updateCompras = async(compras, uid) =>{
+  const comprasRef = doc(db, 'user', uid)
+  await updateDoc(comprasRef, {
+    compras: arrayUnion(...compras)
+  })
 }
 

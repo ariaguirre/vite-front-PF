@@ -1,7 +1,7 @@
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 
-export default function HalfRating({ rValue, sValue}) {
+const SetRatingComponent = ({ rValue, sValue}) => {
   const handleChange = (_, newValue)=> {
   sValue(newValue);
   }
@@ -18,3 +18,4 @@ export default function HalfRating({ rValue, sValue}) {
     </Stack>
   );
 }
+export default SetRatingComponent;
