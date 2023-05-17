@@ -36,9 +36,10 @@ const LinksNavbar = ({ userData }) => {
   return (
     <>
       {
-        userData.admin && <li><Link to="/admin">Admin</Link></li>
+        userData.admin && <li><Link to="/admin">Admin</Link></li> 
+        ||
+        <li><Link to={'/perfil'}>Perfil</Link></li>
       }
-
       <li onClick={handleSignOut}><Link>Salir</Link></li>
     </>)
 }

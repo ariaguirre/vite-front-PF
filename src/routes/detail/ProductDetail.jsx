@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 
 import noAvialableProduct from "../../utils/img/producto-no-disponible.png";
 import Typography from '@mui/material/Typography'
-import DetailComponent from '../../components/detail-component/detail-component';
+import DetailComponent from '../../components/detail-component/detail/detail-component';
 import { getProductByid } from '../../utils/firebase/firebaseClient';
 import Loader from '../../components/loader/loader';
 
@@ -37,13 +37,13 @@ const DetailProduct = () => {
 
     product.active
       ?
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" sx={{marginTop:"80px"}}>
         <div className={styles.detailContainer}>
           <DetailComponent productDetail = {product} />
         </div>
       </Container>
       :
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" sx={{marginTop:"80px"}}>
         <div className={styles.detailContainer}>
           <h2>Producto no displonible</h2>
           <img src={noAvialableProduct} alt="noAvialableProduct" />

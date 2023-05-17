@@ -8,7 +8,6 @@ const setDataUser = async (propiedad, contenido, uid) => {
   };
   try {
     await setPropsUser(prop, uid);
-    alert("Succesfull");
   } catch (error) {
     alert("Ups, algo falló", error);
   }

@@ -1,4 +1,3 @@
-
 import HeroComponent from "../../components/hero-components/hero-component/hero-component"
 import HomeCarousel from "../../components/hero-components/home-carousel/home-carousel";
 import ProductsByRaiting from "../../components/hero-components/products-by-raiting/products-by-raiting";
@@ -33,6 +32,7 @@ return (
       <HeroComponent />
       <ProductsByRaiting />
       <HomeCarousel />
+      <br />
       <ProductsBySale />           
   </>     
   )
