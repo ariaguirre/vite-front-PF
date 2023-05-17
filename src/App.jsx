@@ -28,6 +28,7 @@ import { getCategoriesAction } from "./features/categories/categoriesSlice";
 import SignUp from "./routes/authentication/signUp";
 // import User from "./components/panel-admin/user/User";
 import UserProfile from "./routes/userProfile/UserProfile";
+import AboutUs from "./routes/AboutUs/AboutUs";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -74,6 +75,7 @@ const App = () => {
         <Route path="shop/*" element={<Shop />} />
         <Route path="detail/:id" element={<DetailProduct />} />
         <Route path="perfil" element={<UserProfile/>} />
+        <Route path="aboutUs" element={<AboutUs/>} />
       </Route>
       {userData?.admin && (
         <Route
