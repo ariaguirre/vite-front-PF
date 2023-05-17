@@ -257,8 +257,8 @@ const dataOrder = docSnap.data();
   })
   return {dataOrder, products}
 };
-
-export const orderuser = async(previousOrder, newOrder) =>{   
+//funcion para atender las ordenes desde el admin
+export const serveOrder = async(previousOrder, newOrder) =>{   
 const docRef = doc(db,"user",previousOrder.idClient)
 const ordRef = doc(db,"Orders",previousOrder.id_order)
  await updateDoc(docRef, {

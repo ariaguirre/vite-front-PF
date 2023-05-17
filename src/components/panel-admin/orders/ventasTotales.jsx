@@ -19,7 +19,7 @@ import { Box,
         } from '@mui/material'
 import { useState } from 'react';
 import { useSelector } from 'react-redux'
-import { getOrderByid, getUserByid, orderuser } from '../../../utils/firebase/firebaseClient';
+import { getOrderByid, getUserByid, serveOrder } from '../../../utils/firebase/firebaseClient';
 
         
 const ventasTotales = () => {
@@ -42,7 +42,6 @@ const ventasTotales = () => {
   setlistProducts(products)
   setOpen(true);  
   setDate(dataOrder.date.toDate())
-console.log(date);
   }
   const changeStatus = (value) =>{
    const obj = {
@@ -55,7 +54,7 @@ console.log(date);
       totalProducts: order.totalProducts,
     //  numberTracking : numberTracking
     }
-    orderuser(order,obj);
+    serveOrder(order,obj);
   }
   const handleCloseModal = (inf) =>{
  if(inf.target.value)
@@ -72,7 +71,7 @@ console.log(date);
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: "80%",
+    width: "75%",
     bgcolor: "background.paper",
     border: "1px solid #000",
     boxShadow: 24,
