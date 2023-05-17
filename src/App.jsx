@@ -30,7 +30,6 @@ import SignUp from "./routes/authentication/signUp";
 
 // import User from "./components/panel-admin/user/User";
 import UserProfile from "./routes/userProfile/UserProfile";
-import { orderTypeActions } from "./features/productsPagination/productsPaginationSlice";
 import { ordersAction } from "./features/orders/orders";
 
 const App = () => {

@@ -400,10 +400,10 @@ export const setPropsUser = async(prop, uid)=>{
 }
 
 // agregar compras al usuario sin borrar lo que ya tenga
-export const updateCompras = async(compras, uid) =>{
-  const comprasRef = doc(db, 'user', uid)
-  await updateDoc(comprasRef, {
-    compras: arrayUnion(...compras)
+export const updatePurchases = async(purchases, uid) =>{
+  const purchasesRef = doc(db, 'user', uid)
+  await updateDoc(purchasesRef, {
+    onlinePurchases: arrayUnion(...purchases)
   })
 }
 
