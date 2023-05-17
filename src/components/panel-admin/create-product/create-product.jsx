@@ -23,12 +23,7 @@ const CreateProduct = () => {
     price: 0,
     categories: [],
     imageUrl: [],
-    reviews: [{
-      date:'',
-      rating: 0,
-      review:'',
-      user:''
-    }],
+    reviews: [],
     rating: 0,
     sale: {},
     active: true
@@ -57,13 +52,6 @@ const CreateProduct = () => {
     })
 }
 
-const handleSelect =(event) => {
-  setProduct({
-      ...product,
-      categories: [event.target.value]
-  })
-}
-
  useEffect(() => {
   const getCat = async() => {
     const result = await getCategories()
@@ -72,6 +60,24 @@ const handleSelect =(event) => {
   getCat()
 }, [])
 
+const handleSelect =(event) => {
+  const selectedCategory = event.target.value;
+  if (!product.categories.includes(selectedCategory)) {
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      categories: [...prevProduct.categories, selectedCategory],
+    }));
+  }
+}
+const handleRemoveCategory = (categoryToRemove) => {
+
+  setProduct((prevProduct) => ({
+    ...prevProduct,
+    categories: prevProduct.categories.filter(
+      (category) => category !== categoryToRemove
+    ),
+  }));
+};
  
 useEffect(()=>{
   if(urlImages.length < 1) return;
@@ -85,17 +91,16 @@ const onSubmit = async (e) => {
   //e.preventDefault();
   const data = {...product,
           ...e}
-  
+ 
  
   try{
-     await postProductsAdmin(data)
-     Swal.fire({
-      icon: 'success',
-      title: 'Listo!',
-      text: 'Creaste el Producto Correctamente :)',
-      
-      
+    await postProductsAdmin(data)
+    Swal.fire({
+    icon: 'success',
+    title: 'Listo!',
+    text: 'Creaste el Producto Correctamente :)',
     })
+    //para limpiar el formulario despues de crear el producto
     productform.reset();
 } catch(error){
   Swal.fire({
@@ -110,10 +115,8 @@ const onSubmit = async (e) => {
 
   return (
     <div>      
-      
-        <Container maxWidth="lg" sx={{mt:"2rem"}}>
-
-            <form onSubmit={handleSubmit(onSubmit)} className={styles.center} noValidate>
+      <Container maxWidth="lg" sx={{mt:"2rem"}}>
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.center} noValidate>
         <h1 className={styles.title}>AGREGAR PRODUCTO</h1>
           <div className={styles.contenedor}>
             <TextField
@@ -165,23 +168,25 @@ const onSubmit = async (e) => {
             error={!!errors.price}
             helperText={errors.price?.message}
           /> 
-            <TextField
-            label='Select'
-            select
-            defaultValue=''
-            name='category'
-            onChange={handleSelect}
-            {...register("categories", {required:'Seleccione una categoria'})}
-            error={!!errors.categories}
-            helperText={errors.categories?.message}
-            >
-                {
-                  dataCategories?.categories?.map((ele, index)=> (
-                    <MenuItem key={index} value={ele.categories}>
-                      {ele.categories}
-                    </MenuItem>
-                ))}
-            </TextField>
+          
+           <select name="category" onChange={handleSelect} className={styles.select}>
+           {dataCategories?.categories?.map((ele, index) => (
+            <option key={index} value={ele.categories}>
+           {ele.categories}
+           </option>
+           ))}
+          </select>
+          {/*mostrar y eliminar categorias seleccionadas */}
+          <label className={styles.categories}>
+          Categorías:{" "}
+          {product.categories?.map((category, index) => (
+           <span key={index}>{" | "}{category}
+           <button type="button"onClick={() => handleRemoveCategory(category)} className={styles.buton}>x</button>
+           </span>
+           ))}
+          </label>
+
+          {/* imagenes */}
             {product.imageUrl.length > 0 ? <ImageList sx={{ minHeight: '25vh'}} cols={3} rowHeight={164}>
                 {
                   product.imageUrl?.map((item, i)=>(
@@ -194,9 +199,10 @@ const onSubmit = async (e) => {
                 }
             </ImageList> : null }
             <Images setUrlImages={setUrlImages}/>
-            <Button type='submit' variant='contained' onClick={handleSubmit} fullWidth>Listo</Button>
-            </div>
+            <Button type='submit' variant='contained' onClick={()=>handleSubmit} fullWidth>Listo</Button>
+            </div>            
             </form>
+         
                 
         </Container>
       </div>
