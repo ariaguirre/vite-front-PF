@@ -41,8 +41,8 @@ const ventasTotales = () => {
  await setOrder(dataOrder);
   setlistProducts(products)
   setOpen(true);  
-  console.log(user.userData);
-console.log(order);
+  setDate(dataOrder.date.toDate())
+console.log(date);
   }
   const changeStatus = (value) =>{
    const obj = {
@@ -95,28 +95,23 @@ console.log(order);
           <Typography component="div" variant="subtitle1" color="text.secondary">
           Cliente : {user.displayName}
           </Typography>
-       Fecha :
-        </CardContent>
-   
-      </Box>
-      <Box sx={{ display: 'flex',  flexDirection: 'column'  }}>
-        <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography variant="subtitle1" color="text.secondary" component="div">
+      <Typography component="div" variant="subtitle1" color="text.secondary">
+          Fecha : {date?.toLocaleString('es-co')}
           </Typography>
         </CardContent>
       </Box>
     </Card>
             <List sx={{
-
+   
         position: 'relative',
         overflow: 'auto',
         maxHeight: 300,
-      margin :1
+     
       }}>
      {listProducts?.map((dat,i) =>
       ( 
  
-          <ListItem sx={{  display: 'flex',}} >
+          <ListItem sx={{  display: 'flex',width:"100%"}} >
          <Card   key={`${dat.id}+${i}`} sx={{ display: 'flex' ,marginBottom:"10px"  ,width:"100%"}} >
             <CardMedia
         component="img"
@@ -233,6 +228,7 @@ console.log(order);
         <TableHead bgcolor="#e3f2fd">
           <TableRow>
             <TableCell align="center">ORDEN</TableCell>
+            <TableCell align="center">FECHA</TableCell>
             <TableCell align="center">ESTADO</TableCell>
             <TableCell align="center">CANTIDAD</TableCell>
             <TableCell align="center">TOTAL</TableCell>
@@ -246,6 +242,7 @@ console.log(order);
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell align="center" > {row.id_order} </TableCell>
+              <TableCell align="center" > {row.date.toDate().toLocaleString('es-co')} </TableCell>
               <TableCell align="center"> {row.status} </TableCell>
               <TableCell align="center">{row.totalProducts}</TableCell>
               <TableCell align="center">${row.totalPrice}</TableCell>
@@ -289,9 +286,10 @@ console.log(order);
         <TableHead bgcolor="#e3f2fd">
           <TableRow>
             <TableCell align="center">ORDEN</TableCell>
+            <TableCell align="center">FECHA</TableCell>
             <TableCell align="center">ESTADO</TableCell>
-            <TableCell align="center">TOTAL</TableCell>
             <TableCell align="center">CANTIDAD</TableCell>
+            <TableCell align="center">TOTAL</TableCell>
             <TableCell align="center"></TableCell>
           </TableRow>
         </TableHead>
@@ -302,6 +300,7 @@ console.log(order);
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell  align="center" scope="row"> {row.id_order} </TableCell>
+              <TableCell align="center" > {row.date.toDate().toLocaleString('es-co')} </TableCell>
               <TableCell align="center"> {row.status} </TableCell>
               <TableCell align="center">${row.totalPrice}</TableCell>
               <TableCell align="center">{row.totalProducts}</TableCell>
