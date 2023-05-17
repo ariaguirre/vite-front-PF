@@ -31,8 +31,9 @@ import {
   DocumentReference,
   refEqual,
   onSnapshot,
-  FieldValue,
   arrayUnion,
+  FieldValue,
+  arrayRemove,
 } from "firebase/firestore";
 
 import {
@@ -41,6 +42,7 @@ import {
   uploadBytes, 
   getDownloadURL 
 } from 'firebase/storage';
+import { set } from "react-hook-form";
 
 import {
   v4
@@ -225,39 +227,63 @@ export const getUserByName = async (name) => {
   return findUser;
 };
 //Trae un usuario por id
-export const getUserByid = async (id) => {
-  const docRef = doc(db, "user", id);
-  const docSnap = await getDoc(docRef);
-  return docSnap.data();
-};
+
+export const getUserByid  = async (id , dat) =>{
+
+const q = await onSnapshot(doc(db, "user", id),(dat));
+}
 //----------------------------------------------------------------------
 //trae todos los pedidos a dashboard del admin
-export const getOrdersAdmin = async () => {
-  const querySnapshot = await getDocs(collection(db, "Orders"));
-  let orders = [];
-  querySnapshot.forEach((doc) => {
-    const id = doc.id;
-    const datos = doc.data();
-    orders.push({
-      id,
-      ...datos,
-    });
-  });
-  // console.log(orders);
-  return orders;
+export const getOrdersAdmin = async (orders) => {
+
+  const q = query(collection(db, "Orders"))
+ onSnapshot(q, (orders));
 };
 
 //---- trae pedidos por id
 export const getOrderByid = async (id) => {
-  const orders = [];
-  const docRef = doc(db, "Orders", id);
+  
+  const products = [];
+  const docRef = doc(db, "Orders",id);
   const docSnap = await getDoc(docRef);
-  orders.push({
-    id,
-    ...docSnap.data(),
-  });
-  return orders;
+const dataOrder = docSnap.data();
+  docSnap.data().products.forEach(pro =>{
+ 
+    products.push(pro)
+  })
+  return {dataOrder, products}
 };
+//funcion para atender las ordenes desde el admin
+export const serveOrder = async(previousOrder, newOrder) =>{   
+const docRef = doc(db,"user",previousOrder.idClient)
+const ordRef = doc(db,"Orders",previousOrder.id_order)
+ await updateDoc(docRef, {
+  onlinePurchases: arrayRemove({
+    date : previousOrder.date,
+    id_order :previousOrder.id_order,
+    status : previousOrder.status,
+    products : previousOrder.products,
+    totalPrice : previousOrder.totalPrice,
+    totalProducts : previousOrder.totalProducts
+  }) 
+})
+await updateDoc(docRef, {
+  onlinePurchases: arrayUnion({...newOrder})
+
+})  
+await updateDoc(ordRef,{
+  date: newOrder.date,
+  id_order :newOrder.id_order,
+  idClient : previousOrder.idClient,
+  status : newOrder.status,
+  products :newOrder.products,
+  totalPrice : newOrder.totalPrice,
+  totalProducts: newOrder.totalProducts,
+ // numberTracking: newOrder.numberTracking
+})
+
+
+}
 
 // actualiza status de pedidos
 export const updateOrder = async (data) => {
@@ -273,7 +299,7 @@ export const updateOrder = async (data) => {
     userEmail: data.userEmail,
     userAddress: data.userAddress,
     orderTracking: data.orderTracking,
-  });
+  }); 
 };
 
 /// //funcionalidades para traer categorias

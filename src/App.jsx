@@ -15,6 +15,7 @@ import Authentication from "./routes/authentication/authentication";
 import {
   createUserDocumentFromAuth,
   getCategories,
+  getOrdersAdmin,
   getProducts,
   onAuthStateChangedListener,
 } from "./utils/firebase/firebaseClient";
@@ -26,8 +27,11 @@ import {
 } from "./features/products/productSlice";
 import { getCategoriesAction } from "./features/categories/categoriesSlice";
 import SignUp from "./routes/authentication/signUp";
+
 // import User from "./components/panel-admin/user/User";
 import UserProfile from "./routes/userProfile/UserProfile";
+import { orderTypeActions } from "./features/productsPagination/productsPaginationSlice";
+import { ordersAction } from "./features/orders/orders";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -63,6 +67,19 @@ const App = () => {
     });
     let category = await getCategories();
     dispatch(getCategoriesAction(category));
+    getOrdersAdmin(a=>{
+      const orders = [];
+      a.forEach((element) => {
+        const id = element.id;
+        const data = element.data();
+        orders.push({
+          id,
+          ...data,
+        });
+      });
+      dispatch(ordersAction(orders))
+      
+    })
   };
 
   return (
