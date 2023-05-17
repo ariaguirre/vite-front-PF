@@ -49,7 +49,6 @@ const ventasTotales = () => {
       id_order: order.id_order,
       status : value,
       products: order.products,
-      status: value,
       totalPrice: order.totalPrice,
       totalProducts: order.totalProducts,
     //  numberTracking : numberTracking
@@ -101,7 +100,7 @@ const ventasTotales = () => {
       </Box>
     </Card>
             <List sx={{
-   
+
         position: 'relative',
         overflow: 'auto',
         maxHeight: 300,
@@ -109,9 +108,8 @@ const ventasTotales = () => {
       }}>
      {listProducts?.map((dat,i) =>
       ( 
- 
-          <ListItem sx={{  display: 'flex',width:"100%"}} >
-         <Card   key={`${dat.id}+${i}`} sx={{ display: 'flex' ,marginBottom:"10px"  ,width:"100%"}} >
+          <ListItem key={`${dat.id}+${i}`} sx={{  display: 'flex',width:"100%"}} >
+         <Card   sx={{ display: 'flex' ,marginBottom:"10px"  ,width:"100%"}} >
             <CardMedia
         component="img"
         sx={{ width: 90 ,margin:"10px" }}
