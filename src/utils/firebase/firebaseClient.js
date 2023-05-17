@@ -31,6 +31,9 @@ import {
   DocumentReference,
   refEqual,
   onSnapshot,
+  arrayUnion,
+  FieldValue,
+  arrayRemove,
 } from "firebase/firestore";
 
 import {
@@ -39,6 +42,7 @@ import {
   uploadBytes, 
   getDownloadURL 
 } from 'firebase/storage';
+import { set } from "react-hook-form";
 
 import {
   v4
@@ -223,26 +227,21 @@ export const getUserByName = async (name) => {
   return findUser;
 };
 //Trae un usuario por id
-export const getUserByid = async (id) => {
-  const docRef = doc(db, "user", id);
-  const docSnap = await getDoc(docRef);
-  return docSnap.data();
-};
+
+export const getUserByid  = async (id , dat) =>{
+
+const q = await onSnapshot(doc(db, "user", id),(dat));
+}
 //----------------------------------------------------------------------
 //trae todos los pedidos a dashboard del admin
-export const getOrdersAdmin = async () => {
-  const querySnapshot = await getDocs(collection(db, "Orders"));
-  let orders = [];
-  querySnapshot.forEach((doc) => {
-    const id = doc.id;
-    const datos = doc.data();
-    orders.push({
-      id,
-      ...datos,
-    });
-  });
-  console.log(orders);
-  return orders;
+export const getOrdersAdmin = async (orders) => {
+
+  const q = query(collection(db, "Orders"))
+ onSnapshot(q, (orders));
+
+
+
+
 };
 
 //---- trae pedidos por id
@@ -256,9 +255,40 @@ const dataOrder = docSnap.data();
  
     products.push(pro)
   })
-console.log(dataOrder);
   return {dataOrder, products}
 };
+
+export const orderuser = async(previousOrder, newOrder) =>{   
+const docRef = doc(db,"user",previousOrder.idClient)
+const ordRef = doc(db,"Orders",previousOrder.id_order)
+console.log("si llegfop");
+/* await updateDoc(docRef, {
+  onlinePurchases: arrayRemove({
+    date : previousOrder.date,
+    id_order :previousOrder.id_order,
+    status : previousOrder.status,
+    products : previousOrder.products,
+    totalPrice : previousOrder.totalPrice,
+    totalProducts : previousOrder.totalProducts
+  }) 
+})
+await updateDoc(docRef, {
+  onlinePurchases: arrayUnion({...newOrder})
+
+})  
+await updateDoc(ordRef,{
+  date: newOrder.date,
+  id_order :newOrder.id_order,
+  idClient : previousOrder.idClient,
+  status : newOrder.status,
+  products :newOrder.products,
+  totalPrice : newOrder.totalPrice,
+  totalProducts: newOrder.totalProducts,
+ // numberTracking: newOrder.numberTracking
+})
+
+
+}
 
 // actualiza status de pedidos
 export const updateOrder = async (data) => {
@@ -274,7 +304,7 @@ export const updateOrder = async (data) => {
     userEmail: data.userEmail,
     userAddress: data.userAddress,
     orderTracking: data.orderTracking,
-  });
+  }); */
 };
 
 /// //funcionalidades para traer categorias

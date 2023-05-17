@@ -15,8 +15,12 @@ const Home = () => {
   useEffect(()=>{
       if(uid){
         const dataUser = async() =>{
-        const info = await getUserByid(uid)
-            dispatch(getUserData(info))
+       
+      getUserByid(uid,dat =>{
+          dispatch(getUserData(dat.data()))
+        })
+           
+         
           }
           dataUser()
       }

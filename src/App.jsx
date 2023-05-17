@@ -57,9 +57,19 @@ const App = () => {
     })
     let category = await getCategories();
     dispatch(getCategoriesAction(category))
-    const ordersAdmin = await getOrdersAdmin();
-    dispatch(ordersAction(ordersAdmin));
-  
+    //lisener de ordenes
+    getOrdersAdmin((docs)=>{
+      const orders = [];
+      docs.forEach((element )=> {
+       const id = element.id;
+       const data = element.data()
+       orders.push({
+         id,
+         ...data
+       })
+      });
+      dispatch(ordersAction(orders));
+    });
   }
 
   return (
