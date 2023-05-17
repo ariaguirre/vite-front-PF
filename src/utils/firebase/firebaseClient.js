@@ -31,6 +31,8 @@ import {
   DocumentReference,
   refEqual,
   onSnapshot,
+  FieldValue,
+  arrayUnion,
 } from "firebase/firestore";
 
 import {
@@ -369,5 +371,13 @@ export const setPropsUser = async(prop, uid)=>{
   await setDoc(propUserRef,
     prop
   ,{merge:true})
+}
+
+// agregar compras al usuario sin borrar lo que ya tenga
+export const updateCompras = async(compras, uid) =>{
+  const comprasRef = doc(db, 'user', uid)
+  await updateDoc(comprasRef, {
+    compras: arrayUnion(...compras)
+  })
 }
 
