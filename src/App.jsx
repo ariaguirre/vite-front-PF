@@ -92,7 +92,7 @@ const App = () => {
         <Route path="shop/*" element={<Shop />} />
         <Route path="detail/:id" element={<DetailProduct />} />
         <Route path="perfil" element={<UserProfile/>} />
-        <Route path="aboutUs" element={<AboutUs/>} />
+        <Route path="about-us" element={<AboutUs/>} />
       </Route>
       {userData?.admin && (
         <Route
