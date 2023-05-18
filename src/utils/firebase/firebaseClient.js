@@ -143,11 +143,9 @@ export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth,
 
 //trae Productos existentes
 export const getProducts = async (Products) => {
-
-    const q = query(collection(db, "Products"))
-     onSnapshot(q, (Products));
-  
-   }
+  const q = query(collection(db, "Products"))
+    onSnapshot(q, (Products));  
+  }
 
 //Agrega nuevos productos
 export const postProductsAdmin = async (data) => {
@@ -166,6 +164,7 @@ export const postProductsAdmin = async (data) => {
 };
 //Trae un producto por id
 export const getProductByid = async (id,dat) => {
+
   // const Product = [];
   // const docRef = doc(db, "Products", id);
   // const docSnap = await getDoc(docRef);

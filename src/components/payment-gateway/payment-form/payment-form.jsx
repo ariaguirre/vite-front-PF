@@ -72,7 +72,7 @@ const PaymentForm = () => {
           icon: 'success',
           showCancelButton: true,
         })
-
+        
         updatePurchases(onlinePurchase, uid)
         navigate("/");        
         dispatch(clearCart());
