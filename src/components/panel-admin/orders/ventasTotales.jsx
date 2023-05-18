@@ -21,7 +21,7 @@ import {
 
 import { useState } from 'react';
 import { useSelector } from 'react-redux'
-import { getOrderByid, getUserByid, serveOrder } from '../../../utils/firebase/firebaseClient';
+import { deleteOrders, getOrderByid, getUserByid, serveOrder } from '../../../utils/firebase/firebaseClient';
 
 
 const VentasTotales = () => {
@@ -34,9 +34,9 @@ const VentasTotales = () => {
   const [date, setDate] = useState([])
 
   const handleDispatch = async (id) => {
-    const { dataOrder, products } = await getOrderByid(id)
+     const { dataOrder, products } = await getOrderByid(id)//trae ordenrs
 
-    getUserByid(dataOrder.idClient, dat => {
+    getUserByid(dataOrder.clientId, dat => {
       setUser(dat.data())
     })
 
@@ -45,10 +45,13 @@ const VentasTotales = () => {
     setOpen(true);
     setDate(dataOrder.date.toDate())
   }
+  const handleDelete = async (orderId) =>{
+deleteOrders(orderId);
+  }
   const changeStatus = (value) => {
     const obj = {
       date: order.date,
-      id_order: order.id_order,
+      orderId: order.orderId,
       status: value,
       products: order.products,
       totalPrice: order.totalPrice,
@@ -108,20 +111,20 @@ const VentasTotales = () => {
           }}>
             {listProducts?.map((dat, i) =>
             (
-              <ListItem key={`${dat.id}+${i}`} sx={{ display: 'flex', width: "100%" }} >
+              <ListItem key={`${dat.orderId}+${i}`} sx={{ display: 'flex', width: "100%" }} >
                 <Card sx={{ display: 'flex', marginBottom: "10px", width: "100%" }} >
                   <CardMedia
                     component="img"
                     sx={{ width: 90, margin: "10px" }}
-                    image={dat.imageUrl[0]}
+                    image={dat.imageUrl}
                   />
                   <Box sx={{ display: 'flex', flexDirection: 'column', marginBlockStart: "10px" }}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
                       <Typography component="div" variant="h6">
-                        {dat.name}
+                        {dat.title}
                       </Typography>
                       <Typography variant="subtitle1" color="text.secondary" component="div">
-                        ${dat.subTotal} x {dat.quantity} u.
+                        ${dat.price} x {dat.quantity} u.
                       </Typography>
                     </CardContent>
 
@@ -157,7 +160,7 @@ const VentasTotales = () => {
         </Box>
       </Box>
       <Stack spacing={2} direction="row" justifyContent="right" >
-        {order.status === "Pendiente" && <Button
+        {order.status === "pendiente" && <Button
           type="submit"
           variant="contained"
           onClick={handleCloseModal}
@@ -232,10 +235,10 @@ const VentasTotales = () => {
             <TableBody>
               {orders?.map((row, i) => row.status !== "Terminado" ? (
                 <TableRow
-                  key={`${row.id}+${i}`}
+                  key={`${row.orderId}+${i}`}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell align="center" > {row.id_order} </TableCell>
+                  <TableCell align="center" > {row.orderId} </TableCell>
                   <TableCell align="center" > {row.date.toDate().toLocaleString('es-co')} </TableCell>
                   <TableCell align="center"> {row.status} </TableCell>
                   <TableCell align="center">{row.totalProducts}</TableCell>
@@ -244,7 +247,7 @@ const VentasTotales = () => {
                     <Button
                       aria-label="edit"
                       size="small"
-                      onClick={() => handleDispatch(row.id)}
+                      onClick={() => handleDispatch(row.orderId)}
                     >
                       Verificar
                     </Button>
@@ -293,13 +296,19 @@ const VentasTotales = () => {
                   key={`${row.id}+${i}`}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell align="center" scope="row"> {row.id_order} </TableCell>
+                  <TableCell align="center"> {row.orderId} </TableCell>
                   <TableCell align="center" > {row.date.toDate().toLocaleString('es-co')} </TableCell>
                   <TableCell align="center"> {row.status} </TableCell>
-                  <TableCell align="center">${row.totalPrice}</TableCell>
                   <TableCell align="center">{row.totalProducts}</TableCell>
+                  <TableCell align="center">${row.totalPrice}</TableCell>
                   <TableCell align="center">
-
+                    <Button
+                      aria-label="edit"
+                      size="small"
+                      onClick={() => handleDelete(row.orderId)}
+                    >
+                      Eliminar
+                    </Button>
                   </TableCell>
                 </TableRow>
               ) : (null))}

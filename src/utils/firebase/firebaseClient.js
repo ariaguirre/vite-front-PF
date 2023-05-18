@@ -244,7 +244,7 @@ export const getOrdersAdmin = async (orders) => {
 
 //---- trae pedidos por id
 export const getOrderByid = async (id) => {
-  
+
   const products = [];
   const docRef = doc(db, "Orders",id);
   const docSnap = await getDoc(docRef);
@@ -255,14 +255,32 @@ const dataOrder = docSnap.data();
   })
   return {dataOrder, products}
 };
+
+//global orders
+
+export const  ordersGlobal = async (order,uid)=>{
+  await setDoc(doc(db, "Orders",order.orderId), {
+    date: order.date,
+    orderId: order.orderId,
+    products: order.products,
+    status: order.status,
+    totalPrice: order.totalPrice,
+    totalProducts: order.totalProducts,
+    clientId: uid,
+  });
+}
+// eliminar ordenes
+export const deleteOrders = async (orderId) =>{
+await deleteDoc(doc(db, "Orders", orderId));
+}
 //funcion para atender las ordenes desde el admin
 export const serveOrder = async(previousOrder, newOrder) =>{   
-const docRef = doc(db,"user",previousOrder.idClient)
-const ordRef = doc(db,"Orders",previousOrder.id_order)
+const docRef = doc(db,"user",previousOrder.clientId)
+const ordRef = doc(db,"Orders",previousOrder.orderId)
  await updateDoc(docRef, {
   onlinePurchases: arrayRemove({
     date : previousOrder.date,
-    id_order :previousOrder.id_order,
+    orderId :previousOrder.orderId,
     status : previousOrder.status,
     products : previousOrder.products,
     totalPrice : previousOrder.totalPrice,
@@ -275,8 +293,8 @@ await updateDoc(docRef, {
 })  
 await updateDoc(ordRef,{
   date: newOrder.date,
-  id_order :newOrder.id_order,
-  idClient : previousOrder.idClient,
+  orderId :newOrder.orderId,
+  clientId : previousOrder.clientId,
   status : newOrder.status,
   products :newOrder.products,
   totalPrice : newOrder.totalPrice,

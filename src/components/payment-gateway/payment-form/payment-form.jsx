@@ -9,7 +9,7 @@ import { setCartTotal, updateInitialState } from '../../../features/cartSlice/ca
 import { useEffect, useState } from 'react';
 import Swal from "sweetalert2";
 import formatOnlinePurcase from "../../../helper/formatOnlinePurchase";
-import { updatePurchases } from "../../../utils/firebase/firebaseClient";
+import { ordersGlobal, updatePurchases } from "../../../utils/firebase/firebaseClient";
 
 const PaymentForm = () => {
 
@@ -72,8 +72,8 @@ const PaymentForm = () => {
           icon: 'success',
           showCancelButton: true,
         })
-        
-        updatePurchases(onlinePurchase, uid)
+        ordersGlobal(onlinePurchase[0],uid);
+        updatePurchases(onlinePurchase, uid);
         navigate("/");        
         dispatch(clearCart());
 

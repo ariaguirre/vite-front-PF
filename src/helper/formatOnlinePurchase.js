@@ -5,7 +5,7 @@ const formatOnlinePurcase = (cartItems, total) => {
     date : new Date(),
     orderId: v4(),
     products: cartItems,
-    status:"pendiente",
+    status:"Pendiente",
     totalPrice: total,
     totalProducts: cartItems.length
   }
