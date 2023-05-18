@@ -143,11 +143,9 @@ export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth,
 
 //trae Productos existentes
 export const getProducts = async (Products) => {
-
-    const q = query(collection(db, "Products"))
-     onSnapshot(q, (Products));
-  
-   }
+  const q = query(collection(db, "Products"))
+    onSnapshot(q, (Products));  
+  }
 
 //Agrega nuevos productos
 export const postProductsAdmin = async (data) => {
@@ -165,15 +163,19 @@ export const postProductsAdmin = async (data) => {
   });
 };
 //Trae un producto por id
-export const getProductByid = async (id) => {
-  const Product = [];
-  const docRef = doc(db, "Products", id);
-  const docSnap = await getDoc(docRef);
-  Product.push({
-    id,
-    ...docSnap.data(),
-  });
-  return Product;
+export const getProductByid = async (id,dat) => {
+
+  // const Product = [];
+  // const docRef = doc(db, "Products", id);
+  // const docSnap = await getDoc(docRef);
+  // Product.push({
+  //   id,
+  //   ...docSnap.data(),
+  // });
+  // return Product;
+
+  onSnapshot(doc(db, "Products", id), (dat));
+
 };
 //Trae un producto por nombre
 export const getProductByName = async (name) => {
@@ -230,7 +232,7 @@ export const getUserByName = async (name) => {
 
 export const getUserByid  = async (id , dat) =>{
 
-const q = await onSnapshot(doc(db, "user", id),(dat));
+  onSnapshot(doc(db, "user", id), (dat));
 }
 //----------------------------------------------------------------------
 //trae todos los pedidos a dashboard del admin
@@ -406,4 +408,14 @@ export const updatePurchases = async(purchases, uid) =>{
     onlinePurchases: arrayUnion(...purchases)
   })
 }
+
+export const setReview = async(review, uid) => {
+//onSnapshot(doc(db, "user", id), (dat));
+  const productsRef = doc(db, 'Products', uid)
+
+  await updateDoc(productsRef, {
+    reviews: arrayUnion(review)
+  })
+}
+
 
