@@ -3,11 +3,11 @@ const formatOnlinePurcase = (cartItems, total) => {
   const onlinePurchases = [];
   const newPruchase = {
     date : new Date(),
-    order_id: v4(),
+    orderId: v4(),
     products: cartItems,
-    status:"pendiente",
+    status:"Pendiente",
     totalPrice: total,
-    totalItems: cartItems.length
+    totalProducts: cartItems.length
   }
   
   onlinePurchases.push(newPruchase);
