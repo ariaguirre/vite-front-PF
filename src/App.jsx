@@ -85,11 +85,11 @@ const App = () => {
     <Routes>
       <Route path="/" element={<LandingPage />}>
         <Route index element={<Home />} />
-        <Route path="/auth" element={<Authentication />} />
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/shop/*" element={<Shop />} />
-        <Route path="/detail/:id" element={<DetailProduct />} />
-        <Route path="/perfil" element={<UserProfile/>} />
+        <Route path="auth" element={<Authentication />} />
+        <Route path="sign-up" element={<SignUp />} />
+        <Route path="shop/*" element={<Shop />} />
+        <Route path="detail/:id" element={<DetailProduct />} />
+        <Route path="perfil" element={<UserProfile/>} />
       </Route>
       {userData?.admin && (
         <Route
