@@ -17,9 +17,7 @@ const Home = () => {
        
       getUserByid(uid,dat =>{
           dispatch(getUserData(dat.data()))
-        })
-           
-         
+        })          
           }
           dataUser()
       }
