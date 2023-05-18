@@ -30,7 +30,9 @@ import SignUp from "./routes/authentication/signUp";
 
 // import User from "./components/panel-admin/user/User";
 import UserProfile from "./routes/userProfile/UserProfile";
+import AboutUs from "./routes/AboutUs/AboutUs";
 import { ordersAction } from "./features/orders/orders";
+
 
 const App = () => {
   const dispatch = useDispatch();
@@ -85,11 +87,12 @@ const App = () => {
     <Routes>
       <Route path="/" element={<LandingPage />}>
         <Route index element={<Home />} />
-        <Route path="/auth" element={<Authentication />} />
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/shop/*" element={<Shop />} />
-        <Route path="/detail/:id" element={<DetailProduct />} />
-        <Route path="/perfil" element={<UserProfile/>} />
+        <Route path="auth" element={<Authentication />} />
+        <Route path="sign-up" element={<SignUp />} />
+        <Route path="shop/*" element={<Shop />} />
+        <Route path="detail/:id" element={<DetailProduct />} />
+        <Route path="perfil" element={<UserProfile/>} />
+        <Route path="aboutUs" element={<AboutUs/>} />
       </Route>
       {userData?.admin && (
         <Route
