@@ -85,30 +85,49 @@ const PaymentForm = () => {
 
 
   return (
-    <div style={{ marginTop: "80px" }}>
-      <div className={styles.paymentFormHeader}>
+    <main style={{ marginTop: "80px" }}>
+      <header className={styles.paymentFormHeader}>
         <Typography variant="h3" color="primary">Confirme su pago</Typography>
-      </div>
-      <div className={styles.PaymentFormContainer} >
-        <div className={styles.cardContainer}>
-          <form className={styles.FormContainer} onSubmit={paymentHandler} id="creditCardForm" >
-            <h4>Card</h4>
-            <div className={styles.creditCardContainer}>
-              <CardElement />
-            </div>
-          </form>
-          <button form="creditCardForm" type="submit" className={styles.btn}>Pagar</button>
-        </div>
+      </header>
+      <section className={styles.PaymentFormContainer} >
+        <article className={styles.creditCardContainer}>
+          <fieldset className={styles.FormContainer}>
+            <form onSubmit={paymentHandler} id="creditCardForm" >
+              <section className={styles.CardInfContainer}>
+                <div className={styles.cardElementTitle}>
+                  Tarjeta de credito
+                </div>
+                <div className={styles.cardElement}>
+                  {/* <CardElement /> */}
+                </div>
+              </section>
+            </form>
+          </fieldset>
+        </article>
+        <article className={styles.itemsContainer}>
 
-        <div className={styles.cartContainer}>
-          {cartItems?.map((cartItem, index) => (
-            <CheckoutItem key={cartItem.id + index} cartItem={cartItem} />
-          ))}
-          <span className={styles.total}>Total a pagar <span> {numberFormat(total)}</span> USD</span>
-        </div>
-      </div>
-    </div>
+        </article>
+      </section>
+    </main >
   )
 }
 
 export default PaymentForm
+
+
+{/* <div className={styles.cardContainer}>
+<form className={styles.FormContainer} onSubmit={paymentHandler} id="creditCardForm" >
+  <h4>Card</h4>
+  <div className={styles.creditCardContainer}>
+    <CardElement />
+  </div>
+</form>
+<button form="creditCardForm" type="submit" className={styles.btn}>Pagar</button>
+</div>
+
+<div className={styles.cartContainer}>
+{cartItems?.map((cartItem, index) => (
+  <CheckoutItem key={cartItem.id + index} cartItem={cartItem} />
+))}
+<span className={styles.total}>Total a pagar <span> {numberFormat(total)}</span> USD</span>
+</div> */}

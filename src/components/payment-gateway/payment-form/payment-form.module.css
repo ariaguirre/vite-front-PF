@@ -1,121 +1,37 @@
+.paymentFormHeader {
+	height: 80px;
+}
+.paymentFormHeader h3 {
+	padding: 0;
+	margin: 0;
+}
+
 .PaymentFormContainer {
-	min-height: calc(100vh - 160px);
 	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	gap: 4rem;
-	margin-bottom: 5%;
+	flex-flow: row wrap;
+	min-height: calc(100vh - 160px);
+}
+.creditCardContainer,
+.itemsContainer {
+	width: 50%;
 }
 .FormContainer {
-	border: 1px solid darkgrey;
-	margin-top: 15%;
-	margin-left: 25%;
-	justify-content: space-between;
-	height: 350px;
-	width: 550px;
-	margin-bottom: 5%;
-	border-radius: 12px;
-	background: rgb(96, 185, 215);
-	background: linear-gradient(
-		0deg,
-		rgba(96, 185, 215, 1) 2%,
-		rgba(138, 219, 236, 1) 100%
-	);
-	padding: 20px;
-	cursor: pointer;
+	border: 1px solid rebeccapurple;
+	padding: 1rem;
+	margin: 8rem auto;
+	width: 500px;
+	height: 250px;
+	border-radius: 1rem;
 }
-.FormContainer h4 {
-	font-size: 30px;
-	margin-left: 2%;
-	margin-top: 2%;
-	color: #242424;
-	margin-bottom: 5%;
-}
-.PaymentFormContainer {
+.CardInfContainer {
 	border: 1px solid red;
-	padding: 2rem;
-	height: calc(100vh - 460px);
+	height: 220px;
+	width: 100%;
 }
-
-.PaymentFormContainer button {
-	height: 50px;
-	width: 200px;
-	min-width: 130px;
+.cardElementTitle {
+	border: 1px solid red;
 }
-
-.paymentFormHeader {
-	display: flex;
-	flex-flow: column nowrap;
-	gap: 1rem;
-}
-
-h2 {
-	font-weight: bold;
-	font-size: 40px;
-	margin-top: 1%;
-	margin-bottom: 2%;
-	display: flex;
-	padding: 20px;
-	align-items: center;
-	justify-content: center;
-	width: auto;
-}
-.paymentFormHeader span {
-	text-align: center;
-}
-.paymentFormHeader span span {
-	color: #1ac8db;
-	font-weight: 500;
-}
-
-.btn {
-	width: auto;
-	height: auto;
-	color: #fff;
-	padding: 10px 10px;
-	font-weight: normal;
-	cursor: pointer;
-	transition: all 0.3s ease;
-	outline: none;
-	border-radius: 5px;
-	background: #245dc5;
-	font-size: 25px;
-	margin-left: 40%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-.btn:hover {
-	background: #0f2a5c;
-}
-.btn:active {
-	position: relative;
-	top: 2px;
-}
-
-.cardContainer {
-	width: 50%;
-	float: left;
-	margin-left: 5%;
-	border: 1px solid;
-}
-
-.cartContainer {
-	border-radius: 15px;
-	padding: 30px;
-	width: 30%;
-	float: right;
-	margin-right: 5%;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	box-shadow: 0px 2px 13px 3px rgba(0, 0, 0, 0.75);
-	-webkit-box-shadow: 0px 2px 13px 3px rgba(0, 0, 0, 0.75);
-	-moz-box-shadow: 0px 2px 13px 3px rgba(0, 0, 0, 0.75);
-}
-
-.total {
-	font-size: 30px;
-	font-weight: bold;
-	padding: 30px;
+.cardElement {
+	border: 1px solid red;
+	height: 110px;
 }

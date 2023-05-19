@@ -11,14 +11,14 @@ const CheckoutForm = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const checkoutform = useForm({
     defaultValues: {
       name: "",
       lastName: "",
       company: "",
       country: "",
-      streetA: "",    
+      streetA: "",
       ZIPcode: "",
       phone: "",
       email: "",
@@ -46,7 +46,7 @@ const CheckoutForm = () => {
           type="text"
           autoComplete=""
           required
-          {...register("name", { required: "Ingrese el nombre del destinatario", maxLength: 20, minLength:3 })}
+          {...register("name", { required: "Ingrese el nombre del destinatario", maxLength: 20, minLength: 3 })}
           error={!!errors.name}
           helperText={errors.name?.message}
         />
@@ -55,7 +55,7 @@ const CheckoutForm = () => {
           type="text"
           autoComplete=""
           required
-          {...register("lastName", { required: "Ingrese el apellido del destinatario", maxLength: 25, minLength:3  })}
+          {...register("lastName", { required: "Ingrese el apellido del destinatario", maxLength: 25, minLength: 3 })}
           error={!!errors.lastName}
           helperText={errors.lastName?.message}
         />
@@ -81,7 +81,7 @@ const CheckoutForm = () => {
           type="text"
           autoComplete=""
           required
-          {...register("streetA", { required: "Ingrese la calle del destinatario", maxLength: 20, minLength:3 })}
+          {...register("streetA", { required: "Ingrese la calle del destinatario", maxLength: 20, minLength: 3 })}
           error={!!errors.streetA}
           helperText={errors.streetA?.message}
         />
@@ -99,7 +99,7 @@ const CheckoutForm = () => {
           type="text"
           autoComplete=""
           required
-          {...register("phone", { required: "Ingrese el numero de celular del destinatario", maxLength:15, minLength:6 })}
+          {...register("phone", { required: "Ingrese el numero de celular del destinatario", maxLength: 15, minLength: 6 })}
           error={!!errors.phone}
           helperText={errors.phone?.message}
         />
@@ -107,7 +107,8 @@ const CheckoutForm = () => {
           label="Email"
           type="email"
           autoComplete=""
-          {...register("email", {required: true, validate: validateEmail})}
+          required
+          {...register("email", { required: true, validate: validateEmail })}
           error={!!errors.email}
           helperText={errors.email?.message}
         />
@@ -115,7 +116,7 @@ const CheckoutForm = () => {
           label="Informacion adicional"
           type="text"
           autoComplete=""
-          {...register("orderNotes", { maxLength: 200})}
+          {...register("orderNotes", { maxLength: 200 })}
           error={!!errors.orderNotes}
           helperText={errors.orderNotes?.message}
         />
@@ -126,7 +127,7 @@ const CheckoutForm = () => {
         </div>
       </Stack>
     </form>
-   
+
   )
 }
 
