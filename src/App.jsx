@@ -32,7 +32,7 @@ import SignUp from "./routes/authentication/signUp";
 import UserProfile from "./routes/userProfile/UserProfile";
 // import AboutUs from "./routes/AboutUs/AboutUs";
 import { ordersAction } from "./features/orders/orders";
-
+import Compras from "./components/compras/compras";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -92,6 +92,7 @@ const App = () => {
         <Route path="shop/*" element={<Shop />} />
         <Route path="detail/:id" element={<DetailProduct />} />
         <Route path="perfil" element={<UserProfile/>} />
+        <Route path="compras" element={<Compras/>} />
         {/* <Route path="about-us" element={<AboutUs/>} /> */}
       </Route>
       {userData?.admin && (

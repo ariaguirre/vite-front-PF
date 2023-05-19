@@ -38,17 +38,17 @@ const theme = createTheme({
 ReactDOM.createRoot(document.getElementById('root')).render(
 
   <React.StrictMode>
-   <PersistGate persistor={persist}>
-    <Provider store={store}>
-      <HashRouter hashType="hasbang">
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Elements stripe={stripePromise}>
-            <App />
-          </Elements>
-        </ThemeProvider>
-      </HashRouter>
-    </Provider>      
+    <PersistGate persistor={persist}>
+      <Provider store={store}>
+        <HashRouter hashType="hasbang">
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Elements stripe={stripePromise}>
+              <App />
+            </Elements>
+          </ThemeProvider>
+        </HashRouter>
+      </Provider>
     </PersistGate>
   </React.StrictMode>,
 )

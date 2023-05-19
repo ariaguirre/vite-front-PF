@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signOutUser } from "../../../utils/firebase/firebaseClient";
 import { clearCart } from "../../../features/cartSlice/cartSlice";
 import { useDispatch } from "react-redux";
@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 const LinksNavbar = ({ userData }) => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
 
   const handleSignOut = () => {
 
@@ -21,24 +21,30 @@ const LinksNavbar = ({ userData }) => {
       confirmButtonText: 'Salir'
     }).then((result) => {
       if (result.isConfirmed) {
-        //Se deslogea de todo 
-        signOutUser();
-        //Se elimina la informacion del persist
-        dispatch(clearCart());
-        dispatch(clearUserData());
-        dispatch(clearOrderInf())
+        singOutUserPage()
       }
     })
+  }
 
-
+  const singOutUserPage = async () => {
+    //Se deslogea de todo 
+    await signOutUser();
+    //Se elimina la informacion del persist
+    dispatch(clearCart());
+    dispatch(clearUserData());
+    dispatch(clearOrderInf());
+    navigate("/");
   }
 
   return (
     <>
       {
-        userData.admin && <li><Link to="/admin">Admin</Link></li> 
+        userData.admin && <li><Link to="/admin">Admin</Link></li>
         ||
+        <>
         <li><Link to={'/perfil'}>Perfil</Link></li>
+        <li><Link to={'/compras'}>mis Compras</Link></li>
+       </>
       }
       <li onClick={handleSignOut}><Link>Salir</Link></li>
     </>)
