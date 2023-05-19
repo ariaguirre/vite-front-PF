@@ -6,32 +6,120 @@
 	margin: 0;
 }
 
-.PaymentFormContainer {
+.paymentFormContainer {
 	display: flex;
-	flex-flow: row wrap;
+	flex-flow: row nowrap;
 	min-height: calc(100vh - 160px);
+	padding: 0 2rem;
 }
 .creditCardContainer,
 .itemsContainer {
 	width: 50%;
-}
-.FormContainer {
-	border: 1px solid rebeccapurple;
 	padding: 1rem;
-	margin: 8rem auto;
-	width: 500px;
-	height: 250px;
-	border-radius: 1rem;
 }
-.CardInfContainer {
-	border: 1px solid red;
-	height: 220px;
+.formContainer {
+	padding: 1rem;
+	margin: 8rem auto 4rem;
+	max-width: 450px;
+	min-height: 250px;
+	box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+	border: none;
+	border-radius: 1rem;
+	background-color: rgba(214, 137, 16, 0.8);
+	color: #242424;
+}
+.cardInfContainer {
+	height: 120px;
 	width: 100%;
 }
 .cardElementTitle {
-	border: 1px solid red;
+	height: 190px;
+	text-align: center;
+	text-shadow: rgb(255, 255, 255) 1px 1px 1px;
+}
+.cardElementTitle h2 {
+	font-weight: 500;
 }
 .cardElement {
-	border: 1px solid red;
-	height: 110px;
+	height: 10px;
+}
+.itemsContainer h2 {
+	font-weight: 400;
+	text-align: center;
+	box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.9);
+	border-radius: 1rem;
+}
+.btnPaymentForm {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 130px;
+}
+.btnPaymentForm button {
+	position: relative;
+	display: inline-block;
+	min-width: 130px;
+	height: 40px;
+	padding: 5px 10px;
+	cursor: pointer;
+	color: #242424;
+	background-color: #fff;
+	border: 2px solid rgba(0, 0, 0, 0.3);
+	box-shadow: 0 3px 1px -2px #ccc, 0 2px 2px 0 #ccc, 0 1px 5px 0 #ccc;
+	outline: none;
+	transition: all 0.3s ease;
+	font-weight: 600;
+	letter-spacing: 2px;
+	border-radius: 0.5rem;
+}
+.btnPaymentForm button:hover {
+	letter-spacing: 2.5px;
+}
+.btnPaymentForm button:active {
+	top: 1px;
+}
+
+@media only screen and (max-width: 1250px) {
+	.paymentFormContainer {
+		flex-flow: column nowrap;
+		align-items: center;
+	}
+	.creditCardContainer,
+	.itemsContainer {
+		width: 70%;
+	}
+	.creditCardContainer {
+		order: 2;
+	}
+	.itemsContainer {
+		order: 1;
+	}
+	.formContainer {
+		margin: 4rem auto;
+	}
+}
+@media only screen and (max-width: 900px) {
+	.creditCardContainer,
+	.itemsContainer {
+		width: 80%;
+	}
+}
+@media only screen and (max-width: 600px) {
+	.creditCardContainer,
+	.itemsContainer {
+		width: 100%;
+	}
+}
+@media only screen and (max-width: 470px) {
+	.paymentFormContainer {
+		position: relative;
+		margin-top: 50px;
+	}
+	.formContainer {
+		margin: 2rem auto;
+		min-height: 180px;
+	}
+	.cardElementTitle {
+		height: 130px;
+	}
 }

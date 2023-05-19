@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 import formatOnlinePurcase from "../../../helper/formatOnlinePurchase";
 import { ordersGlobal, updatePurchases } from "../../../utils/firebase/firebaseClient";
 import Typography from '@mui/material/Typography'
+import { v4 } from "uuid";
 
 
 const PaymentForm = () => {
@@ -32,8 +33,7 @@ const PaymentForm = () => {
   const elements = useElements();
   const navigate = useNavigate();
   const currentUser = useSelector(state => state.persistedReducer.userData.userInf)
-  const uid = useSelector(state => state.currentUser.userCredentials.uid);
-
+  const uid = useSelector(state => state.currentUser?.userCredentials?.uid);
   const onlinePurchase = formatOnlinePurcase(cartItems, total);
 
   const paymentHandler = async (e) => {
@@ -83,28 +83,34 @@ const PaymentForm = () => {
     }
   };
 
-
   return (
     <main style={{ marginTop: "80px" }}>
       <header className={styles.paymentFormHeader}>
         <Typography variant="h3" color="primary">Confirme su pago</Typography>
       </header>
-      <section className={styles.PaymentFormContainer} >
+      <section className={styles.paymentFormContainer} >
         <article className={styles.creditCardContainer}>
-          <fieldset className={styles.FormContainer}>
+          <fieldset className={styles.formContainer}>
             <form onSubmit={paymentHandler} id="creditCardForm" >
-              <section className={styles.CardInfContainer}>
+              <section className={styles.cardInfContainer}>
                 <div className={styles.cardElementTitle}>
-                  Tarjeta de credito
+                  <h2>Tarjeta de crédito</h2>
                 </div>
                 <div className={styles.cardElement}>
-                  {/* <CardElement /> */}
+                  <CardElement />
                 </div>
               </section>
             </form>
           </fieldset>
+          <section className={styles.btnPaymentForm}>
+            <button type="submit" form="creditCardForm">Pagar Ahora &#128179;</button>
+          </section>
         </article>
         <article className={styles.itemsContainer}>
+          <h2>Total: {numberFormat(total)}</h2>
+          {
+            cartItems.map((cartItem) => (<CheckoutItem key={v4()} cartItem={cartItem} />))
+          }
 
         </article>
       </section>
@@ -115,19 +121,3 @@ const PaymentForm = () => {
 export default PaymentForm
 
 
-{/* <div className={styles.cardContainer}>
-<form className={styles.FormContainer} onSubmit={paymentHandler} id="creditCardForm" >
-  <h4>Card</h4>
-  <div className={styles.creditCardContainer}>
-    <CardElement />
-  </div>
-</form>
-<button form="creditCardForm" type="submit" className={styles.btn}>Pagar</button>
-</div>
-
-<div className={styles.cartContainer}>
-{cartItems?.map((cartItem, index) => (
-  <CheckoutItem key={cartItem.id + index} cartItem={cartItem} />
-))}
-<span className={styles.total}>Total a pagar <span> {numberFormat(total)}</span> USD</span>
-</div> */}
