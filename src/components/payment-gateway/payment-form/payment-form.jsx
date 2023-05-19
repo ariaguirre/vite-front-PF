@@ -10,6 +10,8 @@ import { useEffect, useState } from 'react';
 import Swal from "sweetalert2";
 import formatOnlinePurcase from "../../../helper/formatOnlinePurchase";
 import { ordersGlobal, updatePurchases } from "../../../utils/firebase/firebaseClient";
+import Typography from '@mui/material/Typography'
+
 
 const PaymentForm = () => {
 
@@ -23,9 +25,9 @@ const PaymentForm = () => {
     setTotal(newCartTotal);
     dispatch(setCartTotal(newCartTotal));
     dispatch(updateInitialState(cartItems))
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartItems])
-  
+
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
@@ -60,21 +62,21 @@ const PaymentForm = () => {
 
     if (paymentResult.error) {
       Swal.fire({
-        title:'Ocurrió un error!',
+        title: 'Ocurrió un error!',
         text: paymentResult.error.message,
         icon: 'warning',
       })
     } else {
       if (paymentResult.paymentIntent.status === "succeeded") {
-        if(!uid) return alert("no hay un usuario");              
+        if (!uid) return alert("no hay un usuario");
         Swal.fire({
-          title:'Pago exitoso!',
+          title: 'Pago exitoso!',
           icon: 'success',
           showCancelButton: true,
         })
-        ordersGlobal(onlinePurchase[0],uid);
+        ordersGlobal(onlinePurchase[0], uid);
         updatePurchases(onlinePurchase, uid);
-        navigate("/");        
+        navigate("/");
         dispatch(clearCart());
 
       }
@@ -83,29 +85,28 @@ const PaymentForm = () => {
 
 
   return (
-    <div style={{marginTop:"80px"}}>
-        <h2>Detalles del pago</h2>
-    <div className={styles.PaymentFormContainer} >
-      <div className={styles.cardContainer}>
+    <div style={{ marginTop: "80px" }}>
       <div className={styles.paymentFormHeader}>
+        <Typography variant="h3" color="primary">Confirme su pago</Typography>
       </div>
-      <form className={styles.FormContainer} onSubmit={paymentHandler} id="creditCardForm" >
-        <h4>Card</h4>
-        <div className={styles.creditCardContainer}>
-          <CardElement />
+      <div className={styles.PaymentFormContainer} >
+        <div className={styles.cardContainer}>
+          <form className={styles.FormContainer} onSubmit={paymentHandler} id="creditCardForm" >
+            <h4>Card</h4>
+            <div className={styles.creditCardContainer}>
+              <CardElement />
+            </div>
+          </form>
+          <button form="creditCardForm" type="submit" className={styles.btn}>Pagar</button>
         </div>
-      </form>
 
-        <br/>
-      <button form="creditCardForm" type="submit" className={styles.btn}>Pagar</button>
+        <div className={styles.cartContainer}>
+          {cartItems?.map((cartItem, index) => (
+            <CheckoutItem key={cartItem.id + index} cartItem={cartItem} />
+          ))}
+          <span className={styles.total}>Total a pagar <span> {numberFormat(total)}</span> USD</span>
         </div>
-      <div className={styles.cartContainer}>
-      {cartItems?.map((cartItem, index) => (
-        <CheckoutItem key={cartItem.id + index} cartItem ={cartItem} />
-        ))}
-        <span className={styles.total}>Total a pagar <span> {numberFormat(total)}</span> USD</span>
-        </div>
-    </div>
+      </div>
     </div>
   )
 }
