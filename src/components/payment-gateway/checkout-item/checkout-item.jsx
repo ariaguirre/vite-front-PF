@@ -9,6 +9,7 @@ const CheckoutItem = ({ cartItem }) => {
   const { title, imageUrl, price, quantity } = cartItem;
   const dispatch = useDispatch();
 
+
   const clearItemHandler = () => {
     Swal.fire({
       title: 'Esta seguro de eliminar este producto?',

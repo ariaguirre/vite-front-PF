@@ -25,8 +25,16 @@
 	box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
 	border: none;
 	border-radius: 1rem;
-	background-color: rgba(214, 137, 16, 0.8);
-	color: #242424;
+	color: #324b4f;
+
+	background-image: linear-gradient(
+		to right bottom,
+		#1ac8db,
+		#69cdcd,
+		#94d2c7,
+		#b6d5c8,
+		#d0d8d2
+	);
 }
 .cardInfContainer {
 	height: 120px;
@@ -47,7 +55,6 @@
 	font-weight: 400;
 	text-align: center;
 	box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.9);
-	border-radius: 1rem;
 }
 .btnPaymentForm {
 	display: flex;

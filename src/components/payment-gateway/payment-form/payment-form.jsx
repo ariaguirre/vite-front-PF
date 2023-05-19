@@ -13,9 +13,9 @@ import { ordersGlobal, updatePurchases } from "../../../utils/firebase/firebaseC
 import Typography from '@mui/material/Typography'
 import { v4 } from "uuid";
 
-
 const PaymentForm = () => {
 
+  const navigate = useNavigate();
   const cartItems = useSelector(state => state.persistedReducer.carState.cartItems);
 
   const [total, setTotal] = useState(0);
@@ -31,7 +31,6 @@ const PaymentForm = () => {
 
   const stripe = useStripe();
   const elements = useElements();
-  const navigate = useNavigate();
   const currentUser = useSelector(state => state.persistedReducer.userData.userInf)
   const uid = useSelector(state => state.currentUser?.userCredentials?.uid);
   const onlinePurchase = formatOnlinePurcase(cartItems, total);
@@ -82,6 +81,8 @@ const PaymentForm = () => {
       }
     }
   };
+
+
 
   return (
     <main style={{ marginTop: "80px" }}>
