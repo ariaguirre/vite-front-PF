@@ -7,12 +7,8 @@ const HomeAdmin = () => {
   const selector = useSelector(state => state.cart)
   const { orders } = useSelector(state => state.orders)
   
-  const nowDate = new Date();
-  const date = nowDate.getFullYear()+'/' +(nowDate.getMonth()+1)+'/'+nowDate.getDate();
-
-  console.log("date: ", date)
-
-
+  const currentDate = new Date();
+  const todaysDate = currentDate.getFullYear()+'/' +(currentDate.getMonth()+1)+'/'+currentDate.getDate();
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -24,26 +20,30 @@ const HomeAdmin = () => {
     const formattedDate = `${year}/${month}/${day}`;
     return formattedDate;
   };
-
+  
+//Ordenes del dia
   const ordersDate = orders.map((order) => {
     const orderDate = order.date
     const firebaseTime = new Date(orderDate.seconds * 1000 + orderDate.nanoseconds / 1000000)
     const fecha = firebaseTime.toDateString();
-
     const formattedDate = formatDate(fecha);
-
     return formattedDate
   })
-  console.log("orderDate:", ordersDate)
+  // console.log("orderDate:", ordersDate)
 
   const todayOrder = () => {
-    const todaysOrders = ordersDate.filter((o) => o.includes(date))
+    const todaysOrders = ordersDate.filter((o) => o.includes(todaysDate))
   if(todaysOrders.length > 0) return todaysOrders.length;
   else return "0 orders";
   }
   const allTodayOrders = todayOrder();
   
-  
+// ordenes de la semana
+const lastWeek = new Date();
+lastWeek.setDate(lastWeek.getDate() - 7);
+const lastWeekString = formatDate(lastWeek)
+const lastWeeksOrders = ordersDate.filter((date) => date >= lastWeekString && date <= todaysDate).length;
+
 
   return (
 <div className={styles.base}>
@@ -60,7 +60,8 @@ const HomeAdmin = () => {
 
         <div className={styles.areaPanel}>
           <p className={styles.title}>Esta semana</p>
-          <p className={styles.value}>25</p>
+          {/* <p className={styles.value}>25</p> */}
+          {lastWeeksOrders > 0 ? lastWeeksOrders : 0}
           <p className={styles.vExtra}>Ordenes esta semana</p>
         </div>
 
