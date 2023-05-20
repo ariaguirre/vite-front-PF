@@ -12,6 +12,7 @@ import formatOnlinePurcase from "../../../helper/formatOnlinePurchase";
 import { ordersGlobal, updatePurchases } from "../../../utils/firebase/firebaseClient";
 import Typography from '@mui/material/Typography'
 import { v4 } from "uuid";
+import emailjs from '@emailjs/browser';
 
 const PaymentForm = () => {
 
@@ -31,9 +32,30 @@ const PaymentForm = () => {
 
   const stripe = useStripe();
   const elements = useElements();
-  const currentUser = useSelector(state => state.persistedReducer.userData.userInf)
+  const currentUser = useSelector(state => state.persistedReducer.userData)
   const uid = useSelector(state => state.currentUser?.userCredentials?.uid);
   const onlinePurchase = formatOnlinePurcase(cartItems, total);
+
+  //emailJs
+  const USER_ID="service_8duinll";
+  const API_KEY= "template_g954u96";
+  const TEMPLATE_ID= "lp4j5eTKXZNYsZ4jM";
+
+  var templateParams = {
+    email: currentUser.orderInf.email,
+    name: currentUser.orderInf.name,
+  };
+
+  // console.log("templateParams:", templateParams)
+
+  const sendEmail = (e) =>{
+    e.preventDefault()
+    emailjs.send(USER_ID, API_KEY, templateParams, TEMPLATE_ID).then((result) => {
+      console.log(result.text);
+    }, (error) => {
+      console.log(error.text)
+    });
+  };
 
   const paymentHandler = async (e) => {
     e.preventDefault();
@@ -73,6 +95,7 @@ const PaymentForm = () => {
           icon: 'success',
           showCancelButton: true,
         })
+        sendEmail();
         ordersGlobal(onlinePurchase[0], uid);
         updatePurchases(onlinePurchase, uid);
         navigate("/");
@@ -82,12 +105,10 @@ const PaymentForm = () => {
     }
   };
 
-
-
   return (
     <main style={{ marginTop: "80px" }}>
       <header className={styles.paymentFormHeader}>
-        <Typography variant="h3" color="primary">Confirme su pago</Typography>
+        <h2 div={styles.titleText}>Finalice su compra</h2>
       </header>
       <section className={styles.paymentFormContainer} >
         <article className={styles.creditCardContainer}>
@@ -108,10 +129,12 @@ const PaymentForm = () => {
           </section>
         </article>
         <article className={styles.itemsContainer}>
-          <h2>Total: {numberFormat(total)}</h2>
+          <div className={styles.itemsCont}>
           {
             cartItems.map((cartItem) => (<CheckoutItem key={v4()} cartItem={cartItem} />))
           }
+          </div>
+          <h2>Total: {numberFormat(total)}</h2>
 
         </article>
       </section>
@@ -122,3 +145,4 @@ const PaymentForm = () => {
 export default PaymentForm
 
 
+//notificacion via mail, payments form
