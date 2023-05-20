@@ -1,4 +1,3 @@
-
 import styles from "../home-admin/home-admin.module.css"
 import { useSelector } from "react-redux"
 
@@ -6,9 +5,45 @@ import { useSelector } from "react-redux"
 const HomeAdmin = () => {
 
   const selector = useSelector(state => state.cart)
+  const { orders } = useSelector(state => state.orders)
+  
+  const nowDate = new Date();
+  const date = nowDate.getFullYear()+'/' +(nowDate.getMonth()+1)+'/'+nowDate.getDate();
 
-  console.log(selector)
+  console.log("date: ", date)
 
+
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    
+    const formattedDate = `${year}/${month}/${day}`;
+    return formattedDate;
+  };
+
+  const ordersDate = orders.map((order) => {
+    const orderDate = order.date
+    const firebaseTime = new Date(orderDate.seconds * 1000 + orderDate.nanoseconds / 1000000)
+    const fecha = firebaseTime.toDateString();
+
+    const formattedDate = formatDate(fecha);
+
+    return formattedDate
+  })
+  console.log("orderDate:", ordersDate)
+
+  const todayOrder = () => {
+    const todaysOrders = ordersDate.filter((o) => o.includes(date))
+  if(todaysOrders.length > 0) return todaysOrders.length;
+  else return "0 orders";
+  }
+  const allTodayOrders = todayOrder();
+  
+  
 
   return (
 <div className={styles.base}>
@@ -19,7 +54,7 @@ const HomeAdmin = () => {
       <div className={styles.flex}>
         <div className={styles.areaPanel}>
           <p className={styles.title}>Hoy</p>
-          <p className={styles.value}>2</p>
+          {allTodayOrders > 0 ? allTodayOrders : 0}
           <p className={styles.vExtra}>Ordenes del día</p>
         </div>
 
@@ -31,7 +66,7 @@ const HomeAdmin = () => {
 
         <div className={styles.areaPanel}>
           <p className={styles.title}>Este mes</p>
-          <p className={styles.value}>32</p>
+          {orders ? orders.length : '0'}
           <p className={styles.vExtra}>Ordenes en el mes</p>
         </div>
       </div>
