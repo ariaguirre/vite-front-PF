@@ -38,11 +38,29 @@ const HomeAdmin = () => {
   }
   const allTodayOrders = todayOrder();
   
-// ordenes de la semana
-const lastWeek = new Date();
-lastWeek.setDate(lastWeek.getDate() - 7);
-const lastWeekString = formatDate(lastWeek)
-const lastWeeksOrders = ordersDate.filter((date) => date >= lastWeekString && date <= todaysDate).length;
+// Ordenes de la semana
+// const lastWeek = new Date();
+const weeksOrders = () => {
+  const todayW = new Date()
+  todayW.setDate(todayW.getDate() - 7);
+  const currentWeekString = formatDate(todayW)
+  const lastWeeksOrders = ordersDate.filter((date) => date >= currentWeekString && date <= todaysDate).length;
+  return lastWeeksOrders
+}
+const allWeeksOrders = weeksOrders();
+
+
+
+// Ordenes del mes
+
+const monthOrders = () => {
+  const todayM = new Date()
+  todayM.setDate(todayM.getDate() - 30);
+  const currentMonthString = formatDate(todayM)
+  const lastMonthOrders = ordersDate.filter((date) => date >= currentMonthString && date <= todaysDate).length;
+  return lastMonthOrders
+}
+const allMonthOrders = monthOrders();
 
 
   return (
@@ -60,14 +78,13 @@ const lastWeeksOrders = ordersDate.filter((date) => date >= lastWeekString && da
 
         <div className={styles.areaPanel}>
           <p className={styles.title}>Esta semana</p>
-          {/* <p className={styles.value}>25</p> */}
-          {lastWeeksOrders > 0 ? lastWeeksOrders : 0}
+          {allWeeksOrders > 0 ? allWeeksOrders : 0}
           <p className={styles.vExtra}>Ordenes esta semana</p>
         </div>
 
         <div className={styles.areaPanel}>
           <p className={styles.title}>Este mes</p>
-          {orders ? orders.length : '0'}
+          {allMonthOrders > 0 ? allMonthOrders : 0}
           <p className={styles.vExtra}>Ordenes en el mes</p>
         </div>
       </div>
