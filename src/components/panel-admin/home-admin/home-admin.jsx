@@ -22,45 +22,80 @@ const HomeAdmin = () => {
   };
   
 //Ordenes del dia
+  // const ordersDate = orders.map((order) => {
+  //   const orderDate = order.date
+  //   const firebaseTime = new Date(orderDate.seconds * 1000 + orderDate.nanoseconds / 1000000)
+  //   const fecha = firebaseTime.toDateString();
+  //   const formattedDate = formatDate(fecha);
+  //   return formattedDate
+  // })
   const ordersDate = orders.map((order) => {
     const orderDate = order.date
     const firebaseTime = new Date(orderDate.seconds * 1000 + orderDate.nanoseconds / 1000000)
     const fecha = firebaseTime.toDateString();
     const formattedDate = formatDate(fecha);
-    return formattedDate
+    const orderPrice = order.totalPrice;
+    const both = {formattedDate,orderPrice}
+    return both;
   })
-  // console.log("orderDate:", ordersDate)
+  console.log("ordersDate:", ordersDate)
+
+
 
   const todayOrder = () => {
-    const todaysOrders = ordersDate.filter((o) => o.includes(todaysDate))
+    const todaysOrders = ordersDate.filter((o) => o.includes(todaysDate));
   if(todaysOrders.length > 0) return todaysOrders.length;
   else return "0 orders";
   }
   const allTodayOrders = todayOrder();
+
+
   
 // Ordenes de la semana
-// const lastWeek = new Date();
 const weeksOrders = () => {
   const todayW = new Date()
   todayW.setDate(todayW.getDate() - 7);
-  const currentWeekString = formatDate(todayW)
+  const currentWeekString = formatDate(todayW);
   const lastWeeksOrders = ordersDate.filter((date) => date >= currentWeekString && date <= todaysDate).length;
-  return lastWeeksOrders
+  return lastWeeksOrders;
 }
 const allWeeksOrders = weeksOrders();
-
-
 
 // Ordenes del mes
 
 const monthOrders = () => {
   const todayM = new Date()
   todayM.setDate(todayM.getDate() - 30);
-  const currentMonthString = formatDate(todayM)
-  const lastMonthOrders = ordersDate.filter((date) => date >= currentMonthString && date <= todaysDate).length;
-  return lastMonthOrders
+  const currentMonthString = formatDate(todayM);
+  const lastMonthOrders = ordersDate.filter((date) => date >= currentMonthString && date <= todaysDate);
+  console.log("lastMonthOrders:", lastMonthOrders )
+  return lastMonthOrders;
 }
 const allMonthOrders = monthOrders();
+
+//Ganancias del mes
+// const todayPW = new Date();
+// const currentDateString = todayPW.toISOString().split('T')[0];
+
+// const weeksEarnings = () => {
+//   const sevenDaysAgo = new Date();
+//   sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+//   const sevenDaysAgoString = sevenDaysAgo.toISOString().split('T')[0];
+
+//   const ordersDuringLastWeek = orders.filter((order) => {
+//   const orderDate = new Date(order.date.seconds * 1000); 
+//   const orderDateString = orderDate.toISOString().split('T')[0];
+//   // console.log("orderDateString:", orderDateString)
+//   const earnings =  orders.filter((date) => orderDateString >= sevenDaysAgoString && orderDateString <= currentDateString)
+//   console.log("orders: ", orders)
+//   return earnings;
+// });
+// }  
+// const allWeeksEarnings = weeksEarnings();
+// console.log("allWeeksEarnings:", allWeeksEarnings)
+
+// const totalPrice = orders.reduce((accumulator, order) => accumulator + order.totalPrice, 0);
+// console.log(`Total price of orders: ${totalPrice}`);
 
 
   return (
@@ -72,19 +107,25 @@ const allMonthOrders = monthOrders();
       <div className={styles.flex}>
         <div className={styles.areaPanel}>
           <p className={styles.title}>Hoy</p>
+          <div className={styles.orders}>
           {allTodayOrders > 0 ? allTodayOrders : 0}
+          </div>
           <p className={styles.vExtra}>Ordenes del día</p>
         </div>
 
         <div className={styles.areaPanel}>
           <p className={styles.title}>Esta semana</p>
+          <div className={styles.orders}>
           {allWeeksOrders > 0 ? allWeeksOrders : 0}
+          </div>
           <p className={styles.vExtra}>Ordenes esta semana</p>
         </div>
 
         <div className={styles.areaPanel}>
           <p className={styles.title}>Este mes</p>
+          <div className={styles.orders}>
           {allMonthOrders > 0 ? allMonthOrders : 0}
+          </div>
           <p className={styles.vExtra}>Ordenes en el mes</p>
         </div>
       </div>
