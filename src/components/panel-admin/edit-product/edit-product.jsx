@@ -320,18 +320,18 @@ return (
    <Button onClick={() =>  handleDisabledChange('categories')}>
     <BorderColorOutlinedIcon sx={{ color: !disabled.categories ? 'primary.main' : "#989898" }}/></Button>
    </Box>
-   <Box component="label" className={`${styles.categories} ${styles.responsiveBox}`} sx={{ display: 'inline-block'}}>
+   <label className={`${styles.categories} ${styles.responsiveBox}`} sx={{ display: 'inline-block'}}>
   Categorías:{" "}
   {product.categories?.map((category, index) => (
     <span key={index}>{" | "}{category}
       <button type="button" onClick={() => handleRemoveCategory(category)} className={styles.buton}>x</button>
     </span>
   ))}
-</Box>
-{errors.categories && <FormHelperText sx={{fontSize:"14px"}}error>*La categoría es obligatoria</FormHelperText>}
+</label>
+{errors.categories && <div sx={{fontSize:"14px"}}error>*La categoría es obligatoria</div>}
 <Divider />
    {/* //imagenes */}
-   
+
       {product.imageUrl.length > 0 ? <ImageList sx={{ minHeight: '25vh'}} cols={3} rowHeight={164}>
           {
             product.imageUrl?.map((item, i)=>(
@@ -345,7 +345,8 @@ return (
             ))
           }
       </ImageList> : null }
-      <Images setUrlImages={setUrlImages}/>       
+      <Images setUrlImages={setUrlImages}/>     
+     
     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>  
     <Button type='submit' variant='contained' onClick={handleSubmit} fullWidth>Listo</Button>
     </Box>
