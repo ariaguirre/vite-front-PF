@@ -7,8 +7,7 @@
   text-align: center;
   background-color: white;
   margin-top: 2rem;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding: 2rem 0;
 }
 
 .tipografia {
@@ -24,38 +23,49 @@
   color: solid black;
   font-size: 20px;
   font-weight: bolder;
-  width: calc(30% - 20px);
+  width: 20% ;
 }
 
 .varios {
-  width: 60%;
-  float: right;
+  width: 70%;
+  text-transform: uppercase;
 }
 
 .footerCont {
   width: 100%;
   display: flex;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 
 @media screen and (max-width: 767px) {
   .footerCont {
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
 
   .varios {
     margin-top: 1rem;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
   }
 
   .varios a {
     margin: 0.5rem;
   }
 
-  .tipografia {
-    width: 100%;
-    /* margin-top: 1rem; */
+}
+
+.tipografia {
+  width: 100%;
+  /* margin-top: 1rem; */
+}
+
+@media only screen and (min-width:768px){
+  .tipografia{
+    display: flex;
   }
 }
