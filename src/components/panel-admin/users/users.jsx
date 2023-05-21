@@ -1,42 +1,40 @@
+//import React
 import React from 'react'
-
 import { useEffect, useState } from 'react';
+//import Material UI y css module
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper, IconButton } from '@mui/material'
-import { getUserAdmin, setActiveUser } from '../../../utils/firebase/firebaseClient';
-
 import styles from "../users/users.module.css"
+//Import firebase
+import { getUserAdmin, setActiveUser } from '../../../utils/firebase/firebaseClient';
+//import alertas
 import Swal from "sweetalert2";
 
 
 
 const Users = () => {
-
  
   const [userData, setUserData] = useState([]);
-
-  const updateUserData = (idUser, act) => {
-    // Create update user data
+   // update para user data y actualizar tabla al activar/desactivar user
+  const updateUserData = (idUser, act) => {   
     const updatedUserData = userData.map((user) => {
       if (user?.id === idUser) {
         return { ...user, active: act };
       }
       return user;
     });
-    // Update userData 
     setUserData(updatedUserData);
   };
 
 
-  useEffect(() => {
-    
-    const resultData = async () => {
-    const users = await getUserAdmin();
-    setUserData(users);
+useEffect(() => {    
+  const resultData = async () => {
+  const users = await getUserAdmin();
+  setUserData(users);
     }
-    resultData();
+  resultData();
   }, []);
-  const usersList = userData.filter((user)=>!user.admin)
- console.log(usersList)
+ const usersList = userData.filter((user)=>!user.admin)
+ //console.log(usersList)
 
 //activar-desactivar
 const handlerActive = async (idUser, act) => {
@@ -82,11 +80,10 @@ const handlerActive = async (idUser, act) => {
 
 return (
 <div>
-<TableContainer component={Paper} sx={{ mt: "1%" }}>CLIENTES
-<Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+<TableContainer component={Paper} sx={{ mt: "1%",  minWidth: "600x" }} >CLIENTES
+<Table sx={{ minWidth: "600x"}} size="small" aria-label="a dense table" >
 <TableHead bgcolor="#e3f2fd">
 <TableRow>
- {/* <TableCell>USUARIO</TableCell> */}
 <TableCell align="left">NOMBRE USUARIO</TableCell>
 <TableCell align="left">E-MAIL</TableCell>
 <TableCell align="left">TELEFONO</TableCell>
@@ -156,19 +153,12 @@ return (
 </IconButton>
 )}
 </TableCell>
-
-
- </TableRow>
+</TableRow>
 ))}
 </TableBody>
-
-    </Table>
-    
-    
-    </TableContainer>
-    
- 
-    </div>
+</Table>
+</TableContainer>
+</div>
   )
 }
 
