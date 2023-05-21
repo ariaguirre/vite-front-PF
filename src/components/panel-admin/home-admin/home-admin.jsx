@@ -1,5 +1,6 @@
 import styles from "../home-admin/home-admin.module.css"
 import { useSelector } from "react-redux"
+import { numberFormat } from "../../../helper/numberFormat";
 
 
 const HomeAdmin = () => {
@@ -119,7 +120,7 @@ const todayEarnings = filteredData.reduce((total, item) => total + item.orderPri
           <div className={styles.orders}>
           {allTodayOrders > 0 ? allTodayOrders : 0}
           </div>
-          <p className={styles.vExtra}>Ordenes del día</p>
+          <p className={styles.vExtra}>Órdenes del día</p>
         </div>
 
         <div className={styles.areaPanel}>
@@ -127,7 +128,7 @@ const todayEarnings = filteredData.reduce((total, item) => total + item.orderPri
           <div className={styles.orders}>
           {allWeeksOrders > 0 ? allWeeksOrders : 0}
           </div>
-          <p className={styles.vExtra}>Ordenes esta semana</p>
+          <p className={styles.vExtra}>Órdenes en la semana</p>
         </div>
 
         <div className={styles.areaPanel}>
@@ -135,7 +136,7 @@ const todayEarnings = filteredData.reduce((total, item) => total + item.orderPri
           <div className={styles.orders}>
           {allMonthOrders > 0 ? allMonthOrders : 0}
           </div>
-          <p className={styles.vExtra}>Ordenes en el mes</p>
+          <p className={styles.vExtra}>Órdenes en el mes</p>
         </div>
       </div>
 
@@ -145,7 +146,7 @@ const todayEarnings = filteredData.reduce((total, item) => total + item.orderPri
         <div className={styles.areaPanel}>
           <p className={styles.title}>Hoy</p>
           <div className={styles.orders}>
-          {todayEarnings ? todayEarnings : 0}
+          {todayEarnings ? numberFormat(todayEarnings) : '$0'}
           </div>
           <p className={styles.vExtra}>Ganancias del día</p>
         </div>
@@ -153,7 +154,7 @@ const todayEarnings = filteredData.reduce((total, item) => total + item.orderPri
         <div className={styles.areaPanel}>
           <p className={styles.title}>Esta semana</p>
           <div className={styles.orders}>
-          {weekEarnings ? weekEarnings : 0}
+          {weekEarnings ? numberFormat(weekEarnings) : '$0'}
           </div>
           <p className={styles.vExtra}>Ganancias esta semana</p>
         </div>
@@ -161,7 +162,7 @@ const todayEarnings = filteredData.reduce((total, item) => total + item.orderPri
         <div className={styles.areaPanel}>
           <p className={styles.title}>Este mes</p>
           <div className={styles.orders}>
-          {monthEarnings ? monthEarnings : 0}
+          {monthEarnings ? numberFormat(monthEarnings) : '$0'}
           </div>
           <p className={styles.vExtra}>Ganancias en el mes</p>
         </div>
