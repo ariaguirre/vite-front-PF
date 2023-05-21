@@ -39,7 +39,6 @@ const HomeAdmin = () => {
     return both
   })
 
-
   const todayOrder = () => {
     const todaysOrders = ordersDate.filter((order) => order.includes(todaysDate));
   if(todaysOrders.length > 0) return todaysOrders.length;
@@ -58,7 +57,6 @@ const weeksOrders = () => {
 const allWeeksOrders = weeksOrders();
 
 // Ordenes del mes
-
 const monthOrders = () => {
   const todayM = new Date()
   todayM.setDate(todayM.getDate() - 30);
@@ -96,6 +94,14 @@ const weekEarningsF = () => {
   return totalEarnings
 }
 const weekEarnings = weekEarningsF()
+
+//Ganancias de hoy
+const today = new Date();
+const filteredData = datePrice.filter(item => {
+  const itemDate = new Date(item.formattedDate);
+  return itemDate.toDateString() === today.toDateString();
+});
+const todayEarnings = filteredData.reduce((total, item) => total + item.orderPrice, 0);
 
 
 
@@ -138,8 +144,10 @@ const weekEarnings = weekEarningsF()
       <div className={styles.flex}>
         <div className={styles.areaPanel}>
           <p className={styles.title}>Hoy</p>
-          <p className={styles.value}>2</p>
-          <p className={styles.vExtra}>Ordenes del día</p>
+          <div className={styles.orders}>
+          {todayEarnings ? todayEarnings : 0}
+          </div>
+          <p className={styles.vExtra}>Ganancias del día</p>
         </div>
 
         <div className={styles.areaPanel}>
@@ -147,7 +155,7 @@ const weekEarnings = weekEarningsF()
           <div className={styles.orders}>
           {weekEarnings ? weekEarnings : 0}
           </div>
-          <p className={styles.vExtra}>Ordenes esta semana</p>
+          <p className={styles.vExtra}>Ganancias esta semana</p>
         </div>
 
         <div className={styles.areaPanel}>
@@ -155,7 +163,7 @@ const weekEarnings = weekEarningsF()
           <div className={styles.orders}>
           {monthEarnings ? monthEarnings : 0}
           </div>
-          <p className={styles.vExtra}>Ordenes en el mes</p>
+          <p className={styles.vExtra}>Ganancias en el mes</p>
         </div>
       </div>
     </div>
