@@ -128,7 +128,7 @@ const todayEarnings = filteredData.reduce((total, item) => total + item.orderPri
           <div className={styles.orders}>
           {allWeeksOrders > 0 ? allWeeksOrders : 0}
           </div>
-          <p className={styles.vExtra}>Órdenes en la semana</p>
+          <p className={styles.vExtra}>Órdenes esta semana</p>
         </div>
 
         <div className={styles.areaPanel}>
