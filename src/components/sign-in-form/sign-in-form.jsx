@@ -7,28 +7,63 @@ import TextField from '@mui/material/TextField'
 import {
   signInWithGooglePopup,
   signInAuthUserWithEmailAndPassword,
+  getUserAdmin,
+  signOutUser
 } from '../../utils/firebase/firebaseClient';
+import { clearUserData, getUserData } from '../../features/userData/userDataSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import { Stack } from '@mui/material';
 //Forms
 import { useForm } from 'react-hook-form';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
 
-const SignInForm = () => {
+const SignInForm = () => { 
 
+  const dispatch = useDispatch();
   const form = useForm({
     defaultValues:{
       email: "",
       password: ""  
     }  
   });
-
   const { register, handleSubmit, formState: {errors} } = form;
   const navigate = useNavigate();
+ //obtengo los datos del usuario 
+  const getUser = async (id) => {
+    const users = await getUserAdmin()
+    const userId= users.filter((user)=> user.id === id) 
+    //console.log(userId)
+    return userId
+  }
+//compruebo si esta activo o no para perimitir el logueo o restringir el acceso
+  const isActive = async (userId) =>{
+    const userData = await getUser(userId)
+    //console.log(userData[0].active)
+    if(userData[0].active){ 
+      navigate("/")
+    }  
+    else { //console.log("usuario NO activo")
+    await signOutUser();     
+    dispatch(clearUserData())
+    //alerta
+    Swal.fire({
+      icon: 'error',
+      title: 'Disculpa, pero ya no tienes acceso!',
+      text: 'Tu cuenta ha sido bloqueada',        
+    })
+    navigate("/")}    
+  }
+
+  
 
   const signInWithGoogle = async () => {
     try {
-      await signInWithGooglePopup();
-      navigate("/");
+      const result = await signInWithGooglePopup(); 
+      //console.log(result.user.uid)
+      const userId= result.user.uid
+       isActive(userId)
     } catch (error) {
       console.error(error)
     }
@@ -37,11 +72,14 @@ const SignInForm = () => {
   const onSubmitEmailAndPassword = async ({email,password}) => {
     
     try {
-      await signInAuthUserWithEmailAndPassword(
+      const result = await signInAuthUserWithEmailAndPassword(
         email,
         password
       );
-      navigate("/");
+      
+      const userId= result.user.uid
+       isActive(userId)
+   
     } catch (error) {
       switch (error.code) {
         case 'auth/wrong-password':
