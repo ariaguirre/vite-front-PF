@@ -26,7 +26,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import FolderSharedRoundedIcon from '@mui/icons-material/FolderSharedRounded';
 import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
 import Inventory2Icon from '@mui/icons-material/Inventory2';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+// import AddCircleIcon from '@mui/icons-material/AddCircle';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 //import componentes
@@ -173,113 +173,10 @@ const SideBar = () =>  {
   </DrawerHeader>
   <Divider />
   <List>
-  {/*menu latera*/}
-  <ListItem sx={{ mt: '20%' }}>
-  <ListItemButton
-    onClick={() => handleItemClick(<Inicio />)}
-    sx={{
-    minHeight: 48,
-    justifyContent: open ? 'initial' : 'center',
-    px: 2.5,
-    }}
-  >
-  <ListItemIcon>
-  <Stack direction="row" spacing={2}>
-    <Avatar sx={{ bgcolor: '#19c8db' }}>
-    <SpaceDashboardIcon />
-    </Avatar> 
-  </Stack>
-  </ListItemIcon>
-  <ListItemText primary="Inicio" />
-  </ListItemButton>
-  </ListItem>
-
-  <ListItem>
-  <ListItemButton
-    onClick={() => handleItemClick(<AllProducts onAddProduct={handleAddProduct} onEditProduct={handleEditProduct}/>)}
-    sx={{
-    minHeight: 48,
-    justifyContent: open ? 'initial' : 'center',
-    px: 2.5,
-    }}
-  >
-  <ListItemIcon>
-  <Stack direction="row" spacing={2}>
-    <Avatar sx={{ bgcolor: '#19c8db' }}>
-    <Inventory2Icon />
-    </Avatar> 
-  </Stack>
-  </ListItemIcon>
-  <ListItemText primary="Ver Productos" />
-  </ListItemButton>
-  </ListItem>
-
-  <ListItem>
-  <ListItemButton
-    onClick={() => handleItemClick(<CreateProduct />)}
-    sx={{
-    minHeight: 48,
-    justifyContent: open ? 'initial' : 'center',
-    px: 2.5,
-  }}
-  >
-  <ListItemIcon>
-  <Stack direction="row" spacing={2}>
-    <Avatar sx={{ bgcolor: '#19c8db' }}>
-    <AddCircleIcon />
-    </Avatar>
-  </Stack>
-
-  </ListItemIcon>
-  <ListItemText primary="Nuevo Producto" />
-  </ListItemButton>
-  </ListItem>
-
-  <ListItem>
-  <ListItemButton
-    onClick={() => handleItemClick(<VentasTotales />)}
-    sx={{
-    minHeight: 48,
-    justifyContent: open ? 'initial' : 'center',
-    px: 2.5,
-    }}
-  >
-  <ListItemIcon>
-  <Stack direction="row" spacing={2}>
-    <Avatar sx={{ bgcolor: '#19c8db' }}>
-    <MonetizationOnIcon />
-  </Avatar>
-  </Stack>
-
-  </ListItemIcon>
-  <ListItemText primary="Ventas" />
-  </ListItemButton>
-  </ListItem>
-
-  <ListItem>
-  <ListItemButton
-    onClick={() => handleItemClick(<Users />)}
-    sx={{
-    minHeight: 48,
-    justifyContent: open ? 'initial' : 'center',
-    px: 2.5,
-    }}
-  >
-  <ListItemIcon>
-  <Stack direction="row" spacing={2}>
-    <Avatar sx={{ bgcolor: '#19c8db' }}>
-    <FolderSharedRoundedIcon />
-    </Avatar> 
-  </Stack>
-
-  </ListItemIcon>
-  <ListItemText primary="Clientes" />
-  </ListItemButton>
-  </ListItem>
-
-    <ListItem>
+    {/*menu latera*/}
+    <ListItem sx={{ mt: '20%' }}>
     <ListItemButton
-      onClick={() => handleItemClick(<User />)}
+      onClick={() => handleItemClick(<Inicio />)}
       sx={{
       minHeight: 48,
       justifyContent: open ? 'initial' : 'center',
@@ -289,14 +186,117 @@ const SideBar = () =>  {
     <ListItemIcon>
     <Stack direction="row" spacing={2}>
       <Avatar sx={{ bgcolor: '#19c8db' }}>
-      <AccountCircleIcon />
+      <SpaceDashboardIcon />
+      </Avatar> 
+    </Stack>
+    </ListItemIcon>
+    <ListItemText primary="Inicio" />
+    </ListItemButton>
+    </ListItem>
+
+    <ListItem>
+    <ListItemButton
+      onClick={() => handleItemClick(<AllProducts onAddProduct={handleAddProduct} onEditProduct={handleEditProduct}/>)}
+      sx={{
+      minHeight: 48,
+      justifyContent: open ? 'initial' : 'center',
+      px: 2.5,
+      }}
+    >
+    <ListItemIcon>
+    <Stack direction="row" spacing={2}>
+      <Avatar sx={{ bgcolor: '#19c8db' }}>
+      <Inventory2Icon />
+      </Avatar> 
+    </Stack>
+    </ListItemIcon>
+    <ListItemText primary="Ver Productos" />
+    </ListItemButton>
+    </ListItem>
+
+    {/* <ListItem>
+    <ListItemButton
+      onClick={() => handleItemClick(<CreateProduct />)}
+      sx={{
+      minHeight: 48,
+      justifyContent: open ? 'initial' : 'center',
+      px: 2.5,
+    }}
+    >
+    <ListItemIcon>
+    <Stack direction="row" spacing={2}>
+      <Avatar sx={{ bgcolor: '#19c8db' }}>
+      <AddCircleIcon />
+      </Avatar>
+    </Stack>
+
+    </ListItemIcon>
+    <ListItemText primary="Nuevo Producto" />
+    </ListItemButton>
+    </ListItem> */}
+
+    <ListItem>
+    <ListItemButton
+      onClick={() => handleItemClick(<VentasTotales />)}
+      sx={{
+      minHeight: 48,
+      justifyContent: open ? 'initial' : 'center',
+      px: 2.5,
+      }}
+    >
+    <ListItemIcon>
+    <Stack direction="row" spacing={2}>
+      <Avatar sx={{ bgcolor: '#19c8db' }}>
+      <MonetizationOnIcon />
+    </Avatar>
+    </Stack>
+
+    </ListItemIcon>
+    <ListItemText primary="Ventas" />
+    </ListItemButton>
+    </ListItem>
+
+    <ListItem>
+    <ListItemButton
+      onClick={() => handleItemClick(<Users />)}
+      sx={{
+      minHeight: 48,
+      justifyContent: open ? 'initial' : 'center',
+      px: 2.5,
+      }}
+    >
+    <ListItemIcon>
+    <Stack direction="row" spacing={2}>
+      <Avatar sx={{ bgcolor: '#19c8db' }}>
+      <FolderSharedRoundedIcon />
       </Avatar> 
     </Stack>
 
     </ListItemIcon>
-    <ListItemText primary="Usuario" />
+    <ListItemText primary="Clientes" />
     </ListItemButton>
     </ListItem>
+
+      <ListItem>
+      <ListItemButton
+        onClick={() => handleItemClick(<User />)}
+        sx={{
+        minHeight: 48,
+        justifyContent: open ? 'initial' : 'center',
+        px: 2.5,
+        }}
+      >
+      <ListItemIcon>
+      <Stack direction="row" spacing={2}>
+        <Avatar sx={{ bgcolor: '#19c8db' }}>
+        <AccountCircleIcon />
+        </Avatar> 
+      </Stack>
+
+      </ListItemIcon>
+      <ListItemText primary="Usuario" />
+      </ListItemButton>
+      </ListItem>
   </List>
   <Divider />
   </Drawer>
