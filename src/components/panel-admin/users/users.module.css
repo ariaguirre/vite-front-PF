@@ -1,0 +1,19 @@
+.active{  
+    position: relative;
+    background-color: transparent;
+    border: none;
+    color: #03f871;
+    cursor: pointer;
+    padding: 0.1rem;
+    font-size: 0.1rem;
+  }
+
+
+.disable{  
+    background-color: transparent;
+    border: none;
+    color: #d4521f;
+    cursor: pointer;
+    font-size: 0.1rem;
+    padding: 0.1rem;
+  }
