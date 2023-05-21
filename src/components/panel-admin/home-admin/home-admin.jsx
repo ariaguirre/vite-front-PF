@@ -12,44 +12,40 @@ const HomeAdmin = () => {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
-    
     const formattedDate = `${year}/${month}/${day}`;
     return formattedDate;
   };
   
 //Ordenes del dia
-  // const ordersDate = orders.map((order) => {
-  //   const orderDate = order.date
-  //   const firebaseTime = new Date(orderDate.seconds * 1000 + orderDate.nanoseconds / 1000000)
-  //   const fecha = firebaseTime.toDateString();
-  //   const formattedDate = formatDate(fecha);
-  //   return formattedDate
-  // })
   const ordersDate = orders.map((order) => {
+    const orderDate = order.date
+    const firebaseTime = new Date(orderDate.seconds * 1000 + orderDate.nanoseconds / 1000000)
+    const fecha = firebaseTime.toDateString();
+    const formattedDate = formatDate(fecha);
+    return formattedDate
+  })
+
+  //Precio y dia
+  const datePrice = orders.map((order) => {
     const orderDate = order.date
     const firebaseTime = new Date(orderDate.seconds * 1000 + orderDate.nanoseconds / 1000000)
     const fecha = firebaseTime.toDateString();
     const formattedDate = formatDate(fecha);
     const orderPrice = order.totalPrice;
     const both = {formattedDate,orderPrice}
-    return both;
+    return both
   })
-  console.log("ordersDate:", ordersDate)
-
 
 
   const todayOrder = () => {
-    const todaysOrders = ordersDate.filter((o) => o.includes(todaysDate));
+    const todaysOrders = ordersDate.filter((order) => order.includes(todaysDate));
   if(todaysOrders.length > 0) return todaysOrders.length;
   else return "0 orders";
   }
   const allTodayOrders = todayOrder();
-
-
   
 // Ordenes de la semana
 const weeksOrders = () => {
@@ -67,35 +63,42 @@ const monthOrders = () => {
   const todayM = new Date()
   todayM.setDate(todayM.getDate() - 30);
   const currentMonthString = formatDate(todayM);
-  const lastMonthOrders = ordersDate.filter((date) => date >= currentMonthString && date <= todaysDate);
-  console.log("lastMonthOrders:", lastMonthOrders )
+  const lastMonthOrders = ordersDate.filter((date) => date >= currentMonthString && date <= todaysDate).length;
   return lastMonthOrders;
 }
 const allMonthOrders = monthOrders();
 
 //Ganancias del mes
-// const todayPW = new Date();
-// const currentDateString = todayPW.toISOString().split('T')[0];
+const todayPW = new Date();
+const monthEarningsF = () => {
+  const lastMonth = new Date();
+  lastMonth.setDate(currentDate.getDate() - 30);
+  
+  const filteredData = datePrice.filter(item => {
+    const itemDate = new Date(item.formattedDate);
+    return itemDate >= lastMonth && itemDate <= currentDate;
+  });
+  const totalEarnings = filteredData.reduce((total, item) => total + item.orderPrice, 0);
+  return totalEarnings
+}
+const monthEarnings = monthEarningsF()
 
-// const weeksEarnings = () => {
-//   const sevenDaysAgo = new Date();
-//   sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-//   const sevenDaysAgoString = sevenDaysAgo.toISOString().split('T')[0];
 
-//   const ordersDuringLastWeek = orders.filter((order) => {
-//   const orderDate = new Date(order.date.seconds * 1000); 
-//   const orderDateString = orderDate.toISOString().split('T')[0];
-//   // console.log("orderDateString:", orderDateString)
-//   const earnings =  orders.filter((date) => orderDateString >= sevenDaysAgoString && orderDateString <= currentDateString)
-//   console.log("orders: ", orders)
-//   return earnings;
-// });
-// }  
-// const allWeeksEarnings = weeksEarnings();
-// console.log("allWeeksEarnings:", allWeeksEarnings)
+//Ganancias de la semana
+const lastWeek = new Date();
+const weekEarningsF = () => {
+  lastWeek.setDate(currentDate.getDate() - 7);
+  const filteredData = datePrice.filter(item => {
+    const itemDate = new Date(item.formattedDate);
+    return itemDate >= lastWeek && itemDate <= currentDate;
+  });
+  const totalEarnings = filteredData.reduce((total, item) => total + item.orderPrice, 0);
+  return totalEarnings
+}
+const weekEarnings = weekEarningsF()
 
-// const totalPrice = orders.reduce((accumulator, order) => accumulator + order.totalPrice, 0);
-// console.log(`Total price of orders: ${totalPrice}`);
+
+
 
 
   return (
@@ -141,13 +144,17 @@ const allMonthOrders = monthOrders();
 
         <div className={styles.areaPanel}>
           <p className={styles.title}>Esta semana</p>
-          <p className={styles.value}>25</p>
+          <div className={styles.orders}>
+          {weekEarnings ? weekEarnings : 0}
+          </div>
           <p className={styles.vExtra}>Ordenes esta semana</p>
         </div>
 
         <div className={styles.areaPanel}>
           <p className={styles.title}>Este mes</p>
-          <p className={styles.value}>32</p>
+          <div className={styles.orders}>
+          {monthEarnings ? monthEarnings : 0}
+          </div>
           <p className={styles.vExtra}>Ordenes en el mes</p>
         </div>
       </div>
