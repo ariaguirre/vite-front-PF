@@ -61,9 +61,9 @@ const DetailComponent = ({ productDetail, productId }) => {
   }
 
   useEffect(() => {
-    const wasReviewed = reviews.find(review => review.user === userData.displayName)
+    const wasReviewed = reviews.find(review => review.user === userData?.displayName)
     wasReviewed ? setReviewed(true) : setReviewed(false)
-  }, [reviews, userData.displayName])
+  }, [reviews, userData?.displayName])
 
 
   return (
@@ -96,7 +96,7 @@ const DetailComponent = ({ productDetail, productId }) => {
         {
           reviewed || bought && <PostReview userData={userData} uid={productId} allReviews={reviews} />
         }
-        {reviews.length !== 0
+        {reviews?.length !== 0
           ? reviews.map((review) => <ReviewComponent key={v4()} reviewInf={review} />)
           : <NoReview />
         }
