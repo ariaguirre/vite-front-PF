@@ -11,7 +11,7 @@ const AboutUs = () => {
   return (
     <div className={styles.conteiner}>
       <div className={styles.nosotros}>
-        <h1>SOBRE NOSOTROS</h1>
+        <h1>CREADO POR</h1>
       </div>
       <div className={styles.perfiles}>
         <div className={styles.git}>

@@ -23,7 +23,7 @@ const Footer = () => {
         <div className={style.footerCont}>
           <div className={style.titulo}>Mom Home & Baby</div>
           <div className={style.varios}>
-            <Link>CONTACT</Link> / <Link to="/about-us"> ABOUT US </Link> / FAQ
+            <Link to="/creado-por" style={{textDecoration: 'underline', color:'rgb(90, 228, 247)'}}>CREADO POR</Link> 
             <WhatsAppIcon
               sx={{
                 color: "black",

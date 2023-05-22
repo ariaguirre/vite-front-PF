@@ -94,7 +94,7 @@ const App = () => {
         <Route path="detail/:id" element={<DetailProduct />} />
         <Route path="perfil" element={<UserProfile/>} />
         <Route path="compras" element={<Compras/>} />
-        <Route path="about-us" element={<AboutUs/>} />
+        <Route path="creado-por" element={<AboutUs/>} />
       </Route>
       {userData?.admin && (
         <Route
