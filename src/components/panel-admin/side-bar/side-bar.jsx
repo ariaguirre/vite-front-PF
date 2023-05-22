@@ -213,28 +213,6 @@ const SideBar = () =>  {
   <ListItemText primary="Ver Productos" />
   </ListItemButton>
   </ListItem>
-
-  <ListItem>
-  <ListItemButton
-    onClick={() => handleItemClick(<CreateProduct />)}
-    sx={{
-    minHeight: 48,
-    justifyContent: open ? 'initial' : 'center',
-    px: 2.5,
-  }}
-  >
-  <ListItemIcon>
-  <Stack direction="row" spacing={2}>
-    <Avatar sx={{ bgcolor: '#19c8db' }}>
-    <AddCircleIcon />
-    </Avatar>
-  </Stack>
-
-  </ListItemIcon>
-  <ListItemText primary="Nuevo Producto" />
-  </ListItemButton>
-  </ListItem>
-
   <ListItem>
   <ListItemButton
     onClick={() => handleItemClick(<VentasTotales />)}
