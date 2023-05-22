@@ -41,7 +41,6 @@ const CardInf = (
 
   price = Number(price);
 
-
   const handleClickCartIcon = () => {
 
     const product = {
@@ -53,7 +52,7 @@ const CardInf = (
     dispatch(addItemToCart(product));
   }
 
-  const handleDetailsClick = ()=> {
+  const handleDetailsClick = () => {
     navigate(`/detail/${id}`);
   }
 
@@ -109,10 +108,10 @@ const CardInf = (
           <Box>
             <HalfRatingPreview rValue={rating} />
           </Box>
-          <CardActions sx={{ padding: 0 }}>            
-              <Button variant="contained" color="primary" onClick={handleDetailsClick}>
-                Details
-              </Button>                        
+          <CardActions sx={{ padding: 0 }}>
+            <Button variant="contained" color="primary" onClick={handleDetailsClick}>
+              Details
+            </Button>
             <IconButton onClick={handleClickCartIcon}>
               <AddShoppingCartIcon color="primary" />
             </IconButton>

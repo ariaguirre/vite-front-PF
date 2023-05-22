@@ -1,19 +1,19 @@
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 
-const SetRatingComponent = ({ rValue, sValue}) => {
-  const handleChange = (_, newValue)=> {
-  sValue(newValue);
+const SetRatingComponent = ({ rValue, sValue }) => {
+  const handleChange = (_, newValue) => {
+    sValue(newValue);
   }
 
   return (
     <Stack spacing={1}>
-      <Rating 
+      <Rating
         name="half-rating"
         defaultValue={3.5}
-        precision={0.5}   
+        precision={0.5}
         value={rValue}
-        onChange={handleChange}    
+        onChange={handleChange}
       />
     </Stack>
   );

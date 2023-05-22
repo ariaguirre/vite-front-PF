@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form"
 import { useState } from "react"
 import SetRatingComponent from "../../card/rating/rating"
 import { useEffect } from "react"
-import { setReview } from "../../../utils/firebase/firebaseClient"
+import { setReview, updateReview } from "../../../utils/firebase/firebaseClient"
 import Swal from "sweetalert2"
 const PostReview = ({ userData, uid, allReviews }) => {
 
@@ -22,7 +22,7 @@ const PostReview = ({ userData, uid, allReviews }) => {
     }
   }, [isSubmitSuccessful, reset])
 
-  const onSubmit = ({ review }) => {
+  const onSubmit = async ({ review }) => {
     const reviews = {
       date: new Date(),
       rating: reviewValue,
@@ -32,11 +32,34 @@ const PostReview = ({ userData, uid, allReviews }) => {
     const response = allReviews.find(review => review.user === userData.displayName);
 
     if (!response) {
+      Swal.fire('Gracias', 'Tus comentarios nos ayudan a mejorar', 'success')
       setReview(reviews, uid)
-      Swal.fire('Solo una reseña por usuario', 'Gracias, tus comentarios nos ayudan a mejorar', 'error')
+      await upDateProductRaiting(reviews.rating);
+      return;
     }
-    Swal.fire('Gracias!', 'tus comentarios nos ayudan a mejorar')
+    Swal.fire('un error a corruido', 'error')
   }
+
+  const upDateProductRaiting = async (rating) => {
+    if (!allReviews.length) {
+      try {
+        console.log("aqui")
+        await updateReview(rating, uid)
+      } catch (error) {
+        console.error(error)
+      }
+      return
+    } else {
+      const numberOfReviews = allReviews.length + 1
+      const subTotalRating = allReviews.reduce((acc, currentReview) => acc + currentReview.rating, 0) + rating
+
+      const totalRating = subTotalRating / numberOfReviews
+      const newRating = Number(totalRating.toFixed(1))
+      await updateReview(newRating, uid);
+    }
+
+  }
+
 
   return (
     <div className={styles.postReviewContainer}>
