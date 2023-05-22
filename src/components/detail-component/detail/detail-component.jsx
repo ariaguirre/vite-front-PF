@@ -16,10 +16,11 @@ import PostReview from "../post-review/post-review";
 import { v4 } from "uuid";
 
 const DetailComponent = ({ productDetail, productId }) => {
-  
+
 
   const [purchasedProducts, setPurchasedProducts] = useState();
   const [bought, setBought] = useState(false);
+  const [reviewed, setReviewed] = useState(false);
 
   const { userData } = useSelector(state => state.persistedReducer.userData);
   const { name, price, rating, reviews, stock, categories, description, imageUrl } = productDetail;
@@ -35,7 +36,7 @@ const DetailComponent = ({ productDetail, productId }) => {
 
     purchases.forEach(purchase => {
       const { products } = purchase;
-      products.forEach(product => {        
+      products.forEach(product => {
         allProducts.push(product);
       })
     })
@@ -45,9 +46,10 @@ const DetailComponent = ({ productDetail, productId }) => {
   }, [userData])
 
   useEffect(() => {
-    if (!purchasedProducts) return;    
-    setBought(!!purchasedProducts.find(({id}) => id === productId )); 
-  }, [ productId, purchasedProducts])
+    if (!purchasedProducts) return;
+    setBought(!!purchasedProducts.find(({ id }) => id === productId));
+  }, [productId, purchasedProducts]);
+
   const handleClickCart = () => {
     const product = {
       id: productId,
@@ -57,6 +59,12 @@ const DetailComponent = ({ productDetail, productId }) => {
     }
     dispatch(addItemToCart(product));
   }
+
+  useEffect(() => {
+    const wasReviewed = reviews.find(review => review.user === userData?.displayName)
+    wasReviewed ? setReviewed(true) : setReviewed(false)
+  }, [reviews, userData?.displayName])
+
 
   return (
     <Container maxWidth="xl">
@@ -86,9 +94,9 @@ const DetailComponent = ({ productDetail, productId }) => {
       </div>
       <div className={styles.reviewsContainer}>
         {
-          bought && <PostReview userData={userData} uid={productId} />
+          reviewed || bought && <PostReview userData={userData} uid={productId} allReviews={reviews} />
         }
-        {reviews.length !== 0
+        {reviews?.length !== 0
           ? reviews.map((review) => <ReviewComponent key={v4()} reviewInf={review} />)
           : <NoReview />
         }

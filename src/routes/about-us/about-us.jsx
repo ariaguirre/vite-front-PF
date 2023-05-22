@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
-import styles from "./aboutUs.module.css";
+
+import styles from "./about-us.module.css";
 import john from './photos/john.jpg'
 import bianca from './photos/bianca.jpg'
 import felipe from './photos/felipe.jpg'
 import mario from './photos/mario.jpg'
 import ariana from './photos/ariana.jpg'
 import daniel from './photos/daniel.jpg'
+
+
 
 const AboutUs = () => {
   return (
