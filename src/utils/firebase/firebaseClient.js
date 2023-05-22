@@ -118,7 +118,7 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 };
 
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
-  if (!email || !password) return;
+  if (!email || !password ) return;
   try {
    
     return await signInWithEmailAndPassword(auth, email, password);
@@ -404,7 +404,7 @@ export const setActiveProduct = async(data) =>{
 
 //borrador logico usuario
 export const setActiveUser = async(data) =>{
-  const productActive = doc(db, 'user', data.uid)
+  const productActive = doc(db, 'user', data.id) // cambie data.uid por --> data.id para poder acceder al usuario
   await setDoc(productActive,{
     active: data.active
   },{merge: true})
