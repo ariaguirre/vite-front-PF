@@ -10,7 +10,7 @@ import {getProductByid, updateProduct,getCategories } from '../../../utils/fireb
 import { getCategoriesAction } from  "../../../features/categories/categoriesSlice" 
 
 //import material ui
-import { Grid, Typography, Divider, TextField, ImageList, Button, ImageListItem, FormHelperText, Box, Container} from '@mui/material';
+import { useMediaQuery, Divider, TextField, ImageList, Button, ImageListItem, FormHelperText, Box, Container} from '@mui/material';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import Images from  "../../images/images"
 
@@ -46,6 +46,8 @@ const EditProduct = ({id}) => {
   imageUrl: true
  });
 
+const isSmallScreen = useMediaQuery('(max-width:600px)')
+ 
 useEffect(() => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   getProduct(id);
@@ -320,24 +322,24 @@ return (
    <Button onClick={() =>  handleDisabledChange('categories')}>
     <BorderColorOutlinedIcon sx={{ color: !disabled.categories ? 'primary.main' : "#989898" }}/></Button>
    </Box>
-   <Box component="label" className={`${styles.categories} ${styles.responsiveBox}`} sx={{ display: 'inline-block'}}>
+   <label className={`${styles.categories} ${styles.responsiveBox}`} sx={{ display: 'inline-block'}}>
   Categorías:{" "}
   {product.categories?.map((category, index) => (
     <span key={index}>{" | "}{category}
       <button type="button" onClick={() => handleRemoveCategory(category)} className={styles.buton}>x</button>
     </span>
   ))}
-</Box>
-{errors.categories && <FormHelperText sx={{fontSize:"14px"}}error>*La categoría es obligatoria</FormHelperText>}
+</label>
+{errors.categories && <div sx={{fontSize:"14px"}}error>*La categoría es obligatoria</div>}
 <Divider />
    {/* //imagenes */}
-   
-      {product.imageUrl.length > 0 ? <ImageList sx={{ minHeight: '25vh'}} cols={3} rowHeight={164}>
+   <Box sx={{ display: 'flex', flexDirection:"row", justifyContent: 'center', alignItems: 'center', width: '100wh'}}>
+      {product.imageUrl.length > 0 ? <ImageList cols={isSmallScreen ? 2 : 6}  >
           {
             product.imageUrl?.map((item, i)=>(
-              <ImageListItem key={i}>
-                <img
-                src={`${item}?w=100&h=100&fit=crop&auto=format`}
+              <ImageListItem key={i} sx={{border:"1px solid grey", marginRight:"10px"}}>
+                <img 
+                src={`${item}?w=50&h=50&fit=crop&auto=format`}
                 />
                  <button type="button"onClick={() => handleRemoveImage(item)} className={styles.butonImagen}
                  >x</button>
@@ -345,7 +347,10 @@ return (
             ))
           }
       </ImageList> : null }
-      <Images setUrlImages={setUrlImages}/>       
+      </Box> 
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>       
+      <Images setUrlImages={setUrlImages}/>     
+    </Box>
     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>  
     <Button type='submit' variant='contained' onClick={handleSubmit} fullWidth>Listo</Button>
     </Box>
