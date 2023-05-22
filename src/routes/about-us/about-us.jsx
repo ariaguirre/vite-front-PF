@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import s from "./aboutUs.module.css";
+import s from "./about-us.module.css";
 
 const AboutUs = () => {
   return (
