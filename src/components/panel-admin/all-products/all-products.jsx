@@ -2,12 +2,10 @@ import Swal from "sweetalert2";
 //import React y Redux
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
 import s from "./all-products.module.css";
 // import FireBase
 import {
   deleteProductsAdmin,
-  getProducts,
   setActiveProduct,
 } from "../../../utils/firebase/firebaseClient";
 
@@ -16,9 +14,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Edit from "@mui/icons-material/Edit";
 
 import {
-  Grid,
-  FormControl,
-  Box,
+ useMediaQuery,
   Table,
   TableBody,
   TableCell,
@@ -27,33 +23,16 @@ import {
   TableRow,
   Paper,
   IconButton,
-  Typography,
-  Modal,
   Button,
-  TextField,
+  Container
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "80vw",
-  height:"70vh",
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
 
 const AllProducts = ({ onAddProduct, onEditProduct }) => {
 
 const dispatch = useDispatch();
 const { products } = useSelector((state) => state.products);
-const [currentId, setCurrentId] = useState("");
-const [open, setOpen] = useState(false);
-  
+const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down('sm'));  
+
 //eliminar
 const handleDelete = (id) => {
     Swal.fire({
@@ -75,11 +54,6 @@ const handleDelete = (id) => {
    
       
   })
-};
-  //editar
-const handleEdit = async (id) => {
-    setCurrentId(id);
-    setOpen(true);
 };
 
 //activar-desactivar
@@ -121,31 +95,24 @@ const handlerActive = async (idProduct, act) => {
 
 return (
 <div>
-<Box
-  component="main"
-  sx={{
-  width: "50%",
-  alignContent: "center",
-  display: "flex",
-  justifyContent: "center",
-  mx: "25%",
-  mt: "2%",
-  }}
-  textAlign={"center"}
-  boxShadow={3}
-  alignContent={"center"}
-  bgcolor={"primary"}
-  >      
+<Container maxWidth="ml"  sx={{mt:"2rem", mx: "1rem", minWidth:"xs"}}>
 <Button type='submit' variant='contained'fullWidth onClick={onAddProduct}>Agregar Producto</Button>
-</Box>
-<TableContainer component={Paper} sx={{ mt: "1%" }}>
-<Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+
+<TableContainer component={Paper} sx={{ mt: "1%",  minWidth: isSmallScreen ? '100%' : '600px', }} >
+<Table sx={{ minWidth: isSmallScreen ? '100%' : '600px' }} size="small" aria-label="a dense table">
 <TableHead bgcolor="#e3f2fd">
 <TableRow>
+{!isSmallScreen && (
 <TableCell>PRODUCTO</TableCell>
-<TableCell align="center">IMAGEN</TableCell>
+)}
+<TableCell align="center">{isSmallScreen ? 'PROD.' : ' IMAGEN '}</TableCell>
+
+{!isSmallScreen && (
 <TableCell align="center">PRECIO</TableCell>
+)}
+{!isSmallScreen && (
 <TableCell align="center">STOCK</TableCell>
+)}
 <TableCell align="center"></TableCell>
 </TableRow>
 </TableHead>
@@ -155,15 +122,23 @@ return (
   key={row.id}
   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
  >
+  {!isSmallScreen && (
 <TableCell component="th" scope="row">
   {row.name}
 </TableCell>
+)}
 <TableCell align="center">
   <img height="50px" src={row.imageUrl[0]} />
 </TableCell>
+
+{!isSmallScreen && (
 <TableCell align="center">${row.price}</TableCell>
+)}
+{!isSmallScreen && (
 <TableCell align="center">{row.stock}</TableCell>
+)}
 <TableCell align="center">
+
   {row.active ? (
 <IconButton                     
   onClick={() => handlerActive(row.id, false)}
@@ -226,6 +201,7 @@ return (
 </TableBody>
 </Table>
 </TableContainer>
+</Container>
 </div>
 );
 };
