@@ -1,5 +1,14 @@
 .paymentFormHeader {
-	height: 80px;
+	/* height: 80px; */
+	margin-top: 5%;
+	margin-bottom: 2%;
+	font-size: 25px;
+	/* color:rgb(74, 178, 219); */
+	color: rgb(78, 76, 76);
+	align-items: center;
+	font-weight: 600;
+	justify-content: center;
+	display: flex;	
 }
 .paymentFormHeader h3 {
 	padding: 0;
@@ -52,9 +61,12 @@
 	height: 10px;
 }
 .itemsContainer h2 {
-	font-weight: 400;
-	text-align: center;
+	text-align: end;
 	box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.9);
+	font-size: 30px;
+	padding: 20px;
+	padding-right:25%;
+	margin-bottom: 5%;
 }
 .btnPaymentForm {
 	display: flex;
@@ -65,8 +77,9 @@
 .btnPaymentForm button {
 	position: relative;
 	display: inline-block;
-	min-width: 130px;
-	height: 40px;
+	/* min-width: 130px; */
+	width: 25%;
+	height: 45%;
 	padding: 5px 10px;
 	cursor: pointer;
 	color: #242424;
@@ -76,6 +89,7 @@
 	outline: none;
 	transition: all 0.3s ease;
 	font-weight: 600;
+	font-size: 17px;
 	letter-spacing: 2px;
 	border-radius: 0.5rem;
 }
@@ -85,6 +99,14 @@
 .btnPaymentForm button:active {
 	top: 1px;
 }
+
+.itemsCont{
+	width: 80%;
+	margin-left: 13%;
+}
+
+
+
 
 @media only screen and (max-width: 1250px) {
 	.paymentFormContainer {

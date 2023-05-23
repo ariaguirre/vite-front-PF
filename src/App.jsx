@@ -33,6 +33,8 @@ import UserProfile from "./routes/userProfile/UserProfile";
 // import AboutUs from "./routes/AboutUs/AboutUs";
 import { ordersAction } from "./features/orders/orders";
 import Compras from "./components/compras/compras";
+import AboutUs from "./routes/about-us/about-us";
+
 
 const App = () => {
   const dispatch = useDispatch();
@@ -68,7 +70,7 @@ const App = () => {
     });
     let category = await getCategories();
     dispatch(getCategoriesAction(category));
-    getOrdersAdmin(a=>{
+    getOrdersAdmin(a => {
       const orders = [];
       a.forEach((element) => {
         const id = element.id;
@@ -79,7 +81,7 @@ const App = () => {
         });
       });
       dispatch(ordersAction(orders))
-      
+
     })
   };
 
@@ -91,9 +93,9 @@ const App = () => {
         <Route path="sign-up" element={<SignUp />} />
         <Route path="shop/*" element={<Shop />} />
         <Route path="detail/:id" element={<DetailProduct />} />
-        <Route path="perfil" element={<UserProfile/>} />
-        <Route path="compras" element={<Compras/>} />
-        {/* <Route path="about-us" element={<AboutUs/>} /> */}
+        <Route path="perfil" element={<UserProfile />} />
+        <Route path="compras" element={<Compras />} />
+        <Route path="creado-por" element={<AboutUs />} />
       </Route>
       {userData?.admin && (
         <Route
