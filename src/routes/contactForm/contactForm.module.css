@@ -15,3 +15,31 @@ h2{
     border: 2px solid red;
 }
 
+
+.btn
+{
+  min-width: 130px;
+  width: 50%;
+  height: 40px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 5px;
+  border: 2px solid #1ac8db;
+  background: #1ac8db;
+}
+.btn:hover
+{
+  background: #fff;
+  color: #1ac8db
+}
+.btn:active
+{
+  position: relative;
+  top: 2px;
+}
