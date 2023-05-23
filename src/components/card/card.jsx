@@ -31,7 +31,7 @@ const CardInf = (
   const onSale = useRef(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [salePrice, setSalePrice] = useState()
+  const [salePrice, setSalePrice] = useState(0)
 
 
   if (Object.keys(sale).length !== 0) {
@@ -42,7 +42,7 @@ const CardInf = (
 
   price = Number(price);
 
-  let priceOrSale = salePrice === undefined ? price : salePrice
+  let priceOrSale = salePrice === 0 ? price : salePrice
 
   const handleClickCartIcon = () => {
 
@@ -73,7 +73,7 @@ const CardInf = (
           <CardHeader title={title} className={styles.titleCard} sx={{ padding: 0, userSelect: "none" }} />
           {
             onSale.current
-              ? <Sale price={price} sale={sale} setSalePrice={setSalePrice} /> 
+              ? <Sale price={price} sale={sale} setSalePrice={setSalePrice}/> 
               : <Typography variant="h5" color="initial" sx={{ userSelect: "none" }} align="left">{numberFormat(price)}</Typography>
           }
           {
