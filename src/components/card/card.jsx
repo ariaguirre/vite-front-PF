@@ -1,5 +1,5 @@
 //react Imports
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 //mui Components
 import styles from './card.module.css';
@@ -31,6 +31,7 @@ const CardInf = (
   const onSale = useRef(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [salePrice, setSalePrice] = useState()
 
 
   if (Object.keys(sale).length !== 0) {
@@ -41,13 +42,15 @@ const CardInf = (
 
   price = Number(price);
 
+  let priceOrSale = salePrice === undefined ? price : salePrice
+
   const handleClickCartIcon = () => {
 
     const product = {
       id,
       title,
       imageUrl,
-      price
+      price: priceOrSale,
     }
     dispatch(addItemToCart(product));
   }
@@ -70,7 +73,7 @@ const CardInf = (
           <CardHeader title={title} className={styles.titleCard} sx={{ padding: 0, userSelect: "none" }} />
           {
             onSale.current
-              ? <Sale price={price} sale={sale} />
+              ? <Sale price={price} sale={sale} setSalePrice={setSalePrice} /> 
               : <Typography variant="h5" color="initial" sx={{ userSelect: "none" }} align="left">{numberFormat(price)}</Typography>
           }
           {
