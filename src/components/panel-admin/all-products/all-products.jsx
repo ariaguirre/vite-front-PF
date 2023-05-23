@@ -139,7 +139,7 @@ return (
 )}
 <TableCell align="center">
 
-  {row.active && row.stock > 0 ? (
+  {row.active && row.stock >= 0 ? (
 <IconButton                     
   onClick={() => handlerActive(row.id, false)}
   className={s.disable}
