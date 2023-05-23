@@ -10,7 +10,6 @@ import { useEffect, useState } from 'react';
 import Swal from "sweetalert2";
 import formatOnlinePurcase from "../../../helper/formatOnlinePurchase";
 import { ordersGlobal, updatePurchases } from "../../../utils/firebase/firebaseClient";
-import Typography from '@mui/material/Typography'
 import { v4 } from "uuid";
 import emailjs from '@emailjs/browser';
 
@@ -37,9 +36,9 @@ const PaymentForm = () => {
   const onlinePurchase = formatOnlinePurcase(cartItems, total);
 
   //emailJs
-  const USER_ID="service_8duinll";
-  const API_KEY= "template_g954u96";
-  const TEMPLATE_ID= "lp4j5eTKXZNYsZ4jM";
+  const USER_ID = "service_8duinll";
+  const API_KEY = "template_g954u96";
+  const TEMPLATE_ID = "lp4j5eTKXZNYsZ4jM";
 
   var templateParams = {
     email: currentUser.orderInf.email,
@@ -48,8 +47,8 @@ const PaymentForm = () => {
 
   // console.log("templateParams:", templateParams)
 
-  const sendEmail = (e) =>{
-    e.preventDefault()
+  const sendEmail = () => {
+
     emailjs.send(USER_ID, API_KEY, templateParams, TEMPLATE_ID).then((result) => {
       console.log(result.text);
     }, (error) => {
@@ -108,7 +107,7 @@ const PaymentForm = () => {
   return (
     <main style={{ marginTop: "80px" }}>
       <header className={styles.paymentFormHeader}>
-        <h2 div={styles.titleText}>Finalice su compra</h2>
+        <h2 className={styles.titleText}>Finalice su compra</h2>
       </header>
       <section className={styles.paymentFormContainer} >
         <article className={styles.creditCardContainer}>
@@ -130,9 +129,9 @@ const PaymentForm = () => {
         </article>
         <article className={styles.itemsContainer}>
           <div className={styles.itemsCont}>
-          {
-            cartItems.map((cartItem) => (<CheckoutItem key={v4()} cartItem={cartItem} />))
-          }
+            {
+              cartItems.map((cartItem) => (<CheckoutItem key={v4()} cartItem={cartItem} />))
+            }
           </div>
           <h2>Total: {numberFormat(total)}</h2>
 
