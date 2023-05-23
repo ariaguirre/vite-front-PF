@@ -8,10 +8,18 @@ import Filters from '../filters/filters'
 
 import styles from "./products.module.css"
 import Loader from '../loader/loader'
+import { useEffect, useState } from 'react'
 
 const Products = () => {
+  const [products, setProducts] = useState(null);
 
-  const products = useSelector((state) => state.productPag.productsPag)
+
+  const currentProducts = useSelector((state) => state.productPag.productsPag);
+  useEffect(() => {
+    setProducts(currentProducts);
+  }, [currentProducts])
+
+
   return (
     <>
       <div className={styles.dropListContainer}>
@@ -19,10 +27,10 @@ const Products = () => {
         <Filters />
       </div>
       <article>
-        <Container maxWidth="xl" sx={{ minHeight: "100vh", pt: "2rem" , marginTop:"80px" }}>
+        <Container maxWidth="xl" sx={{ minHeight: "100vh", pt: "2rem", marginTop: "80px" }}>
           <Grid container justifyContent={"center"} >
             {
-              products.length ? products.map((products, i) => (
+              products ? products.map((products, i) => (
                 <CardInf
                   key={`${products.id}+${i}`}
                   id={products.id}
