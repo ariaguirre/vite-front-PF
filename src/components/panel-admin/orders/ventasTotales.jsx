@@ -116,7 +116,7 @@ deleteOrders(orderId);
                   <CardMedia
                     component="img"
                     sx={{ width: 90, margin: "10px" }}
-                    image={dat.imageUrl}
+                    image={dat.imageUrl?dat.imageUrl : dat.imageUrl[0]}
                   />
                   <Box sx={{ display: 'flex', flexDirection: 'column', marginBlockStart: "10px" }}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
@@ -160,7 +160,7 @@ deleteOrders(orderId);
         </Box>
       </Box>
       <Stack spacing={2} direction="row" justifyContent="right" >
-        {order.status === "pendiente" && <Button
+        {order.status === "Pendiente" && <Button
           type="submit"
           variant="contained"
           onClick={handleCloseModal}
@@ -238,7 +238,7 @@ deleteOrders(orderId);
                   key={`${row.orderId}+${i}`}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell align="center" > {row.orderId} </TableCell>
+                  <TableCell align="center" > {row.orderId.substr(0, 13)} </TableCell>
                   <TableCell align="center" > {row.date.toDate().toLocaleString('es-co')} </TableCell>
                   <TableCell align="center"> {row.status} </TableCell>
                   <TableCell align="center">{row.totalProducts}</TableCell>
