@@ -56,7 +56,7 @@ const ContactForm = () => {
 
     return(
         <div>
-        <h2>Contactanos</h2>
+        <h2>Contáctate con nosotros</h2>
         <br/>
         <div className={style.fullContainer}>
         <form onSubmit={sendEmail}>
