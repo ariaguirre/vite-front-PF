@@ -5,9 +5,6 @@ import {useState} from 'react'
 import emailjs from '@emailjs/browser';
 import Swal from "sweetalert2";
 
-
-
-
 const ContactForm = () => {
 
     //EmailJs
@@ -19,39 +16,57 @@ const ContactForm = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [issue, setIssue] = useState('')
-    const [text, setText] = useState('')
+    const [message, setMessage] = useState('')
 
-    console.log(params)
-    const sendEmail = () => {
+    const sendEmail = (event) => {
+        event.preventDefault()
         const params = {
             email: email,
-            fromName: name,
+            name: name,
             issue: issue,
-            message: text
+            message: message
         }
-        email.send(service, template, params, apiKey).then(
-            Swal.fire({
-                title: 'Correo enviado!',
-                text: 'Pronto responderemos tu mensaje.',
-                icon: 'success',
-              })
+        console.log("params:", params)
+        emailjs.sendForm(service, template, event.target, apiKey).then(
+            (result)=> {
+            if(result.text === 'OK'){
+                Swal.fire({
+                        title: 'Correo enviado!',
+                        text: 'Pronto responderemos tu mensaje.',
+                        icon: 'success',
+                    })
+                } else {
+                    console.log(result.text)
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Intentalo de nuevo.',
+                        icon: 'error',
+                    })
+                }
+            }
         )
     }
+    // .then(
+    //     Swal.fire({
+    //         title: 'Correo enviado!',
+    //         text: 'Pronto responderemos tu mensaje.',
+    //         icon: 'success',
+    //       })
+    // )
 
     return(
         <div>
         <h2>Contactanos</h2>
         <br/>
-      <Stack spacing={2}  sx = {{
-        width: '50%',
-        marginLeft: '25%',  
-        justifyContent: 'center', 
-      }}>
+        <div className={style.fullContainer}>
+        <form onSubmit={sendEmail}>
+      <Stack spacing={2}  >
         <TextField
           label="Email"
           type="email"
           autoComplete=""
           required
+          name="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -60,6 +75,7 @@ const ContactForm = () => {
           type="text"
           autoComplete=""
           required
+          name="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
@@ -68,6 +84,7 @@ const ContactForm = () => {
           type="text"
           autoComplete=""
           required
+          name="issue"
           value={issue}
           onChange={(e) => setIssue(e.target.value)}
         />
@@ -77,8 +94,9 @@ const ContactForm = () => {
           autoComplete=""
           required
           size="large"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
+          name="message"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           className={style.consulta}
           sx = {{
             marginBottom: '60%'
@@ -86,6 +104,8 @@ const ContactForm = () => {
         />
           <button type="submit" className={style.btn}>Enviar</button>
       </Stack>
+      </form>
+      </div>
         </div>
     )
 }

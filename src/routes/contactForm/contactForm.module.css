@@ -1,3 +1,13 @@
+.fullContainer{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    margin-left: 27%;
+}
+
 h2{
     color: rgb(65, 66, 66);
     font-size: 40px;
@@ -10,28 +20,25 @@ h2{
     width: 100%;
 }
 
-.consulta{
-    margin-bottom: 15%;
-    border: 2px solid red;
-}
-
-
 .btn
 {
-  min-width: 130px;
-  width: 50%;
-  height: 40px;
+  width: 30%;
+  height: 45px;
   color: #fff;
   padding: 5px 10px;
   font-weight: bold;
+  font-size: 17px;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
-  display: inline-block;
+  display: inline;
+  top: 10px;
+  left: 35%;
   outline: none;
   border-radius: 5px;
   border: 2px solid #1ac8db;
   background: #1ac8db;
+  align-items: center;
 }
 .btn:hover
 {
@@ -43,3 +50,39 @@ h2{
   position: relative;
   top: 2px;
 }
+
+@media screen and (max-width: 1300px) {
+    form {
+      padding: 15px;
+      width: 100%;
+      font-size: 20px;
+    }
+    h2{
+        margin-top: 10%;
+        margin-bottom: 2%;
+        margin-left: 2%;
+    }
+    .btn{
+        width: 50%;
+        left: 25%;
+        margin-top: 3rem;
+    }
+  }
+  
+  @media screen and (max-width: 700px) {
+    form {
+        padding: 15px;
+        width: 100%;
+        font-size: 20px;
+      }
+      h2{
+          margin-top: 25%;
+          margin-bottom: 2%;
+          margin-left: 2%;
+      }
+      .btn{
+          width: 50%;
+          left: 25%;
+          margin-top: 3rem;
+      }
+  }
