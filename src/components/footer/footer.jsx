@@ -29,6 +29,9 @@ const Footer = () => {
             <Link to="/creado-por">Creado por nosotros</Link>
           </div>
           <div>
+            <Link to="/contacto">Contacto</Link>
+          </div>
+          <div>
 
             <WhatsAppIcon
               sx={{
