@@ -12,18 +12,21 @@ import {
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux'
 import timeStampToDate from '../../helper/timeStampToDate';
+import styles from '../compras/compras.module.css';
+
 
 const Compras = () => {
   const data = useSelector((state) => state.currentUser.userCredentials);
   const userData = useSelector((state) => state.persistedReducer.userData.userData);
   const [listProducts, setlistProducts] = useState([])// lista de productos por orden 
+  
 
   useEffect(() => {
     setlistProducts(userData.onlinePurchases)
   }, [])
 
   return (
-    <div>
+    <div className={styles.container}>
       <Box
         component="main"
         sx={{
@@ -35,7 +38,7 @@ const Compras = () => {
       >
       </Box>
       <Stack sx={{ alignItems: "center" }}>
-        <Typography variant="h6" color="initial" align="center">
+        <Typography variant="h5" color="initial" align="center">
           Mis Compras
         </Typography>
         {listProducts?.map((dat, i) =>

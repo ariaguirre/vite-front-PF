@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import PostReview from "../post-review/post-review";
 
 import { v4 } from "uuid";
+import Typography from '@mui/material/Typography'
 
 const DetailComponent = ({ productDetail, productId }) => {
 
@@ -75,6 +76,7 @@ const DetailComponent = ({ productDetail, productId }) => {
         <div className={styles.attributes}>
           <h2>{name}</h2>
           <div className={styles.detailsData}>
+            <Typography variant="body1" color="primary" sx={{ textTransform: "uppercase" }}>Rating: {rating}</Typography>
             <HalfRatingPreview rValue={rating} />
             <p className={styles.price}>{numberFormat(price)}</p>
             <span className={styles.stock}>En stock: {stock}</span>

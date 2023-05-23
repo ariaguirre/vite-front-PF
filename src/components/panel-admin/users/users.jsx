@@ -2,7 +2,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 //import Material UI y css module
-import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper, IconButton } from '@mui/material'
+import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper, IconButton, useMediaQuery, Typography} from '@mui/material'
 import styles from "../users/users.module.css"
 //Import firebase
 import { getUserAdmin, setActiveUser } from '../../../utils/firebase/firebaseClient';
@@ -10,10 +10,10 @@ import { getUserAdmin, setActiveUser } from '../../../utils/firebase/firebaseCli
 import Swal from "sweetalert2";
 
 
-
 const Users = () => {
  
   const [userData, setUserData] = useState([]);
+  const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down('sm'));  
    // update para user data y actualizar tabla al activar/desactivar user
   const updateUserData = (idUser, act) => {   
     const updatedUserData = userData.map((user) => {
@@ -34,7 +34,6 @@ useEffect(() => {
   resultData();
   }, []);
  const usersList = userData.filter((user)=>!user.admin)
- //console.log(usersList)
 
 //activar-desactivar
 const handlerActive = async (idUser, act) => {
@@ -80,15 +79,24 @@ const handlerActive = async (idUser, act) => {
 
 return (
 <div>
-<TableContainer component={Paper} sx={{ mt: "1%",  minWidth: "600x" }} >CLIENTES
-<Table sx={{ minWidth: "600x"}} size="small" aria-label="a dense table" >
+<TableContainer component={Paper} sx={{ mt: "1%",  minWidth: isSmallScreen ? '100%' : '600px', }} >
+<Typography variant="h6" color="initial" align="center" mb="4%">
+          CLIENTES
+        </Typography>
+        <Table sx={{ minWidth: isSmallScreen ? '100%' : '600px' }} size="small" aria-label="a dense table">
 <TableHead bgcolor="#e3f2fd">
 <TableRow>
-<TableCell align="left">NOMBRE USUARIO</TableCell>
+<TableCell align="left">USUARIO</TableCell>
+{!isSmallScreen && (
 <TableCell align="left">E-MAIL</TableCell>
+)}
+{!isSmallScreen && (
 <TableCell align="left">TELEFONO</TableCell>
+)}
+{!isSmallScreen && (
 <TableCell align="left">DIRECCION</TableCell>
-<TableCell align="left"></TableCell>
+)}
+<TableCell align="left" ></TableCell>
 </TableRow>
 </TableHead>
 <TableBody>
@@ -100,15 +108,21 @@ return (
 <TableCell component="th" scope="row">
   {row.displayName}
 </TableCell>
+{!isSmallScreen && (
 <TableCell component="th" scope="row">
   {row.email}
 </TableCell>
+)}
+{!isSmallScreen && (
 <TableCell component="th" scope="row">
   {row.userData?.phoneN}
 </TableCell>
+)}
+{!isSmallScreen && (
 <TableCell component="th" scope="row">
   {row.userData?.adress}{"-"}{row.userData?.city}
 </TableCell>
+)}
 <TableCell align="center">
   {row.active ? (
 <IconButton                     
