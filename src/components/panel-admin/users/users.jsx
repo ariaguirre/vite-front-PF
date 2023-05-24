@@ -13,7 +13,7 @@ import Swal from "sweetalert2";
 const Users = () => {
  
   const [userData, setUserData] = useState([]);
-  const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down('sm'));  
+  const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down('md')); 
    // update para user data y actualizar tabla al activar/desactivar user
   const updateUserData = (idUser, act) => {   
     const updatedUserData = userData.map((user) => {
