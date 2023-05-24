@@ -240,10 +240,15 @@ export const getOrderByid = async (id) => {
 	});
 	return { dataOrder, products };
 };
-
+export const updateDataDelivery = async (userData, uid) => {
+	const purchasesRef = doc(db, 'user', uid);
+	await updateDoc(purchasesRef, {
+		userData: userData,
+	});
+};
 //global orders
 
-export const ordersGlobal = async (order, uid,userData) => {
+export const ordersGlobal = async (order, uid) => {
 	await setDoc(doc(db, 'Orders', order.orderId), {
 		date: order.date,
 		orderId: order.orderId,
@@ -251,7 +256,6 @@ export const ordersGlobal = async (order, uid,userData) => {
 		status: order.status,
 		totalPrice: order.totalPrice,
 		totalProducts: order.totalProducts,
-		userData : userData,
 		clientId: uid,
 	});
 };

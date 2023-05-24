@@ -175,16 +175,16 @@ deleteOrders(orderId);
           </Typography>
 
           <Typography margin="10px" align='left' component="div" variant="subtitle1">
-            Direccion : {order.userData?.streetA}
+            Direccion : {user.userData?.streetA}
           </Typography>
           <Typography margin="10px" align='left' component="div" variant="subtitle1">
-            Ciudad : {order.userData?.country}
+            Ciudad : {user.userData?.country}
           </Typography>
           <Typography margin="10px" align='left' component="div" variant="subtitle1">
-            Codigo postal : {order.userData?.ZIPcode}
+            Codigo postal : {user.userData?.ZIPcode}
           </Typography>
           <Typography margin="10px" align='left' component="div" variant="subtitle1">
-            Telefono : {order.userData?.phone}
+            Telefono : {user.userData?.phone}
           </Typography>
 
         </Box>
