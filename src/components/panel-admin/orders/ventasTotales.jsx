@@ -17,25 +17,55 @@ import {
   ListItem,
   List,
   Backdrop,
+  Input,
+  Tooltip,
 } from '@mui/material'
-
-import { useState } from 'react';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux'
 import { deleteOrders, getOrderByid, getUserByid, serveOrder } from '../../../utils/firebase/firebaseClient';
-
+import { orderOrdersHelper, searchOrderHelper } from './helper';
 
 const VentasTotales = () => {
   const { orders } = useSelector(state => state.orders)//todas las ordenes
+  const [currentOrders, setcurrentOrders] = useState([]);
   const [open, setOpen] = useState(false);
   const [order, setOrder] = useState({}); // la orden seleccionada
   const [listProducts, setlistProducts] = useState([])// lista de productos por orden 
   //const [numberTracking , setnumberTracking] = useState('')
   const [user, setUser] = useState([])
   const [date, setDate] = useState([])
+  const [orderType, setorderType] = useState("desc")
+  
+  useEffect(()=>{
+    setcurrentOrders(orders)
+  },[])
+  const searchOrder  = (a) => {
+    
+    if(a.target.value){
+      const currentOrders  =  searchOrderHelper(a.target.value , orders)
+      setcurrentOrders(currentOrders);
+    }
+    else{
+      setcurrentOrders(orders)
+    }
+  }
+  const orderOrders = () =>{
 
+if(orderType==="asc"){
+ const ordersOrder = orderOrdersHelper(orders, "desc")
+  setorderType("desc")
+  setcurrentOrders(ordersOrder)
+}else{
+  const ordersOrder =  orderOrdersHelper(orders, "asc")
+  setorderType("asc")
+  setcurrentOrders(ordersOrder)
+}
+  }
   const handleDispatch = async (id) => {
      const { dataOrder, products } = await getOrderByid(id)//trae ordenrs
-
+     
     getUserByid(dataOrder.clientId, dat => {
       setUser(dat.data())
     })
@@ -145,16 +175,16 @@ deleteOrders(orderId);
           </Typography>
 
           <Typography margin="10px" align='left' component="div" variant="subtitle1">
-            Direccion : {user.userData?.address}
+            Direccion : {order.userData?.streetA}
           </Typography>
           <Typography margin="10px" align='left' component="div" variant="subtitle1">
-            Ciudad : {user.userData?.city}
+            Ciudad : {order.userData?.country}
           </Typography>
           <Typography margin="10px" align='left' component="div" variant="subtitle1">
-            Codigo postal : {user.userData?.zipCode}
+            Codigo postal : {order.userData?.ZIPcode}
           </Typography>
           <Typography margin="10px" align='left' component="div" variant="subtitle1">
-            Telefono : {user.userData?.phoneN}
+            Telefono : {order.userData?.phone}
           </Typography>
 
         </Box>
@@ -219,13 +249,18 @@ deleteOrders(orderId);
           ORDENES NUEVAS
         </Typography>
       </Box>
-      <Stack sx={{ alignItems: "center" }}>
-        <TableContainer component={Paper} sx={{ maxWidth: 800, mt: "1%" }}>
+      <Stack sx={{ alignItems: "center", margin:5 }}>
+      <Input color="primary" placeholder="Buscar orden" size="md" variant="plain" onChange={()=>searchOrder(event)} />
+        <TableContainer component={Paper} sx={{ maxWidth: 800, mt: "1%"  }}>
           <Table sx={{/*  minWidth: 650 */ }} size="small" aria-label="a dense table">
             <TableHead bgcolor="#e3f2fd">
               <TableRow>
                 <TableCell align="center">ORDEN</TableCell>
-                <TableCell align="center">FECHA</TableCell>
+                <Tooltip title="Ordenar por fecha">
+                  <TableCell  align="center" ><Button variant="text" color='inherit' onClick={() => orderOrders() }  >
+                    Fecha {orderType =="asc"?(<ExpandLessIcon fontSize="small"></ExpandLessIcon>):(<ExpandMoreIcon fontSize="small"></ExpandMoreIcon>)} </Button>
+                    </TableCell>
+                </Tooltip>
                 <TableCell align="center">ESTADO</TableCell>
                 <TableCell align="center">CANTIDAD</TableCell>
                 <TableCell align="center">TOTAL</TableCell>
@@ -233,7 +268,7 @@ deleteOrders(orderId);
               </TableRow>
             </TableHead>
             <TableBody>
-              {orders?.map((row, i) => row.status !== "Terminado" ? (
+              {currentOrders?.map((row, i) => row.status !== "Terminado" ? (
                 <TableRow
                   key={`${row.orderId}+${i}`}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -291,12 +326,12 @@ deleteOrders(orderId);
               </TableRow>
             </TableHead>
             <TableBody>
-              {orders?.map((row, i) => row.status === "Terminado" ? (
+              {currentOrders?.map((row, i) => row.status === "Terminado" ? (
                 <TableRow
                   key={`${row.id}+${i}`}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell align="center"> {row.orderId} </TableCell>
+                  <TableCell align="center"> {row.orderId.substr(0, 13)} </TableCell>
                   <TableCell align="center" > {row.date.toDate().toLocaleString('es-co')} </TableCell>
                   <TableCell align="center"> {row.status} </TableCell>
                   <TableCell align="center">{row.totalProducts}</TableCell>

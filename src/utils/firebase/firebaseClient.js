@@ -225,7 +225,7 @@ export const getUserByid = async (id, dat) => {
 //----------------------------------------------------------------------
 //trae todos los pedidos a dashboard del admin
 export const getOrdersAdmin = async (orders) => {
-	const q = query(collection(db, 'Orders'));
+	const q = query(collection(db, 'Orders'),orderBy("date" , "desc"));
 	onSnapshot(q, orders);
 };
 
@@ -243,7 +243,7 @@ export const getOrderByid = async (id) => {
 
 //global orders
 
-export const ordersGlobal = async (order, uid) => {
+export const ordersGlobal = async (order, uid,userData) => {
 	await setDoc(doc(db, 'Orders', order.orderId), {
 		date: order.date,
 		orderId: order.orderId,
@@ -251,6 +251,7 @@ export const ordersGlobal = async (order, uid) => {
 		status: order.status,
 		totalPrice: order.totalPrice,
 		totalProducts: order.totalProducts,
+		userData : userData,
 		clientId: uid,
 	});
 };

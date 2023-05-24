@@ -34,7 +34,7 @@ const PaymentForm = () => {
   const currentUser = useSelector(state => state.persistedReducer.userData)
   const uid = useSelector(state => state.currentUser?.userCredentials?.uid);
   const onlinePurchase = formatOnlinePurcase(cartItems, total);
-
+ console.log(currentUser.orderInf);
   //emailJs
   const USER_ID = "service_8duinll";
   const API_KEY = "template_g954u96";
@@ -58,6 +58,7 @@ const PaymentForm = () => {
 
   const paymentHandler = async (e) => {
     e.preventDefault();
+    ordersGlobal(onlinePurchase[0], uid,currentUser.orderInf);
     if (!stripe || !elements) {
       return;
     }
@@ -95,7 +96,7 @@ const PaymentForm = () => {
           showCancelButton: true,
         })
         sendEmail();
-        ordersGlobal(onlinePurchase[0], uid);
+        ordersGlobal(onlinePurchase[0], uid,currentUser.orderInf);
         updatePurchases(onlinePurchase, uid);
         navigate("/");
         dispatch(clearCart());
