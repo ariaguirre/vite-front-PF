@@ -34,7 +34,6 @@ const PaymentForm = () => {
   const currentUser = useSelector(state => state.persistedReducer.userData)
   const uid = useSelector(state => state.currentUser?.userCredentials?.uid);
   const onlinePurchase = formatOnlinePurcase(cartItems, total);
- console.log(currentUser.orderInf);
   //emailJs
   const USER_ID = "service_8duinll";
   const API_KEY = "template_g954u96";
