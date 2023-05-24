@@ -54,6 +54,12 @@
   font-size: 14px;
   text-transform: capitalize;
 }
+
+.priceSale{
+  display: flex;
+  flex-direction: row;
+}
+
 /* sm 600px, md 900px, lg 1200px, xl 1536 */
 @media screen and (max-width: 1200px) 
 {
