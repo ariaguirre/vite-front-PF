@@ -25,6 +25,7 @@ const CardInf = (
     sale,
     rating,
     id,
+    stock
   }
 ) => {
 
@@ -50,6 +51,7 @@ const CardInf = (
       id,
       title,
       imageUrl,
+      stock,
       price: priceOrSale,
     }
     dispatch(addItemToCart(product));

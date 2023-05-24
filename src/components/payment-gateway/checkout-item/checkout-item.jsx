@@ -6,9 +6,9 @@ import Swal from "sweetalert2";
 
 const CheckoutItem = ({ cartItem }) => {
 
-  const { title, imageUrl, price, quantity } = cartItem;
+  const { title, imageUrl, price, quantity, stock } = cartItem;
   const dispatch = useDispatch();
-
+ 
 
   const clearItemHandler = () => {
     Swal.fire({
@@ -32,9 +32,22 @@ const CheckoutItem = ({ cartItem }) => {
     })
 
   };
-  const addItemHandler = () => dispatch(addItemToCart(cartItem));
+  // const addItemHandler = () => dispatch(addItemToCart(cartItem));
   const removeItemHandler = () => dispatch(deleteCartItem(cartItem));
 
+  const addOrDisabledItemHandler = () =>{
+    if( quantity > stock){
+      Swal.fire({
+        title: 'Stock no disponible',
+        text: "No hay suficientes productos en este momento",
+        icon: 'warning',
+        confirmButtonColor: '#1ac8db',
+        confirmButtonText: 'Aceptar'
+      })
+    } else{
+      dispatch(addItemToCart(cartItem));
+    }
+  }
 
   return (
     <div className={styles.checkoutItemContainer}>
@@ -45,7 +58,7 @@ const CheckoutItem = ({ cartItem }) => {
       <span className={styles.quantity}>
         <div className={styles.arrow} onClick={removeItemHandler}> &#10094;</div>
         <span className={styles.value}>{quantity}</span>
-        <div className={styles.arrow} onClick={addItemHandler}>&#10095;</div>
+        <div className={styles.arrow} onClick={addOrDisabledItemHandler}> &#10095;</div>
       </span>
       <span className={styles.price}>{numberFormat(price)}</span>
       <div className={styles.removeButton} onClick={clearItemHandler}>

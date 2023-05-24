@@ -69,8 +69,9 @@ const DetailComponent = ({ productDetail, productId }) => {
     const product = {
       id: productId,
       title: name,
-      imageUrl: imageUrl[0],
-      price: priceOrSale
+      imageUrl,
+      stock,
+      price
     }
     dispatch(addItemToCart(product));
   }
