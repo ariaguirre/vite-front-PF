@@ -26,7 +26,8 @@ const Footer = () => {
             Mom Home & Baby
           </div>
           <div className={style.varios}>
-            <Link to="/creado-por">Creado por nosotros</Link>
+            <Link to="/creado-por">Creado por nosotros    |    </Link>
+            <Link to="/contacto">Contacto</Link>
           </div>
           <div>
 

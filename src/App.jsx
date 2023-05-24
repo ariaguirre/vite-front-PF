@@ -34,6 +34,7 @@ import UserProfile from "./routes/userProfile/UserProfile";
 import { ordersAction } from "./features/orders/orders";
 import Compras from "./components/compras/compras";
 import AboutUs from "./routes/about-us/about-us";
+import ContactForm from "./routes/contactForm/contactForm"
 
 
 const App = () => {
@@ -96,6 +97,7 @@ const App = () => {
         <Route path="perfil" element={<UserProfile />} />
         <Route path="compras" element={<Compras />} />
         <Route path="creado-por" element={<AboutUs />} />
+        <Route path="contacto" element={<ContactForm />} />
       </Route>
       {userData?.admin && (
         <Route

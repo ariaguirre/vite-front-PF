@@ -16,6 +16,7 @@ import {
   Stack,
   ListItem,
   List,
+  useMediaQuery,
   Backdrop,
   Input,
   Tooltip,
@@ -52,6 +53,9 @@ const VentasTotales = () => {
     }
   }
   const orderOrders = () =>{
+
+  const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down('md'));
+
 
 if(orderType==="asc"){
  const ordersOrder = orderOrdersHelper(orders, "desc")
@@ -101,15 +105,18 @@ deleteOrders(orderId);
   }
   const style = {
     position: "absolute",
-    top: "50%",
+    top: isSmallScreen ? "5%" : "50%",
     left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "75%",
+    transform: isSmallScreen ? "translate(-50%, 0)" : "translate(-50%, -50%)",
+    width: isSmallScreen ? "95%" : "75%",
+    overflow: isSmallScreen ? 'scroll' : 'visible',
+    maxHeight: isSmallScreen ? '90%' : 'none',
     bgcolor: "background.paper",
     border: "1px solid #000",
     boxShadow: 24,
     p: 4,
-  };
+   };
+
   const orderModal = (
     <Box sx={style}>
       <Box
@@ -230,22 +237,7 @@ deleteOrders(orderId);
   );
   return (
     <div>
-      <Box
-        component="main"
-        sx={{
-          width: "50%",
-          alignContent: "center",
-          display: "flex",
-          justifyContent: "center",
-          mx: "25%",
-          mt: "2%",
-        }}
-        textAlign={"center"}
-        boxShadow={3}
-        alignContent={"center"}
-        bgcolor={"primary"}
-      >
-        <Typography variant="h6" color="initial" align="center">
+    <Typography variant="h6" color="initial" align="center">
           ORDENES NUEVAS
         </Typography>
       </Box>
@@ -256,14 +248,20 @@ deleteOrders(orderId);
             <TableHead bgcolor="#e3f2fd">
               <TableRow>
                 <TableCell align="center">ORDEN</TableCell>
-                <Tooltip title="Ordenar por fecha">
-                  <TableCell  align="center" ><Button variant="text" color='inherit' onClick={() => orderOrders() }  >
+                {!isSmallScreen && (<Tooltip title="Ordenar por fecha">
+                 <TableCell  align="center" ><Button variant="text" color='inherit' onClick={() => orderOrders() }  >
                     Fecha {orderType =="asc"?(<ExpandLessIcon fontSize="small"></ExpandLessIcon>):(<ExpandMoreIcon fontSize="small"></ExpandMoreIcon>)} </Button>
                     </TableCell>
-                </Tooltip>
+                </Tooltip>  )}
                 <TableCell align="center">ESTADO</TableCell>
+                
+                 {!isSmallScreen && (
                 <TableCell align="center">CANTIDAD</TableCell>
-                <TableCell align="center">TOTAL</TableCell>
+                )}
+                
+                {!isSmallScreen && (
+                <TableCell align="center">TOTAL</TableCell>  
+                )}
                 <TableCell align="center"></TableCell>
               </TableRow>
             </TableHead>
@@ -274,17 +272,25 @@ deleteOrders(orderId);
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell align="center" > {row.orderId.substr(0, 13)} </TableCell>
+                  {!isSmallScreen && (
                   <TableCell align="center" > {row.date.toDate().toLocaleString('es-co')} </TableCell>
+                  )}
+                     {!isSmallScreen && (
                   <TableCell align="center"> {row.status} </TableCell>
+                     )}
+                   {!isSmallScreen && (
                   <TableCell align="center">{row.totalProducts}</TableCell>
+                   )}
+                  {!isSmallScreen && (
                   <TableCell align="center">${row.totalPrice}</TableCell>
+                  )}
                   <TableCell align="center">
                     <Button
                       aria-label="edit"
                       size="small"
                       onClick={() => handleDispatch(row.orderId)}
                     >
-                      Verificar
+                    {isSmallScreen? 'Ver' : 'Verificar'}
                     </Button>
                   </TableCell>
                 </TableRow>
@@ -292,36 +298,25 @@ deleteOrders(orderId);
             </TableBody>
           </Table>
         </TableContainer>
-      </Stack>
-      <Box
-        component="main"
-        sx={{
-          width: "50%",
-          alignContent: "center",
-          display: "flex",
-          justifyContent: "center",
-          mx: "25%",
-          mt: "2%",
-        }}
-        textAlign={"center"}
-        boxShadow={3}
-        alignContent={"center"}
-        bgcolor={"primary"}
-      >
-        <Typography variant="h6" color="initial" align="center">
+   
+    <Typography variant="h6" color="initial" align="center">
           ORDENES FINALIZADAS
         </Typography>
-      </Box>
-      <Stack sx={{ alignItems: "center" }}>
-        <TableContainer component={Paper} sx={{ maxWidth: 800, mt: "1%" }}>
-          <Table sx={{/*  minWidth: 650 */ }} size="small" aria-label="a dense table">
+    <TableContainer component={Paper} sx={{ mt: "1%",  minWidth: isSmallScreen ? '100%' : '600px', }}>
+          <Table  sx={{ minWidth: isSmallScreen ? '100%' : '600px' }} size="small" aria-label="a dense table">
             <TableHead bgcolor="#e3f2fd">
               <TableRow>
                 <TableCell align="center">ORDEN</TableCell>
+                {!isSmallScreen && (
                 <TableCell align="center">FECHA</TableCell>
+                )}
                 <TableCell align="center">ESTADO</TableCell>
+                {!isSmallScreen && (
                 <TableCell align="center">CANTIDAD</TableCell>
+                )}
+                {!isSmallScreen && (
                 <TableCell align="center">TOTAL</TableCell>
+                )}
                 <TableCell align="center"></TableCell>
               </TableRow>
             </TableHead>
@@ -332,10 +327,21 @@ deleteOrders(orderId);
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell align="center"> {row.orderId.substr(0, 13)} </TableCell>
+
+              
+                  {!isSmallScreen && (
+
                   <TableCell align="center" > {row.date.toDate().toLocaleString('es-co')} </TableCell>
+                  )}
+                  {!isSmallScreen && (
                   <TableCell align="center"> {row.status} </TableCell>
+                  )}
+                  {!isSmallScreen && (
                   <TableCell align="center">{row.totalProducts}</TableCell>
+                  )}
+                  {!isSmallScreen && (
                   <TableCell align="center">${row.totalPrice}</TableCell>
+                  )}
                   <TableCell align="center">
                     <Button
                       aria-label="edit"
@@ -350,7 +356,7 @@ deleteOrders(orderId);
             </TableBody>
           </Table>
         </TableContainer>
-      </Stack>
+   
       <Modal
 
         slots={{ backdrop: Backdrop }}
