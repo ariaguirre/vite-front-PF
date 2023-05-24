@@ -12,9 +12,12 @@ import { addItemToCart } from "../../../features/cartSlice/cartSlice";
 import { useState } from "react";
 import { useEffect } from "react";
 import PostReview from "../post-review/post-review";
+import Sale from "../../card/sale/sale";
 
 import { v4 } from "uuid";
 import Typography from '@mui/material/Typography'
+import { Box } from "@mui/material";
+import { useRef } from "react";
 
 const DetailComponent = ({ productDetail, productId }) => {
 
@@ -22,9 +25,11 @@ const DetailComponent = ({ productDetail, productId }) => {
   const [purchasedProducts, setPurchasedProducts] = useState();
   const [bought, setBought] = useState(false);
   const [reviewed, setReviewed] = useState(false);
+  const [salePrice, setSalePrice] = useState(0)
+  const onSale = useRef(false);
 
   const { userData } = useSelector(state => state.persistedReducer.userData);
-  const { name, price, rating, reviews, stock, categories, description, imageUrl } = productDetail;
+  const {imageUrl, name, price, sale, rating, reviews, stock, categories, description } = productDetail;
 
   const dispatch = useDispatch();
 
@@ -51,12 +56,21 @@ const DetailComponent = ({ productDetail, productId }) => {
     setBought(!!purchasedProducts.find(({ id }) => id === productId));
   }, [productId, purchasedProducts]);
 
+  let priceOrSale = salePrice === 0 ? price : salePrice
+ 
+  if (Object.keys(sale).length !== 0) {
+    onSale.current = true;
+  } else {
+    onSale.current = false;
+  }
+ 
+
   const handleClickCart = () => {
     const product = {
       id: productId,
       title: name,
-      imageUrl,
-      price
+      imageUrl: imageUrl[0],
+      price: priceOrSale
     }
     dispatch(addItemToCart(product));
   }
@@ -78,7 +92,42 @@ const DetailComponent = ({ productDetail, productId }) => {
           <div className={styles.detailsData}>
             <Typography variant="body1" color="primary" sx={{ textTransform: "uppercase" }}>Rating: {rating}</Typography>
             <HalfRatingPreview rValue={rating} />
-            <p className={styles.price}>{numberFormat(price)}</p>
+                  {
+            onSale.current
+              ? <Sale price={price} sale={sale} setSalePrice={setSalePrice}/> 
+              : <Typography variant="h5" color="initial" sx={{ userSelect: "none" }} align="left">{numberFormat(price)}</Typography>
+          }
+          {
+            onSale.current
+            && <Box sx={{ display: "flex" }}>
+              <Typography
+                variant="body1"
+                sx={{
+                  textDecorationLine: "line-through",
+                  paddingRight: "1rem",
+                  userSelect: "none"
+                }}
+              >
+                {`${numberFormat(price)}`}
+              </Typography>
+              <Box
+                component="span"
+                sx={{
+                  paddingTop: "0.125rem",
+                  paddingBottom: "0.125rem",
+                  paddingLeft: "0.375rem",
+                  paddingRight: "0.375rem",
+                  backgroundColor: "rgba(26, 200, 219,0.7)",
+                  color: "#ffffff",
+                  fontSize: "0.875rem",
+                  lineHeight: "1.25rem",
+                  borderRadius: "0.375rem",
+                  userSelect: "none"
+                }}>
+                {`- ${sale.discount}%`}
+              </Box>
+            </Box>
+          }
             <span className={styles.stock}>En stock: {stock}</span>
             <IconButton onClick={handleClickCart}>
               <AddShoppingCartIcon color="primary" />
