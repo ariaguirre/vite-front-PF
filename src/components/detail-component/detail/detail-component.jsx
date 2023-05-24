@@ -56,6 +56,7 @@ const DetailComponent = ({ productDetail, productId }) => {
       id: productId,
       title: name,
       imageUrl,
+      stock,
       price
     }
     dispatch(addItemToCart(product));
