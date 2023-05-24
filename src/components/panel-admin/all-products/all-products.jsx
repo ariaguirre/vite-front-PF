@@ -31,7 +31,7 @@ const AllProducts = ({ onAddProduct, onEditProduct }) => {
 
 const dispatch = useDispatch();
 const { products } = useSelector((state) => state.products);
-const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down('sm'));  
+const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down('md')); 
 
 //eliminar
 const handleDelete = (id) => {
