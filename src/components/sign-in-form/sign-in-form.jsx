@@ -10,6 +10,11 @@ import {
   getUserAdmin,
   signOutUser
 } from '../../utils/firebase/firebaseClient';
+//EmailJS
+import emailjs from "emailjs-com"
+const USER_ID="service_8duinll"
+const API_KEY="lp4j5eTKXZNYsZ4jM"
+const TEMPLATE_ID="template_cvqj07q"
 import { clearUserData } from '../../features/userData/userDataSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import { Stack } from '@mui/material';
@@ -41,7 +46,7 @@ const SignInForm = () => {
   const isActive = async (userId) => {
     const userData = await getUser(userId)
     //console.log(userData[0].active)
-    if (userData[0].active) {
+    if (userData && userData[0] && userData[0].active){
       navigate("/")
     }
     else { //console.log("usuario NO activo")
@@ -62,11 +67,19 @@ const SignInForm = () => {
   const signInWithGoogle = async () => {
     try {
       const result = await signInWithGooglePopup();
-      //console.log(result.user.uid)
-      const userId = result.user.uid
-      isActive(userId)
+      //console.log(result.user.metadata)
+      const isNewUser = result.user.metadata.creationTime === result.user.metadata.lastSignInTime
+      if (isNewUser) {      
+    //enviar email de registro
+      emailjs.send(USER_ID, TEMPLATE_ID, {
+      email: result.user.email,
+      displayName: result.user.displayName
+    }, API_KEY)
+    } 
+    const userId = result.user.uid      
+    isActive(userId)
     } catch (error) {
-      console.log(error.code)
+    console.log(error.code)
     }
   };
 
@@ -84,15 +97,26 @@ const SignInForm = () => {
     } catch (error) {
       switch (error.code) {
         case 'auth/wrong-password':
-          alert('contraseña incorrecta');
-          break;
-        case 'auth/user-not-found':
-          alert('Ninguna usuario asociado con este correo electrónico');
-          break;
-        default:
-          alert('inicio de sesión de usuario fallido', error);
-      }
+       
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'usuario y/o contraseña incorrectos!'                  
+          })
+      break;
+      case 'auth/user-not-found':
+        Swal.fire({
+        icon: 'error',
+        title: 'Usuario y/o Contraseña Incorrecta!',                  
+         })
+      break;
+      default:
+        Swal.fire({
+        icon: 'error',
+        title: 'Inicio de Sesión de usuario Fallido',                  
+        })
     }
+   }
   }
   return (
     <Grid item md={8} xs={10}>
