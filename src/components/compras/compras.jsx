@@ -19,7 +19,7 @@ const Compras = () => {
   const data = useSelector((state) => state.currentUser.userCredentials);
   const userData = useSelector((state) => state.persistedReducer.userData.userData);
   const [listProducts, setlistProducts] = useState([])// lista de productos por orden 
-  
+
 
   useEffect(() => {
     setlistProducts(userData.onlinePurchases)
@@ -38,7 +38,7 @@ const Compras = () => {
       >
       </Box>
       <Stack sx={{ alignItems: "center" }}>
-        <Typography variant="h5" color="initial" align="center">
+        <Typography variant="h3" color="primary" align="center">
           Mis Compras
         </Typography>
         {listProducts?.map((dat, i) =>
