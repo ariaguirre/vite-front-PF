@@ -35,6 +35,7 @@ const VentasTotales = () => {
   const [order, setOrder] = useState({}); // la orden seleccionada
   const [listProducts, setlistProducts] = useState([])// lista de productos por orden 
   //const [numberTracking , setnumberTracking] = useState('')
+  const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down('md'));
   const [user, setUser] = useState([])
   const [date, setDate] = useState([])
   const [orderType, setorderType] = useState("desc")
@@ -54,7 +55,7 @@ const VentasTotales = () => {
   }
   const orderOrders = () =>{
 
-  const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down('md'));
+ 
 
 
 if(orderType==="asc"){
@@ -237,13 +238,15 @@ deleteOrders(orderId);
   );
   return (
     <div>
+ 
     <Typography variant="h6" color="initial" align="center">
           ORDENES NUEVAS
         </Typography>
-      </Box>
+  
       <Stack sx={{ alignItems: "center", margin:5 }}>
       <Input color="primary" placeholder="Buscar orden" size="md" variant="plain" onChange={()=>searchOrder(event)} />
-        <TableContainer component={Paper} sx={{ maxWidth: 800, mt: "1%"  }}>
+      </Stack >
+        <TableContainer component={Paper} sx={{  mt: "1%",  minWidth: isSmallScreen ? '100%' : '600px', }}>
           <Table sx={{/*  minWidth: 650 */ }} size="small" aria-label="a dense table">
             <TableHead bgcolor="#e3f2fd">
               <TableRow>
