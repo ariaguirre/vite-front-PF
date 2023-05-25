@@ -161,6 +161,7 @@ const SignInForm = () => {
         </Stack>
       </form>
       <Grid container justifyContent={'center'} marginTop={2}>
+        <Link to={'/reset-password'}>¿Olvidaste tu contraseña?</Link>
         <Link to={'/sign-up'}> ¿No tienes cuenta? Registrarse <span style={{ color: "#1ac8db" }}>aquí</span> </Link>
       </Grid>
     </Grid>

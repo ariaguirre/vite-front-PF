@@ -1,7 +1,9 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import { initializeApp } from 'firebase/app';
-
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
 import {
 	getAuth,
 	signInWithPopup,
@@ -10,6 +12,7 @@ import {
 	signInWithEmailAndPassword,
 	signOut,
 	onAuthStateChanged,
+  sendPasswordResetEmail
 } from 'firebase/auth';
 
 import {
@@ -452,4 +455,25 @@ export const updateReview = async (rating, uid) => {
 		},
 		{ merge: true }
 	);
+};
+
+
+//email reset de contraseña
+export const resetPasswordEmail = async (email) => {
+  try {
+    const myAuth = getAuth(firebaseApp)
+    await sendPasswordResetEmail(myAuth, email).then(()=>{console.log('email enviado!')});
+    // return true;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const updatePasswordInDatabase = async (userId, newPassword) => {
+  try {
+    await firebase.database().ref(`user/${userId}`).update({ password: newPassword });
+    return true;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };

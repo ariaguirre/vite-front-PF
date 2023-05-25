@@ -35,6 +35,8 @@ import { ordersAction } from "./features/orders/orders";
 import Compras from "./components/compras/compras";
 import AboutUs from "./routes/about-us/about-us";
 import ContactForm from "./routes/contactForm/contactForm"
+import ResetPass from "./routes/reset-password/reset-password";
+
 
 
 const App = () => {
@@ -98,6 +100,7 @@ const App = () => {
         <Route path="compras" element={<Compras />} />
         <Route path="creado-por" element={<AboutUs />} />
         <Route path="contacto" element={<ContactForm />} />
+        <Route path ="/reset-password" element={<ResetPass/>}/>
       </Route>
       {userData?.admin && (
         <Route
