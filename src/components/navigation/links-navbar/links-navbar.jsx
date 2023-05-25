@@ -42,9 +42,9 @@ const LinksNavbar = ({ userData }) => {
         userData.admin && <li><Link to="/admin">Admin</Link></li>
         ||
         <>
-        <li><Link to={'/perfil'}>Perfil</Link></li>
-        <li><Link to={'/compras'}>mis Compras</Link></li>
-       </>
+          <li><Link to={'/porfile'}>Perfil</Link></li>
+          <li><Link to={'/bought'}>mis Compras</Link></li>
+        </>
       }
       <li onClick={handleSignOut}><Link>Salir</Link></li>
     </>)

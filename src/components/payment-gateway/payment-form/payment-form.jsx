@@ -42,8 +42,8 @@ const PaymentForm = () => {
   const TEMPLATE_ID = "lp4j5eTKXZNYsZ4jM";
 
   var templateParams = {
-    email: currentUser.orderInf.email,
-    name: currentUser.orderInf.name,
+    email: currentUser.orderInf?.email,
+    name: currentUser.orderInf?.name,
   };
 
   const sendEmail = () => {

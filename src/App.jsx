@@ -29,7 +29,7 @@ import { getCategoriesAction } from "./features/categories/categoriesSlice";
 import SignUp from "./routes/authentication/signUp";
 
 // import User from "./components/panel-admin/user/User";
-import UserProfile from "./routes/userProfile/UserProfile";
+import UserProfile from "./routes/user-profile/user-profile";
 // import AboutUs from "./routes/AboutUs/AboutUs";
 import { ordersAction } from "./features/orders/orders";
 import Compras from "./components/compras/compras";
@@ -96,11 +96,11 @@ const App = () => {
         <Route path="sign-up" element={<SignUp />} />
         <Route path="shop/*" element={<Shop />} />
         <Route path="detail/:id" element={<DetailProduct />} />
-        <Route path="perfil" element={<UserProfile />} />
-        <Route path="compras" element={<Compras />} />
-        <Route path="creado-por" element={<AboutUs />} />
+        <Route path="porfile" element={<UserProfile />} />
+        <Route path="bought" element={<Compras />} />
+        <Route path="made-by" element={<AboutUs />} />
         <Route path="contacto" element={<ContactForm />} />
-        <Route path ="/reset-password" element={<ResetPass/>}/>
+        <Route path="/reset-password" element={<ResetPass />} />
       </Route>
       {userData?.admin && (
         <Route
