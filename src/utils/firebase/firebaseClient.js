@@ -225,7 +225,7 @@ export const getUserByid = async (id, dat) => {
 //----------------------------------------------------------------------
 //trae todos los pedidos a dashboard del admin
 export const getOrdersAdmin = async (orders) => {
-	const q = query(collection(db, 'Orders'));
+	const q = query(collection(db, 'Orders'),orderBy("date" , "desc"));
 	onSnapshot(q, orders);
 };
 
@@ -240,7 +240,12 @@ export const getOrderByid = async (id) => {
 	});
 	return { dataOrder, products };
 };
-
+export const updateDataDelivery = async (userData, uid) => {
+	const purchasesRef = doc(db, 'user', uid);
+	await updateDoc(purchasesRef, {
+		userData: userData,
+	});
+};
 //global orders
 
 export const ordersGlobal = async (order, uid) => {

@@ -9,7 +9,7 @@ import { setCartTotal, updateInitialState } from '../../../features/cartSlice/ca
 import { useEffect, useState } from 'react';
 import Swal from "sweetalert2";
 import formatOnlinePurcase from "../../../helper/formatOnlinePurchase";
-import { ordersGlobal, updatePurchases } from "../../../utils/firebase/firebaseClient";
+import { ordersGlobal, updateDataDelivery, updatePurchases } from "../../../utils/firebase/firebaseClient";
 import { v4 } from "uuid";
 import emailjs from '@emailjs/browser';
 
@@ -34,7 +34,6 @@ const PaymentForm = () => {
   const currentUser = useSelector(state => state.persistedReducer.userData)
   const uid = useSelector(state => state.currentUser?.userCredentials?.uid);
   const onlinePurchase = formatOnlinePurcase(cartItems, total);
-
   //emailJs
   const USER_ID = "service_8duinll";
   const API_KEY = "template_g954u96";
@@ -96,6 +95,7 @@ const PaymentForm = () => {
         })
         sendEmail();
         ordersGlobal(onlinePurchase[0], uid);
+        updateDataDelivery(currentUser.orderInf,uid)
         updatePurchases(onlinePurchase, uid);
         navigate("/");
         dispatch(clearCart());

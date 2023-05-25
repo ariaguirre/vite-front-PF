@@ -9,7 +9,7 @@ const HomeAdmin = () => {
   const { orders } = useSelector(state => state.orders)
   
   const currentDate = new Date();
-  const todaysDate = currentDate.getFullYear()+'/' +(currentDate.getMonth()+1)+'/'+currentDate.getDate();
+  const todaysDate = currentDate.getFullYear()+'/' +String(currentDate.getMonth()+1).padStart(2, '0')+'/'+currentDate.getDate();
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
