@@ -14,8 +14,6 @@ const IconsSx = {
   }
 }
 
-
-
 const Footer = () => {
   return (
     <footer className={styles.footerContainer}>
