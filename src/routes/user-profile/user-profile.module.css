@@ -1,0 +1,58 @@
+.userProfileContainer {
+	margin-top: 80px;
+	min-height: calc(100vh - 80px);
+	max-width: 1536px;
+	margin-left: auto;
+	margin-right: auto;
+	overflow: hidden;
+	padding: 1rem;
+}
+.userProfileContainer .userDataContainer {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	flex-flow: column;
+	width: inherit;
+	height: calc(100vh - 160px);
+}
+.userProfileContainer .userDataContainer .userData {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.userData .userDataInf {
+	display: flex;
+	flex-flow: column;
+	gap: 1rem;
+	padding: 1rem;
+}
+.userData .userDataInf :first-child {
+	color: #1ac8db;
+	font-size: 1.5rem;
+}
+
+.userProfileContainer .userDataContainer img {
+	width: 150px;
+	height: auto;
+	border-radius: 1rem;
+}
+.userProfileContainer .userDataContainer button {
+	padding: 0 1rem;
+	height: 50px;
+	color: #1ac8db;
+	font-size: 1rem;
+	margin: 0;
+	border-radius: 0.5rem;
+	font-weight: 400;
+	border: 2px solid #1ac8db;
+	transition: all 0.5 ease;
+	background-color: white;
+}
+.userProfileContainer .userDataContainer button:hover {
+	background-color: #1ac8db;
+	color: #fff;
+}
+.userProfileContainer .userDataContainer button:active {
+	position: relative;
+	top: 1px;
+}

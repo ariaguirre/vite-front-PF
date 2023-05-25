@@ -1,109 +1,106 @@
-.perfil{
-    display: flex;
-    justify-content: center;
-    /* max-width: 100vw; */
-    height:calc(100vh - 150px);
-
+.perfilContainer {
+	display: flex;
+	justify-content: center;
+	height: calc(100vh - 80px);
+	margin-top: 80px;
 }
 
-.container{
-    display: flex;
-    flex-direction: column;
-    width: 30vw;
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 30vw;
 }
 
-h1{
-    padding-top: 1rem;
-    text-align: center;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+h1 {
+	padding-top: 1rem;
+	text-align: center;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif;
 }
 
-h3{
-    text-align: center;
-    text-transform: uppercase ;
-    padding-bottom:2rem ;  
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif; 
+h3 {
+	text-align: center;
+	text-transform: uppercase;
+	padding-bottom: 2rem;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif;
 }
 
-.margin{
-    display: block;
-    padding: 1rem 0;
+.margin {
+	display: block;
+	padding: 1rem 0;
 }
 
-
-.imgUsuario{
-    max-width: 600px;
-    clip-path: circle(50% at 50% 50%);
-    margin: 0 auto;
-    display: block;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+.imgUsuario {
+	max-width: 600px;
+	clip-path: circle(50% at 50% 50%);
+	margin: 0 auto;
+	display: block;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
 }
 
-.name{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1rem;
-    font-size: 4vh;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+.name {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 1rem;
+	font-size: 4vh;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif;
 }
-.email{
-    display: flex;
-    justify-content: center;
-    font-size: large;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-}
-
-.boton{
-    display: flex;
-    justify-content: center;
-    margin-top: 2rem;
+.email {
+	display: flex;
+	justify-content: center;
+	font-size: large;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif;
 }
 
-.boton button{
- min-width: 130px;
-  width: 20%;
-  height: 40px;
-  color: #fff;
-  padding: 5px 10px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  display: inline-block;
-  outline: none;
-  border-radius: 5px;
-  border: 2px solid #1ac8db;
-  background: #1ac8db;
+.boton {
+	display: flex;
+	justify-content: center;
+	margin-top: 2rem;
 }
 
-.boton button:hover{
-    opacity: 0.8 ;
+.boton button {
+	min-width: 130px;
+	width: 20%;
+	height: 40px;
+	color: #fff;
+	padding: 5px 10px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	position: relative;
+	display: inline-block;
+	outline: none;
+	border-radius: 5px;
+	border: 2px solid #1ac8db;
+	background: #1ac8db;
 }
 
-.containerData{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    border-bottom: 1px solid #1ac8db;
-    border-top: 1px solid #1ac8db;
-    padding-bottom: 2rem;
-    padding-top: 1rem;
+.boton button:hover {
+	opacity: 0.8;
+}
+
+.containerData {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	border-bottom: 1px solid #1ac8db;
+	border-top: 1px solid #1ac8db;
+	padding-bottom: 2rem;
+	padding-top: 1rem;
 }
 
 @media only screen and (max-width: 600px) {
-    
-    .container{
-        display: flex;
-        flex-direction: column;
-        width: 80vw;
-    }
-  }
+	.container {
+		display: flex;
+		flex-direction: column;
+		width: 80vw;
+	}
+}

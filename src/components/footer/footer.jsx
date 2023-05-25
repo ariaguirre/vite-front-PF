@@ -1,64 +1,48 @@
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import style from './footer.module.css'
-import { Container } from '@mui/material';
-import styled from '@emotion/styled';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import { Link } from "react-router-dom";
+import styles from './footer.module.css'
 
 
-//Verificar que hace este various (const Various =)
-styled('h2')(({ theme }) => ({
-  color: 'black',
-  textAlign: 'start',
-  fontSize: theme.typography.pxToRem(6),
-  fontWeight: 'normal',
-  [theme.breakpoints.up('sm')]: {
-    fontSize: theme.typography.pxToRem(17),
-  },
-}));
+const IconsSx = {
+  "&:hover": {
+    color: "rgba(26, 200, 219, .7)",
+    position: "relative",
+    top: "-1px",
+    transform: "scale(1.1)"
+  }
+}
 
 const Footer = () => {
   return (
-    <div className={style.fullCont}>
-      <Container maxWidth="lg">
-        <div className={style.footerCont}>
-          <div className={style.titulo}>
-            Mom Home & Baby
-          </div>
-          <div className={style.varios}>
-            <Link to="/creado-por">Creado por nosotros    |    </Link>
-            <Link to="/contacto">Contacto</Link>
-          </div>
-          <div>
+    <footer className={styles.footerContainer}>
 
-            <WhatsAppIcon
-              sx={{
-                color: 'black',
-                // marginRight: '-6rem',
-                fontSize: 25,
-              }}
-            />
-            <InstagramIcon
-              sx={{
-                color: 'black',
-                // marginRight: '-3rem',
-                fontSize: 25,
-              }}
-            />
-          </div>
-        </div>
-        <hr />
-        <div className={style.tipografia}>
-          {`@${new Date().getFullYear()} MH&B. All Rights Reserved.`}
-        </div>
+      <section className={styles.madeFooterContainer}>
+        <Link to="/made-by" >Creadores</Link>
+        <Link to="/contact-us" >Contactanos</Link>
+      </section>
 
+      <section className={styles.logoFooterContainer}>
+        <span>Mom Baby &#38; Home </span>
+        <span>&copy;{` All Rights Reserved ${new Date().getFullYear()} `}</span>
+      </section>
 
-      </Container>
-    </div>
+      <section className={styles.networkContainer}>
+        <Link to="https://www.instagram.com/mombaby_home/?igshid=14xly8yt3crjg" target='_blank'>
+          <InstagramIcon color='primary' sx={IconsSx} />
+        </Link>
+        <Link to="https://www.facebook.com/MomBabyhomecol/" target='_blank'>
+          <FacebookIcon color='primary' sx={IconsSx} />
+        </Link>
+        <Link to="https://api.whatsapp.com/send?phone=573052407581" target='_blank'>
+          <WhatsAppIcon color='primary' sx={IconsSx} />
+        </Link>
+      </section>
 
-  );
+    </footer>
+  )
 
 };
 
 export default Footer;
-

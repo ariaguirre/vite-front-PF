@@ -1,60 +1,77 @@
+import { useForm } from 'react-hook-form';
 import styles from './reset.module.css'
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button';
+
+import { resetPasswordEmail } from '../../utils/firebase/firebaseClient'
+import Typography from '@mui/material/Typography'
+import { Stack, TextField } from '@mui/material';
 import Swal from 'sweetalert2';
-import React, { useState } from 'react';
-import {resetPasswordEmail, updatePasswordInDatabase} from '../../utils/firebase/firebaseClient'
-import 'firebase/auth';
-import 'firebase/database';
 
-    const ResetPass = () => {
 
-    const [email, setEmail] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(false);
+const ResetPass = () => {
 
-  const handlePasswordReset = async () => {
-    try {
-        console.log('email:', email)
-      await resetPasswordEmail(email);
-    console.log('mensaje enviado!')
-            Swal.fire({
-            title: 'Éxito!',
-            text: 'Su contraseña ha sido actualizada.',
-            icon: 'success',
-        }) 
-    } catch (error) {
-      setError(error.message);
-      console.log("error:", error)
-        Swal.fire({
-      title: 'Error!',
-      text: 'Ingrese nuevamente su correo electónico.',
-      icon: 'error',
-  })
+  const resetForm = useForm({
+    defaultValues: {
+      email: ""
     }
-  };
+  });
+  const { register, handleSubmit, formState: { errors } } = resetForm;
+
+  const onSubmitResetPassword = async ({ email }) => {
+    try {
+      await resetPasswordEmail(email)
+      Swal.fire('Verifica tu email', '', 'info')
+    } catch (error) {
+      Swal.fire('Error', 'intenta de nuevo', 'error')
+    }
+  }
 
 
- return (
-    <div>
-        <div className={styles.fullContainer}>
-      <h2>Recupera tu contraseña</h2>
+  return (
+    <main className={styles.resetPasswordContainer}>
+      <Typography variant="h3" color="primary">Recupera tu contraseña</Typography>
+      <section className={styles.formContainer}>
+        <form onSubmit={handleSubmit(onSubmitResetPassword)}>
+          <Stack spacing={2}>
             <TextField
-            label='Correo electrónico'
-            type='text'
-            required                  
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            autoComplete=""
-            sx={{width:'40%', marginBottom: '1rem',
-        marginTop: '3%'}}
-            />
-          <button onClick={handlePasswordReset}>Enviar correo de recuperación</button>
-        </div>
-      {/* {error && <p>{error}</p>} */}
-    </div>
+              label="Email"
+              type='Email'
+              autoComplete=''
+              required
+              {...register("email", { required: "Por favor ingrese el email a recuperar la contraseña" })}
+              error={!!errors.email}
+              helperText={errors.email?.message}
+            >
+            </TextField>
+          </Stack>
+          <button type='submit'>Recuperar contraseña</button>
+        </form>
+      </section>
+    </main>
   );
- };
+};
 
 export default ResetPass
+
+
+
+/*
+    <div className={styles.resetPasswordContainer}>
+      <div className={styles.fullContainer}>
+        <h2>Recupera tu contraseña</h2>
+        <TextField
+          label='Correo electrónico'
+          type='text'
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          autoComplete=""
+          sx={{
+            width: '40%', marginBottom: '1rem',
+            marginTop: '3%'
+          }}
+        />
+        <button onClick={handlePasswordReset}>Enviar correo de recuperación</button>
+      </div>
+    </div>
+
+*/

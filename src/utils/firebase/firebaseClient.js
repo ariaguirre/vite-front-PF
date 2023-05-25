@@ -12,7 +12,7 @@ import {
 	signInWithEmailAndPassword,
 	signOut,
 	onAuthStateChanged,
-  sendPasswordResetEmail
+	sendPasswordResetEmail,
 } from 'firebase/auth';
 
 import {
@@ -38,10 +38,7 @@ import {
 	FieldValue,
 	arrayRemove,
 } from 'firebase/firestore';
-
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { set } from 'react-hook-form';
-
 import { v4 } from 'uuid';
 
 const firebaseConfig = {
@@ -119,10 +116,10 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 	} catch (error) {
 		switch (error.code) {
 			case 'auth/wrong-password':
-			//	alert('Incorrect password for email'); //comente para que no aparezca el alert comun de windows - se implemento en front alertas con sweet alert (Bianca)
+				//	alert('Incorrect password for email'); //comente para que no aparezca el alert comun de windows - se implemento en front alertas con sweet alert (Bianca)
 				break;
 			case 'auth/user-not-found':
-			//	alert('no user associated with this email');//comente para que no aparezca el alert comun de windows - se implemento en front alertas con sweet alert (Bianca)
+				//	alert('no user associated with this email');//comente para que no aparezca el alert comun de windows - se implemento en front alertas con sweet alert (Bianca)
 				break;
 			default:
 				return error.code;
@@ -228,7 +225,7 @@ export const getUserByid = async (id, dat) => {
 //----------------------------------------------------------------------
 //trae todos los pedidos a dashboard del admin
 export const getOrdersAdmin = async (orders) => {
-	const q = query(collection(db, 'Orders'),orderBy("date" , "desc"));
+	const q = query(collection(db, 'Orders'), orderBy('date', 'desc'));
 	onSnapshot(q, orders);
 };
 
@@ -412,7 +409,8 @@ export const setActiveProduct = async (data) => {
 
 //borrador logico usuario
 export const setActiveUser = async (data) => {
-	const productActive = doc(db, 'user', data.id); // cambie data.uid por --> data.id para poder acceder al usuario
+	//cambie data.uid por --> data.id para poder acceder al usuario
+	const productActive = doc(db, 'user', data.id);
 	await setDoc(
 		productActive,
 		{
@@ -438,7 +436,6 @@ export const updatePurchases = async (purchases, uid) => {
 };
 
 export const setReview = async (review, uid) => {
-	//onSnapshot(doc(db, "user", id), (dat));
 	const productsRef = doc(db, 'Products', uid);
 
 	await updateDoc(productsRef, {
@@ -457,23 +454,23 @@ export const updateReview = async (rating, uid) => {
 	);
 };
 
-
 //email reset de contraseña
 export const resetPasswordEmail = async (email) => {
-  try {
-    const myAuth = getAuth(firebaseApp)
-    await sendPasswordResetEmail(myAuth, email).then(()=>{console.log('email enviado!')});
-    // return true;
-  } catch (error) {
-    throw new Error(error.message);
-  }
+	try {
+		await sendPasswordResetEmail(auth, email);
+	} catch (error) {
+		throw new Error(error.message);
+	}
 };
 
 export const updatePasswordInDatabase = async (userId, newPassword) => {
-  try {
-    await firebase.database().ref(`user/${userId}`).update({ password: newPassword });
-    return true;
-  } catch (error) {
-    throw new Error(error.message);
-  }
+	try {
+		await firebase
+			.database()
+			.ref(`user/${userId}`)
+			.update({ password: newPassword });
+		return true;
+	} catch (error) {
+		throw new Error(error.message);
+	}
 };
