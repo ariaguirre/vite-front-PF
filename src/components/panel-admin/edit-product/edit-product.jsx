@@ -90,7 +90,7 @@ const handleRemoveCategory = (categoryToRemove) => {
       (category) => category !== categoryToRemove
     ),
   }));
-  console.log("categoryRemoved: "+ product.categories)
+
 };
 
 const handleRemoveImage = (imageUrlToRemove) => {

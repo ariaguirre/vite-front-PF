@@ -7,15 +7,14 @@ import felipe from './photos/felipe.jpg'
 import mario from './photos/mario.jpg'
 import ariana from './photos/ariana.jpg'
 import daniel from './photos/daniel.jpg'
+import Typography from '@mui/material/Typography'
 
 
 
-const AboutUs = () => {
+const MadeBy = () => {
   return (
-    <div className={styles.conteiner}>
-      <div className={styles.nosotros}>
-        <h1>CREADO POR</h1>
-      </div>
+    <div className={styles.aboutUsContainer}>
+      <Typography variant="h3" color="primary">TEAM</Typography>
       <div className={styles.perfiles}>
         <div className={styles.git}>
           <div className={styles.name}>
@@ -323,4 +322,4 @@ const AboutUs = () => {
   );
 };
 
-export default AboutUs;
+export default MadeBy;

@@ -1,72 +1,74 @@
-.fullCont{
-  /* position: absolute; */
-  bottom: 0; 
-  left: 0;
-  width: 100%;
-  /* height: "auto"; */
-  /* left: 0; */
-  text-align: center;
-  background-color: white;
-  margin-top: 2rem;
-  padding: 2rem 0;
+.footerContainer {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+	align-items: center;
+	height: 60px;
+	max-height: 60px;
+	border-top: 2px solid rgba(0, 0, 0, 0.4);
+	background-color: #fff;
+	margin-top: 2rem;
 }
-
-.tipografia {
-  padding-left: 10px;
-  padding-right: 10px;
-  float: left;
-  font-size: small;
-  color: darkgrey;
-  width: calc(30% - 20px);
+.footerContainer .logoFooterContainer,
+.footerContainer .madeFooterContainer,
+.footerContainer .networkContainer {
+	width: 33%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 2rem;
+	user-select: none;
 }
-
-.titulo {
-  color: solid black;
-  font-size: 20px;
-  font-weight: bolder;
-  width: 20% ;
+.footerContainer .madeFooterContainer a:hover {
+	color: #1ac8db;
+	font-weight: 600;
 }
-
-.varios {
-  width: 70%;
-  text-transform: uppercase;
+@media only screen and (max-width: 1200px) {
+	.footerContainer .madeFooterContainer,
+	.footerContainer .networkContainer {
+		width: 25%;
+	}
+	.footerContainer .logoFooterContainer {
+		width: 50%;
+	}
 }
-
-.footerCont {
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: nowrap;
-  align-items: center;
+@media only screen and (max-width: 900px) {
+	.footerContainer {
+		max-height: 90px;
+		height: 90px;
+	}
+	.footerContainer .madeFooterContainer {
+		order: 1;
+		width: 50%;
+		height: 40px;
+	}
+	.footerContainer .networkContainer {
+		order: 2;
+		width: 50%;
+		height: 40px;
+	}
+	.footerContainer .logoFooterContainer {
+		order: 3;
+		width: 100%;
+		height: 40px;
+	}
 }
-
-@media screen and (max-width: 767px) {
-  .footerCont {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .varios {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .varios a {
-    margin: 0.5rem;
-  }
-
-}
-
-.tipografia {
-  width: 100%;
-  /* margin-top: 1rem; */
-}
-
-@media only screen and (min-width:768px){
-  .tipografia{
-    display: flex;
-  }
+@media only screen and (max-width: 450px) {
+	.footerContainer {
+		max-height: 180px;
+		height: 180px;
+	}
+	.footerContainer .networkContainer,
+	.footerContainer .madeFooterContainer {
+		width: 100%;
+	}
+	.footerContainer .logoFooterContainer {
+		flex-flow: column;
+		max-height: 80px;
+		height: 80px;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem;
+	}
 }

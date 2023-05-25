@@ -9,9 +9,11 @@ import { setCartTotal, updateInitialState } from '../../../features/cartSlice/ca
 import { useEffect, useState } from 'react';
 import Swal from "sweetalert2";
 import formatOnlinePurcase from "../../../helper/formatOnlinePurchase";
-import { ordersGlobal, updatePurchases } from "../../../utils/firebase/firebaseClient";
+import { ordersGlobal, updateDataDelivery, updatePurchases } from "../../../utils/firebase/firebaseClient";
 import { v4 } from "uuid";
 import emailjs from '@emailjs/browser';
+import Typography from '@mui/material/Typography'
+
 
 const PaymentForm = () => {
 
@@ -34,18 +36,15 @@ const PaymentForm = () => {
   const currentUser = useSelector(state => state.persistedReducer.userData)
   const uid = useSelector(state => state.currentUser?.userCredentials?.uid);
   const onlinePurchase = formatOnlinePurcase(cartItems, total);
-
   //emailJs
   const USER_ID = "service_8duinll";
   const API_KEY = "template_g954u96";
   const TEMPLATE_ID = "lp4j5eTKXZNYsZ4jM";
 
   var templateParams = {
-    email: currentUser.orderInf.email,
-    name: currentUser.orderInf.name,
+    email: currentUser.orderInf?.email,
+    name: currentUser.orderInf?.name,
   };
-
-  // console.log("templateParams:", templateParams)
 
   const sendEmail = () => {
 
@@ -96,6 +95,7 @@ const PaymentForm = () => {
         })
         sendEmail();
         ordersGlobal(onlinePurchase[0], uid);
+        updateDataDelivery(currentUser.orderInf, uid)
         updatePurchases(onlinePurchase, uid);
         navigate("/");
         dispatch(clearCart());
@@ -105,22 +105,65 @@ const PaymentForm = () => {
   };
 
   return (
-    <main style={{ marginTop: "80px" }}>
-      <header className={styles.paymentFormHeader}>
-        <h2 className={styles.titleText}>Finalice su compra</h2>
-      </header>
-      <section className={styles.paymentFormContainer} >
+    <main className={styles.paymentFormContainer}>
+      <Typography variant="h3" color="primary">Realizar el pago</Typography>
+      <section className={styles.itemsFormContainer} >
+        <section className={styles.cardSection}>
+          <span className={styles.cardSectionTotal}>Total a pagar: <span>{numberFormat(total)}</span> </span>
+          <div className={styles.cardContainer}>
+            <span style={{ fontWeight: "800", color: "rgba(0, 0, 0, 0.6)", textTransform: "capitalize" }}>
+              Credit Card
+            </span>
+            <span>{`  
+              ${currentUser.orderInf?.name || "name"} 
+              ${currentUser.orderInf?.lastName || "lastName"} 
+            `
+            }</span>
+            <section className={styles.dataContainer}>
+              <div className={styles.cardInf}>
+                <form onSubmit={paymentHandler} id="creditCardForm" >
+                  <CardElement />
+                </form>
+              </div>
+            </section>
+          </div>
+          <span className={styles.cardSectionBtn}>
+            <button type="submit" form="creditCardForm">Pagar ahora</button>
+          </span>
+        </section>
+        <section className={styles.listSection}>
+          <div>
+            {
+              cartItems.map((cartItem) => (<CheckoutItem key={v4()} cartItem={cartItem} />))
+            }
+          </div>
+        </section>
+      </section>
+    </main>
+  )
+}
+
+export default PaymentForm
+
+
+//#1ac8db
+//#1AD8CF
+//#52E5BA
+
+
+//       <CardElement />
+
+/*
+    <main className={styles.paymentFormContainer} >
+      <section >
+        <Typography variant="h3" color="primary">Pagar Ahora</Typography>
+      </section>
+      <section className={styles.allItemsFormContainer}>
         <article className={styles.creditCardContainer}>
           <fieldset className={styles.formContainer}>
+            <section className={styles.cardInfContainer} >hola</section>
             <form onSubmit={paymentHandler} id="creditCardForm" >
-              <section className={styles.cardInfContainer}>
-                <div className={styles.cardElementTitle}>
-                  <h2>Tarjeta de crédito</h2>
-                </div>
-                <div className={styles.cardElement}>
-                  <CardElement />
-                </div>
-              </section>
+
             </form>
           </fieldset>
           <section className={styles.btnPaymentForm}>
@@ -137,11 +180,7 @@ const PaymentForm = () => {
 
         </article>
       </section>
+
     </main >
-  )
-}
 
-export default PaymentForm
-
-
-//notificacion via mail, payments form
+*/

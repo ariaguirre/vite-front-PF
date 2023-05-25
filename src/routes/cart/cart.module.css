@@ -1,84 +1,82 @@
 .checkoutContainer {
-  width: 55%;
-  min-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 50px auto 0;
-  margin-top: 100px;
+	width: 55%;
+	min-height: 90vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 50px auto 0;
+	margin-top: 100px;
 }
 .checkoutContainer .checkoutHeader {
-  width: 100%;
-  padding: 10px 0;
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid darkgrey;
-  margin: 50px;
+	width: 100%;
+	padding: 10px 0;
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid darkgrey;
+	margin: 50px;
 }
 .checkoutContainer .checkoutHeader .headerBlock {
-  text-transform: uppercase;
-  font-weight: 600;
-  width: 23%;
-  color: rgba(26, 200, 219, .7);
+	text-transform: uppercase;
+	font-weight: 600;
+	width: 23%;
+	color: rgba(26, 200, 219, 0.7);
 }
 .checkoutContainer .checkoutHeader .headerBlock:last-child {
-  width: 8%;
+	width: 8%;
 }
 .checkoutContainer .total {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  font-size: xx-large;
-  margin: 0;
-  margin-top: 4rem;
-  padding: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	font-size: xx-large;
+	margin: 0;
+	margin-top: 4rem;
+	padding: 0;
 }
-.checkoutContainer .total button{
-  min-width: 130px;
-  width: 40%;
-  height: 40px;
-  color: #fff;
-  padding: 5px 10px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  display: inline-block;
-  outline: none;
-  border-radius: 5px;
-  border: 2px solid #1ac8db;
-  background: #1ac8db;
+.checkoutContainer .total button {
+	min-width: 130px;
+	width: 40%;
+	height: 40px;
+	color: #fff;
+	padding: 5px 10px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	position: relative;
+	display: inline-block;
+	outline: none;
+	border-radius: 5px;
+	border: 2px solid #1ac8db;
+	background: #1ac8db;
 }
-.checkoutContainer .total button:hover
-{
-  background: #fff;
-  color: #1ac8db
+.checkoutContainer .total button:hover {
+	background: #fff;
+	color: #1ac8db;
 }
-.checkoutContainer .total button:active
-{
-  position: relative;
-  top: 2px;
+.checkoutContainer .total button:active {
+	position: relative;
+	top: 2px;
 }
 /* Media queries */
 @media only screen and (max-width: 1350px) {
-  .checkoutContainer {  
-    width:70%
-  }
+	.checkoutContainer {
+		width: 70%;
+	}
 }
 @media only screen and (max-width: 770px) {
-  .checkoutContainer {  
-    width:80%
-  }
-  .checkoutHeader :nth-child(2), :nth-child(5) {
-    display: none;
-  }
+	.checkoutContainer {
+		width: 80%;
+	}
+	.checkoutHeader :nth-child(2),
+	.checkoutHeader :nth-child(5) {
+		display: none;
+	}
 }
 @media only screen and (max-width: 600px) {
-  .checkoutContainer .total 
-  {
-    flex-direction: column;
-    gap: 1rem;
-  }
+	.checkoutContainer .total {
+		flex-direction: column;
+		gap: 1rem;
+	}
 }

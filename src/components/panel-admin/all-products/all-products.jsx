@@ -31,7 +31,7 @@ const AllProducts = ({ onAddProduct, onEditProduct }) => {
 
 const dispatch = useDispatch();
 const { products } = useSelector((state) => state.products);
-const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down('sm'));  
+const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down('md')); 
 
 //eliminar
 const handleDelete = (id) => {
@@ -139,7 +139,7 @@ return (
 )}
 <TableCell align="center">
 
-  {row.active && row.stock >= 0 ? (
+  {row.active && row.stock > 0 ? (
 <IconButton                     
   onClick={() => handlerActive(row.id, false)}
   className={s.disable}

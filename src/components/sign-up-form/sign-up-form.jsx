@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 //Material UI 
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
@@ -36,7 +37,12 @@ const SignUpForm = () => {
   const navigate = useNavigate()
   const onSubmitRegistration = async ({displayName, email, password, repeatPassword})=> {
     if (password !== repeatPassword) {
-          alert('Las contraseñas no coinciden');
+           Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Las contraseñas no coinciden',
+      
+    });
           return;
         }
         try {
@@ -45,12 +51,22 @@ const SignUpForm = () => {
             password
           );
           await createUserDocumentFromAuth(user, { displayName }); 
-          alert('Registrado exitosamente') 
+          Swal.fire({
+        icon: 'success',
+        title: 'Ok!',
+        text: 'Registrado Exitosamente',
+        
+      })
           
           navigate('/auth')
         } catch (error) {
           if (error.code === 'auth/email-already-in-use') {
-            alert('El correo electrónico ya está registrado en el sistema');
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'El correo electrónico ya está registrado en el sistema',
+            })
+           // alert('');
           } else {
             console.error('Ha ocurrido un error al intentar crear el usuario', error);
           }

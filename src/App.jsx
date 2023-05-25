@@ -26,14 +26,15 @@ import {
   productsCopy,
 } from "./features/products/productSlice";
 import { getCategoriesAction } from "./features/categories/categoriesSlice";
-import SignUp from "./routes/authentication/signUp";
-
-// import User from "./components/panel-admin/user/User";
-import UserProfile from "./routes/userProfile/UserProfile";
-// import AboutUs from "./routes/AboutUs/AboutUs";
 import { ordersAction } from "./features/orders/orders";
+
+import SignUp from "./routes/authentication/signUp";
+import UserProfile from "./routes/user-profile/user-profile";
 import Compras from "./components/compras/compras";
-import AboutUs from "./routes/about-us/about-us";
+import MadeBy from "./routes/about-us/about-us";
+import ContactForm from "./routes/contactForm/contactForm"
+import ResetPass from "./routes/reset-password/reset-password";
+
 
 
 const App = () => {
@@ -93,9 +94,11 @@ const App = () => {
         <Route path="sign-up" element={<SignUp />} />
         <Route path="shop/*" element={<Shop />} />
         <Route path="detail/:id" element={<DetailProduct />} />
-        <Route path="perfil" element={<UserProfile />} />
-        <Route path="compras" element={<Compras />} />
-        <Route path="creado-por" element={<AboutUs />} />
+        <Route path="porfile" element={<UserProfile />} />
+        <Route path="bought" element={<Compras />} />
+        <Route path="made-by" element={<MadeBy />} />
+        <Route path="contact-us" element={<ContactForm />} />
+        <Route path="reset-password" element={<ResetPass />} />
       </Route>
       {userData?.admin && (
         <Route

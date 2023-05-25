@@ -25,6 +25,7 @@ const CardInf = (
     sale,
     rating,
     id,
+    stock
   }
 ) => {
 
@@ -50,6 +51,7 @@ const CardInf = (
       id,
       title,
       imageUrl,
+      stock,
       price: priceOrSale,
     }
     dispatch(addItemToCart(product));
@@ -103,7 +105,7 @@ const CardInf = (
                   borderRadius: "0.375rem",
                   userSelect: "none"
                 }}>
-                {`save ${sale.discount}%`}
+                {`- ${sale.discount}%`}
               </Box>
             </Box>
           }
@@ -113,7 +115,7 @@ const CardInf = (
           </Box>
           <CardActions sx={{ padding: 0 }}>
             <Button variant="contained" color="primary" onClick={handleDetailsClick}>
-              Details
+              Detalle
             </Button>
             <IconButton onClick={handleClickCartIcon}>
               <AddShoppingCartIcon color="primary" />

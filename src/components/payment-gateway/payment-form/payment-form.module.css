@@ -1,154 +1,118 @@
-.paymentFormHeader {
-	/* height: 80px; */
-	margin-top: 5%;
-	margin-bottom: 2%;
-	font-size: 25px;
-	/* color:rgb(74, 178, 219); */
-	color: rgb(78, 76, 76);
-	align-items: center;
-	font-weight: 600;
-	justify-content: center;
-	display: flex;	
-}
-.paymentFormHeader h3 {
-	padding: 0;
-	margin: 0;
-}
-
 .paymentFormContainer {
 	display: flex;
-	flex-flow: row nowrap;
-	min-height: calc(100vh - 160px);
-	padding: 0 2rem;
+	margin-top: 80px;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	min-height: calc(100vh - 80px);
+	max-width: 1536px;
+	margin-left: auto;
+	margin-right: auto;
 }
-.creditCardContainer,
-.itemsContainer {
-	width: 50%;
-	padding: 1rem;
-}
-.formContainer {
-	padding: 1rem;
-	margin: 8rem auto 4rem;
-	max-width: 450px;
-	min-height: 250px;
-	box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
-	border: none;
-	border-radius: 1rem;
-	color: #324b4f;
-
-	background-image: linear-gradient(
-		to right bottom,
-		#1ac8db,
-		#69cdcd,
-		#94d2c7,
-		#b6d5c8,
-		#d0d8d2
-	);
-}
-.cardInfContainer {
-	height: 120px;
-	width: 100%;
-}
-.cardElementTitle {
-	height: 190px;
-	text-align: center;
-	text-shadow: rgb(255, 255, 255) 1px 1px 1px;
-}
-.cardElementTitle h2 {
-	font-weight: 500;
-}
-.cardElement {
-	height: 10px;
-}
-.itemsContainer h2 {
-	text-align: end;
-	box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.9);
-	font-size: 30px;
-	padding: 20px;
-	padding-right:25%;
-	margin-bottom: 5%;
-}
-.btnPaymentForm {
+.paymentFormContainer .itemsFormContainer {
 	display: flex;
 	justify-content: center;
+	align-items: flex-start;
+	width: 100%;
+	gap: 1rem;
+	min-height: calc(100vh - 170px);
+}
+.itemsFormContainer .cardSection,
+.itemsFormContainer .listSection {
+	width: 50%;
+	display: flex;
+	justify-content: space-evenly;
 	align-items: center;
-	height: 130px;
+	padding-top: 2rem;
+	min-height: inherit;
+	overflow: hidden;
 }
-.btnPaymentForm button {
-	position: relative;
-	display: inline-block;
-	/* min-width: 130px; */
-	width: 25%;
-	height: 45%;
-	padding: 5px 10px;
-	cursor: pointer;
-	color: #242424;
-	background-color: #fff;
-	border: 2px solid rgba(0, 0, 0, 0.3);
-	box-shadow: 0 3px 1px -2px #ccc, 0 2px 2px 0 #ccc, 0 1px 5px 0 #ccc;
-	outline: none;
-	transition: all 0.3s ease;
-	font-weight: 600;
-	font-size: 17px;
-	letter-spacing: 2px;
+.itemsFormContainer .cardSection {
+	flex-direction: column;
+}
+.itemsFormContainer .listSection {
+	padding: 1rem;
+}
+
+.itemsFormContainer .cardSection .cardSectionTotal {
+	color: black;
+	text-transform: uppercase;
+	font-weight: 500;
+}
+.itemsFormContainer .cardSection .cardSectionBtn button {
+	color: #06d1d6;
+	background: white;
+	margin: 0;
+	padding: 0 1rem;
+	height: 40px;
 	border-radius: 0.5rem;
+	border: 2px solid;
+	text-transform: capitalize;
+	transition: all 0.5s;
 }
-.btnPaymentForm button:hover {
-	letter-spacing: 2.5px;
+.itemsFormContainer .cardSection .cardSectionBtn button:hover {
+	background: #06d1d6;
+	color: #fff;
+	border: 2px solid #06d1d6;
 }
-.btnPaymentForm button:active {
+.itemsFormContainer .cardSection .cardSectionBtn button:active {
+	position: relative;
 	top: 1px;
 }
-
-.itemsCont{
-	width: 80%;
-	margin-left: 13%;
+.itemsFormContainer .cardSection .cardSectionTotal span {
+	color: #06d1d6;
+	font-weight: 400;
 }
-
-
-
-
-@media only screen and (max-width: 1250px) {
-	.paymentFormContainer {
-		flex-flow: column nowrap;
-		align-items: center;
-	}
-	.creditCardContainer,
-	.itemsContainer {
-		width: 70%;
-	}
-	.creditCardContainer {
-		order: 2;
-	}
-	.itemsContainer {
-		order: 1;
-	}
-	.formContainer {
-		margin: 4rem auto;
-	}
+.cardSection .cardContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-start;
+	width: 350px;
+	height: 200px;
+	border-radius: 1rem;
+	padding: 1rem;
+	box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+	background-image: linear-gradient(
+		to right top,
+		#1ac8db,
+		#10cbda,
+		#08ced8,
+		#06d1d6,
+		#0cd4d3,
+		#15d6d0,
+		#1ed9cd,
+		#28dbca,
+		#33dec6,
+		#3de0c3,
+		#48e3be,
+		#52e5ba
+	);
+}
+.cardSection .cardContainer .dataContainer {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+}
+.cardSection .cardContainer .cardInf {
+	position: relative;
+	width: 250px;
+	height: 20px;
 }
 @media only screen and (max-width: 900px) {
-	.creditCardContainer,
-	.itemsContainer {
-		width: 80%;
+	.paymentFormContainer .itemsFormContainer {
+		flex-direction: column;
 	}
-}
-@media only screen and (max-width: 600px) {
-	.creditCardContainer,
-	.itemsContainer {
+	.itemsFormContainer .cardSection,
+	.itemsFormContainer .listSection {
 		width: 100%;
+		min-height: auto;
+		gap: 2rem;
 	}
-}
-@media only screen and (max-width: 470px) {
-	.paymentFormContainer {
-		position: relative;
-		margin-top: 50px;
+	.itemsFormContainer .cardSection {
+		order: 2;
 	}
-	.formContainer {
-		margin: 2rem auto;
-		min-height: 180px;
-	}
-	.cardElementTitle {
-		height: 130px;
+	.itemsFormContainer .listSection {
+		order: 1;
 	}
 }
