@@ -247,7 +247,7 @@ deleteOrders(orderId);
       <Input color="primary" placeholder="Buscar orden" size="md" variant="plain" onChange={()=>searchOrder(event)} />
       </Stack >
         <TableContainer component={Paper} sx={{  mt: "1%",  minWidth: isSmallScreen ? '100%' : '600px', }}>
-          <Table sx={{/*  minWidth: 650 */ }} size="small" aria-label="a dense table">
+          <Table sx={{minWidth: isSmallScreen ? '100%' : '600px' }} size="small" aria-label="a dense table">
             <TableHead bgcolor="#e3f2fd">
               <TableRow>
                 <TableCell align="center">ORDEN</TableCell>
@@ -265,7 +265,9 @@ deleteOrders(orderId);
                 {!isSmallScreen && (
                 <TableCell align="center">TOTAL</TableCell>  
                 )}
-                <TableCell align="center"></TableCell>
+            
+                <TableCell align="center"></TableCell>  
+           
               </TableRow>
             </TableHead>
             <TableBody>
@@ -278,9 +280,9 @@ deleteOrders(orderId);
                   {!isSmallScreen && (
                   <TableCell align="center" > {row.date.toDate().toLocaleString('es-co')} </TableCell>
                   )}
-                     {!isSmallScreen && (
+               
                   <TableCell align="center"> {row.status} </TableCell>
-                     )}
+                  
                    {!isSmallScreen && (
                   <TableCell align="center">{row.totalProducts}</TableCell>
                    )}
@@ -305,8 +307,8 @@ deleteOrders(orderId);
     <Typography variant="h6" color="initial" align="center">
           ORDENES FINALIZADAS
         </Typography>
-    <TableContainer component={Paper} sx={{ mt: "1%",  minWidth: isSmallScreen ? '100%' : '600px', }}>
-          <Table  sx={{ minWidth: isSmallScreen ? '100%' : '600px' }} size="small" aria-label="a dense table">
+    <TableContainer component={Paper} sx={{ mt: "1%",  minWidth: isSmallScreen ? '100%' : '600px' }}>
+          <Table   sx={{minWidth: isSmallScreen ? '100%' : '600px' }} size="small" aria-label="a dense table">
             <TableHead bgcolor="#e3f2fd">
               <TableRow>
                 <TableCell align="center">ORDEN</TableCell>
@@ -320,14 +322,16 @@ deleteOrders(orderId);
                 {!isSmallScreen && (
                 <TableCell align="center">TOTAL</TableCell>
                 )}
+             
                 <TableCell align="center"></TableCell>
+             
               </TableRow>
             </TableHead>
             <TableBody>
               {currentOrders?.map((row, i) => row.status === "Terminado" ? (
                 <TableRow
                   key={`${row.id}+${i}`}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                 
                 >
                   <TableCell align="center"> {row.orderId.substr(0, 13)} </TableCell>
 
@@ -336,9 +340,9 @@ deleteOrders(orderId);
 
                   <TableCell align="center" > {row.date.toDate().toLocaleString('es-co')} </TableCell>
                   )}
-                  {!isSmallScreen && (
+              
                   <TableCell align="center"> {row.status} </TableCell>
-                  )}
+                
                   {!isSmallScreen && (
                   <TableCell align="center">{row.totalProducts}</TableCell>
                   )}
