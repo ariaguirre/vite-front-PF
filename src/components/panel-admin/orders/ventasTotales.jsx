@@ -42,7 +42,7 @@ const VentasTotales = () => {
   
   useEffect(()=>{
     setcurrentOrders(orders)
-  },[])
+  },[orders])
   const searchOrder  = (a) => {
     
     if(a.target.value){
@@ -265,8 +265,14 @@ deleteOrders(orderId);
                 {!isSmallScreen && (
                 <TableCell align="center">TOTAL</TableCell>  
                 )}
-            
+              {isSmallScreen && (<Tooltip title="Ordenar por fecha">
+                 <TableCell  align="center" ><Button variant="text" color='inherit' onClick={() => orderOrders() }  >
+                    Fecha {orderType =="asc"?(<ExpandLessIcon fontSize="small"></ExpandLessIcon>):(<ExpandMoreIcon fontSize="small"></ExpandMoreIcon>)} </Button>
+                    </TableCell>
+                </Tooltip>  )}
+                {!isSmallScreen && (
                 <TableCell align="center"></TableCell>  
+                )}
            
               </TableRow>
             </TableHead>
@@ -276,12 +282,19 @@ deleteOrders(orderId);
                   key={`${row.orderId}+${i}`}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell align="center" > {row.orderId.substr(0, 13)} </TableCell>
+                  <TableCell align="center" > 
+                   {isSmallScreen ?   (<Button
+                      aria-label="edit"
+                      size="small"
+                      onClick={() => handleDispatch(row.orderId)}
+                    > {row.orderId.substr(0, 5)}
+                   </Button>):(row.orderId.substr(0, 8))}
+                     </TableCell>
                   {!isSmallScreen && (
                   <TableCell align="center" > {row.date.toDate().toLocaleString('es-co')} </TableCell>
                   )}
                
-                  <TableCell align="center"> {row.status} </TableCell>
+                  <TableCell align="center">{isSmallScreen?(row.status.substr(0, 4)):(row.status)} </TableCell>
                   
                    {!isSmallScreen && (
                   <TableCell align="center">{row.totalProducts}</TableCell>
@@ -290,13 +303,16 @@ deleteOrders(orderId);
                   <TableCell align="center">${row.totalPrice}</TableCell>
                   )}
                   <TableCell align="center">
-                    <Button
+                  {isSmallScreen && ( <Typography fontSize="small" align='center' component="div" variant="subtitle1">
+                    {row.date.toDate().toLocaleString('es-co').substr(0, 9)}
+                  </Typography>    )}
+                  {!isSmallScreen &&  <Button
                       aria-label="edit"
                       size="small"
                       onClick={() => handleDispatch(row.orderId)}
                     >
-                    {isSmallScreen? 'Ver' : 'Verificar'}
-                    </Button>
+                    Verificar
+                    </Button>}
                   </TableCell>
                 </TableRow>
               ) : (null))}
@@ -333,7 +349,14 @@ deleteOrders(orderId);
                   key={`${row.id}+${i}`}
                  
                 >
-                  <TableCell align="center"> {row.orderId.substr(0, 13)} </TableCell>
+                  <TableCell align="center" > 
+                   <Button
+                      aria-label="edit"
+                      size="small"
+                      onClick={() => handleDispatch(row.orderId)}
+                    > {row.orderId.substr(0, 8)}
+                   </Button>
+                     </TableCell>
 
               
                   {!isSmallScreen && (
@@ -341,7 +364,7 @@ deleteOrders(orderId);
                   <TableCell align="center" > {row.date.toDate().toLocaleString('es-co')} </TableCell>
                   )}
               
-                  <TableCell align="center"> {row.status} </TableCell>
+                  <TableCell align="center"> {isSmallScreen?(row.status.substr(0, 4)):(row.status)} </TableCell>
                 
                   {!isSmallScreen && (
                   <TableCell align="center">{row.totalProducts}</TableCell>

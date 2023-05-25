@@ -69,7 +69,7 @@ const DetailComponent = ({ productDetail, productId }) => {
     const product = {
       id: productId,
       title: name,
-      imageUrl,
+      imageUrl :imageUrl[0],
       stock,
       price
     }
