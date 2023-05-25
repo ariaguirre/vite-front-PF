@@ -39,17 +39,17 @@ const SignInForm = () => {
   const getUser = async (id) => {
     const users = await getUserAdmin()
     const userId = users.filter((user) => user.id === id)
-    //console.log(userId)
+    
     return userId
   }
   //compruebo si esta activo o no para perimitir el logueo o restringir el acceso
   const isActive = async (userId) => {
     const userData = await getUser(userId)
-    //console.log(userData[0].active)
+    
     if (userData && userData[0] && userData[0].active){
       navigate("/")
     }
-    else { //console.log("usuario NO activo")
+    else { 
       await signOutUser();
       dispatch(clearUserData())
       //alerta
@@ -62,12 +62,10 @@ const SignInForm = () => {
     }
   }
 
-
-
-  const signInWithGoogle = async () => {
+const signInWithGoogle = async () => {
     try {
       const result = await signInWithGooglePopup();
-      //console.log(result.user.metadata)
+     
       const isNewUser = result.user.metadata.creationTime === result.user.metadata.lastSignInTime
       if (isNewUser) {      
     //enviar email de registro
