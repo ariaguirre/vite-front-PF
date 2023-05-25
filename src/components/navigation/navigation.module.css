@@ -31,7 +31,6 @@ header ul {
 }
 header ul li {
 	list-style: none;
-	z-index: 999;
 }
 header ul li a {
 	position: relative;

@@ -116,10 +116,10 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 	} catch (error) {
 		switch (error.code) {
 			case 'auth/wrong-password':
-				alert('Incorrect password for email');
+			//	alert('Incorrect password for email'); //comente para que no aparezca el alert comun de windows - se implemento en front alertas con sweet alert (Bianca)
 				break;
 			case 'auth/user-not-found':
-				alert('no user associated with this email');
+			//	alert('no user associated with this email');//comente para que no aparezca el alert comun de windows - se implemento en front alertas con sweet alert (Bianca)
 				break;
 			default:
 				return error.code;
