@@ -1,8 +1,8 @@
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import styles from './footer.module.css'
 import { Link } from "react-router-dom";
+import styles from './footer.module.css'
 
 
 const IconsSx = {
@@ -19,8 +19,8 @@ const Footer = () => {
     <footer className={styles.footerContainer}>
 
       <section className={styles.madeFooterContainer}>
-        <Link to="/creado-por" >Creadores</Link>
-        <Link to="/contacto" >Contactanos</Link>
+        <Link to="/made-by" >Creadores</Link>
+        <Link to="/contact-us" >Contactanos</Link>
       </section>
 
       <section className={styles.logoFooterContainer}>
@@ -46,7 +46,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
-//<Link to="/creado-por">Creado por nosotros    |    </Link>
-//<Link to="/contacto">Contacto</Link>
-// {`@${new Date().getFullYear()} MH&B. All Rights Reserved.`}

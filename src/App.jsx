@@ -26,14 +26,12 @@ import {
   productsCopy,
 } from "./features/products/productSlice";
 import { getCategoriesAction } from "./features/categories/categoriesSlice";
-import SignUp from "./routes/authentication/signUp";
-
-// import User from "./components/panel-admin/user/User";
-import UserProfile from "./routes/user-profile/user-profile";
-// import AboutUs from "./routes/AboutUs/AboutUs";
 import { ordersAction } from "./features/orders/orders";
+
+import SignUp from "./routes/authentication/signUp";
+import UserProfile from "./routes/user-profile/user-profile";
 import Compras from "./components/compras/compras";
-import AboutUs from "./routes/about-us/about-us";
+import MadeBy from "./routes/about-us/about-us";
 import ContactForm from "./routes/contactForm/contactForm"
 import ResetPass from "./routes/reset-password/reset-password";
 
@@ -98,9 +96,9 @@ const App = () => {
         <Route path="detail/:id" element={<DetailProduct />} />
         <Route path="porfile" element={<UserProfile />} />
         <Route path="bought" element={<Compras />} />
-        <Route path="made-by" element={<AboutUs />} />
-        <Route path="contacto" element={<ContactForm />} />
-        <Route path="/reset-password" element={<ResetPass />} />
+        <Route path="made-by" element={<MadeBy />} />
+        <Route path="contact-us" element={<ContactForm />} />
+        <Route path="reset-password" element={<ResetPass />} />
       </Route>
       {userData?.admin && (
         <Route

@@ -12,9 +12,9 @@ import {
 } from '../../utils/firebase/firebaseClient';
 //EmailJS
 import emailjs from "emailjs-com"
-const USER_ID="service_8duinll"
-const API_KEY="lp4j5eTKXZNYsZ4jM"
-const TEMPLATE_ID="template_cvqj07q"
+const USER_ID = "service_8duinll"
+const API_KEY = "lp4j5eTKXZNYsZ4jM"
+const TEMPLATE_ID = "template_cvqj07q"
 import { clearUserData } from '../../features/userData/userDataSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import { Stack } from '@mui/material';
@@ -39,17 +39,17 @@ const SignInForm = () => {
   const getUser = async (id) => {
     const users = await getUserAdmin()
     const userId = users.filter((user) => user.id === id)
-    
+
     return userId
   }
   //compruebo si esta activo o no para perimitir el logueo o restringir el acceso
   const isActive = async (userId) => {
     const userData = await getUser(userId)
-    
-    if (userData && userData[0] && userData[0].active){
+
+    if (userData && userData[0] && userData[0].active) {
       navigate("/")
     }
-    else { 
+    else {
       await signOutUser();
       dispatch(clearUserData())
       //alerta
@@ -62,22 +62,22 @@ const SignInForm = () => {
     }
   }
 
-const signInWithGoogle = async () => {
+  const signInWithGoogle = async () => {
     try {
       const result = await signInWithGooglePopup();
-     
+
       const isNewUser = result.user.metadata.creationTime === result.user.metadata.lastSignInTime
-      if (isNewUser) {      
-    //enviar email de registro
-      emailjs.send(USER_ID, TEMPLATE_ID, {
-      email: result.user.email,
-      displayName: result.user.displayName
-    }, API_KEY)
-    } 
-    const userId = result.user.uid      
-    isActive(userId)
+      if (isNewUser) {
+        //enviar email de registro
+        emailjs.send(USER_ID, TEMPLATE_ID, {
+          email: result.user.email,
+          displayName: result.user.displayName
+        }, API_KEY)
+      }
+      const userId = result.user.uid
+      isActive(userId)
     } catch (error) {
-    console.log(error.code)
+      console.log(error.code)
     }
   };
 
@@ -95,26 +95,26 @@ const signInWithGoogle = async () => {
     } catch (error) {
       switch (error.code) {
         case 'auth/wrong-password':
-       
+
           Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: 'usuario y/o contraseña incorrectos!'                  
+            text: 'usuario y/o contraseña incorrectos!'
           })
-      break;
-      case 'auth/user-not-found':
-        Swal.fire({
-        icon: 'error',
-        title: 'Usuario y/o Contraseña Incorrecta!',                  
-         })
-      break;
-      default:
-        Swal.fire({
-        icon: 'error',
-        title: 'Inicio de Sesión de usuario Fallido',                  
-        })
+          break;
+        case 'auth/user-not-found':
+          Swal.fire({
+            icon: 'error',
+            title: 'Usuario y/o Contraseña Incorrecta!',
+          })
+          break;
+        default:
+          Swal.fire({
+            icon: 'error',
+            title: 'Inicio de Sesión de usuario Fallido',
+          })
+      }
     }
-   }
   }
   return (
     <Grid item md={8} xs={10}>
@@ -159,9 +159,13 @@ const signInWithGoogle = async () => {
         </Stack>
       </form>
       <Grid container justifyContent={'center'} marginTop={2}>
-        <Link to={'/reset-password'}>¿Olvidaste tu contraseña?</Link>
         <Link to={'/sign-up'}> ¿No tienes cuenta? Registrarse <span style={{ color: "#1ac8db" }}>aquí</span> </Link>
       </Grid>
+      <Grid container justifyContent={'center'} marginTop={2}>
+        <Link to={'/reset-password'}>¿Olvidaste tu contraseña?</Link>
+      </Grid>
+
+
     </Grid>
   );
 };
