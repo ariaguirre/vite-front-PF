@@ -1,71 +1,24 @@
-.fullCont{
-  /* position: absolute; */
-  bottom: 0; 
-  left: 0;
-  width: 100%;
-  /* height: "auto"; */
-  /* left: 0; */
-  text-align: center;
-  background-color: white;
-  margin-top: 2rem;
-  padding: 2rem 0;
+.footerContainer {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+	align-items: center;
+	border: 1px solid red;
+	height: 80px;
+	max-height: 80px;
 }
-
-.tipografia {
-  padding-left: 10px;
-  padding-right: 10px;
-  float: left;
-  font-size: small;
-  color: darkgrey;
-  width: calc(30% - 20px);
+.logoFooterContainer {
+	border: 1px solid;
+	width: 33%;
+	height: 100%;
 }
-
-.titulo {
-  color: solid black;
-  font-size: 20px;
-  font-weight: bolder;
-  width: 20% ;
+.madeFooterContainer {
+	border: 1px solid violet;
+	width: 33%;
+	height: 100%;
 }
-
-.varios {
-  width: 70%;
-}
-
-.footerCont {
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: nowrap;
-  align-items: center;
-}
-
-@media screen and (max-width: 767px) {
-  .footerCont {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .varios {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .varios a {
-    margin: 0.5rem;
-  }
-
-}
-
-.tipografia {
-  width: 100%;
-  /* margin-top: 1rem; */
-}
-
-@media only screen and (min-width:768px){
-  .tipografia{
-    display: flex;
-  }
+.networkContainer {
+	border: 1px solid green;
+	width: 33%;
+	height: 100%;
 }
