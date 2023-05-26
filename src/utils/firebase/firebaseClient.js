@@ -37,6 +37,7 @@ import {
 	arrayUnion,
 	FieldValue,
 	arrayRemove,
+	increment,
 } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { v4 } from 'uuid';
@@ -419,7 +420,13 @@ export const setActiveUser = async (data) => {
 		{ merge: true }
 	);
 };
-
+//
+export const updateStock  = async (items) =>{
+ 	const ProfuctsRef = doc(db, 'Products', items.id);
+	await updateDoc(ProfuctsRef, {
+		stock: increment(-items.quantity)
+	}); 
+}
 // crea o edita una propiedad dentro del usuario logueado
 
 export const setPropsUser = async (prop, uid) => {
