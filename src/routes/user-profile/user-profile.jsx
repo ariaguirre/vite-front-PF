@@ -1,14 +1,17 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./user-profile.module.css";
 import Typography from '@mui/material/Typography'
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import setDataUser from "../../helper/setDataUser";
 import noPic from "../../utils/img/noPic.jpg";
+import { resetCurrentUser } from "../../features/userCredentials/userCredentialsSlice";
+import { clearUserData } from "../../features/userData/userDataSlice";
 
 const UserProfile = () => {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const data = useSelector((state) => state.currentUser.userCredentials);
   const userData = useSelector((state) => state.persistedReducer.userData.userData)
 
@@ -32,13 +35,13 @@ const UserProfile = () => {
     try {
       setDataUser("active", false, data.uid);
       navigate("/auth");
+      dispatch(resetCurrentUser());
+      dispatch(clearUserData())
+
     } catch (error) {
       Swal.fire('Error', 'Ocurrio un error en la eliminacion', 'error')
     }
   }
-
-  console.log()
-
 
   return (
     <main className={styles.userProfileContainer}>
