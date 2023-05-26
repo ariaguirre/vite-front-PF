@@ -28,7 +28,7 @@ const ResetPass = () => {
 
   return (
     <main className={styles.resetPasswordContainer}>
-      <Typography variant="h3" color="primary">Recupera tu contraseña</Typography>
+      <Typography variant="h4">Recupera tu contraseña</Typography>
       <section className={styles.formContainer}>
         <form onSubmit={handleSubmit(onSubmitResetPassword)}>
           <Stack spacing={2}>

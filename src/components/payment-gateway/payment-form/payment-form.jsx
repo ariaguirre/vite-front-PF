@@ -66,7 +66,7 @@ const PaymentForm = () => {
         'content-Type': 'application/json'
       },
       body: JSON.stringify({ amount: total * 100 })
-    }).then(res => res.json()).catch(error => alert(error));
+    }).then(res => res.json()).catch(error => Swal.fire('Ocurrio un error', `${error}`, "error"));
 
     const { paymentIntent: { client_secret } } = response;
 
@@ -83,8 +83,19 @@ const PaymentForm = () => {
       Swal.fire({
         title: 'Ocurrió un error!',
         text: paymentResult.error.message,
-        icon: 'warning',
+        icon: 'error',
+      }).then(response => {
+        if (response.isConfirmed) {
+          Swal.fire({
+            title: 'Deseas testear?',
+            html: 'use este numero de tarjeta: <br/>' + '4242 4242 4242 4242 04/42 424 24242',
+            icon: "info"
+          })
+        }
       })
+
+
+
     } else {
       if (paymentResult.paymentIntent.status === "succeeded") {
         if (!uid) return alert("no hay un usuario");
