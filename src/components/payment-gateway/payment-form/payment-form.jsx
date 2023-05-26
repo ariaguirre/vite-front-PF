@@ -13,7 +13,7 @@ import { ordersGlobal, updateDataDelivery, updatePurchases } from "../../../util
 import { v4 } from "uuid";
 import emailjs from '@emailjs/browser';
 import Typography from '@mui/material/Typography'
-
+import {helperStock} from './helperStock.js'
 
 const PaymentForm = () => {
 
@@ -106,6 +106,7 @@ const PaymentForm = () => {
         })
         sendEmail();
         ordersGlobal(onlinePurchase[0], uid);
+        helperStock(onlinePurchase[0].products)
         updateDataDelivery(currentUser.orderInf, uid)
         updatePurchases(onlinePurchase, uid);
         navigate("/");
