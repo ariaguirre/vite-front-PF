@@ -8,7 +8,7 @@ const CheckoutItem = ({ cartItem }) => {
 
   const { title, imageUrl, price, quantity, stock } = cartItem;
   const dispatch = useDispatch();
- 
+
 
   const clearItemHandler = () => {
     Swal.fire({
@@ -35,8 +35,8 @@ const CheckoutItem = ({ cartItem }) => {
   // const addItemHandler = () => dispatch(addItemToCart(cartItem));
   const removeItemHandler = () => dispatch(deleteCartItem(cartItem));
 
-  const addOrDisabledItemHandler = () =>{
-    if( quantity > stock){
+  const addOrDisabledItemHandler = () => {
+    if (quantity >= stock) {
       Swal.fire({
         title: 'Stock no disponible',
         text: "No hay suficientes productos en este momento",
@@ -44,7 +44,7 @@ const CheckoutItem = ({ cartItem }) => {
         confirmButtonColor: '#1ac8db',
         confirmButtonText: 'Aceptar'
       })
-    } else{
+    } else {
       dispatch(addItemToCart(cartItem));
     }
   }
